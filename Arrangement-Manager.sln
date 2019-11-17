@@ -13,27 +13,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. UnitTest", "6. UnitTest"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Presentation", "1. Presentation", "{BE20422D-D4C6-4A12-A7D9-24E7606D39C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Group15.EventManager.ApplicationLayer", "Group15.EventManager.Application\Group15.EventManager.ApplicationLayer.csproj", "{D1B7B6EB-F15F-4037-8A54-581B73739586}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Group15.EventManager.ApplicationLayer", "Group15.EventManager.Application\Group15.EventManager.ApplicationLayer.csproj", "{D1B7B6EB-F15F-4037-8A54-581B73739586}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Group15.EventManager.Domain.Core", "Group15.EventManager.Domain.Core\Group15.EventManager.Domain.Core.csproj", "{A5138706-ACA1-483B-A80F-6EA8B35D906C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Group15.EventManager.Domain.Core", "Group15.EventManager.Domain.Core\Group15.EventManager.Domain.Core.csproj", "{A5138706-ACA1-483B-A80F-6EA8B35D906C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Group15.EventManager.Domain.Models", "Group15.EventManager.Domain.Models\Group15.EventManager.Domain.Models.csproj", "{E36E0D24-89E2-441A-9245-08936997AE0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Group15.EventManager.Domain.Models", "Group15.EventManager.Domain.Models\Group15.EventManager.Domain.Models.csproj", "{E36E0D24-89E2-441A-9245-08936997AE0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Group15.EventManager.Domain", "Group15.EventManager.Domain\Group15.EventManager.Domain.csproj", "{E4FA8811-06F4-46BC-BBFB-E69C910B60E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Group15.EventManager.Domain", "Group15.EventManager.Domain\Group15.EventManager.Domain.csproj", "{E4FA8811-06F4-46BC-BBFB-E69C910B60E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Group15.EventManager.Data", "Group15.EventManager.Data\Group15.EventManager.Data.csproj", "{E84D98AE-F3E6-49FA-91F0-9B7AA0E1D254}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Group15.EventManager.Data", "Group15.EventManager.Data\Group15.EventManager.Data.csproj", "{E84D98AE-F3E6-49FA-91F0-9B7AA0E1D254}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Group15.EventManager.Test", "Group15.EventManager.Test\Group15.EventManager.Test.csproj", "{620FF2E3-BD8A-460A-87C5-2B6AB7AEE8FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Group15.EventManager.Server", "Group15.EventManager\Server\Group15.EventManager.Server.csproj", "{5E9C57BA-B430-4D61-8D7F-62C67C06A669}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Group15.EventManager.Server", "Group15.EventManager\Server\Group15.EventManager.Server.csproj", "{5E9C57BA-B430-4D61-8D7F-62C67C06A669}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Group15.EventManager.Client", "Group15.EventManager\Client\Group15.EventManager.Client.csproj", "{E0E03E59-4A85-42C9-A1A2-4DECBB12CB1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Group15.EventManager.Client", "Group15.EventManager\Client\Group15.EventManager.Client.csproj", "{E0E03E59-4A85-42C9-A1A2-4DECBB12CB1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Group15.EventManager.Shared", "Group15.EventManager\Shared\Group15.EventManager.Shared.csproj", "{6FB6F0D3-A437-48B7-8FD0-FA939D7FAAEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Group15.EventManager.Shared", "Group15.EventManager\Shared\Group15.EventManager.Shared.csproj", "{6FB6F0D3-A437-48B7-8FD0-FA939D7FAAEB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Bootstrapper", "5. Bootstrapper", "{544F7047-FF64-4315-9C28-7BD3CF130E43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Group15.EventManager.Bootstrapper", "Group15.EventManager.Bootstrapper\Group15.EventManager.Bootstrapper.csproj", "{4509326D-A689-4A03-B5EA-02767D30129B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Group15.EventManager.Bootstrapper", "Group15.EventManager.Bootstrapper\Group15.EventManager.Bootstrapper.csproj", "{4509326D-A689-4A03-B5EA-02767D30129B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

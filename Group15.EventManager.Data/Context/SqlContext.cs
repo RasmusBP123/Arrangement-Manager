@@ -20,6 +20,10 @@ namespace Group15.EventManager.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new EventMap());
+            modelBuilder.ApplyConfiguration(new StoreMap());
+            modelBuilder.ApplyConfiguration(new CustomerMap());
+            modelBuilder.ApplyConfiguration(new EmployeeMap());
+            modelBuilder.ApplyConfiguration(new FoodMap());
             base.OnModelCreating(modelBuilder);
         }
 

@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 using Microsoft.OpenApi.Models;
+using MediatR;
 
 namespace Group15.EventManager.Server
 {
@@ -27,10 +28,11 @@ namespace Group15.EventManager.Server
             services.AddDbContext<SqlContext>();
 
             services.AddAutoMapperSetup(typeof(Startup).Assembly);
+            services.AddMediatR(typeof(Startup));
 
             services.AddSwaggerGen(setup =>
             {
-                setup.SwaggerDoc("v1", new OpenApiInfo() { Title = "Event Manager", Version = "Version 1" });   
+                setup.SwaggerDoc("v1", new OpenApiInfo() { Title = "Event Manager", Version = "Version 1" });
             });
             services.RegisterServices();
         }

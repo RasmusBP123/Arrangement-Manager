@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Group15.EventManager.Application.ViewModels
+namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
 {
-    public class GetEventViewModel
+    public class UpdateEventViewModel
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }

@@ -1,11 +1,11 @@
-﻿using Group15.EventManager.Domain.Core.Models;
+﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Group15.EventManager.Domain.Models
+namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
 {
-    public class Event : Entity
+    public class CreateEventViewModel
     {
         public string Name { get; set; }
         public double Price { get; set; }
@@ -13,8 +13,5 @@ namespace Group15.EventManager.Domain.Models
         public string Location { get; set; }
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
-        public virtual Food Food { get; set; }
-        public virtual ICollection<Customer> Customers { get; set; }
-        public virtual Employee Employee { get; set; }
     }
 }

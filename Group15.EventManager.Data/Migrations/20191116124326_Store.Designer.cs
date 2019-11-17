@@ -4,14 +4,16 @@ using Group15.EventManager.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Group15.EventManager.Data.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    partial class SqlContextModelSnapshot : ModelSnapshot
+    [Migration("20191116124326_Store")]
+    partial class Store
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,16 +36,11 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("StoreId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");
 
-                    b.HasIndex("StoreId");
-
-                    b.ToTable("Customers");
+                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Employee", b =>
@@ -58,14 +55,9 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("StoreId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("StoreId");
-
-                    b.ToTable("Employees");
+                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Event", b =>
@@ -107,7 +99,7 @@ namespace Group15.EventManager.Data.Migrations
 
                     b.HasIndex("FoodId");
 
-                    b.ToTable("Events");
+                    b.ToTable("Stores");
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Food", b =>
@@ -127,27 +119,7 @@ namespace Group15.EventManager.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Foods");
-                });
-
-            modelBuilder.Entity("Group15.EventManager.Domain.Models.Store", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Stores");
+                    b.ToTable("Food");
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Customer", b =>
@@ -155,17 +127,6 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasOne("Group15.EventManager.Domain.Models.Event", null)
                         .WithMany("Customers")
                         .HasForeignKey("EventId");
-
-                    b.HasOne("Group15.EventManager.Domain.Models.Store", null)
-                        .WithMany("Customers")
-                        .HasForeignKey("StoreId");
-                });
-
-            modelBuilder.Entity("Group15.EventManager.Domain.Models.Employee", b =>
-                {
-                    b.HasOne("Group15.EventManager.Domain.Models.Store", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("StoreId");
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Event", b =>

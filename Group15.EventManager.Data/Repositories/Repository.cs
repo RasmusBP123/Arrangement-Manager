@@ -11,7 +11,7 @@ namespace Group15.EventManager.Data.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private readonly SqlContext Db;
+        protected readonly SqlContext Db;
         protected readonly DbSet<TEntity> DbSet;
 
         public Repository(SqlContext sqlContext)
@@ -30,9 +30,9 @@ namespace Group15.EventManager.Data.Repositories
             return Db.Set<TEntity>().Find(id);
         }
 
-        public async Task<IQueryable<TEntity>> GetAll()
+        public ICollection<TEntity> GetAll()
         {
-            return DbSet;
+            return DbSet.ToList();
         }
 
         public void Update(TEntity entity)

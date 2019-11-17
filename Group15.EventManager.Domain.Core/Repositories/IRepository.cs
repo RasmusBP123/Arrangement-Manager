@@ -10,7 +10,7 @@ namespace Group15.EventManager.Domain.Core.Repositories
     {
         void Add(TEntity entity);
         TEntity GetById(Guid id);
-        Task<IQueryable<TEntity>> GetAll();
+        ICollection<TEntity> GetAll();
         void Update(TEntity entity);
         void Remove(Guid id);
         int SaveChanges();
