@@ -30,9 +30,9 @@ namespace Group15.EventManager.Data.Repositories
             return Db.Set<TEntity>().Find(id);
         }
 
-        public ICollection<TEntity> GetAll()
+        public IQueryable<TEntity> GetAll()
         {
-            return DbSet.ToList();
+            return DbSet;
         }
 
         public void Update(TEntity entity)

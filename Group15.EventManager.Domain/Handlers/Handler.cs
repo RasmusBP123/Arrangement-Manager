@@ -1,17 +1,14 @@
 ﻿using Group15.EventManager.Data.UnitOfWork;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Group15.EventManager.Domain.CommandHandlers
+namespace Group15.EventManager.Domain.Handlers
 {
-    public class CommandHandler
+    public class Handler
     {
         protected readonly IMediator _mediator;
         protected readonly IUnitOfWork _unitOfWork;
 
-        public CommandHandler(IMediator mediator, IUnitOfWork unitOfWork)
+        public Handler(IMediator mediator, IUnitOfWork unitOfWork)
         {
             _mediator = mediator;
             _unitOfWork = unitOfWork;

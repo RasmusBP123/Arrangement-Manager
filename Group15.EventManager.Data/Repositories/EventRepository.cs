@@ -16,7 +16,7 @@ namespace Group15.EventManager.Data.Repositories
         {
         }
 
-        public IEnumerable<Event> GetActiveEvents()
+        public IQueryable<Event> GetActiveEvents()
         {
             var events = Db.Set<Event>().Where(_event => _event.EventDate >= DateTime.Today);
             return events;
@@ -29,6 +29,13 @@ namespace Group15.EventManager.Data.Repositories
                                         .Include(e => e.Food)
                                         .FirstOrDefault(e => e.Id == eventId);
             return _event;
+        }
+
+        public void UpdateEvent(Event _event)
+        {
+            var existingEvent = Db.Set<Event>().FirstOrDefault(e => e.Id == _event.Id);
+            existingEvent = _event;
+            Db.Attach(existingEvent).State = EntityState.Modified;
         }
     }
 }

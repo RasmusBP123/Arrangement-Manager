@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Group15.EventManager.Shared.Events
 {
-    public class GetEventViewModel
+    public class GetEventListViewModel
     {
         public string Name { get; set; }
         public double Price { get; set; }

@@ -1,0 +1,33 @@
+﻿@page "/events"
+@inherits FluxorComponent
+@inject IDispatcher Dispatcher
+@inject IState<GetActiveEventsState> EventState
+@inject HttpClient HttpClient
+
+@if (EventState.Value.ErrorMessage != null)
+{
+    <p>@EventState.Value.ErrorMessage</p>
+}
+
+@if (EventState.Value.IsLoading)
+{
+    <p><em>Loading...</em></p>
+}
+
+@if(EventState.Value.Events != null)
+{
+    <p>Test</p>
+    @foreach (var _event in EventState.Value.Events)
+    {
+        <p>@_event.Location</p>
+        <p>@_event.Price</p>
+    }
+}
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        Dispatcher.Dispatch(new GetActiveEventsAction());
+    }
+}

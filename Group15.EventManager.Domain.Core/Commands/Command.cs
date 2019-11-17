@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Group15.EventManager.Domain.Core.Commands
 {
-    public abstract class BaseCommand<TRepsonse> : IRequest<TRepsonse>
+    public abstract class BaseCQ<TRepsonse> : IRequest<TRepsonse>
     {
     }
 
-    public abstract class Command : BaseCommand<bool>
+    public abstract class Command : BaseCQ<bool>
     {
 
     }

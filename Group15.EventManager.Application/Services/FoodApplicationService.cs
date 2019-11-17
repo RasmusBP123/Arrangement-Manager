@@ -27,11 +27,16 @@ namespace Group15.EventManager.ApplicationLayer.Services
             _foodRepository.AddFoodToEvent(eventId, food);
         }
 
+
         public IEnumerable<GetFoodViewModel> GetAllFoods()
         {
             var foods = _foodRepository.GetAll();
             var foodViewModels = _mapper.Map<IEnumerable<GetFoodViewModel>>(foods);
             return foodViewModels;
+        }
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
         }
     }
 }

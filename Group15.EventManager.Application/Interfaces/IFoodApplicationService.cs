@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Group15.EventManager.ApplicationLayer.Interfaces
 {
-    public interface IFoodApplicationService
+    public interface IFoodApplicationService : IDisposable
     {
         IEnumerable<GetFoodViewModel> GetAllFoods();
         void AddFoodToEvent(Guid eventId, CreateFoodViewModel foodViewModel);

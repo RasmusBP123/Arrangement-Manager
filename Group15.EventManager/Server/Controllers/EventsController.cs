@@ -17,27 +17,28 @@ namespace Group15.EventManager.Server.Controllers
             _eventApplicationService = eventApplicationService;
         }
 
-        [HttpGet()]
-        public IActionResult GetActiveEvents()
+        [HttpGet]
+        [Route("active")]
+        public async Task<IActionResult> GetActiveEvents()
         {
-            var events = _eventApplicationService.GetActiveEvents();
+            var events = await _eventApplicationService.GetActiveEvents();
             if (events == null) return BadRequest();
             return Ok(events);
         }
 
         [HttpGet("all")]
-        public IActionResult GetAllEvents()
+        public async Task<IActionResult> GetAllEvents()
         {
-            var events = _eventApplicationService.GetAllEvents();
+            var events = await _eventApplicationService.GetAllEvents();
             if (events == null) return BadRequest();
             return Ok(events);
         }
 
         [HttpGet]
         [Route("{eventId}")]
-        public IActionResult GetSingleEvent([FromRoute] Guid eventId)
+        public async Task<IActionResult> GetSingleEvent([FromRoute] Guid eventId)
         {
-            var _event = _eventApplicationService.GetSingleEvent(eventId);
+            var _event = await _eventApplicationService.GetSingleEvent(eventId);
             if (_event == null) return BadRequest();
             return Ok(_event);
         }
@@ -55,14 +56,23 @@ namespace Group15.EventManager.Server.Controllers
 
         [HttpPost]
         [Route("{eventId}/update")]
-        public IActionResult UpdateEvent(Guid eventId, UpdateEventViewModel eventViewModel)
+        public async Task<IActionResult> UpdateEvent(Guid eventId, [FromBody] UpdateEventViewModel eventViewModel)
         {
             if (!ModelState.IsValid)
             {
                 return StatusCode(422, eventViewModel);
             }
-            _eventApplicationService.UpdateEvent(eventId, eventViewModel);
+
+            await _eventApplicationService.UpdateEvent(eventId, eventViewModel);
             return Ok();
+        }
+
+        [HttpDelete]
+        [Route("{eventId}/delete")]
+        public async Task<IActionResult> DeleteEvent([FromRoute] Guid eventId)
+        {
+            await _eventApplicationService.DeleteEvent(eventId);
+            return NotFound();
         }
     }
 }

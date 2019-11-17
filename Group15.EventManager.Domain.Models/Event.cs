@@ -1,6 +1,5 @@
 ﻿using Group15.EventManager.Domain.Core.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Group15.EventManager.Domain.Models
