@@ -10,6 +10,8 @@ using Group15.EventManager.Domain.CommandHandlers;
 using Group15.EventManager.Domain.Commands.Events;
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Queries.Events;
+using Group15.EventManager.Domain.Queries.Events.Filters;
+using Group15.EventManager.Domain.Queries.Regions;
 using Group15.EventManager.Domain.QueryHandlers;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,16 +27,16 @@ namespace Group15.EventManager.Bootstrapper
 
             services.RegisterApplicationServices();
             services.RegisterRepositories();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
             services.RegisterCommands();
             services.RegisterQueries();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         public static void RegisterApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IEventApplicationService, EventApplicationService>();
             services.AddScoped<IFoodApplicationService, FoodApplicationService>();
+            services.AddScoped<IRegionApplicationService, RegionApplicationService>();
         }
 
         public static void RegisterCommands(this IServiceCollection services)
@@ -46,15 +48,21 @@ namespace Group15.EventManager.Bootstrapper
 
         public static void RegisterQueries(this IServiceCollection services)
         {
-            services.AddScoped<IRequestHandler<ActiveEventsQuery, IQueryable<Event>>, EventQueryHandler>();
+            //Events
+            services.AddScoped<IRequestHandler<AllActiveEventsQuery, IQueryable<Event>>, EventQueryHandler>();
             services.AddScoped<IRequestHandler<AllEventsQuery, IQueryable<Event>>, EventQueryHandler>();
+            services.AddScoped<IRequestHandler<AllEventsByRegionQuery, IQueryable<Event>>, EventQueryHandler>();
+            services.AddScoped<IRequestHandler<AllEventsByRegionAndCityQuery, IQueryable<Event>>, EventQueryHandler>();
             services.AddScoped<IRequestHandler<SingleEventQuery, Event>, EventQueryHandler>();
-
+            //Regions
+            services.AddScoped<IRequestHandler<AllRegionsQuery, IQueryable<Region>>, RegionQueryHandler>();
+            services.AddScoped<IRequestHandler<SingleRegionQuery, Region>,RegionQueryHandler>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddScoped<IFoodRepository, FoodRepository>();
         }
     }

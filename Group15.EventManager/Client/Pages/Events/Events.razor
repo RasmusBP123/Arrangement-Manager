@@ -3,21 +3,12 @@
 @inject IDispatcher Dispatcher
 @inject IState<GetActiveEventsState> EventState
 @inject HttpClient HttpClient
+@inject EventStore EventStore
 
-@if (EventState.Value.ErrorMessage != null)
-{
-    <p>@EventState.Value.ErrorMessage</p>
-}
 
-@if (EventState.Value.IsLoading)
+@if(EventStore.Events != null)
 {
-    <p><em>Loading...</em></p>
-}
-
-@if(EventState.Value.Events != null)
-{
-    <p>Test</p>
-    @foreach (var _event in EventState.Value.Events)
+    @foreach (var _event in EventStore.Events)
     {
         <p>@_event.Location</p>
         <p>@_event.Price</p>
@@ -26,8 +17,10 @@
 
 @code {
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        Dispatcher.Dispatch(new GetActiveEventsAction());
+        EventStore.Events = await HttpClient.GetJsonAsync<List<GetEventListViewModel>>("api/events/active");
+        EventStore.OnChange += StateHasChanged;
+        //Dispatcher.Dispatch(new GetActiveEventsAction());
     }
 }

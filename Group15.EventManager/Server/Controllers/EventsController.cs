@@ -35,6 +35,24 @@ namespace Group15.EventManager.Server.Controllers
         }
 
         [HttpGet]
+        [Route("region/{regionId}")]
+        public async Task<IActionResult> GetAllEventsByRegion(Guid regionId)
+        {
+            var events = await _eventApplicationService.GetAllEventsByRegion(regionId);
+            if (events == null) return BadRequest();
+            return Ok(events);
+        }
+
+        [HttpGet]
+        [Route("region/{regionId}/city/{cityId}")]
+        public async Task<IActionResult> GetAllEventsByRegionAndCity(Guid regionId, Guid cityId)
+        {
+            var events = await _eventApplicationService.GetAllEventsByRegionAndCity(regionId, cityId);
+            if (events == null) return BadRequest();
+            return Ok(events);
+        }
+
+        [HttpGet]
         [Route("{eventId}")]
         public async Task<IActionResult> GetSingleEvent([FromRoute] Guid eventId)
         {
@@ -67,7 +85,7 @@ namespace Group15.EventManager.Server.Controllers
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete] 
         [Route("{eventId}/delete")]
         public async Task<IActionResult> DeleteEvent([FromRoute] Guid eventId)
         {

@@ -12,6 +12,8 @@ namespace Group15.EventManager.Application.Interfaces
     {
         Task<IEnumerable<GetEventListViewModel>> GetAllEvents();
         Task<IEnumerable<GetEventListViewModel>> GetActiveEvents();
+        Task<IEnumerable<GetEventListViewModel>> GetAllEventsByRegion(Guid regionId);
+        Task<IEnumerable<GetEventListViewModel>> GetAllEventsByRegionAndCity(Guid regionId, Guid cityId);
         Task<GetSingleEventViewModel> GetSingleEvent(Guid eventId);
         Task CreateEvent(CreateEventViewModel eventViewModel);
         Task UpdateEvent(Guid eventId, UpdateEventViewModel eventViewModel);

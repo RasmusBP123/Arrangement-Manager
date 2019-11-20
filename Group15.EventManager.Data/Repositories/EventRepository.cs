@@ -18,7 +18,24 @@ namespace Group15.EventManager.Data.Repositories
 
         public IQueryable<Event> GetActiveEvents()
         {
-            var events = Db.Set<Event>().Where(_event => _event.EventDate >= DateTime.Today);
+            var events = Db.Set<Event>().Include(_event => _event.Region)
+                                        .Where(_event => _event.EventDate >= DateTime.Today);
+            return events;
+        }
+
+        public IQueryable<Event> GetEventsByRegion(Guid regionId)
+        {
+            var events = Db.Set<Event>().Include(_event => _event.Region)
+                                        .Where(_event => _event.Region.Id == regionId)
+                                        .Where(_event => _event.EventDate >= DateTime.Today);
+            return events;
+        }
+
+        public IQueryable<Event> GetEventsByRegionAndCity(Guid regionId, Guid cityId)
+        {
+            var events = Db.Set<Event>().Include(_event => _event.Region)
+                                        .Where(_event => _event.Region.Id == regionId && _event.City.Id == cityId)
+                                        .Where(_event => _event.EventDate >= DateTime.Today);
             return events;
         }
 

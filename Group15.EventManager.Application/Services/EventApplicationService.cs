@@ -3,15 +3,14 @@ using Group15.EventManager.Application.Interfaces;
 using Group15.EventManager.Application.ViewModels.Events;
 using Group15.EventManager.ApplicationLayer.Services;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
-using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Data.UnitOfWork;
 using Group15.EventManager.Domain.Commands.Events;
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Queries.Events;
+using Group15.EventManager.Domain.Queries.Events.Filters;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Group15.EventManager.Application.Services
@@ -30,7 +29,20 @@ namespace Group15.EventManager.Application.Services
 
         public async Task<IEnumerable<GetEventListViewModel>> GetActiveEvents()
         {
-            var events = await _mediator.Send(new ActiveEventsQuery());
+            var events = await _mediator.Send(new AllActiveEventsQuery());
+            var eventViewModels = _mapper.Map<IEnumerable<GetEventListViewModel>>(events);
+            return eventViewModels;
+        }
+        public async Task<IEnumerable<GetEventListViewModel>> GetAllEventsByRegion(Guid regionId)
+        {
+            var events = await _mediator.Send(new AllEventsByRegionQuery(regionId));
+            var eventViewModels = _mapper.Map<IEnumerable<GetEventListViewModel>>(events);
+            return eventViewModels;
+        }
+
+        public async Task<IEnumerable<GetEventListViewModel>> GetAllEventsByRegionAndCity(Guid regionId, Guid cityId)
+        {
+            var events = await _mediator.Send(new AllEventsByRegionAndCityQuery(regionId, cityId));
             var eventViewModels = _mapper.Map<IEnumerable<GetEventListViewModel>>(events);
             return eventViewModels;
         }

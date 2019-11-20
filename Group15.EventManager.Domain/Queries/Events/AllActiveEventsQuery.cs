@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Group15.EventManager.Domain.Queries.Events
 {
-    public class ActiveEventsQuery : Query<IQueryable<Event>>
+    public class AllActiveEventsQuery : Query<IQueryable<Event>>
     {
     }
 }

@@ -1,0 +1,51 @@
+﻿@page "/region"
+@inject HttpClient HttpClient
+@inject RegionStore RegionStore
+@inject EventStore  EventStore
+
+<div class="side-flex">
+    <div>
+        <select class="form-control" @onchange="@RegionClicked">
+            <option value="">-- Vælg Region --</option>
+            @foreach (var region in RegionStore.Regions)
+            {
+                <option value="@region.Id">@region.Name</option>
+            }
+        </select>
+    </div>
+    <div>
+        <select class="form-control" @onchange="CityClicked">
+            <option value="">-- Vælg by --</option>
+            @if (RegionStore.region != null && RegionStore.region.Cities != null)
+            {
+                @foreach (var city in RegionStore.region.Cities)
+                {
+                    <option value="@city.Id">@city.Name</option>
+                }
+            }
+        </select>
+    </div>
+</div>
+
+@code {
+    string regionId = "";
+    protected override async Task OnInitializedAsync()
+    {
+        RegionStore.Regions = await HttpClient.GetJsonAsync<IEnumerable<GetRegionViewModel>>("api/regions");
+    }
+
+    public async Task RegionClicked(ChangeEventArgs changeEvent)
+    {
+        regionId = changeEvent.Value.ToString();
+        RegionStore.region = await HttpClient.GetJsonAsync<GetRegionViewModel>($"api/regions/{regionId}");
+        EventStore.Events = await HttpClient.GetJsonAsync<List<GetEventListViewModel>>($"api/events/region/{regionId}");
+        EventStore.NotifyStateChanged();
+    }
+
+    public async Task CityClicked(ChangeEventArgs changeEvent)
+    {
+        var cityId = changeEvent.Value.ToString();
+        EventStore.Events = await HttpClient.GetJsonAsync<List<GetEventListViewModel>>($"api/events/region/{regionId}/city/{cityId}");
+        EventStore.NotifyStateChanged();
+    }
+}

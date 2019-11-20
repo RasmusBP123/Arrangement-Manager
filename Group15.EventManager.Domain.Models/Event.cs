@@ -12,8 +12,11 @@ namespace Group15.EventManager.Domain.Models
         public string Location { get; set; }
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
+        public virtual City City { get; set; }
+        public virtual Region Region { get; set; }
         public virtual Food Food { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual Employee Employee { get; set; }
     }
+
 }

@@ -4,14 +4,16 @@ using Group15.EventManager.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Group15.EventManager.Data.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    partial class SqlContextModelSnapshot : ModelSnapshot
+    [Migration("20191119133632_cityRegion")]
+    partial class cityRegion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,9 +101,6 @@ namespace Group15.EventManager.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CityId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -133,8 +132,6 @@ namespace Group15.EventManager.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("EmployeeId");
 
@@ -231,10 +228,6 @@ namespace Group15.EventManager.Data.Migrations
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Event", b =>
                 {
-                    b.HasOne("Group15.EventManager.Domain.Models.City", "City")
-                        .WithMany("Events")
-                        .HasForeignKey("CityId");
-
                     b.HasOne("Group15.EventManager.Domain.Models.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId");
@@ -244,7 +237,7 @@ namespace Group15.EventManager.Data.Migrations
                         .HasForeignKey("FoodId");
 
                     b.HasOne("Group15.EventManager.Domain.Models.Region", "Region")
-                        .WithMany("Events")
+                        .WithMany()
                         .HasForeignKey("RegionId");
                 });
 #pragma warning restore 612, 618

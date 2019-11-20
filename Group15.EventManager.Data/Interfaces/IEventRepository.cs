@@ -8,6 +8,8 @@ namespace Group15.EventManager.Data.Interfaces
     public interface IEventRepository : IRepository<Event>
     {
         IQueryable<Event> GetActiveEvents();
+        IQueryable<Event> GetEventsByRegion(Guid regionId);
+        IQueryable<Event> GetEventsByRegionAndCity(Guid regionId, Guid cityId);
         Event GetSingleEvent(Guid eventId);
         void UpdateEvent(Event _event);
     }

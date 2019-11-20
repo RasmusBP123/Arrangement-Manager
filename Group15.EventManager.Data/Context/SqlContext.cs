@@ -24,6 +24,8 @@ namespace Group15.EventManager.Data.Context
             modelBuilder.ApplyConfiguration(new CustomerMap());
             modelBuilder.ApplyConfiguration(new EmployeeMap());
             modelBuilder.ApplyConfiguration(new FoodMap());
+            modelBuilder.ApplyConfiguration(new CityMap());
+            modelBuilder.ApplyConfiguration(new RegionMap());
             base.OnModelCreating(modelBuilder);
         }
 

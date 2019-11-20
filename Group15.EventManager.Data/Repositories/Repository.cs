@@ -20,27 +20,27 @@ namespace Group15.EventManager.Data.Repositories
             DbSet = Db.Set<TEntity>();
         }
 
-        public void Add(TEntity entity)
+        public virtual void Add(TEntity entity)
         {
             Db.Add(entity);
         }
 
-        public TEntity GetById(Guid id)
+        public virtual TEntity GetById(Guid id)
         {
             return Db.Set<TEntity>().Find(id);
         }
 
-        public IQueryable<TEntity> GetAll()
+        public virtual IQueryable<TEntity> GetAll()
         {
             return DbSet;
         }
 
-        public void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             DbSet.Update(entity);
         }
 
-        public void Remove(Guid id)
+        public virtual void Remove(Guid id)
         {
             var entity = DbSet.Find(id);
             DbSet.Remove(entity);

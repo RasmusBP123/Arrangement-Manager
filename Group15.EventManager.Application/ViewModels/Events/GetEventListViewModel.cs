@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Group15.EventManager.ApplicationLayer.ViewModels.Cities;
+using Group15.EventManager.ApplicationLayer.ViewModels.Regions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,5 +15,7 @@ namespace Group15.EventManager.Application.ViewModels.Events
         public string Location { get; set; }
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
+        //public GetCityViewModel City { get; set; }
+        public GetRegionViewModel Region { get; set; }
     }
 }
