@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Group15.EventManager.Data.Mappings;
@@ -35,8 +32,6 @@ namespace Group15.EventManager.Data.Context
                 .SetBasePath(_env.ContentRootPath)
                 .AddJsonFile("appsettings.json")
                 .Build();
-
-            // optionsBuilder.UseLazyLoadingProxies();
 
             // define the database to use
             optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));

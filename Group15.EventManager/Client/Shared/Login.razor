@@ -1,0 +1,19 @@
+﻿@page "/login"
+<h3>Login</h3>
+
+<div class="login">
+    <AuthorizeView>
+        <Authorizing>
+            <text>Processing..</text>
+        </Authorizing>
+        <Authorized>
+            <div>
+                <span class="username">@context.User.Identity.Name</span>
+                <a class="sign-out" href="signout">Sign out</a>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <a class="sign-in" href="signin">Sign in</a>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>

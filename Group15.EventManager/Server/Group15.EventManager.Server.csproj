@@ -7,12 +7,15 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="3.1.0-preview1.19508.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0-preview2.19525.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0-preview3.19558.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
   </ItemGroup>
@@ -20,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Group15.EventManager.Application\Group15.EventManager.ApplicationLayer.csproj" />
     <ProjectReference Include="..\..\Group15.EventManager.Bootstrapper\Group15.EventManager.Bootstrapper.csproj" />
+    <ProjectReference Include="..\..\Group15.EventManager.Identity\Group15.EventManager.Identity.csproj" />
     <ProjectReference Include="..\Client\Group15.EventManager.Client.csproj" />
     <ProjectReference Include="..\Shared\Group15.EventManager.Shared.csproj" />
   </ItemGroup>

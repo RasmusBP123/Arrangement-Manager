@@ -5,6 +5,7 @@ namespace Group15.EventManager.Domain.Models
 {
     public class Customer : Entity
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

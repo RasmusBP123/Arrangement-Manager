@@ -12,10 +12,9 @@ namespace Group15.EventManager.Application.ViewModels.Events
         public string Name { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
-        public string Location { get; set; }
+        public string Address { get; set; }
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
-        //public GetCityViewModel City { get; set; }
         public GetRegionViewModel Region { get; set; }
     }
 }

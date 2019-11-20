@@ -10,13 +10,23 @@ using Microsoft.Extensions.Hosting;
 using System.Linq;
 using Microsoft.OpenApi.Models;
 using MediatR;
+using Group15.EventManager.Identity.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Group15.EventManager.Server
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
@@ -25,7 +35,13 @@ namespace Group15.EventManager.Server
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                     new[] { "application/octet-stream" });
             });
+
+            //DB
             services.AddDbContext<SqlContext>();
+
+            services.AddDbContext<IdentityContext>();
+
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<IdentityDbContext>();
 
             services.AddAutoMapperSetup(typeof(Startup).Assembly);
             services.AddMediatR(typeof(Startup));
@@ -34,6 +50,7 @@ namespace Group15.EventManager.Server
             {
                 setup.SwaggerDoc("v1", new OpenApiInfo() { Title = "Event Manager", Version = "Version 1" });
             });
+
             services.RegisterServices();
         }
 

@@ -64,7 +64,7 @@ namespace Group15.EventManager.Application.Services
                 Description = _event.Description, 
                 EventDate = _event.EventDate,
                 Image = _event.Image, 
-                Location = _event.Location,
+                Address = _event.Address,
                 Price = _event.Price
             });
         }
@@ -78,7 +78,7 @@ namespace Group15.EventManager.Application.Services
                 Description = _event.Description,
                 EventDate = _event.EventDate,
                 Image = _event.Image,
-                Location = _event.Location,
+                Address = _event.Address,
                 Price = _event.Price
             });
         }

@@ -1,8 +1,10 @@
 using Blazor.Fluxor;
 using Blazor.Fluxor.ReduxDevTools;
 using Blazor.Fluxor.Routing;
+using Group15.EventManager.Client.Auth;
 using Group15.EventManager.Client.Store.Events;
 using Group15.EventManager.Client.Store.Regions;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +21,10 @@ namespace Group15.EventManager.Client
                 .AddMiddleware<ReduxDevToolsMiddleware>()
                 .AddMiddleware<RoutingMiddleware>()
             );
+
+            //Auth services 
+            services.AddAuthorizationCore();
+            services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

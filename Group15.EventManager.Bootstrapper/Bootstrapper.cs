@@ -7,12 +7,14 @@ using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Data.Repositories;
 using Group15.EventManager.Data.UnitOfWork;
 using Group15.EventManager.Domain.CommandHandlers;
+using Group15.EventManager.Domain.Commands.Customers;
 using Group15.EventManager.Domain.Commands.Events;
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Queries.Events;
 using Group15.EventManager.Domain.Queries.Events.Filters;
 using Group15.EventManager.Domain.Queries.Regions;
 using Group15.EventManager.Domain.QueryHandlers;
+using Group15.EventManager.Identity.Data;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
@@ -23,12 +25,16 @@ namespace Group15.EventManager.Bootstrapper
     {
         public static void RegisterServices(this IServiceCollection services)
         {
+            //DB
             services.AddScoped<SqlContext>();
+            services.AddScoped<IdentityContext>();
 
             services.RegisterApplicationServices();
             services.RegisterRepositories();
             services.RegisterCommands();
             services.RegisterQueries();
+
+            //Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
@@ -37,13 +43,17 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IEventApplicationService, EventApplicationService>();
             services.AddScoped<IFoodApplicationService, FoodApplicationService>();
             services.AddScoped<IRegionApplicationService, RegionApplicationService>();
+            services.AddScoped<ICustomerApplicationService, CustomerApplicationService>();
         }
 
         public static void RegisterCommands(this IServiceCollection services)
         {
+            //Events
             services.AddScoped<IRequestHandler<CreateEventCommand, bool>, EventCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateEventCommand, bool>, EventCommandHandler>();
             services.AddScoped<IRequestHandler<DeleteEventCommand, bool>, EventCommandHandler>();
+            //Customers
+            services.AddScoped<IRequestHandler<SignCustomerUpForEventCommand, bool>, CustomerCommandHandler>();
         }
 
         public static void RegisterQueries(this IServiceCollection services)
@@ -64,6 +74,7 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddScoped<IFoodRepository, FoodRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
         }
     }
 }

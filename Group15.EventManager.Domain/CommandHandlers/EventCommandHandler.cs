@@ -28,7 +28,7 @@ namespace Group15.EventManager.Domain.CommandHandlers
                 Price = request.Price,
                 Description = request.Description,
                 EventDate = request.EventDate,
-                Location = request.Location,
+                Address = request.Address,
                 Image = request.Image,
             };
 
@@ -48,7 +48,7 @@ namespace Group15.EventManager.Domain.CommandHandlers
                 Price = request.Price,
                 Description = request.Description,
                 EventDate = request.EventDate,
-                Location = request.Location,
+                Address = request.Address,
                 Image = request.Image,
             };
 

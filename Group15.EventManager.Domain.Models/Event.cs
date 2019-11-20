@@ -9,8 +9,9 @@ namespace Group15.EventManager.Domain.Models
         public string Name { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
-        public string Location { get; set; }
+        public string Address { get; set; }
         public byte[] Image { get; set; }
+        public int MaxCustomerLimit { get; set; }
         public DateTime EventDate { get; set; }
         public virtual City City { get; set; }
         public virtual Region Region { get; set; }
