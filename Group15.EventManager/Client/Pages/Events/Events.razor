@@ -10,8 +10,9 @@
 {
     @foreach (var _event in EventStore.Events)
     {
-        <p>@_event.Location</p>
         <p>@_event.Price</p>
+        <p>@_event.Name</p>
+        <p>@_event.Region.Name</p>
     }
 }
 

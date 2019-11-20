@@ -18,7 +18,7 @@ namespace Group15.EventManager.Identity.Data
         {
             var config = new ConfigurationBuilder()
                 .SetBasePath(_env.ContentRootPath)
-                .AddJsonFile("identity_appsettings.json")
+                .AddJsonFile("appsettings.json")
                 .Build();
 
             // define the database to use
