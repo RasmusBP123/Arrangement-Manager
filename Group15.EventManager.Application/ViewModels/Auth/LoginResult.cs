@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Group15.EventManager.Identity.Models
+namespace Group15.EventManager.Application.ViewModels.Auth
 {
     public class LoginResult
     {

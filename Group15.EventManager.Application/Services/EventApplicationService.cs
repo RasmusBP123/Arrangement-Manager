@@ -17,7 +17,7 @@ namespace Group15.EventManager.Application.Services
 {
     public class EventApplicationService : Service, IEventApplicationService
     {
-        public EventApplicationService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator) : base(unitOfWork, mapper, mediator)
+        public EventApplicationService(IMapper mapper, IMediator mediator) : base(mapper, mediator)
         { }
 
         public async Task<IEnumerable<GetEventListViewModel>> GetAllEvents()

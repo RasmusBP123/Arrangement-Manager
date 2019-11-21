@@ -13,7 +13,7 @@ namespace Group15.EventManager.ApplicationLayer.Services
 {
     public class RegionApplicationService : Service, IRegionApplicationService
     {
-        public RegionApplicationService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator) : base(unitOfWork, mapper, mediator)
+        public RegionApplicationService(IMapper mapper, IMediator mediator) : base(mapper, mediator)
         {
         }
 

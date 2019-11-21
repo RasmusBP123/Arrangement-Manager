@@ -14,7 +14,7 @@ namespace Group15.EventManager.ApplicationLayer.Services
 {
     public class CustomerApplicationService : Service, ICustomerApplicationService
     {
-        public CustomerApplicationService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator) : base(unitOfWork, mapper, mediator)
+        public CustomerApplicationService(IMapper mapper, IMediator mediator) : base(mapper, mediator)
         {
         }
 

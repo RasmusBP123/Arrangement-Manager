@@ -2,6 +2,7 @@
 using Group15.EventManager.Shared.Auth;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -56,5 +57,9 @@ namespace Group15.EventManager.Client.Auth.Services
             _httpClient.DefaultRequestHeaders.Authorization = null;
         }
 
+        public async Task DeleteUser(Guid userId)
+        {
+            await _httpClient.PostJsonAsync<Guid>($"api/accounts/{userId}/delete", userId);
+        }
     }
 }

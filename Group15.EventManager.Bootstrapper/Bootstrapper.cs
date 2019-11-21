@@ -15,6 +15,8 @@ using Group15.EventManager.Domain.Queries.Events.Filters;
 using Group15.EventManager.Domain.Queries.Regions;
 using Group15.EventManager.Domain.QueryHandlers;
 using Group15.EventManager.Identity.Data;
+using Group15.EventManager.Identity.Interfaces;
+using Group15.EventManager.Identity.Repositories;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
@@ -40,6 +42,7 @@ namespace Group15.EventManager.Bootstrapper
 
         public static void RegisterApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IAccountApplicationService, AccountApplicationService>();
             services.AddScoped<IEventApplicationService, EventApplicationService>();
             services.AddScoped<IFoodApplicationService, FoodApplicationService>();
             services.AddScoped<IRegionApplicationService, RegionApplicationService>();
@@ -71,6 +74,7 @@ namespace Group15.EventManager.Bootstrapper
 
         public static void RegisterRepositories(this IServiceCollection services)
         {
+            services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddScoped<IFoodRepository, FoodRepository>();

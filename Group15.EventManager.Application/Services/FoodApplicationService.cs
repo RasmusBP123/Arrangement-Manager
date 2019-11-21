@@ -14,7 +14,7 @@ namespace Group15.EventManager.ApplicationLayer.Services
     {
         private readonly IFoodRepository _foodRepository;
 
-        public FoodApplicationService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator, IFoodRepository foodRepository) : base(unitOfWork, mapper, mediator)
+        public FoodApplicationService(IMapper mapper, IMediator mediator, IFoodRepository foodRepository) : base(mapper, mediator)
         {
             _foodRepository = foodRepository;
         }

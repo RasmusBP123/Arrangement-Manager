@@ -3,8 +3,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Group15.EventManager.Application.ViewModels.Auth;
+using Group15.EventManager.ApplicationLayer.Interfaces;
 using Group15.EventManager.Domain.Models.Auth;
-using Group15.EventManager.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -17,18 +18,19 @@ namespace Group15.EventManager.Server.Controllers
     public class LoginController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IAccountApplicationService _accountApplicationService;
 
-        public LoginController(IConfiguration configuration, SignInManager<ApplicationUser> signInManager)
+        public LoginController(IConfiguration configuration, IAccountApplicationService accountApplicationService)
         {
             _configuration = configuration;
-            _signInManager = signInManager;
+            _accountApplicationService = accountApplicationService;
         }
 
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
-            var result = await _signInManager.PasswordSignInAsync(loginModel.Email, loginModel.Password, false, false);
+            var result = await _accountApplicationService.PasswordSignIn(loginModel);
+
             if (!result.Succeeded)
             {
                 return BadRequest(new LoginResult { Successful = false, Error = "Username or password are invalid" });
