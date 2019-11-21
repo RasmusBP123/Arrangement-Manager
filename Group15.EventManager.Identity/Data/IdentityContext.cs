@@ -1,17 +1,30 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Group15.EventManager.Domain.Models.Auth;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace Group15.EventManager.Identity.Data
 {
-    public class IdentityContext : IdentityDbContext
+    public class IdentityContext : IdentityDbContext<ApplicationUser>
     {
         private readonly IHostEnvironment _env;
 
         public IdentityContext(DbContextOptions options, IHostEnvironment env) : base(options)
         {
             _env = env;
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<ApplicationUser>().Ignore(user => user.TwoFactorEnabled)
+                                             .Ignore(user => user.LockoutEnabled)
+                                             .Ignore(user => user.LockoutEnd)
+                                             .Ignore(user => user.EmailConfirmed)
+                                             .Ignore(user => user.AccessFailedCount);
+
+            builder.Entity<ApplicationUser>().ToTable("Users");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -22,8 +35,7 @@ namespace Group15.EventManager.Identity.Data
                 .Build();
 
             // define the database to use
-            optionsBuilder.UseSqlServer(config.GetConnectionString("IdentityConnection"));
+            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
         }
-
     }
 }

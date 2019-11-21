@@ -1,0 +1,54 @@
+﻿@page  "/login"
+@inject IAuthService AuthService
+@inject NavigationManager NavManager
+@inject AuthStore AuthStore
+
+<h3>Login</h3>
+
+@if (ShowErrors)
+{
+    <div class="alert alert-danger" role="alert">
+            <p>@Error</p>
+    </div>
+}
+
+<EditForm Model="loginModel" OnValidSubmit="@HandleLogin">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="email">Email address</label>
+        <InputText Id="email" class="form-control" @bind-Value="loginModel.Email" />
+        <ValidationMessage For="@(() => loginModel.Email)" />
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <InputText Id="password" type="password" class="form-control" @bind-Value="loginModel.Password" />
+        <ValidationMessage For="@(() => loginModel.Password)" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+@code {
+
+    private LoginModel loginModel = new LoginModel();
+    private bool ShowErrors;
+    private string Error;
+
+    private async Task HandleLogin()
+    {
+        ShowErrors = false;
+
+        var result = await AuthService.Login(loginModel);
+        if (result.Successful)
+        {
+            AuthStore.NotifyLogin();
+            NavManager.NavigateTo("/region");
+        }
+        else
+        {
+            Error = result.Error;
+            ShowErrors = true;
+        }
+    }
+}

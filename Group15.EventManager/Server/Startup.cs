@@ -11,10 +11,11 @@ using System.Linq;
 using Microsoft.OpenApi.Models;
 using MediatR;
 using Group15.EventManager.Identity.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Group15.EventManager.Domain.Models.Auth;
 
 namespace Group15.EventManager.Server
 {
@@ -29,36 +30,58 @@ namespace Group15.EventManager.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            //DB
+            services.AddDbContext<SqlContext>();
+            services.AddDbContext<IdentityContext>();
+
+            services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<IdentityContext>();
+            services.RegisterServices();
+
+            //JWT
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["JwtIssuer"],
+                        ValidAudience = Configuration["JwtAudience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSecurityKey"]))
+                    };  
+                });
+
+            services.AddAutoMapperSetup(typeof(Startup).Assembly);
+            services.AddMediatR(typeof(Startup));
+
+            services.AddMvc().AddNewtonsoftJson();
+
             services.AddResponseCompression(opts =>
             {
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                     new[] { "application/octet-stream" });
             });
 
-            //DB
-            services.AddDbContext<SqlContext>();
-
-            services.AddDbContext<IdentityContext>();
-
-            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<IdentityDbContext>();
-
-            services.AddAutoMapperSetup(typeof(Startup).Assembly);
-            services.AddMediatR(typeof(Startup));
-
             services.AddSwaggerGen(setup =>
             {
                 setup.SwaggerDoc("v1", new OpenApiInfo() { Title = "Event Manager", Version = "Version 1" });
             });
-
-            services.RegisterServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseResponseCompression();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseBlazorDebugging();
+            }
 
+
+            //Swagger
             app.UseSwagger();
             app.UseSwaggerUI(config =>
             {
@@ -67,16 +90,14 @@ namespace Group15.EventManager.Server
 
             });
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseBlazorDebugging();
-            }
-
             app.UseStaticFiles();
             app.UseClientSideBlazorFiles<Client.Startup>();
 
             app.UseRouting();
+
+            //Authentication IMPORTANT --> UseAuthorization must be between UseRouting() and UseEndPoints()
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

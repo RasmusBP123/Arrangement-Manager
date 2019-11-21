@@ -11,6 +11,6 @@ namespace Group15.EventManager.Domain.Models
         public string Location { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
-
+        
     }
 }

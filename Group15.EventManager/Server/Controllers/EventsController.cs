@@ -2,12 +2,14 @@
 using System.Threading.Tasks;
 using Group15.EventManager.Application.Interfaces;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Group15.EventManager.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class EventsController : ControllerBase
     {
         private readonly IEventApplicationService _eventApplicationService;

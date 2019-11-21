@@ -1,5 +1,6 @@
-﻿@page "/login"
-<h3>Login</h3>
+﻿@inject IAuthService AuthService
+@inject NavigationManager NavManager
+@inject AuthStore  AuthStore
 
 <div class="login">
     <AuthorizeView>
@@ -8,12 +9,22 @@
         </Authorizing>
         <Authorized>
             <div>
-                <span class="username">@context.User.Identity.Name</span>
-                <a class="sign-out" href="signout">Sign out</a>
+                <span class="username">Hello, @context.User.Identity.Name</span>
+                <button class="sign-out" @onclick="@HandleLogout">Sign out</button>
             </div>
         </Authorized>
         <NotAuthorized>
-            <a class="sign-in" href="signin">Sign in</a>
+            <button class="btn btn-success" @onclick="@(() => NavManager.NavigateTo("/register"))">Register</button> |
+            <button class="sign-in" @onclick="@(() => NavManager.NavigateTo("/login"))">Log in</button>
         </NotAuthorized>
     </AuthorizeView>
 </div>
+
+@code{
+
+    private async Task HandleLogout()
+    {
+        await AuthService.Logout();
+        NavManager.NavigateTo("/region");
+    }
+}

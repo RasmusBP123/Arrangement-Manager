@@ -1,5 +1,0 @@
-{
-  "ConnectionStrings": {
-    "IdentityConnection": "Server=(localdb)\\MSSQLLocalDB;Database=EventManagerDb;Trusted_Connection=True;MultipleActiveResultSets=true"
-  }
-}
