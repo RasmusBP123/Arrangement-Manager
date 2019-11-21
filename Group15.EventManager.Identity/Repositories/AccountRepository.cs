@@ -4,6 +4,7 @@ using Group15.EventManager.Identity.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Group15.EventManager.Identity.Repositories
@@ -12,13 +13,11 @@ namespace Group15.EventManager.Identity.Repositories
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IdentityContext _identityContext;
 
-        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IdentityContext identityContext)
+        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _identityContext = identityContext;
         }
 
         public async Task<IdentityResult> CreateAccount(ApplicationUser user, string password)
@@ -27,11 +26,18 @@ namespace Group15.EventManager.Identity.Repositories
             return result;
         }
 
-        public async Task DeleteAccount(Guid userId)
+        public async Task DeleteAccount(ClaimsPrincipal userClaim)
         {
-            string id = userId.ToString();
-            var user = _identityContext.Set<ApplicationUser>().FirstOrDefault(appUser => appUser.Id == id);
+            string userName = userClaim.Identity.Name;
+            var user = await _userManager.FindByNameAsync(userName);
             await _userManager.DeleteAsync(user);
+        }
+
+        public async Task<ApplicationUser> GetLoggedInUser(ClaimsPrincipal claimsPrincipal)
+        {
+            string userName = claimsPrincipal.Identity.Name;
+            var user = await _userManager.FindByNameAsync(userName);
+            return user;
         }
 
         public async Task<SignInResult> PasswordSignIn(string email, string password)

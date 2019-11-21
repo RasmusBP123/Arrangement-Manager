@@ -1,0 +1,30 @@
+﻿@page  "/account"
+@inject HttpClient HttpClient
+@inject IAuthService AuthService
+@inject NavigationManager NavManager
+@inject AuthStore AuthStore
+@attribute [Authorize]
+
+<h3>Account</h3>
+
+<!--More properties to be added-->
+<p>@AuthStore.User.Email</p>
+<p>@AuthStore.User.FirstName</p>
+<p>@AuthStore.User.LastName</p>
+
+<button class="btn btn-outline-danger" @onclick="@(() => DeleteAccount())">delete</button>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
+    }
+
+    private async Task DeleteAccount()
+    {
+        await HttpClient.PostAsync("api/accounts/delete", null);
+        await AuthService.Logout();
+        NavManager.NavigateTo("/");
+    }
+}

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Group15.EventManager.Application.ViewModels.Auth;
 using Group15.EventManager.ApplicationLayer.Interfaces;
-using Group15.EventManager.Data.UnitOfWork;
-using Group15.EventManager.Domain.Models.Auth;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Group15.EventManager.Server.Controllers
@@ -14,7 +11,7 @@ namespace Group15.EventManager.Server.Controllers
     [Route("api/[controller]")]
     public class AccountsController : ControllerBase
     {
-        private static UserModel LoggedOutUser = new UserModel { IsAuthenticated = false };
+        //private static UserModel LoggedOutUser = new UserModel { IsAuthenticated = false };
         private readonly IAccountApplicationService _accountApplicationService;
 
         public AccountsController(IAccountApplicationService accountApplicationService)
@@ -38,17 +35,28 @@ namespace Group15.EventManager.Server.Controllers
                 var errors = result.Errors.Select(e => e.Description);
                 return BadRequest(new RegisterResult() { Successful = false, Errors = errors });
             }
-
             return Ok(new RegisterResult() { Successful = true });
         }
 
-        [HttpPost]
-        [Route("{userId}/delete")]
-        public async Task<IActionResult> DeleteAccount([FromRoute] Guid userId)
+        [HttpGet]
+        [Route("user")]
+        [Authorize]
+        public async Task<IActionResult> GetUser()
         {
-            if (userId == Guid.Empty) return BadRequest();
-            await _accountApplicationService.DeleteAccount(userId);
+            var claims = HttpContext.User;
+            var user = await _accountApplicationService.GetLoggedInUser(claims);
+            return Ok(user);
+        }
 
+        [HttpPost]
+        [Route("delete")]
+        [Authorize]
+        public async Task<IActionResult> DeleteAccount()
+        {
+            var user = HttpContext.User;
+            if (user == null) return BadRequest();
+
+            await _accountApplicationService.DeleteAccount(user);
             return NotFound();
         }
     }

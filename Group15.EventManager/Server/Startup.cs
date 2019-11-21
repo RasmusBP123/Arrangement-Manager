@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Group15.EventManager.Domain.Models.Auth;
+using Microsoft.AspNetCore.Identity;
 
 namespace Group15.EventManager.Server
 {
@@ -34,7 +35,10 @@ namespace Group15.EventManager.Server
             services.AddDbContext<SqlContext>();
             services.AddDbContext<IdentityContext>();
 
-            services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<IdentityContext>();
+            services.AddDefaultIdentity<ApplicationUser>()
+                    .AddEntityFrameworkStores<IdentityContext>()
+                    .AddDefaultTokenProviders();
+            ;
             services.RegisterServices();
 
             //JWT

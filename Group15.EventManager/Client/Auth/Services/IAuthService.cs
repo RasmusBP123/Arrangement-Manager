@@ -9,6 +9,6 @@ namespace Group15.EventManager.Client.Auth.Services
         Task<LoginResult> Login(LoginModel loginModel);
         Task Logout();
         Task<RegisterResult> Register(RegisterModel registerModel);
-        Task DeleteUser(Guid userId);
+        Task DeleteUser();
     }
 }

@@ -1,6 +1,17 @@
 ﻿@page "/"
+@inject AuthStore AuthStore
+@inject HttpClient HttpClient
 
 <h1>Hello, world!</h1>
 
 <Regions />
 <Events />
+
+@code{
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
+        AuthStore.NotifyLogin();
+    }
+}

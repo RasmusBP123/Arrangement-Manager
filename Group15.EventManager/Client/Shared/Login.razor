@@ -1,6 +1,7 @@
 ﻿@inject IAuthService AuthService
 @inject NavigationManager NavManager
-@inject AuthStore  AuthStore
+@inject AuthStore AuthStore
+@inject HttpClient HttpClient
 
 <div class="login">
     <AuthorizeView>
@@ -9,7 +10,7 @@
         </Authorizing>
         <Authorized>
             <div>
-                <span class="username">Hello, @context.User.Identity.Name</span>
+                <span>Hello, @AuthStore.User.FirstName @AuthStore.User.LastName</span>
                 <button class="sign-out" @onclick="@HandleLogout">Sign out</button>
             </div>
         </Authorized>
@@ -21,6 +22,11 @@
 </div>
 
 @code{
+
+    protected override void OnInitialized()
+    {
+        AuthStore.OnLogin += StateHasChanged;
+    }
 
     private async Task HandleLogout()
     {

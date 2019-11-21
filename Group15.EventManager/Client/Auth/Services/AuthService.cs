@@ -57,9 +57,10 @@ namespace Group15.EventManager.Client.Auth.Services
             _httpClient.DefaultRequestHeaders.Authorization = null;
         }
 
-        public async Task DeleteUser(Guid userId)
+        public async Task DeleteUser()
         {
-            await _httpClient.PostJsonAsync<Guid>($"api/accounts/{userId}/delete", userId);
+            await _httpClient.PostJsonAsync<int>($"api/accounts/delete", 7);
+            _httpClient.DefaultRequestHeaders.Authorization = null;
         }
     }
 }

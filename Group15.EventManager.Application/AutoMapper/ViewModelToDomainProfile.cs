@@ -16,7 +16,6 @@ namespace Group15.EventManager.Application.AutoMapper
             CreateMap<UpdateEventViewModel, Event>();
             CreateMap<CreateFoodViewModel, Food>();
             CreateMap<SignUpCustomerViewModel, Customer>();
-            CreateMap<RegisterModel, ApplicationUser>();
         }
     }
 }
