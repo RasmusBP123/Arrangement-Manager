@@ -11,7 +11,6 @@ namespace Group15.EventManager.Server.Controllers
     [Route("api/[controller]")]
     public class AccountsController : ControllerBase
     {
-        //private static UserModel LoggedOutUser = new UserModel { IsAuthenticated = false };
         private readonly IAccountApplicationService _accountApplicationService;
 
         public AccountsController(IAccountApplicationService accountApplicationService)

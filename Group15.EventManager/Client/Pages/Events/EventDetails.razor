@@ -1,0 +1,23 @@
+﻿@page "/{eventId:guid}/event/details"
+@inject HttpClient HttpClient
+@inject EventStore EventStore
+
+<h3>Event</h3>
+
+<p>@EventStore.Event.Name</p>
+
+@code {
+
+    [Parameter]
+    public Guid eventId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        EventStore.Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{eventId}");
+    }
+
+    private async Task SignUpForEvent(Guid eventId)
+    {
+        
+    }
+}

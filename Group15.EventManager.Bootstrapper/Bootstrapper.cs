@@ -1,7 +1,12 @@
-﻿using Group15.EventManager.Application.Interfaces;
+﻿using FluentValidation;
+using Group15.EventManager.Application.Interfaces;
 using Group15.EventManager.Application.Services;
+using Group15.EventManager.Application.Validation.Events;
+using Group15.EventManager.Application.ViewModels.Auth;
 using Group15.EventManager.ApplicationLayer.Interfaces;
 using Group15.EventManager.ApplicationLayer.Services;
+using Group15.EventManager.ApplicationLayer.Validation.Accounts;
+using Group15.EventManager.ApplicationLayer.ViewModels.Events;
 using Group15.EventManager.Data.Context;
 using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Data.Repositories;
@@ -35,7 +40,7 @@ namespace Group15.EventManager.Bootstrapper
             services.RegisterRepositories();
             services.RegisterCommands();
             services.RegisterQueries();
-
+            services.RegisterValidators();
             //Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
@@ -79,6 +84,12 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddScoped<IFoodRepository, FoodRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+        }
+
+        public static void RegisterValidators(this IServiceCollection services)
+        {
+            services.AddTransient<IValidator<CreateEventViewModel>, CreateEventValidator>();
+            services.AddTransient<IValidator<RegisterModel>, RegisterValidator>();
         }
     }
 }

@@ -15,7 +15,6 @@
 <EditForm Model="loginModel" OnValidSubmit="@HandleLogin">
     <DataAnnotationsValidator />
     <ValidationSummary />
-
     <div class="form-group">
         <label for="email">Email address</label>
         <InputText Id="email" class="form-control" @bind-Value="loginModel.Email" />
@@ -34,6 +33,10 @@
     private LoginModel loginModel = new LoginModel();
     private bool ShowErrors;
     private string Error;
+
+    protected override void OnInitialized()
+    {
+    }
 
     private async Task HandleLogin()
     {

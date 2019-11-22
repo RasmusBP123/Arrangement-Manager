@@ -8,10 +8,11 @@ namespace Group15.EventManager.Shared.Events
 {
     public class GetEventListViewModel
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
-        public string Location { get; set; }
+        public string Address { get; set; }
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
         //public GetCityViewModel City { get; set; }

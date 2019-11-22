@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Group15.EventManager.Domain.Models.Auth;
 using Microsoft.AspNetCore.Identity;
+using FluentValidation.AspNetCore;
 
 namespace Group15.EventManager.Server
 {
@@ -60,7 +61,9 @@ namespace Group15.EventManager.Server
             services.AddAutoMapperSetup(typeof(Startup).Assembly);
             services.AddMediatR(typeof(Startup));
 
-            services.AddMvc().AddNewtonsoftJson();
+            services.AddMvc()
+                    .AddFluentValidation()
+                    .AddNewtonsoftJson();
 
             services.AddResponseCompression(opts =>
             {
@@ -74,7 +77,6 @@ namespace Group15.EventManager.Server
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseResponseCompression();
@@ -83,7 +85,6 @@ namespace Group15.EventManager.Server
                 app.UseDeveloperExceptionPage();
                 app.UseBlazorDebugging();
             }
-
 
             //Swagger
             app.UseSwagger();
@@ -99,7 +100,7 @@ namespace Group15.EventManager.Server
 
             app.UseRouting();
 
-            //Authentication IMPORTANT --> UseAuthorization must be between UseRouting() and UseEndPoints()
+            //DO NOT TOUCH IMPORTANT --> UseAuthorization must be between UseRouting() and UseEndPoints()
             app.UseAuthentication();
             app.UseAuthorization();
 

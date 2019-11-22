@@ -9,7 +9,6 @@ namespace Group15.EventManager.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class EventsController : ControllerBase
     {
         private readonly IEventApplicationService _eventApplicationService;
@@ -64,6 +63,10 @@ namespace Group15.EventManager.Server.Controllers
         }
 
         [HttpPost]
+        [Route("{eventId}/user/signup")]
+        public async Task<IActionResult> SignUserUpForEvent([FromRoute]Guid eventId, )
+
+        [HttpPost]
         [Route("create")]
         public async Task<IActionResult> CreateEvent([FromBody]CreateEventViewModel eventViewModel)
         {
@@ -89,6 +92,7 @@ namespace Group15.EventManager.Server.Controllers
 
         [HttpDelete] 
         [Route("{eventId}/delete")]
+        [Authorize]
         public async Task<IActionResult> DeleteEvent([FromRoute] Guid eventId)
         {
             await _eventApplicationService.DeleteEvent(eventId);

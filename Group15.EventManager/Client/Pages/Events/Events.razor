@@ -4,14 +4,20 @@
 @inject IState<GetActiveEventsState> EventState
 @inject HttpClient HttpClient
 @inject EventStore EventStore
+@inject NavigationManager NavManager
 
 @if(EventStore.Events != null)
 {
-    @foreach (var _event in EventStore.Events)
-    {
-        <p>@_event.Price</p>
-        <p>@_event.Name</p>
-    }
+    <ul>
+        @foreach (var _event in EventStore.Events)
+        {
+            <li @onclick="@(() => NavigateToEventDetails(_event.Id))">
+                <p>@_event.Name</p>
+                <p>@_event.Region.Name</p>
+                <p>@_event.Price</p>
+            </li>
+        }
+    </ul>
 }
 
 @code {
@@ -21,5 +27,10 @@
         EventStore.Events = await HttpClient.GetJsonAsync<List<GetEventListViewModel>>("api/events/active");
         EventStore.OnChange += StateHasChanged;
         //Dispatcher.Dispatch(new GetActiveEventsAction());
+    }
+
+    private void NavigateToEventDetails(Guid eventId)
+    {
+        NavManager.NavigateTo($"/{eventId}/event/details");
     }
 }

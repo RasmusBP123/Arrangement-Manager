@@ -9,6 +9,7 @@ namespace Group15.EventManager.Client.Store.Events
     public class EventStore
     {
         public List<GetEventListViewModel> Events { get; set; } = new List<GetEventListViewModel>();
+        public GetSingleEventViewModel Event { get; set; } = new GetSingleEventViewModel();
         public event Action OnChange;
 
         public void NotifyStateChanged() => OnChange.Invoke();
