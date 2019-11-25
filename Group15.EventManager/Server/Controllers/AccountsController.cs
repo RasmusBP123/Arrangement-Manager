@@ -39,12 +39,20 @@ namespace Group15.EventManager.Server.Controllers
 
         [HttpGet]
         [Route("user")]
-        [Authorize]
         public async Task<IActionResult> GetUser()
         {
             var claims = HttpContext.User;
             var user = await _accountApplicationService.GetLoggedInUser(claims);
             return Ok(user);
+        }
+
+        //Used for validating if user is logged in or not, so you cannot register or log in if already logged in
+        [HttpGet]
+        [Route("valid")]
+        public IActionResult IsUserAuthenticated()
+        {
+            var isAuthenticated = HttpContext.User.Identity.IsAuthenticated;
+            return Ok(isAuthenticated);
         }
 
         [HttpPost]

@@ -1,8 +1,5 @@
-﻿using Group15.EventManager.Shared.Auth;
+﻿using Group15.EventManager.Shared.Users;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Group15.EventManager.Client.Store.Auth
 {

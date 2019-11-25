@@ -1,7 +1,6 @@
 ﻿using Group15.EventManager.Domain.Core.Models;
-using System;
+using Group15.EventManager.Domain.Models.Auth;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Group15.EventManager.Domain.Models
 {
@@ -9,7 +8,7 @@ namespace Group15.EventManager.Domain.Models
     {
         public string Name { get; set; }
         public string Location { get; set; }
-        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         
     }

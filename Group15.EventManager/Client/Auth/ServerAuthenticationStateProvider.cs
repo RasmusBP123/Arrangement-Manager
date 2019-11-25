@@ -1,6 +1,4 @@
 ﻿using Blazored.LocalStorage;
-using Group15.EventManager.Shared.Customers;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using System;
 using System.Collections.Generic;

@@ -18,11 +18,11 @@ namespace Group15.EventManager.Data.Context
         {
             modelBuilder.ApplyConfiguration(new EventMap());
             modelBuilder.ApplyConfiguration(new StoreMap());
-            modelBuilder.ApplyConfiguration(new CustomerMap());
             modelBuilder.ApplyConfiguration(new EmployeeMap());
             modelBuilder.ApplyConfiguration(new FoodMap());
             modelBuilder.ApplyConfiguration(new CityMap());
             modelBuilder.ApplyConfiguration(new RegionMap());
+            modelBuilder.ApplyConfiguration(new ApplicationUserEventMap());
             base.OnModelCreating(modelBuilder);
         }
 

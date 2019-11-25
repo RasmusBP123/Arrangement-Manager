@@ -1,4 +1,4 @@
-﻿namespace Group15.EventManager.Shared.Auth
+﻿namespace Group15.EventManager.Shared.Users
 {
     public class UserModel
     {

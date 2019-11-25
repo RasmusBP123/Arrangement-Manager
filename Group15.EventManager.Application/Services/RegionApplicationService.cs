@@ -30,5 +30,10 @@ namespace Group15.EventManager.ApplicationLayer.Services
             var regionViewModel = _mapper.Map<GetRegionViewModel>(region);
             return regionViewModel;
         }
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
+
     }
 }

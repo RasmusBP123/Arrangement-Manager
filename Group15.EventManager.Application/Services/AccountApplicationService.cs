@@ -61,5 +61,9 @@ namespace Group15.EventManager.ApplicationLayer.Services
             var result = await _accountRepository.PasswordSignIn(loginModel.Email, loginModel.Password);
             return result;
         }
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

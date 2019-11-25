@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Group15.EventManager.ApplicationLayer.Interfaces
 {
-    public interface IRegionApplicationService
+    public interface IRegionApplicationService : IDisposable
     {
         Task<IEnumerable<GetRegionViewModel>> GetAllRegions();
         Task<GetRegionViewModel> GetSingleRegion(Guid regionId);

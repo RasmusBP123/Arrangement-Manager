@@ -41,9 +41,7 @@ namespace Group15.EventManager.Data.Repositories
 
         public Event GetSingleEvent(Guid eventId)
         {
-            var _event = Db.Set<Event>().Include(e => e.Customers)
-                                        .Include(e => e.Employee)
-                                        .Include(e => e.Food)
+            var _event = Db.Set<Event>().Include(e => e.Food)
                                         .FirstOrDefault(e => e.Id == eventId);
             return _event;
         }

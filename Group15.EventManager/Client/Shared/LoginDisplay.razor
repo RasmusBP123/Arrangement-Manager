@@ -1,6 +1,7 @@
 ﻿@inject IAuthService AuthService
 @inject NavigationManager NavManager
 @inject AuthStore AuthStore
+@inject AuthStore AuthStore
 @inject HttpClient HttpClient
 
 <div class="login">
@@ -23,7 +24,7 @@
 
 @code{
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         AuthStore.OnLogin += StateHasChanged;
     }

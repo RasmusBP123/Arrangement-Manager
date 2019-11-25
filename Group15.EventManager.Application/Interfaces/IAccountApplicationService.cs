@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Group15.EventManager.ApplicationLayer.Interfaces
 {
-    public interface IAccountApplicationService
+    public interface IAccountApplicationService : IDisposable
     {
         Task<IdentityResult> CreateAccount(RegisterModel registerModel);
         Task<SignInResult> PasswordSignIn(LoginModel loginModel);

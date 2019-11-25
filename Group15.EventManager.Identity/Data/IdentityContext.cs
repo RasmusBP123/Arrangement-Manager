@@ -1,12 +1,15 @@
-﻿using Group15.EventManager.Domain.Models.Auth;
+﻿using Group15.EventManager.Data.Mappings;
+using Group15.EventManager.Domain.Models.Auth;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Group15.EventManager.Identity.Data
 {
-    public class IdentityContext : IdentityDbContext<ApplicationUser>
+    public class IdentityContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         private readonly IHostEnvironment _env;
 
@@ -24,6 +27,7 @@ namespace Group15.EventManager.Identity.Data
                                              .Ignore(user => user.EmailConfirmed)
                                              .Ignore(user => user.AccessFailedCount);
 
+            builder.ApplyConfiguration(new ApplicationUserEventMap());
             builder.Entity<ApplicationUser>().ToTable("Users");
         }
 

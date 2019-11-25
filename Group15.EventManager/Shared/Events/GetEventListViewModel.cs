@@ -15,7 +15,6 @@ namespace Group15.EventManager.Shared.Events
         public string Address { get; set; }
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
-        //public GetCityViewModel City { get; set; }
         public GetRegionViewModel Region { get; set; }
     }
 }

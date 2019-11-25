@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Group15.EventManager.Data.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    [Migration("20191119135802_updatedEvent")]
-    partial class updatedEvent
+    [Migration("20191124185626_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,75 @@ namespace Group15.EventManager.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Group15.EventManager.Domain.Models.Auth.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("StoreId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoreId");
+
+                    b.ToTable("Users");
+                });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.City", b =>
                 {
@@ -44,33 +113,6 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasIndex("RegionId");
 
                     b.ToTable("Cities");
-                });
-
-            modelBuilder.Entity("Group15.EventManager.Domain.Models.Customer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("EventId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("StoreId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("StoreId");
-
-                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Employee", b =>
@@ -101,6 +143,9 @@ namespace Group15.EventManager.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid?>("CityId")
                         .HasColumnType("uniqueidentifier");
 
@@ -122,8 +167,8 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<byte[]>("Image")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("MaxCustomerLimit")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -167,6 +212,21 @@ namespace Group15.EventManager.Data.Migrations
                     b.ToTable("Foods");
                 });
 
+            modelBuilder.Entity("Group15.EventManager.Domain.Models.Joint.ApplicationUserEvent", b =>
+                {
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ApplicationUserId", "EventId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("UserEvents");
+                });
+
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Region", b =>
                 {
                     b.Property<Guid>("Id")
@@ -204,6 +264,13 @@ namespace Group15.EventManager.Data.Migrations
                     b.ToTable("Stores");
                 });
 
+            modelBuilder.Entity("Group15.EventManager.Domain.Models.Auth.ApplicationUser", b =>
+                {
+                    b.HasOne("Group15.EventManager.Domain.Models.Store", null)
+                        .WithMany("Users")
+                        .HasForeignKey("StoreId");
+                });
+
             modelBuilder.Entity("Group15.EventManager.Domain.Models.City", b =>
                 {
                     b.HasOne("Group15.EventManager.Domain.Models.Region", "Region")
@@ -211,17 +278,6 @@ namespace Group15.EventManager.Data.Migrations
                         .HasForeignKey("RegionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Group15.EventManager.Domain.Models.Customer", b =>
-                {
-                    b.HasOne("Group15.EventManager.Domain.Models.Event", null)
-                        .WithMany("Customers")
-                        .HasForeignKey("EventId");
-
-                    b.HasOne("Group15.EventManager.Domain.Models.Store", null)
-                        .WithMany("Customers")
-                        .HasForeignKey("StoreId");
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Employee", b =>
@@ -248,6 +304,21 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasOne("Group15.EventManager.Domain.Models.Region", "Region")
                         .WithMany("Events")
                         .HasForeignKey("RegionId");
+                });
+
+            modelBuilder.Entity("Group15.EventManager.Domain.Models.Joint.ApplicationUserEvent", b =>
+                {
+                    b.HasOne("Group15.EventManager.Domain.Models.Auth.ApplicationUser", "User")
+                        .WithMany("UserEvents")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Group15.EventManager.Domain.Models.Event", "Event")
+                        .WithMany("UserEvents")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

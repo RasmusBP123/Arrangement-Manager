@@ -1,7 +1,5 @@
-﻿using Group15.EventManager.Shared.Customers;
-using Group15.EventManager.Shared.Food;
+﻿using Group15.EventManager.Shared.Food;
 using System;
-using System.Collections.Generic;
 
 namespace Group15.EventManager.Shared.Events
 {
@@ -14,7 +12,6 @@ namespace Group15.EventManager.Shared.Events
         public string Location { get; set; }
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
-        public IEnumerable<GetCustomerViewModel> Customers { get; set; }
         public GetFoodViewModel Food { get; set; }
     }
 }

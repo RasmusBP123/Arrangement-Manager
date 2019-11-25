@@ -1,8 +1,5 @@
-﻿using Group15.EventManager.ApplicationLayer.ViewModels.Customers;
-using Group15.EventManager.ApplicationLayer.ViewModels.Foods;
+﻿using Group15.EventManager.ApplicationLayer.ViewModels.Foods;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
 {
@@ -15,7 +12,6 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
         public string Address { get; set; }
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
-        public IEnumerable<GetCustomerViewModel> Customers { get; set; }
         public GetFoodViewModel Food { get; set; }
     }
 }

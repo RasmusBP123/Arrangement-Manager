@@ -64,7 +64,10 @@ namespace Group15.EventManager.Server.Controllers
 
         [HttpPost]
         [Route("{eventId}/user/signup")]
-        public async Task<IActionResult> SignUserUpForEvent([FromRoute]Guid eventId, )
+        public async Task<IActionResult> SignUserUpForEvent([FromRoute]Guid eventId)
+        {
+            return Ok();
+        }
 
         [HttpPost]
         [Route("create")]
