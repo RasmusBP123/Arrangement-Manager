@@ -34,20 +34,18 @@ namespace Group15.EventManager.Client.Auth.Services
 
         public async Task<LoginResult> Login(LoginModel loginModel)
         {
-            var loginAsJson = JsonSerializer.Serialize(loginModel);
-            var response = await _httpClient.PostAsync("api/login", new StringContent(loginAsJson, Encoding.UTF8, "application/json"));
-            var loginResult = JsonSerializer.Deserialize<LoginResult>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var result = await _httpClient.PostJsonAsync<LoginResult>("api/login", loginModel);
 
-            if (!response.IsSuccessStatusCode)
+            if (!result.Successful)
             {
-                return loginResult;
+                return result;
             }
 
-            await _localStorageService.SetItemAsync("authToken", loginResult.Token);
-            ((ServerAuthenticationStateProvider)_authStateProvider).MarkUserAsAuthenticated(loginResult.Token);
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResult.Token);
+            await _localStorageService.SetItemAsync("authToken", result.Token);
+            ((ServerAuthenticationStateProvider)_authStateProvider).MarkUserAsAuthenticated(result.Token);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
 
-            return loginResult;
+            return result;
         }
 
         public async Task Logout()

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
 
 namespace Group15.EventManager.Application.ViewModels.Auth
 {
@@ -10,5 +12,6 @@ namespace Group15.EventManager.Application.ViewModels.Auth
         public string LastName { get; set; }
         public string City { get; set; }
         public string Address { get; set; }
+        public IEnumerable<IdentityRole> Roles { get; set; }
     }
 }

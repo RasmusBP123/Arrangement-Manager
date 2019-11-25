@@ -7,6 +7,7 @@ using Group15.EventManager.Domain.Models.Auth;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -44,14 +45,16 @@ namespace Group15.EventManager.ApplicationLayer.Services
             return result;
         }
 
-        public async Task DeleteAccount(ClaimsPrincipal userClaim)
-        {
-            await _accountRepository.DeleteAccount(userClaim);
-        }
-
         public async Task<UserModel> GetLoggedInUser(ClaimsPrincipal claimsPrincipal)
         {
             var applicationUser = await _accountRepository.GetLoggedInUser(claimsPrincipal);
+            var userModel = _mapper.Map<UserModel>(applicationUser);
+            return userModel;
+        }
+
+        public async Task<UserModel> Login(string email)
+        {
+            var applicationUser = await _accountRepository.Login(email);
             var userModel = _mapper.Map<UserModel>(applicationUser);
             return userModel;
         }
@@ -60,6 +63,18 @@ namespace Group15.EventManager.ApplicationLayer.Services
         {
             var result = await _accountRepository.PasswordSignIn(loginModel.Email, loginModel.Password);
             return result;
+        }
+
+        public Task<IEnumerable<string>> GetRoles(UserModel user)
+        {
+            var applicationUser = _mapper.Map<ApplicationUser>(user);
+            var roles = _accountRepository.GetRoles(applicationUser);
+            return roles;
+        }
+
+        public async Task DeleteAccount(ClaimsPrincipal userClaim)
+        {
+            await _accountRepository.DeleteAccount(userClaim);
         }
         public void Dispose()
         {

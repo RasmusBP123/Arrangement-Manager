@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -26,7 +27,7 @@ namespace Group15.EventManager.Server.Controllers
             _accountApplicationService = accountApplicationService;
         }
 
-        [HttpPost]
+        [HttpPost()]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
             var result = await _accountApplicationService.PasswordSignIn(loginModel);
@@ -36,10 +37,16 @@ namespace Group15.EventManager.Server.Controllers
                 return BadRequest(new LoginResult { Successful = false, Error = "Username or password are invalid" });
             }
 
-            var claims = new[]
+            var user = await _accountApplicationService.Login(loginModel.Email);
+            var roles = await _accountApplicationService.GetRoles(user);
+
+            var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Name, loginModel.Email));
+
+            foreach (var role in roles)
             {
-                new Claim(ClaimTypes.Name, loginModel.Email)
-            };
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSecurityKey"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

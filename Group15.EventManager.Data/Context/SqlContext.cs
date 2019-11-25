@@ -1,4 +1,5 @@
 ﻿using Group15.EventManager.Data.Mappings;
+using Group15.EventManager.Data.Mappings.Policies;
 using Group15.EventManager.Domain.Models.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -28,6 +29,11 @@ namespace Group15.EventManager.Data.Context
             modelBuilder.ApplyConfiguration(new FoodMap());
             modelBuilder.ApplyConfiguration(new RegionMap());
             modelBuilder.ApplyConfiguration(new StoreMap());
+
+            //Policies
+            modelBuilder.ApplyConfiguration(new AdminPolicy());
+            modelBuilder.ApplyConfiguration(new EmployeePolicy());
+            modelBuilder.ApplyConfiguration(new UserPolicy());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -17,6 +17,7 @@ using Group15.EventManager.Domain.Models.Auth;
 using Microsoft.AspNetCore.Identity;
 using FluentValidation.AspNetCore;
 using Group15.EventManager.Data.Context;
+using System;
 
 namespace Group15.EventManager.Server
 {
@@ -35,6 +36,7 @@ namespace Group15.EventManager.Server
             services.AddDbContext<SqlContext>();
 
             services.AddDefaultIdentity<ApplicationUser>()
+                    .AddRoles<IdentityRole<Guid>>()
                     .AddEntityFrameworkStores<SqlContext>()
                     .AddDefaultTokenProviders();
             

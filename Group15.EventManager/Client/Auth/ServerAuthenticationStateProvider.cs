@@ -37,8 +37,9 @@ namespace Group15.EventManager.Client.Auth
 
         public void MarkUserAsAuthenticated(string token)
         {
-            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, token) }, "serverauth"));
+            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(token), "serverauth"));
             var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
+
             NotifyAuthenticationStateChanged(authState);
         }
 

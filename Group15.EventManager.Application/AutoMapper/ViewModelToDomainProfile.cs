@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Group15.EventManager.Application.ViewModels.Auth;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
 using Group15.EventManager.ApplicationLayer.ViewModels.Foods;
 using Group15.EventManager.ApplicationLayer.ViewModels.Users;
@@ -16,6 +17,7 @@ namespace Group15.EventManager.Application.AutoMapper
             CreateMap<CreateFoodViewModel, Food>();
             CreateMap<AddUserToEventViewModel, ApplicationUser>();
             CreateMap<GetSingleEventViewModel, Event>();
+            CreateMap<UserModel, ApplicationUser>();
         }
     }
 }

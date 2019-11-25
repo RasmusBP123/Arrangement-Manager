@@ -57,7 +57,7 @@ namespace Group15.EventManager.Server.Controllers
 
         [HttpPost]
         [Route("delete")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAccount()
         {
             var user = HttpContext.User;

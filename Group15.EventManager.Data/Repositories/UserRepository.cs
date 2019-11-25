@@ -3,8 +3,6 @@ using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Models.Auth;
 using Group15.EventManager.Domain.Models.Joint;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Group15.EventManager.Data.Repositories
 {
@@ -16,6 +14,8 @@ namespace Group15.EventManager.Data.Repositories
 
         public void AddUserToEvent(Event _event, ApplicationUser user)
         {
+            //Attach existing entities, or else ef will believe you are trying to insert new entities, instead of existing ones
+
             Db.Set<Event>().Attach(_event);
             Db.Set<ApplicationUser>().Attach(user);
             var userEvents = Db.Set<ApplicationUserEvent>();
