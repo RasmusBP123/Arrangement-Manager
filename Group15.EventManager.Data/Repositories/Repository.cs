@@ -2,10 +2,7 @@
 using Group15.EventManager.Domain.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Group15.EventManager.Data.Repositories
 {
@@ -14,9 +11,9 @@ namespace Group15.EventManager.Data.Repositories
         protected readonly SqlContext Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        public Repository(SqlContext sqlContext)
+        public Repository(SqlContext context)
         {
-            Db = sqlContext;
+            Db = context;
             DbSet = Db.Set<TEntity>();
         }
 

@@ -11,10 +11,6 @@ namespace Group15.EventManager.Domain.Models.Auth
         public string LastName { get; set; }
         public string City { get; set; }
         public string Address { get; set; }
-        public virtual IList<ApplicationUserEvent> UserEvents { get; set; }
-        public ApplicationUser() : base()
-        {
-            Id = Guid.NewGuid();
-        }
+        public virtual ICollection<ApplicationUserEvent> UserEvents { get; set; }
     }
 }

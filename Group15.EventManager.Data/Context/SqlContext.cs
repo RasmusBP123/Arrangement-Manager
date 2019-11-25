@@ -1,28 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Group15.EventManager.Data.Mappings;
+using Group15.EventManager.Domain.Models.Auth;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Group15.EventManager.Data.Mappings;
+using System;
 
 namespace Group15.EventManager.Data.Context
 {
-    public class SqlContext : DbContext
+    public class SqlContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         private readonly IHostEnvironment _env;
 
-        public SqlContext(IHostEnvironment env) : base()
+        public SqlContext(DbContextOptions options, IHostEnvironment env) : base(options)
         {
             _env = env;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new EventMap());
-            modelBuilder.ApplyConfiguration(new StoreMap());
-            modelBuilder.ApplyConfiguration(new EmployeeMap());
-            modelBuilder.ApplyConfiguration(new FoodMap());
-            modelBuilder.ApplyConfiguration(new CityMap());
-            modelBuilder.ApplyConfiguration(new RegionMap());
             modelBuilder.ApplyConfiguration(new ApplicationUserEventMap());
+            modelBuilder.ApplyConfiguration(new ApplicationUserMap());
+            modelBuilder.ApplyConfiguration(new CityMap());
+            modelBuilder.ApplyConfiguration(new EmployeeMap());
+            modelBuilder.ApplyConfiguration(new EventMap());
+            modelBuilder.ApplyConfiguration(new FoodMap());
+            modelBuilder.ApplyConfiguration(new RegionMap());
+            modelBuilder.ApplyConfiguration(new StoreMap());
+
             base.OnModelCreating(modelBuilder);
         }
 

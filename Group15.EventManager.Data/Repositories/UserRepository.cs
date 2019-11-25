@@ -2,24 +2,25 @@
 using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Models.Auth;
+using Group15.EventManager.Domain.Models.Joint;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Group15.EventManager.Data.Repositories
 {
     public class UserRepository : Repository<ApplicationUser>, IUserRepository
     {
-        public UserRepository(SqlContext sqlContext) : base(sqlContext)
+        public UserRepository(SqlContext context) : base(context)
         {
         }
 
-        public void AddUserToEvent(Guid eventId, ApplicationUser user)
+        public void AddUserToEvent(Event _event, ApplicationUser user)
         {
-            //var _event = Db.Set<Event>().Include(e => e.UserEvents).FirstOrDefault(e => e.Id == eventId);
-            //_event.UserEvents.Add(user);
+            Db.Set<Event>().Attach(_event);
+            Db.Set<ApplicationUser>().Attach(user);
+            var userEvents = Db.Set<ApplicationUserEvent>();
+            var userEvent = new ApplicationUserEvent() { User = user, Event = _event };
+            userEvents.Add(userEvent);
         }
     }
 }

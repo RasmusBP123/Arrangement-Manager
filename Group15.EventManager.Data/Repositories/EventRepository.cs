@@ -3,16 +3,13 @@ using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Group15.EventManager.Data.Repositories
 {
     public class EventRepository : Repository<Event>, IEventRepository
     {
-        public EventRepository(SqlContext sqlContext) : base(sqlContext)
+        public EventRepository(SqlContext context) : base(context)
         {
         }
 

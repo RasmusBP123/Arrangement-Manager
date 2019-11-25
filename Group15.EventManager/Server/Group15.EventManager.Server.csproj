@@ -25,7 +25,6 @@
     <ProjectReference Include="..\..\Group15.EventManager.Application\Group15.EventManager.ApplicationLayer.csproj" />
     <ProjectReference Include="..\..\Group15.EventManager.Bootstrapper\Group15.EventManager.Bootstrapper.csproj" />
     <ProjectReference Include="..\..\Group15.EventManager.Data\Group15.EventManager.Data.csproj" />
-    <ProjectReference Include="..\..\Group15.EventManager.Identity\Group15.EventManager.Identity.csproj" />
     <ProjectReference Include="..\Client\Group15.EventManager.Client.csproj" />
     <ProjectReference Include="..\Shared\Group15.EventManager.Shared.csproj" />
   </ItemGroup>

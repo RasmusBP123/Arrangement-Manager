@@ -7,6 +7,7 @@ using Group15.EventManager.Client.Auth.Services;
 using Group15.EventManager.Client.Store.Auth;
 using Group15.EventManager.Client.Store.Events;
 using Group15.EventManager.Client.Store.Regions;
+using Group15.EventManager.Client.Store.Users;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +22,7 @@ namespace Group15.EventManager.Client
             services.AddScoped<RegionStore>();
             services.AddScoped<EventStore>();
             services.AddScoped<AuthStore>();
-
+            services.AddScoped<UserStore>();
             //Fluxor
             services.AddFluxor(options => options
                 .UseDependencyInjection(typeof(Startup).Assembly)

@@ -1,10 +1,14 @@
 ﻿@page "/{eventId:guid}/event/details"
 @inject HttpClient HttpClient
 @inject EventStore EventStore
+@inject UserStore UserStore
+@inject AuthStore AuthStore
 
 <h3>Event</h3>
 
 <p>@EventStore.Event.Name</p>
+
+<button class="btn btn-success" @onclick="@(() => BookEventForUser(EventStore.Event))">Book event</button>
 
 @code {
 
@@ -14,10 +18,23 @@
     protected override async Task OnInitializedAsync()
     {
         EventStore.Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{eventId}");
+        AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
+
     }
 
-    private async Task SignUpForEvent(Guid eventId)
+    private async Task BookEventForUser(GetSingleEventViewModel _event)
     {
-        
+        var user = new AddUserToEventViewModel() 
+        { 
+            Id = AuthStore.User.Id,
+            City = AuthStore.User.City,
+            Address = AuthStore.User.Address,
+            Email = AuthStore.User.Email,
+            FirstName = AuthStore.User.FirstName,
+            LastName = AuthStore.User.LastName,
+            Event = EventStore.Event,
+        };
+
+        await HttpClient.PostJsonAsync<AddUserToEventViewModel>($"api/user/{eventId}/book/event", user);
     }
 }

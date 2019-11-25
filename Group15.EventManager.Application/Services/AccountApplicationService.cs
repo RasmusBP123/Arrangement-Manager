@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Group15.EventManager.Application.ViewModels.Auth;
 using Group15.EventManager.ApplicationLayer.Interfaces;
+using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Data.UnitOfWork;
 using Group15.EventManager.Domain.Models.Auth;
-using Group15.EventManager.Identity.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using System;

@@ -3,15 +3,13 @@ using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Group15.EventManager.Data.Repositories
 {
     public class RegionRepository : Repository<Region>, IRegionRepository
     {
-        public RegionRepository(SqlContext sqlContext) : base(sqlContext)
+        public RegionRepository(SqlContext context) : base(context)
         {
         }
 

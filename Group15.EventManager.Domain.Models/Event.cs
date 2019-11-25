@@ -1,5 +1,4 @@
 ﻿using Group15.EventManager.Domain.Core.Models;
-using Group15.EventManager.Domain.Models.Auth;
 using Group15.EventManager.Domain.Models.Joint;
 using System;
 using System.Collections.Generic;
@@ -18,7 +17,7 @@ namespace Group15.EventManager.Domain.Models
         public virtual City City { get; set; }
         public virtual Region Region { get; set; }
         public virtual Food Food { get; set; }
-        public virtual IList<ApplicationUserEvent> UserEvents { get; set; }
+        public virtual ICollection<ApplicationUserEvent> UserEvents { get; set; }
         public virtual Employee Employee { get; set; }
     }
 

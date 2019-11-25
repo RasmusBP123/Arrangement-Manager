@@ -1,7 +1,6 @@
 using AutoMapper;
 using Group15.EventManager.Application.AutoMapper;
 using Group15.EventManager.Bootstrapper;
-using Group15.EventManager.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -10,7 +9,6 @@ using Microsoft.Extensions.Hosting;
 using System.Linq;
 using Microsoft.OpenApi.Models;
 using MediatR;
-using Group15.EventManager.Identity.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -18,7 +16,7 @@ using System.Text;
 using Group15.EventManager.Domain.Models.Auth;
 using Microsoft.AspNetCore.Identity;
 using FluentValidation.AspNetCore;
-using System;
+using Group15.EventManager.Data.Context;
 
 namespace Group15.EventManager.Server
 {
@@ -35,10 +33,9 @@ namespace Group15.EventManager.Server
         {
             //DB
             services.AddDbContext<SqlContext>();
-            services.AddDbContext<IdentityContext>();
 
             services.AddDefaultIdentity<ApplicationUser>()
-                    .AddEntityFrameworkStores<IdentityContext>()
+                    .AddEntityFrameworkStores<SqlContext>()
                     .AddDefaultTokenProviders();
             
             services.RegisterServices();

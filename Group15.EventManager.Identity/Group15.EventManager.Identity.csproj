@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Group15.EventManager.Data\Group15.EventManager.Data.csproj" />
     <ProjectReference Include="..\Group15.EventManager.Domain.Models\Group15.EventManager.Domain.Models.csproj" />
   </ItemGroup>
 

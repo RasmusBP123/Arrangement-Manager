@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Group15.EventManager.Application\Group15.EventManager.ApplicationLayer.csproj" />
     <ProjectReference Include="..\Group15.EventManager.Data\Group15.EventManager.Data.csproj" />
-    <ProjectReference Include="..\Group15.EventManager.Identity\Group15.EventManager.Identity.csproj" />
   </ItemGroup>
 
 </Project>
