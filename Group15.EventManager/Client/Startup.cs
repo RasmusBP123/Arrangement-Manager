@@ -8,6 +8,7 @@ using Group15.EventManager.Client.Store.Auth;
 using Group15.EventManager.Client.Store.Events;
 using Group15.EventManager.Client.Store.Regions;
 using Group15.EventManager.Client.Store.Users;
+using Group15.EventManager.Shared.Auth.Policies;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,7 +33,11 @@ namespace Group15.EventManager.Client
 
             //Auth services 
             services.AddBlazoredLocalStorage();
-            services.AddAuthorizationCore();
+            services.AddAuthorizationCore(config =>
+            {
+                config.AddPolicy(Policies.IsAdmin, Policies.IsAdminPolicy());
+                config.AddPolicy(Policies.IsUser, Policies.IsUserPolicy());
+            });
             services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
             services.AddScoped<IAuthService, AuthService>();
         }

@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Identity;
 using FluentValidation.AspNetCore;
 using Group15.EventManager.Data.Context;
 using System;
+using Group15.EventManager.Shared.Auth.Policies;
 
 namespace Group15.EventManager.Server
 {
@@ -57,6 +58,12 @@ namespace Group15.EventManager.Server
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSecurityKey"]))
                     };  
                 });
+
+            services.AddAuthorization(config =>
+            {
+                config.AddPolicy(Policies.IsAdmin, Policies.IsAdminPolicy());
+                config.AddPolicy(Policies.IsUser, Policies.IsUserPolicy());
+            });
 
             services.AddAutoMapperSetup(typeof(Startup).Assembly);
             services.AddMediatR(typeof(Startup));

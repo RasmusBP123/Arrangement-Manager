@@ -3,7 +3,7 @@
 @inject IAuthService AuthService
 @inject NavigationManager NavManager
 @inject AuthStore AuthStore
-
+@attribute [Authorize(Policy = Policies.IsAdmin)]
 <h3>Account</h3>
 
 <!--More properties to be added-->
