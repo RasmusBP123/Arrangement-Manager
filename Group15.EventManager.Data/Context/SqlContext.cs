@@ -21,6 +21,7 @@ namespace Group15.EventManager.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new AddressMap());
             modelBuilder.ApplyConfiguration(new ApplicationUserEventMap());
             modelBuilder.ApplyConfiguration(new ApplicationUserMap());
             modelBuilder.ApplyConfiguration(new CityMap());

@@ -46,6 +46,12 @@ namespace Group15.EventManager.Application.Services
             var eventViewModels = _mapper.Map<IEnumerable<GetEventListViewModel>>(events);
             return eventViewModels;
         }
+        public async Task<IEnumerable<GetEventListViewModel>> GetAllEventsForUser(Guid userId)
+        {
+            var events = await _mediator.Send(new AllEventsForUserQuery(userId));
+            var eventViewModels = _mapper.Map<IEnumerable<GetEventListViewModel>>(events);
+            return eventViewModels;
+        }
 
         public async Task<GetSingleEventViewModel> GetSingleEvent(Guid eventId)
         {
@@ -65,7 +71,10 @@ namespace Group15.EventManager.Application.Services
                 EventDate = _event.EventDate,
                 Image = _event.Image, 
                 Address = _event.Address,
-                Price = _event.Price
+                Price = _event.Price,
+                Food = _event.Food,
+                Region = _event.Region,
+                City = _event.City
             });
         }
 

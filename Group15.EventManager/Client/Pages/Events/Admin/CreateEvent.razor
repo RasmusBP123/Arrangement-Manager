@@ -1,0 +1,66 @@
+﻿@page "/create/event"
+@inject EventStore EventStore
+@inject FoodStore FoodStore
+@inject RegionStore RegionStore
+@inject CityStore CityStore
+@inject HttpClient HttpClient
+
+<h3>Create a new event</h3>
+
+<EditForm Model="@EventStore.CreateEvent" OnValidSubmit="SubmitEvent">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label>Choose location</label>
+        <LocationsForEvent />
+    </div>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <InputText Id="name" class="form-control" @bind-Value="EventStore.CreateEvent.Name" />
+        <ValidationMessage For="@(() => EventStore.CreateEvent.Name)" />
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <InputText Id="description" class="form-control" @bind-Value="EventStore.CreateEvent.Description" />
+        <ValidationMessage For="@(() => EventStore.CreateEvent.Description)" />
+    </div>
+    <div class="form-group">
+        <label for="address">Address</label>
+        <InputText Id="address" class="form-control" @bind-Value="EventStore.CreateEvent.Address" />
+        <ValidationMessage For="@(() => EventStore.CreateEvent.Address)" />
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <InputNumber Id="price" class="form-control" @bind-Value="EventStore.CreateEvent.Price" />
+        <ValidationMessage For="@(() => EventStore.CreateEvent.Price)" />
+    </div>
+    <div class="form-group">
+        <label for="date">Date</label>
+        <InputDate Id="date" class="form-control" @bind-Value="EventStore.CreateEvent.EventDate" />
+        <ValidationMessage For="@(() => EventStore.CreateEvent.EventDate)" />
+    </div>
+    <div class="form-group">
+        <label for="food">Food</label>
+        <InputText Id="food" class="form-control" @bind-Value="FoodStore.foodViewModel.Name" />
+        <ValidationMessage For="@(() =>FoodStore.foodViewModel.Name)" />
+    </div>
+    <button class="btn btn-outline-success">Submit</button>
+</EditForm>
+
+@code { 
+
+    protected override void OnInitialized()
+    {
+        EventStore.OnSubmittedEvent += StateHasChanged;
+    }
+
+    private async Task SubmitEvent()
+    {
+        RegionStore.Region.Cities = null;         //To avoid sending unnecessary cities with it in the post 
+        EventStore.CreateEvent.Food = FoodStore.foodViewModel;
+        EventStore.CreateEvent.Image = new byte[] { 0x00 };
+        EventStore.CreateEvent.Region = RegionStore.Region;
+        EventStore.CreateEvent.City = CityStore.City;
+
+        await HttpClient.PostJsonAsync<CreateEventViewModel>("api/events/create", EventStore.CreateEvent);
+    }
+}

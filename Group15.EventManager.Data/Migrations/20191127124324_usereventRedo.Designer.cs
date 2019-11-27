@@ -4,46 +4,22 @@ using Group15.EventManager.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Group15.EventManager.Data.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    partial class SqlContextModelSnapshot : ModelSnapshot
+    [Migration("20191127124324_usereventRedo")]
+    partial class usereventRedo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Group15.EventManager.Domain.Models.Address", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RoadName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoadNumber")
-                        .HasColumnType("int");
-
-                    b.Property<double>("X")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Y")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Address");
-                });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Auth.ApplicationUser", b =>
                 {
@@ -91,6 +67,9 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("StoreId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -104,6 +83,8 @@ namespace Group15.EventManager.Data.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("StoreId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -161,8 +142,8 @@ namespace Group15.EventManager.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AddressId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("CityId")
                         .HasColumnType("uniqueidentifier");
@@ -185,20 +166,11 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<byte[]>("Image")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<DateTime>("LastBookingDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("MaxCustomerLimit")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MinCustomerAmount")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PayOnline")
-                        .HasColumnType("bit");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -207,8 +179,6 @@ namespace Group15.EventManager.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
 
                     b.HasIndex("CityId");
 
@@ -279,28 +249,16 @@ namespace Group15.EventManager.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CityId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("RegionId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("SiteId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.HasIndex("RegionId");
-
-                    b.HasIndex("SiteId");
 
                     b.ToTable("Stores");
                 });
@@ -326,22 +284,22 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "490aca4c-0af7-4eb2-aeb5-43679db996b7",
-                            ConcurrencyStamp = "0cfc47a9-ec7f-4c7e-a218-248c97ef2542",
+                            Id = "19f981ea-63e4-4be5-a38e-9a95cdace32f",
+                            ConcurrencyStamp = "6263e57c-2036-4644-b01a-9cfa57fb4c18",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "36044d1f-8c28-4b41-8233-d6b64944e08d",
-                            ConcurrencyStamp = "ff935111-1d5a-4e75-87e2-451a4ee84d23",
+                            Id = "aa1acf7d-e971-4ae3-a14b-c5e9c767fee5",
+                            ConcurrencyStamp = "8308ac49-1172-4415-8a33-128fce105c04",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-                            Id = "f5718c82-75fa-4068-ba12-43e820690581",
-                            ConcurrencyStamp = "4e4db971-7d73-45f5-92d1-cf0c496b6a99",
+                            Id = "e1e5d821-aa74-4d26-9a2c-a5a49daea15b",
+                            ConcurrencyStamp = "f2a4441d-0d54-408f-a9a5-67aa8f0e902e",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -480,6 +438,13 @@ namespace Group15.EventManager.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Group15.EventManager.Domain.Models.Auth.ApplicationUser", b =>
+                {
+                    b.HasOne("Group15.EventManager.Domain.Models.Store", null)
+                        .WithMany("Users")
+                        .HasForeignKey("StoreId");
+                });
+
             modelBuilder.Entity("Group15.EventManager.Domain.Models.City", b =>
                 {
                     b.HasOne("Group15.EventManager.Domain.Models.Region", "Region")
@@ -491,23 +456,19 @@ namespace Group15.EventManager.Data.Migrations
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Employee", b =>
                 {
-                    b.HasOne("Group15.EventManager.Domain.Models.Store", "Store")
+                    b.HasOne("Group15.EventManager.Domain.Models.Store", null)
                         .WithMany("Employees")
                         .HasForeignKey("StoreId");
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Event", b =>
                 {
-                    b.HasOne("Group15.EventManager.Domain.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
                     b.HasOne("Group15.EventManager.Domain.Models.City", "City")
                         .WithMany("Events")
                         .HasForeignKey("CityId");
 
                     b.HasOne("Group15.EventManager.Domain.Models.Employee", "Employee")
-                        .WithMany("Events")
+                        .WithMany()
                         .HasForeignKey("EmployeeId");
 
                     b.HasOne("Group15.EventManager.Domain.Models.Food", "Food")
@@ -532,21 +493,6 @@ namespace Group15.EventManager.Data.Migrations
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Group15.EventManager.Domain.Models.Store", b =>
-                {
-                    b.HasOne("Group15.EventManager.Domain.Models.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId");
-
-                    b.HasOne("Group15.EventManager.Domain.Models.Region", "Region")
-                        .WithMany()
-                        .HasForeignKey("RegionId");
-
-                    b.HasOne("Group15.EventManager.Domain.Models.Address", "Site")
-                        .WithMany()
-                        .HasForeignKey("SiteId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

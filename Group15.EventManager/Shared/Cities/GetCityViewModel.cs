@@ -9,6 +9,5 @@ namespace Group15.EventManager.Shared.Cities
         public Guid Id { get; set; }
         public string Name { get; set; }
         public int Zipcode { get; set; }
-        //public IEnumerable<GetEventListViewModel> Events { get; set; }
     }
 }

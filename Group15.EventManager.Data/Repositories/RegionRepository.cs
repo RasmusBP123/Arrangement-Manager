@@ -21,7 +21,9 @@ namespace Group15.EventManager.Data.Repositories
 
         public override Region GetById(Guid id)
         {
-            var region = Db.Set<Region>().Include(region => region.Cities).Include(region => region.Events).FirstOrDefault(region => region.Id == id);
+            var region = Db.Set<Region>().Include(region => region.Cities)
+                                         .Include(region => region.Events)
+                                         .FirstOrDefault(region => region.Id == id);
             return region;
         }
     }

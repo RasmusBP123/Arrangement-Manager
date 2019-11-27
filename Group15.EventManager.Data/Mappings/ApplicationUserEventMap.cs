@@ -10,9 +10,14 @@ namespace Group15.EventManager.Data.Mappings
         {
             builder.ToTable("UserEvents");
             builder.HasKey(aue => new { aue.ApplicationUserId, aue.EventId });
-            builder.Ignore(e => e.User);
-            builder.HasOne(aue => aue.Event).WithMany(e => e.UserEvents).HasForeignKey(aue => aue.ApplicationUserId);
-            builder.HasOne(aue => aue.User).WithMany(u => u.UserEvents).HasForeignKey(aue => aue.EventId);
+            builder.HasOne(aue => aue.Event).WithMany(e => e.UserEvents).HasForeignKey(aue => aue.EventId);
+            builder.HasOne(aue => aue.User).WithMany(u => u.UserEvents).HasForeignKey(aue => aue.ApplicationUserId);
         }
     }
 }
+
+
+//    modelBuilder.Entity<BookCategory>().HasKey(bc => new { bc.BookId, bc.CategoryId }); 
+
+//    modelBuilder.Entity<BookCategory>().HasOne(bc => bc.Book).WithMany(b => b.BookCategories).HasForeignKey(bc => bc.BookId);
+//    modelBuilder.Entity<BookCategory>().HasOne(bc => bc.Category).WithMany(c => c.BookCategories).HasForeignKey(bc => bc.CategoryId);

@@ -3,13 +3,16 @@
 @inject IAuthService AuthService
 @inject NavigationManager NavManager
 @inject AuthStore AuthStore
-@attribute [Authorize(Policy = Policies.IsAdmin)]
+@attribute [Authorize(Policy = Policies.IsUser)]
+
 <h3>Account</h3>
 
 <!--More properties to be added-->
 <p>@AuthStore.User.Email</p>
 <p>@AuthStore.User.FirstName</p>
 <p>@AuthStore.User.LastName</p>
+<p>@AuthStore.User.Address</p>
+
 
 <button class="btn btn-outline-danger" @onclick="@(() => DeleteAccount())">delete</button>
 

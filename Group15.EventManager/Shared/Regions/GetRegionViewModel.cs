@@ -10,6 +10,5 @@ namespace Group15.EventManager.Shared.Regions
         public Guid Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<GetCityViewModel> Cities { get; set; }
-        //public IEnumerable<GetEventListViewModel> Events { get; set; }
     }
 }

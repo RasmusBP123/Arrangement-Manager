@@ -15,6 +15,7 @@ using Group15.EventManager.Domain.CommandHandlers;
 using Group15.EventManager.Domain.Commands.Events;
 using Group15.EventManager.Domain.Commands.Users;
 using Group15.EventManager.Domain.Models;
+using Group15.EventManager.Domain.Queries.Cities;
 using Group15.EventManager.Domain.Queries.Events;
 using Group15.EventManager.Domain.Queries.Events.Filters;
 using Group15.EventManager.Domain.Queries.Regions;
@@ -44,8 +45,8 @@ namespace Group15.EventManager.Bootstrapper
         public static void RegisterApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IAccountApplicationService, AccountApplicationService>();
+            services.AddScoped<ICityApplicationService, CityApplicationService>();
             services.AddScoped<IEventApplicationService, EventApplicationService>();
-            services.AddScoped<IFoodApplicationService, FoodApplicationService>();
             services.AddScoped<IRegionApplicationService, RegionApplicationService>();
             services.AddScoped<IUserApplicationService, UserApplicationService>();
         }
@@ -67,10 +68,13 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IRequestHandler<AllEventsQuery, IQueryable<Event>>, EventQueryHandler>();
             services.AddScoped<IRequestHandler<AllEventsByRegionQuery, IQueryable<Event>>, EventQueryHandler>();
             services.AddScoped<IRequestHandler<AllEventsByRegionAndCityQuery, IQueryable<Event>>, EventQueryHandler>();
+            services.AddScoped<IRequestHandler<AllEventsForUserQuery, IQueryable<Event>>, EventQueryHandler>();
             services.AddScoped<IRequestHandler<SingleEventQuery, Event>, EventQueryHandler>();
             //Regions
             services.AddScoped<IRequestHandler<AllRegionsQuery, IQueryable<Region>>, RegionQueryHandler>();
             services.AddScoped<IRequestHandler<SingleRegionQuery, Region>,RegionQueryHandler>();
+            //Cities
+            services.AddScoped<IRequestHandler<SingleCityQuery, City>, CityQueryHandler>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)
@@ -78,8 +82,8 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IRegionRepository, RegionRepository>();
-            services.AddScoped<IFoodRepository, FoodRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICityRepository, CityRepository>();
         }
 
         public static void RegisterValidators(this IServiceCollection services)

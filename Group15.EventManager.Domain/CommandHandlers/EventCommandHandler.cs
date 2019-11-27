@@ -23,13 +23,16 @@ namespace Group15.EventManager.Domain.CommandHandlers
         public Task<bool> Handle(CreateEventCommand request, CancellationToken cancellationToken)
         {
             var _event = new Event()
-            {   
+            {
                 Name = request.Name,
                 Price = request.Price,
                 Description = request.Description,
                 EventDate = request.EventDate,
                 Address = request.Address,
                 Image = request.Image,
+                Food = request.Food,
+                Region = request.Region,
+                City = request.City,
             };
 
             _eventRepository.Add(_event);

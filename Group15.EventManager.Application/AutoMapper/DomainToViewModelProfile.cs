@@ -19,6 +19,7 @@ namespace Group15.EventManager.Application.AutoMapper
             CreateMap<Food, GetFoodViewModel>();
             CreateMap<City, GetCityViewModel>();
             CreateMap<Region, GetRegionViewModel>();
+            CreateMap<Region, AddRegionForEventViewModel>();
             CreateMap<ApplicationUser, UserModel>();
         }
     }

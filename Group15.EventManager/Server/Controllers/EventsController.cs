@@ -62,12 +62,15 @@ namespace Group15.EventManager.Server.Controllers
             return Ok(_event);
         }
 
-        [HttpPost]
-        [Route("{eventId}/user/signup")]
-        public async Task<IActionResult> SignUserUpForEvent([FromRoute]Guid eventId)
+        [HttpGet]
+        [Route("{userId}/events")]
+        public async Task<IActionResult> GetEventsForUser([FromRoute] Guid userId)
         {
-            return Ok();
+            var events = await _eventApplicationService.GetAllEventsForUser(userId);
+            if (events == null) return BadRequest();
+            return Ok(events);
         }
+
 
         [HttpPost]
         [Route("create")]

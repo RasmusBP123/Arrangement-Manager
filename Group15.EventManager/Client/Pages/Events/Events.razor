@@ -25,7 +25,7 @@
     protected override async Task OnInitializedAsync()
     {
         EventStore.Events = await HttpClient.GetJsonAsync<List<GetEventListViewModel>>("api/events/active");
-        EventStore.OnChange += StateHasChanged;
+        EventStore.OnClickedRegion += StateHasChanged;
         //Dispatcher.Dispatch(new GetActiveEventsAction());
     }
 

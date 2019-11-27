@@ -12,6 +12,6 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
         public string Address { get; set; }
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
-        public GetFoodViewModel Food { get; set; }
+        public GetFoodViewModel? Food { get; set; }
     }
 }

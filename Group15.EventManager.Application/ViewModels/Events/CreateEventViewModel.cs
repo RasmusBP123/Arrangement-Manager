@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Group15.EventManager.ApplicationLayer.ViewModels.Cities;
+using Group15.EventManager.ApplicationLayer.ViewModels.Foods;
+using Group15.EventManager.ApplicationLayer.ViewModels.Regions;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
 {
@@ -13,5 +13,8 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
         public string Address { get; set; }
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
+        public CreateFoodViewModel Food { get; set; }
+        public GetRegionViewModel Region { get; set; }
+        public GetCityViewModel City { get; set; }
     }
 }
