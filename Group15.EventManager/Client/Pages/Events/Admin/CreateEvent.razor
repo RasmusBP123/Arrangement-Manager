@@ -24,11 +24,6 @@
         <ValidationMessage For="@(() => EventStore.CreateEvent.Description)" />
     </div>
     <div class="form-group">
-        <label for="address">Address</label>
-        <InputText Id="address" class="form-control" @bind-Value="EventStore.CreateEvent.Address" />
-        <ValidationMessage For="@(() => EventStore.CreateEvent.Address)" />
-    </div>
-    <div class="form-group">
         <label for="price">Price</label>
         <InputNumber Id="price" class="form-control" @bind-Value="EventStore.CreateEvent.Price" />
         <ValidationMessage For="@(() => EventStore.CreateEvent.Price)" />

@@ -11,6 +11,5 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Regions
         public Guid Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<GetCityViewModel> Cities { get; set; }
-        //public IEnumerable<GetEventListViewModel> Events { get; set; }
     }
 }

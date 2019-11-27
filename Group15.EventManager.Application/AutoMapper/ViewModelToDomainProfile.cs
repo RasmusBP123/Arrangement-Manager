@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Group15.EventManager.Application.ViewModels.Auth;
+using Group15.EventManager.ApplicationLayer.ViewModels.Address_;
 using Group15.EventManager.ApplicationLayer.ViewModels.Cities;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
 using Group15.EventManager.ApplicationLayer.ViewModels.Foods;
@@ -14,6 +15,7 @@ namespace Group15.EventManager.Application.AutoMapper
     {
         public ViewModelToDomainProfile()
         {
+            CreateMap<CreateAddressForEventViewModel, Address>();
             CreateMap<CreateEventViewModel, Event>();
             CreateMap<UpdateEventViewModel, Event>();
             CreateMap<CreateFoodViewModel, Food>();

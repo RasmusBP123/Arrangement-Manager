@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Address%2527\**" />
+    <EmbeddedResource Remove="Address%2527\**" />
+    <None Remove="Address%2527\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Address%27\CreateAddressForEventViewModel.cs" />
+    <Compile Include="Address%27\GetAddressForEventViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.0.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />

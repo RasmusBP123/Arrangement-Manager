@@ -12,7 +12,6 @@ namespace Group15.EventManager.Shared.Users
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string City { get; set; }
-        public string Address { get; set; }
         public GetSingleEventViewModel Event { get; set; }
     }
 }

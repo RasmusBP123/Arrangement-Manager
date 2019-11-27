@@ -1,0 +1,21 @@
+﻿@page "/bookings"
+@inject HttpClient HttpClient
+@inject EventStore EventStore
+@inject AuthStore AuthStore
+
+<h3>Your booked events</h3>
+
+@foreach (var _event in EventStore.BookedEvents)
+{
+    <p>@_event.Id</p>
+    <p>@_event.Name</p>
+}
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = AuthStore.User.Id;
+        EventStore.BookedEvents = await HttpClient.GetJsonAsync<IEnumerable<GetEventListViewModel>>($"api/events/{userId}/events");
+    }
+}
