@@ -57,7 +57,7 @@ namespace Group15.EventManager.Data.Repositories
         {
             Db.Attach(entity.City);
             Db.Attach(entity.Region);
-            Db.Attach(entity.Address);
+            //Db.Attach(entity.Address);
             base.Add(entity);
         }
 

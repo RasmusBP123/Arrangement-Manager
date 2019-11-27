@@ -31,10 +31,17 @@ namespace Group15.EventManager.Data.Context
             modelBuilder.ApplyConfiguration(new RegionMap());
             modelBuilder.ApplyConfiguration(new StoreMap());
 
-            //Policies
-            modelBuilder.ApplyConfiguration(new AdminPolicy());
-            modelBuilder.ApplyConfiguration(new EmployeePolicy());
-            modelBuilder.ApplyConfiguration(new UserPolicy());
+            //Policies SKAL MÅSKE BRUGES
+            //modelBuilder.ApplyConfiguration(new AdminPolicy());
+            //modelBuilder.ApplyConfiguration(new EmployeePolicy());
+            //modelBuilder.ApplyConfiguration(new UserPolicy());
+
+            var allEntities = modelBuilder.Model.GetEntityTypes();
+
+            foreach (var entity in allEntities)
+            {
+                entity.AddProperty("CreatedDate", typeof(DateTime));
+            }
 
             base.OnModelCreating(modelBuilder);
         }
@@ -48,6 +55,23 @@ namespace Group15.EventManager.Data.Context
 
             // define the database to use
             optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+        }
+
+        //Everytime you add an item it will automatically set a created date for the given entitiy
+        public override int SaveChanges()
+        {
+            ChangeTracker.DetectChanges();
+            var entries = ChangeTracker.Entries();
+
+            foreach (var entry in entries)
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Property("CreatedDate").CurrentValue = DateTime.UtcNow;
+                }
+            }
+
+            return base.SaveChanges();
         }
     }
 }

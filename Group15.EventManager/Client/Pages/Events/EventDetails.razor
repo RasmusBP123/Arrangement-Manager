@@ -1,31 +1,31 @@
 ﻿@page "/{eventId:guid}/event/details"
 @inject HttpClient HttpClient
 @inject EventStore EventStore
-@inject UserStore UserStore
 @inject AuthStore AuthStore
 
 <h3>Event</h3>
 
 <p>@EventStore.Event.Name</p>
 
-<button class="btn btn-success" @onclick="@(() => BookEventForUser(EventStore.Event))">Book event</button>
+<button class="btn btn-success" disabled="@disabled" @onclick="@(() => BookEventForUser(EventStore.Event))">Book event</button>
 
 @code {
 
     [Parameter]
     public Guid eventId { get; set; }
+    private bool disabled { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         EventStore.Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{eventId}");
+        IsPayableOnline();
         AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
-
     }
 
     private async Task BookEventForUser(GetSingleEventViewModel _event)
     {
-        var user = new AddUserToEventViewModel() 
-        { 
+        var user = new AddUserToEventViewModel()
+        {
             Id = AuthStore.User.Id,
             City = AuthStore.User.City,
             Email = AuthStore.User.Email,
@@ -35,5 +35,17 @@
         };
 
         await HttpClient.PostJsonAsync<AddUserToEventViewModel>($"api/user/{eventId}/book/event", user);
+    }
+
+    private void IsPayableOnline()
+    {
+        if(EventStore.Event.PayOnline == false)
+        {
+            disabled = true;
+        }
+        else
+        {
+            disabled = false;
+        }
     }
 }

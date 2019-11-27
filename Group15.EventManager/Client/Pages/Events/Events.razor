@@ -14,7 +14,14 @@
             <li @onclick="@(() => NavigateToEventDetails(_event.Id))">
                 <p>@_event.Name</p>
                 <p>@_event.Region.Name</p>
-                <p>@_event.Price</p>
+                @if (_event.PayOnline == false)
+	            {
+		            <p>This event can only be bought in the specified store</p>
+                }
+                else
+                {
+                    <p>@_event.Price</p>
+                }
             </li>
         }
     </ul>
