@@ -9,6 +9,7 @@ namespace Group15.EventManager.Data.Interfaces
     public interface IUserRepository : IRepository<ApplicationUser>
     {
         IQueryable<ApplicationUser> GetAllUsersFromEvent(Guid eventId);
-        void AddUserToEvent(Event _event, ApplicationUser user);
+        void AddUserToEvent(Guid userId, Guid eventId);
+        void CancelEventForUser(Guid userId, Guid eventId);
     }
 }

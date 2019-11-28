@@ -61,6 +61,7 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IRequestHandler<DeleteEventCommand, bool>, EventCommandHandler>();
             //Users
             services.AddScoped<IRequestHandler<AddUserToEventCommand, bool>, UserCommandHandler>();
+            services.AddScoped<IRequestHandler<CancelEventForUserCommand, bool>, UserCommandHandler>();
         }
 
         public static void RegisterQueries(this IServiceCollection services)

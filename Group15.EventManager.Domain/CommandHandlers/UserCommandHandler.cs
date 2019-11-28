@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 
 namespace Group15.EventManager.Domain.CommandHandlers
 {
-    public class UserCommandHandler : Handler, IRequestHandler<AddUserToEventCommand, bool>
+    public class UserCommandHandler : Handler, IRequestHandler<AddUserToEventCommand, bool>,
+                                               IRequestHandler<CancelEventForUserCommand, bool>
     {
         private readonly IUserRepository _userRepository;
 
@@ -23,9 +24,16 @@ namespace Group15.EventManager.Domain.CommandHandlers
 
         public Task<bool> Handle(AddUserToEventCommand request, CancellationToken cancellationToken)
         {
-            _userRepository.AddUserToEvent(request.Event, request.User);
+            _userRepository.AddUserToEvent(request.UserId, request.EventId);
             _unitOfWork.Commit();
 
+            return Task.FromResult(true);
+        }
+
+        public Task<bool> Handle(CancelEventForUserCommand request, CancellationToken cancellationToken)
+        {
+            _userRepository.CancelEventForUser(request.UserId, request.EventId);
+            _unitOfWork.Commit();
             return Task.FromResult(true);
         }
     }

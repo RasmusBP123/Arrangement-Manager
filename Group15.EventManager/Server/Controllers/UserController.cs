@@ -31,11 +31,15 @@ namespace Group15.EventManager.Server.Controllers
         public async Task<IActionResult> GetAllUsersFromEvent(Guid eventId)
         {
             var users = await _userApplicationService.GetUsersFromEvent(eventId);
-            if (users == null)
-            {
-                return BadRequest();
-            }
             return Ok(users);
+        }
+
+        [HttpDelete]
+        [Route("{userId}/delete/{eventId}/event")]
+        public async Task<IActionResult> CancelEventFromUser( Guid userId, Guid eventId)
+        {
+            await _userApplicationService.CancelEventFromUser(userId, eventId);
+            return Ok();
         }
     }
 }

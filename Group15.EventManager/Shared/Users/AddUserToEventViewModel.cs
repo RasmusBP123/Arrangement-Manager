@@ -7,11 +7,7 @@ namespace Group15.EventManager.Shared.Users
 {
     public class AddUserToEventViewModel
     {
-        public string Id { get; set; }
-        public string Email { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string City { get; set; }
-        public GetSingleEventViewModel Event { get; set; }
+        public Guid UserId { get; set; }
+        public Guid EventId { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using Group15.EventManager.Client.Auth;
 using Group15.EventManager.Client.Auth.Services;
 using Group15.EventManager.Client.Store.Auth;
 using Group15.EventManager.Client.Store.Cities;
+using Group15.EventManager.Client.Store.Employees;
 using Group15.EventManager.Client.Store.Events;
 using Group15.EventManager.Client.Store.Foods;
 using Group15.EventManager.Client.Store.Regions;
@@ -26,6 +27,7 @@ namespace Group15.EventManager.Client
             services.AddScoped<RegionStore>();
             services.AddScoped<EventStore>();
             services.AddScoped<AuthStore>();
+            services.AddScoped<EmployeeStore>();
             services.AddScoped<FoodStore>();
             services.AddScoped<CityStore>();
             services.AddScoped<UserStore>();

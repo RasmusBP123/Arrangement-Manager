@@ -20,12 +20,9 @@ namespace Group15.EventManager.ApplicationLayer.Services
         {
         }
 
-        public async Task AddUserToEvent(AddUserToEventViewModel userViewModel)
+        public async Task AddUserToEvent(AddUserToEventViewModel userEvent)
         {
-            var user = _mapper.Map<ApplicationUser>(userViewModel);
-            var _event = _mapper.Map<Event>(userViewModel.Event);
-
-            await _mediator.Send(new AddUserToEventCommand(user, _event));
+            await _mediator.Send(new AddUserToEventCommand(userEvent.UserId, userEvent.EventId));
         }
 
         public async Task<IEnumerable<GetUserFromEventViewModel>> GetUsersFromEvent(Guid eventId)
@@ -33,6 +30,15 @@ namespace Group15.EventManager.ApplicationLayer.Services
             var users = await _mediator.Send(new AllUsersFromEventQuery(eventId));
             var userViewModels = _mapper.Map<IEnumerable<GetUserFromEventViewModel>>(users);
             return userViewModels;
+        }
+
+        public async Task CancelEventFromUser(Guid userId, Guid eventId)
+        {
+            await _mediator.Send(new CancelEventForUserCommand(userId, eventId));
+        }
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
         }
     }
 }

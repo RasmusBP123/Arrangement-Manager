@@ -15,20 +15,23 @@ namespace Group15.EventManager.Data.Repositories
         {
         }
 
-        public void AddUserToEvent(Event _event, ApplicationUser user)
+        public void AddUserToEvent(Guid userId, Guid eventId)
         {
-            //Attach existing entities, or else ef will believe you are trying to insert new entities, instead of existing ones
-            Db.Set<Event>().Attach(_event);
-            Db.Set<ApplicationUser>().Attach(user);
             var userEvents = Db.Set<ApplicationUserEvent>();
-            var userEvent = new ApplicationUserEvent() { ApplicationUserId = user.Id, User = user, EventId = _event.Id, Event = _event};
+            var userEvent = new ApplicationUserEvent() { ApplicationUserId = userId, EventId = eventId };
             userEvents.Add(userEvent);
+        }
+
+        public void CancelEventForUser(Guid userId, Guid eventId)
+        {
+            var userEvent = Db.Set<ApplicationUserEvent>().FirstOrDefault(aue => aue.ApplicationUserId == userId && aue.EventId == eventId);
+            Db.Remove(userEvent);
         }
 
         public IQueryable<ApplicationUser> GetAllUsersFromEvent(Guid eventId)
         {
-            var test = Db.Set<ApplicationUserEvent>().Where(ue => ue.EventId == eventId).Include(ue => ue.User);
-            var users = test.Select(ue => ue.User).AsQueryable();
+            var userEvents = Db.Set<ApplicationUserEvent>().Where(ue => ue.EventId == eventId).Include(ue => ue.User);
+            var users = userEvents.Select(ue => ue.User).AsQueryable();
             return users;
         }
     }

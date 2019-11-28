@@ -14,7 +14,7 @@ namespace Group15.EventManager.Shared.Events
         public DateTime EventDate { get; set; }
         public DateTime LastBookingDate { get; set; }
         public bool PayOnline { get; set; }
-        public GetAddressForEventViewModel Address { get; set; }
-        public GetFoodViewModel Food { get; set; }
+        //public GetAddressForEventViewModel Address { get; set; }
+        //public GetFoodViewModel Food { get; set; }
     }
 }

@@ -7,8 +7,7 @@
 
 <p>@EventStore.Event.Name</p>
 
-<button class="btn btn-success" disabled="@disabled" @onclick="@(() => BookEventForUser(EventStore.Event))">Book event</button>
-
+<button class="btn btn-success" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</button>
 <UsersFromEvent EventId="@EventId" />
 
 @code {
@@ -22,21 +21,19 @@
         EventStore.Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{EventId}");
         IsPayableOnline();
         AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
+        EventStore.OnBookEvent += StateHasChanged;
     }
 
-    private async Task BookEventForUser(GetSingleEventViewModel _event)
+    private async Task BookEventForUser()
     {
-        var user = new AddUserToEventViewModel()
+        var userEvent = new AddUserToEventViewModel()
         {
-            Id = AuthStore.User.Id,
-            City = AuthStore.User.City,
-            Email = AuthStore.User.Email,
-            FirstName = AuthStore.User.FirstName,
-            LastName = AuthStore.User.LastName,
-            Event = EventStore.Event,
+            UserId = AuthStore.User.Id,
+            EventId = EventId
         };
 
-        await HttpClient.PostJsonAsync<AddUserToEventViewModel>($"api/user/{EventId}/book/event", user);
+        await HttpClient.PostJsonAsync<AddUserToEventViewModel>($"api/user/{EventId}/book/event", userEvent);
+        EventStore.NotifyBookedEvent();
     }
 
     private void IsPayableOnline()

@@ -12,11 +12,11 @@ namespace Group15.EventManager.Domain.Models
         public string Description { get; set; }
         public byte[] Image { get; set; }
         public int MinCustomerAmount { get; set; }
+        public bool PayOnline { get; set; }
         public int MaxCustomerLimit { get; set; }
         public DateTime LastBookingDate { get; set; }
         public DateTime EventDate { get; set; }
         public DateTime EndEventDate { get; set; }
-        public bool PayOnline { get; set; }
         public Address Address { get; set; }
         public virtual City City { get; set; }
         public virtual Region Region { get; set; }
@@ -24,5 +24,4 @@ namespace Group15.EventManager.Domain.Models
         public ICollection<ApplicationUserEvent> UserEvents { get; set; }
         public virtual Employee Employee { get; set; }
     }
-
 }

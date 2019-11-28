@@ -9,13 +9,22 @@
 {
     <p>@_event.Id</p>
     <p>@_event.Name</p>
+    <button class="btn btn-danger" @onclick="@(() => CancelEvent(_event.Id))">Cancel booking</button>
 }
 
 @code {
 
+    protected Guid userId;
     protected override async Task OnInitializedAsync()
     {
-        var userId = AuthStore.User.Id;
+        userId = AuthStore.User.Id;
         EventStore.BookedEvents = await HttpClient.GetJsonAsync<IEnumerable<GetEventListViewModel>>($"api/events/{userId}/events");
+        EventStore.OnDeletedEvent += StateHasChanged;
+    }
+
+    private async Task CancelEvent(Guid eventId)
+    {
+        await HttpClient.DeleteAsync($"api/user/{userId}/delete/{eventId}/event");
+        EventStore.NotifyEventDeleted();
     }
 }
