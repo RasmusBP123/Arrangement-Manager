@@ -9,15 +9,17 @@
 
 <button class="btn btn-success" disabled="@disabled" @onclick="@(() => BookEventForUser(EventStore.Event))">Book event</button>
 
+<UsersFromEvent EventId="@EventId" />
+
 @code {
 
     [Parameter]
-    public Guid eventId { get; set; }
+    public Guid EventId { get; set; }
     private bool disabled { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        EventStore.Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{eventId}");
+        EventStore.Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{EventId}");
         IsPayableOnline();
         AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
     }
@@ -34,12 +36,12 @@
             Event = EventStore.Event,
         };
 
-        await HttpClient.PostJsonAsync<AddUserToEventViewModel>($"api/user/{eventId}/book/event", user);
+        await HttpClient.PostJsonAsync<AddUserToEventViewModel>($"api/user/{EventId}/book/event", user);
     }
 
     private void IsPayableOnline()
     {
-        if(EventStore.Event.PayOnline == false)
+        if (EventStore.Event.PayOnline == false)
         {
             disabled = true;
         }

@@ -1,0 +1,26 @@
+﻿@inject HttpClient HttpClient
+@inject UserStore UserStore
+
+@if (UserStore.UsersFromEvent == null)
+{
+    <text>Loading..</text>
+}
+else
+{
+    @foreach (var user in UserStore.UsersFromEvent)
+    {
+        <p>@user.FirstName.</p>
+        <p>@user.LastName</p>
+    }
+}
+
+
+@code {
+    [Parameter]
+    public Guid EventId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        UserStore.UsersFromEvent = await HttpClient.GetJsonAsync<IEnumerable<GetUserFromEventViewModel>>($"api/user/{EventId}/users");
+    }
+}

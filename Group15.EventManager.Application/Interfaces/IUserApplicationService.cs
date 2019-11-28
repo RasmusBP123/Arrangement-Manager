@@ -9,6 +9,7 @@ namespace Group15.EventManager.ApplicationLayer.Interfaces
 {
     public interface IUserApplicationService
     {
+        Task<IEnumerable<GetUserFromEventViewModel>> GetUsersFromEvent(Guid eventId);
         Task AddUserToEvent(AddUserToEventViewModel userViewModel);
     }
 }

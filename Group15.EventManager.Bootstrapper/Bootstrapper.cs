@@ -15,10 +15,12 @@ using Group15.EventManager.Domain.CommandHandlers;
 using Group15.EventManager.Domain.Commands.Events;
 using Group15.EventManager.Domain.Commands.Users;
 using Group15.EventManager.Domain.Models;
+using Group15.EventManager.Domain.Models.Auth;
 using Group15.EventManager.Domain.Queries.Cities;
 using Group15.EventManager.Domain.Queries.Events;
 using Group15.EventManager.Domain.Queries.Events.Filters;
 using Group15.EventManager.Domain.Queries.Regions;
+using Group15.EventManager.Domain.Queries.Users;
 using Group15.EventManager.Domain.QueryHandlers;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -75,6 +77,8 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IRequestHandler<SingleRegionQuery, Region>,RegionQueryHandler>();
             //Cities
             services.AddScoped<IRequestHandler<SingleCityQuery, City>, CityQueryHandler>();
+            //Users
+            services.AddScoped<IRequestHandler<AllUsersFromEventQuery, IQueryable<ApplicationUser>>, UserQueryHandler>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)

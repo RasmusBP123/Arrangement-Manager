@@ -5,6 +5,7 @@ using Group15.EventManager.ApplicationLayer.ViewModels.Users;
 using Group15.EventManager.Domain.Commands.Users;
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Models.Auth;
+using Group15.EventManager.Domain.Queries.Users;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,13 @@ namespace Group15.EventManager.ApplicationLayer.Services
             var _event = _mapper.Map<Event>(userViewModel.Event);
 
             await _mediator.Send(new AddUserToEventCommand(user, _event));
+        }
+
+        public async Task<IEnumerable<GetUserFromEventViewModel>> GetUsersFromEvent(Guid eventId)
+        {
+            var users = await _mediator.Send(new AllUsersFromEventQuery(eventId));
+            var userViewModels = _mapper.Map<IEnumerable<GetUserFromEventViewModel>>(users);
+            return userViewModels;
         }
     }
 }

@@ -13,14 +13,15 @@ namespace Group15.EventManager.Domain.Models
         public byte[] Image { get; set; }
         public int MinCustomerAmount { get; set; }
         public int MaxCustomerLimit { get; set; }
-        public DateTime EventDate { get; set; }
         public DateTime LastBookingDate { get; set; }
+        public DateTime EventDate { get; set; }
+        public DateTime EndEventDate { get; set; }
         public bool PayOnline { get; set; }
         public Address Address { get; set; }
         public virtual City City { get; set; }
         public virtual Region Region { get; set; }
         public virtual Food Food { get; set; }
-        public virtual ICollection<ApplicationUserEvent> UserEvents { get; set; }
+        public ICollection<ApplicationUserEvent> UserEvents { get; set; }
         public virtual Employee Employee { get; set; }
     }
 

@@ -6,6 +6,7 @@ using Group15.EventManager.ApplicationLayer.ViewModels.Cities;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
 using Group15.EventManager.ApplicationLayer.ViewModels.Foods;
 using Group15.EventManager.ApplicationLayer.ViewModels.Regions;
+using Group15.EventManager.ApplicationLayer.ViewModels.Users;
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Models.Auth;
 
@@ -23,6 +24,7 @@ namespace Group15.EventManager.Application.AutoMapper
             CreateMap<Region, GetRegionViewModel>();
             CreateMap<Region, AddRegionForEventViewModel>();
             CreateMap<ApplicationUser, UserModel>();
+            CreateMap<ApplicationUser, GetUserFromEventViewModel>();
         }
     }
 }

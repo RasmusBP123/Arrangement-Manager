@@ -12,8 +12,11 @@ namespace Group15.EventManager.Shared.Events
         public double Price { get; set; }
         public string Description { get; set; }
         public byte[] Image { get; set; }
-        public DateTime EventDate { get; set; }
+        public int MinCustomerAmount { get; set; }
+        public int MaxCustomerLimit { get; set; }
         public bool PayOnline { get; set; }
+        public DateTime EventDate { get; set; }
+        public DateTime LastBookingDate { get; set; }
         public CreateAddressForEventViewModel Address { get; set; }
         public CreateFoodViewModel Food { get; set; }
         public GetRegionViewModel Region { get; set; }

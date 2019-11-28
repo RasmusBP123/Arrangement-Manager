@@ -2,6 +2,7 @@ using Blazor.Fluxor;
 using Blazor.Fluxor.ReduxDevTools;
 using Blazor.Fluxor.Routing;
 using Blazored.LocalStorage;
+using Blazored.Modal;
 using Group15.EventManager.Client.Auth;
 using Group15.EventManager.Client.Auth.Services;
 using Group15.EventManager.Client.Store.Auth;
@@ -9,6 +10,7 @@ using Group15.EventManager.Client.Store.Cities;
 using Group15.EventManager.Client.Store.Events;
 using Group15.EventManager.Client.Store.Foods;
 using Group15.EventManager.Client.Store.Regions;
+using Group15.EventManager.Client.Store.Users;
 using Group15.EventManager.Shared.Auth.Policies;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Builder;
@@ -26,6 +28,7 @@ namespace Group15.EventManager.Client
             services.AddScoped<AuthStore>();
             services.AddScoped<FoodStore>();
             services.AddScoped<CityStore>();
+            services.AddScoped<UserStore>();
             //Fluxor
             services.AddFluxor(options => options
                 .UseDependencyInjection(typeof(Startup).Assembly)
@@ -33,8 +36,11 @@ namespace Group15.EventManager.Client
                 .AddMiddleware<RoutingMiddleware>()
             );
 
-            //Auth services 
+            //Blazored
+            services.AddBlazoredModal();
             services.AddBlazoredLocalStorage();
+
+            //Auth services 
             services.AddAuthorizationCore(config =>
             {
                 config.AddPolicy(Policies.IsAdmin, Policies.IsAdminPolicy());
