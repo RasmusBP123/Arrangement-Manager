@@ -21,5 +21,8 @@ namespace Group15.EventManager.Client.Store.Events
         public void NotifyStateChanged() => OnClickedRegion?.Invoke();
         public void NotifyEventDeleted() => OnDeletedEvent?.Invoke();
         public void NotifyBookedEvent() => OnBookEvent?.Invoke();
+
+        public  bool ShowWarning = false;
+
     }
 }

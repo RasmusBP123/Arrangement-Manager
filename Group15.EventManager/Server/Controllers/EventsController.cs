@@ -71,7 +71,6 @@ namespace Group15.EventManager.Server.Controllers
             return Ok(events);
         }
 
-
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> CreateEvent([FromBody]CreateEventViewModel eventViewModel)

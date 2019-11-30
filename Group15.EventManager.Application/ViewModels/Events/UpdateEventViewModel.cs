@@ -17,6 +17,7 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
         public int MaxCustomerLimit { get; set; }
         public DateTime EventDate { get; set; }
         public DateTime LastBookingDate { get; set; }
+        public DateTime EndEventDate { get; set; }
 
         public GetAddressForEventViewModel Address { get; set; }
     }

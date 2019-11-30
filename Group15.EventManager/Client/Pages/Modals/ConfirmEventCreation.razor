@@ -1,0 +1,45 @@
+﻿@inject EventStore EventStore
+@inject HttpClient  HttpClient
+@inject NavigationManager NavManager
+@inject IModalService Modal
+
+@if (EventStore.ShowWarning == true)
+{
+    <p class="warning">@doubleBookingWarning</p>
+}
+
+<p>@EventStore.CreateEvent.Name</p>
+<p>@EventStore.CreateEvent.Price</p>
+<p>@EventStore.CreateEvent.Description</p>
+
+<p>@EventStore.CreateEvent.City.Name</p>
+<p>@EventStore.CreateEvent.Region.Name</p>
+<button class="btn btn-success" @onclick="@ConfirmEvent">Confirm</button>
+
+<button class="btn btn-danger" @onclick="@CancelEvent">Deny</button>
+<button class="btn btn-info" @onclick="@EditEvent">Go back</button>
+
+@code {     
+    
+    private string doubleBookingWarning = "You are about to book an event on the same day in the same city. Is that correct?";
+
+    private async Task ConfirmEvent()
+    {
+        await HttpClient.PostJsonAsync<CreateEventViewModel>("api/events/create", EventStore.CreateEvent);
+        EventStore.CreateEvent = new CreateEventViewModel();
+        Modal.Cancel();
+        NavManager.NavigateTo("/");
+    }
+
+    private void CancelEvent()
+    {
+        EventStore.CreateEvent = new CreateEventViewModel();
+        EventStore.NotifyEventStateChanged();
+        Modal.Cancel();
+    }
+
+    private void EditEvent()
+    {
+        Modal.Cancel();
+    }
+}

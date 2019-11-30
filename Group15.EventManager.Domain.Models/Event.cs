@@ -11,8 +11,8 @@ namespace Group15.EventManager.Domain.Models
         public double Price { get; set; }
         public string Description { get; set; }
         public byte[] Image { get; set; }
-        public int MinCustomerAmount { get; set; }
         public bool PayOnline { get; set; }
+        public int MinCustomerAmount { get; set; }
         public int MaxCustomerLimit { get; set; }
         public DateTime LastBookingDate { get; set; }
         public DateTime EventDate { get; set; }

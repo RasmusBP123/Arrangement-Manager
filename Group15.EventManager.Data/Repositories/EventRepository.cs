@@ -18,6 +18,7 @@ namespace Group15.EventManager.Data.Repositories
         public IQueryable<Event> GetActiveEvents()
         {
             var events = Db.Set<Event>().Include(_event => _event.Region)
+                                        .Include(_event => _event.City)
                                         .Where(_event => _event.EventDate >= DateTime.Today);
             return events;
         }
@@ -49,6 +50,7 @@ namespace Group15.EventManager.Data.Repositories
         public Event GetSingleEvent(Guid eventId)
         {
             var _event = Db.Set<Event>().Include(e => e.Food)
+                                        .Include(e => e.City)
                                         .FirstOrDefault(e => e.Id == eventId);
             return _event;
         }

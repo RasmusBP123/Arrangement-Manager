@@ -5,10 +5,18 @@
 
 <h3>Event</h3>
 
-<p>@EventStore.Event.Name</p>
+@if(EventStore.Event == null ||EventStore.Event.City == null)
+{
+    <text>Loading..</text>
+}
+else
+{
+    <p>@EventStore.Event.Name</p>
+    <p>@EventStore.Event.City.Name</p>
 
-<button class="btn btn-success" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</button>
-<UsersFromEvent EventId="@EventId" />
+    <button class="btn btn-success" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</button>
+    <UsersFromEvent EventId="@EventId" />
+}
 
 @code {
 

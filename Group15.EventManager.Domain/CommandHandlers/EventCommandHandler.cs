@@ -28,6 +28,10 @@ namespace Group15.EventManager.Domain.CommandHandlers
                 Price = request.Price,
                 Description = request.Description,
                 EventDate = request.EventDate,
+                LastBookingDate = request.LastBookingDate,
+                MinCustomerAmount = request.MinCustomerAmount,
+                MaxCustomerLimit = request.MaxCustomerLimit,
+                PayOnline = request.PayOnline,
                 Address = request.Address,
                 Image = request.Image,
                 Food = request.Food,
@@ -36,7 +40,6 @@ namespace Group15.EventManager.Domain.CommandHandlers
             };
 
             _eventRepository.Add(_event);
-
             _unitOfWork.Commit();
 
             return Task.FromResult(true);

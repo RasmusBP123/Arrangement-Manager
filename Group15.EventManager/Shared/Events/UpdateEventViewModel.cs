@@ -15,6 +15,6 @@ namespace Group15.EventManager.Shared.Events
         public bool PayOnline { get; set; }
         public DateTime EventDate { get; set; }
         public DateTime LastBookingDate { get; set; }
-
+        public DateTime EndEventDate { get; set; }
     }
 }

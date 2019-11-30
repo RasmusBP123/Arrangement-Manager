@@ -12,6 +12,10 @@ namespace Group15.EventManager.Domain.Commands.Events
         public Address Address { get; set; }
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
+        public DateTime LastBookingDate { get; set;}
+        public bool PayOnline { get; set; }
+        public int MinCustomerAmount { get; set; }
+        public int MaxCustomerLimit { get; set; }
         public Food Food { get; set; }
         public Region Region { get; set; }
         public City City { get; set; }

@@ -6,3 +6,7 @@
 .display-form{
     display: block;
 }
+
+.warning{
+    color: red;
+}

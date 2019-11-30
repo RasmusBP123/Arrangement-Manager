@@ -69,12 +69,16 @@ namespace Group15.EventManager.Application.Services
                 Name = _event.Name,
                 Description = _event.Description, 
                 EventDate = _event.EventDate,
+                LastBookingDate = _event.LastBookingDate,
                 Image = _event.Image, 
                 Address = _event.Address,
                 Price = _event.Price,
+                PayOnline = _event.PayOnline,
+                MaxCustomerLimit = _event.MaxCustomerLimit,
+                MinCustomerAmount = _event.MinCustomerAmount,
                 Food = _event.Food,
                 Region = _event.Region,
-                City = _event.City
+                City = _event.City,
             });
         }
 

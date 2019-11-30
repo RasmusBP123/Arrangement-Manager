@@ -1,4 +1,5 @@
 ﻿using Group15.EventManager.Shared.Address_;
+using Group15.EventManager.Shared.Cities;
 using Group15.EventManager.Shared.Food;
 using System;
 
@@ -13,8 +14,11 @@ namespace Group15.EventManager.Shared.Events
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
         public DateTime LastBookingDate { get; set; }
+        public DateTime EndEventDate { get; set; }
         public bool PayOnline { get; set; }
+        public GetCityViewModel City { get; set; }
+
         //public GetAddressForEventViewModel Address { get; set; }
-        //public GetFoodViewModel Food { get; set; }
+        public GetFoodViewModel Food { get; set; }
     }
 }
