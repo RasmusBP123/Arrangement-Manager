@@ -18,7 +18,7 @@ namespace Group15.EventManager.Shared.Events
         public bool PayOnline { get; set; }
         public GetCityViewModel City { get; set; }
 
-        //public GetAddressForEventViewModel Address { get; set; }
+        public GetAddressForEventViewModel Address { get; set; }
         public GetFoodViewModel Food { get; set; }
     }
 }

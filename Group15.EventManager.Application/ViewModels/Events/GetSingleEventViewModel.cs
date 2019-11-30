@@ -16,7 +16,7 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
         public DateTime LastBookingDate { get; set; }
         public DateTime EndEventDate { get; set; }
         public bool PayOnline { get; set; }
-        // public GetAddressForEventViewModel Address { get; set; }
+        public GetAddressForEventViewModel Address { get; set; }
         public GetFoodViewModel Food { get; set; }
         public GetCityViewModel City { get; set; }
     }

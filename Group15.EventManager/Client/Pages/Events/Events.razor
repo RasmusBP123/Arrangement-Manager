@@ -16,6 +16,10 @@
                 <p>@_event.Region.Name</p>
                 <p>@_event.City.Name</p>
                 <p>@_event.EventDate</p>
+                @if (_event.Address != null)
+                {
+                 <p>@_event.Address.RoadName -- @_event.Address.RoadNumber</p>
+                }
                 @if (_event.PayOnline == false)
 	            {
 		            <p>This event can only be bought in the specified store</p>

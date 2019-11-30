@@ -34,7 +34,7 @@
     </div>
     <div class="form-group">
         <label for="date">Date</label>
-        <InputDate Id="date" type="datetime-local"  class="form-control" @bind-Value="EventStore.CreateEvent.EventDate" />
+        <InputDate Id="date" type="datetime-local" class="form-control" @bind-Value="EventStore.CreateEvent.EventDate" />
         <ValidationMessage For="@(() => EventStore.CreateEvent.EventDate)" />
     </div>
     <div class="form-group">
@@ -58,6 +58,16 @@
         <ValidationMessage For="@(() => EventStore.CreateEvent.MaxCustomerLimit)" />
     </div>
     <div class="form-group">
+        <label>StreetName</label>
+        <InputText class="form-control" @bind-Value="Address.RoadName" />
+        <ValidationMessage For="@(() => Address.RoadName)" />
+    </div>
+    <div class="form-group">
+        <label>Number</label>
+        <InputNumber class="form-control" @bind-Value="Address.RoadNumber" />
+        <ValidationMessage For="@(() => Address.RoadNumber)" />
+    </div>
+    <div class="form-group">
         <label for="food">Food</label>
         <InputText Id="food" class="form-control" @bind-Value="FoodStore.foodViewModel.Name" />
         <ValidationMessage For="@(() =>FoodStore.foodViewModel.Name)" />
@@ -70,6 +80,7 @@
 </EditForm>
 
 @code { 
+    public CreateAddressForEventViewModel Address { get; set; } = new CreateAddressForEventViewModel();
 
     private async Task SubmitEvent()
     {
@@ -82,7 +93,7 @@
                 EventStore.ShowWarning = true;
             }
         }
-        Modal.Show("Are you sure?", typeof(ConfirmEventCreation));
+        Modal.Show("Confirm Event?", typeof(ConfirmEventCreation));
     }
 
     private void PackageEvent()
@@ -91,6 +102,7 @@
         EventStore.CreateEvent.Image = new byte[] { 0x00 };
         EventStore.CreateEvent.Food = FoodStore.foodViewModel;
         EventStore.CreateEvent.City = CityStore.City;
+        EventStore.CreateEvent.Address = Address;
         EventStore.CreateEvent.Region = RegionStore.Region;
     }
 }

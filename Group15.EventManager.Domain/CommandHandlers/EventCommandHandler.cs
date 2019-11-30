@@ -29,6 +29,7 @@ namespace Group15.EventManager.Domain.CommandHandlers
                 Description = request.Description,
                 EventDate = request.EventDate,
                 LastBookingDate = request.LastBookingDate,
+                EndEventDate = request.EndEventDate,
                 MinCustomerAmount = request.MinCustomerAmount,
                 MaxCustomerLimit = request.MaxCustomerLimit,
                 PayOnline = request.PayOnline,

@@ -70,6 +70,7 @@ namespace Group15.EventManager.Application.Services
                 Description = _event.Description, 
                 EventDate = _event.EventDate,
                 LastBookingDate = _event.LastBookingDate,
+                EndEventDate = _event.EndEventDate,
                 Image = _event.Image, 
                 Address = _event.Address,
                 Price = _event.Price,

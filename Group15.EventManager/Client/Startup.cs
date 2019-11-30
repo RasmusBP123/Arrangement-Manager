@@ -5,6 +5,7 @@ using Blazored.LocalStorage;
 using Blazored.Modal;
 using Group15.EventManager.Client.Auth;
 using Group15.EventManager.Client.Auth.Services;
+using Group15.EventManager.Client.Store.Address_;
 using Group15.EventManager.Client.Store.Auth;
 using Group15.EventManager.Client.Store.Cities;
 using Group15.EventManager.Client.Store.Employees;
@@ -31,6 +32,7 @@ namespace Group15.EventManager.Client
             services.AddScoped<FoodStore>();
             services.AddScoped<CityStore>();
             services.AddScoped<UserStore>();
+            services.AddScoped<AddressStore>();
             //Fluxor
             services.AddFluxor(options => options
                 .UseDependencyInjection(typeof(Startup).Assembly)

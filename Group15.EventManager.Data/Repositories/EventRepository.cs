@@ -19,6 +19,7 @@ namespace Group15.EventManager.Data.Repositories
         {
             var events = Db.Set<Event>().Include(_event => _event.Region)
                                         .Include(_event => _event.City)
+                                        .Include(_event => _event.Address)
                                         .Where(_event => _event.EventDate >= DateTime.Today);
             return events;
         }
@@ -51,6 +52,8 @@ namespace Group15.EventManager.Data.Repositories
         {
             var _event = Db.Set<Event>().Include(e => e.Food)
                                         .Include(e => e.City)
+                                        .Include(e => e.Region)
+                                        .Include(e => e.Address)
                                         .FirstOrDefault(e => e.Id == eventId);
             return _event;
         }
@@ -59,7 +62,7 @@ namespace Group15.EventManager.Data.Repositories
         {
             Db.Attach(entity.City);
             Db.Attach(entity.Region);
-            //Db.Attach(entity.Address);
+            Db.Set<Address>().Add(entity.Address);
             base.Add(entity);
         }
 

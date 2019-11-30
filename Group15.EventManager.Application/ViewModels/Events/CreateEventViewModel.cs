@@ -19,7 +19,7 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
         public DateTime LastBookingDate { get; set; }
         public DateTime EndEventDate { get; set; }
 
-        //public CreateAddressForEventViewModel Address { get; set; }
+        public CreateAddressForEventViewModel Address { get; set; }
 
         public CreateFoodViewModel Food { get; set; }
         public GetRegionViewModel Region { get; set; }
