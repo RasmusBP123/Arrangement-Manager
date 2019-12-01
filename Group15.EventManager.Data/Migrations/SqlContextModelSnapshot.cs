@@ -134,6 +134,48 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasIndex("RegionId");
 
                     b.ToTable("Cities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("038d1fee-4610-4f8f-acf5-d35d2f24d72f"),
+                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Herning",
+                            RegionId = new Guid("0d096733-5437-4c53-8f3d-0e815d3753b3"),
+                            Zipcode = 7429
+                        },
+                        new
+                        {
+                            Id = new Guid("6daf7bfe-850b-4bdd-87c5-5cf5cc2160dd"),
+                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Aalborg",
+                            RegionId = new Guid("4c68ec57-cfed-4b52-be86-6349d47f9a74"),
+                            Zipcode = 9000
+                        },
+                        new
+                        {
+                            Id = new Guid("264d9f3b-ee5a-4436-8f5e-9937a9ff4727"),
+                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Fyn",
+                            RegionId = new Guid("7e07ff02-61b5-47cf-80d2-95af4c291274"),
+                            Zipcode = 5000
+                        },
+                        new
+                        {
+                            Id = new Guid("0a0e4d03-66af-4121-8de0-707d12beaeed"),
+                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Slagelse",
+                            RegionId = new Guid("2469efa8-72a6-490f-bf5a-b434e672bc78"),
+                            Zipcode = 4200
+                        },
+                        new
+                        {
+                            Id = new Guid("1d3ffeaa-3d1f-4920-9ffa-310f61b8dc41"),
+                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "København",
+                            RegionId = new Guid("808bb796-576a-46d8-a53f-cd52324d9705"),
+                            Zipcode = 2100
+                        });
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Employee", b =>
@@ -280,6 +322,38 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Regions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("0d096733-5437-4c53-8f3d-0e815d3753b3"),
+                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Midtjylland"
+                        },
+                        new
+                        {
+                            Id = new Guid("4c68ec57-cfed-4b52-be86-6349d47f9a74"),
+                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Nordjylland"
+                        },
+                        new
+                        {
+                            Id = new Guid("7e07ff02-61b5-47cf-80d2-95af4c291274"),
+                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Syddanmark"
+                        },
+                        new
+                        {
+                            Id = new Guid("2469efa8-72a6-490f-bf5a-b434e672bc78"),
+                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sjælland"
+                        },
+                        new
+                        {
+                            Id = new Guid("808bb796-576a-46d8-a53f-cd52324d9705"),
+                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Hovedstaden"
+                        });
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Store", b =>
@@ -343,6 +417,24 @@ namespace Group15.EventManager.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f2209255-92ed-4e3a-9368-31736af7f935"),
+                            ConcurrencyStamp = "62b0f3e4-fa81-4b33-a5b4-9c21e8aa577f",
+                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = new Guid("6519cc1b-cd18-4898-a7bd-959d826ff413"),
+                            ConcurrencyStamp = "9be42a72-8ca8-42fb-a61c-bc8e323f523e",
+                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

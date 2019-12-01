@@ -41,6 +41,7 @@ namespace Group15.EventManager.Bootstrapper
             services.RegisterCommands();
             services.RegisterQueries();
             services.RegisterValidators();
+
             //Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

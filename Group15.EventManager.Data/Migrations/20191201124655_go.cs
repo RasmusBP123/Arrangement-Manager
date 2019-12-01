@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Group15.EventManager.Data.Migrations
 {
-    public partial class employee : Migration
+    public partial class go : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -356,6 +356,39 @@ namespace Group15.EventManager.Data.Migrations
                         principalTable: "Event",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { new Guid("f2209255-92ed-4e3a-9368-31736af7f935"), "62b0f3e4-fa81-4b33-a5b4-9c21e8aa577f", new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "User", "USER" },
+                    { new Guid("6519cc1b-cd18-4898-a7bd-959d826ff413"), "9be42a72-8ca8-42fb-a61c-bc8e323f523e", new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Admin", "ADMIN" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Regions",
+                columns: new[] { "Id", "CreatedDate", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("0d096733-5437-4c53-8f3d-0e815d3753b3"), new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Midtjylland" },
+                    { new Guid("4c68ec57-cfed-4b52-be86-6349d47f9a74"), new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nordjylland" },
+                    { new Guid("7e07ff02-61b5-47cf-80d2-95af4c291274"), new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Syddanmark" },
+                    { new Guid("2469efa8-72a6-490f-bf5a-b434e672bc78"), new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sjælland" },
+                    { new Guid("808bb796-576a-46d8-a53f-cd52324d9705"), new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Hovedstaden" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Cities",
+                columns: new[] { "Id", "CreatedDate", "Name", "RegionId", "Zipcode" },
+                values: new object[,]
+                {
+                    { new Guid("038d1fee-4610-4f8f-acf5-d35d2f24d72f"), new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Herning", new Guid("0d096733-5437-4c53-8f3d-0e815d3753b3"), 7429 },
+                    { new Guid("6daf7bfe-850b-4bdd-87c5-5cf5cc2160dd"), new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Aalborg", new Guid("4c68ec57-cfed-4b52-be86-6349d47f9a74"), 9000 },
+                    { new Guid("264d9f3b-ee5a-4436-8f5e-9937a9ff4727"), new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fyn", new Guid("7e07ff02-61b5-47cf-80d2-95af4c291274"), 5000 },
+                    { new Guid("0a0e4d03-66af-4121-8de0-707d12beaeed"), new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Slagelse", new Guid("2469efa8-72a6-490f-bf5a-b434e672bc78"), 4200 },
+                    { new Guid("1d3ffeaa-3d1f-4920-9ffa-310f61b8dc41"), new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "København", new Guid("808bb796-576a-46d8-a53f-cd52324d9705"), 2100 }
                 });
 
             migrationBuilder.CreateIndex(
