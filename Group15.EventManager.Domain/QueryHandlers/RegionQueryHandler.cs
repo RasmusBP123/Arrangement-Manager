@@ -11,13 +11,12 @@ using System.Threading.Tasks;
 
 namespace Group15.EventManager.Domain.QueryHandlers
 {
-    public class RegionQueryHandler : Handler,
-                                      IRequestHandler<AllRegionsQuery, IQueryable<Region>>,
+    public class RegionQueryHandler : IRequestHandler<AllRegionsQuery, IQueryable<Region>>,
                                       IRequestHandler<SingleRegionQuery, Region>
     {
         private readonly IRegionRepository _regionRepository;
 
-        public RegionQueryHandler(IMediator mediator, IUnitOfWork unitOfWork, IRegionRepository regionRepository) : base(mediator, unitOfWork)
+        public RegionQueryHandler(IRegionRepository regionRepository)
         {
             _regionRepository = regionRepository;
         }

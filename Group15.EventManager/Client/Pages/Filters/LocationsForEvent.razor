@@ -38,7 +38,6 @@
 
     public async Task RegionClicked(ChangeEventArgs changeEvent)
     {
-        Console.WriteLine("Test");
         regionId = changeEvent.Value.ToString();
         RegionStore.Region = await HttpClient.GetJsonAsync<GetRegionViewModel>($"api/regions/{regionId}");
         EventStore.NotifyEventStateChanged();

@@ -11,13 +11,12 @@ namespace Group15.EventManager.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            builder.ToTable("Users");
-            builder.Ignore(user => user.TwoFactorEnabled)
-                                             .Ignore(user => user.LockoutEnabled)
-                                             .Ignore(user => user.LockoutEnd)
-                                             .Ignore(user => user.EmailConfirmed)
-                                             .Ignore(user => user.AccessFailedCount);
-
+             builder.ToTable("Users");
+             builder.Ignore(user => user.TwoFactorEnabled)
+                    .Ignore(user => user.LockoutEnabled)
+                    .Ignore(user => user.LockoutEnd)
+                    .Ignore(user => user.EmailConfirmed)
+                    .Ignore(user => user.AccessFailedCount);
         }
     }
 }

@@ -288,6 +288,9 @@ namespace Group15.EventManager.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("AddressId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("CityId")
                         .HasColumnType("uniqueidentifier");
 
@@ -300,16 +303,13 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<Guid?>("RegionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("SiteId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("CityId");
 
                     b.HasIndex("RegionId");
-
-                    b.HasIndex("SiteId");
 
                     b.ToTable("Stores");
                 });
@@ -521,6 +521,10 @@ namespace Group15.EventManager.Data.Migrations
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Store", b =>
                 {
+                    b.HasOne("Group15.EventManager.Domain.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+
                     b.HasOne("Group15.EventManager.Domain.Models.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId");
@@ -528,10 +532,6 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasOne("Group15.EventManager.Domain.Models.Region", "Region")
                         .WithMany()
                         .HasForeignKey("RegionId");
-
-                    b.HasOne("Group15.EventManager.Domain.Models.Address", "Site")
-                        .WithMany()
-                        .HasForeignKey("SiteId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace Group15.EventManager.Domain.QueryHandlers
 {
-    public class UserQueryHandler : Handler, IRequestHandler<AllUsersFromEventQuery, IQueryable<ApplicationUser>>
+    public class UserQueryHandler : IRequestHandler<AllUsersFromEventQuery, IQueryable<ApplicationUser>>
     {
         private readonly IUserRepository _userRepository;
 
-        public UserQueryHandler(IMediator mediator, IUnitOfWork unitOfWork, IUserRepository userRepository) : base(mediator, unitOfWork)
+        public UserQueryHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

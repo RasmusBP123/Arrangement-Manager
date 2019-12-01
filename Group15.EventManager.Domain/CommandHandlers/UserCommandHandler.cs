@@ -17,7 +17,7 @@ namespace Group15.EventManager.Domain.CommandHandlers
     {
         private readonly IUserRepository _userRepository;
 
-        public UserCommandHandler(IMediator mediator, IUnitOfWork unitOfWork, IUserRepository userRepository) : base(mediator, unitOfWork)
+        public UserCommandHandler(IUnitOfWork unitOfWork, IUserRepository userRepository) : base(unitOfWork)
         {
             _userRepository = userRepository;
         }

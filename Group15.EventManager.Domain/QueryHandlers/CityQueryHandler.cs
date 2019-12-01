@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace Group15.EventManager.Domain.QueryHandlers
 {
-    public class CityQueryHandler : Handler, IRequestHandler<SingleCityQuery, City>
+    public class CityQueryHandler : IRequestHandler<SingleCityQuery, City>
     {
         private readonly ICityRepository _cityRepository;
 
-        public CityQueryHandler(IMediator mediator, IUnitOfWork unitOfWork, ICityRepository cityRepository) : base(mediator, unitOfWork)
+        public CityQueryHandler(ICityRepository cityRepository) 
         {
             _cityRepository = cityRepository;
         }

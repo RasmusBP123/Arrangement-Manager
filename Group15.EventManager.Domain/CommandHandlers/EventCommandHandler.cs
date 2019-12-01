@@ -15,7 +15,7 @@ namespace Group15.EventManager.Domain.CommandHandlers
     {
         private readonly IEventRepository _eventRepository;
 
-        public EventCommandHandler(IMediator mediator, IUnitOfWork unitOfWork, IEventRepository eventRepository) : base(mediator, unitOfWork)
+        public EventCommandHandler(IUnitOfWork unitOfWork, IEventRepository eventRepository) : base(unitOfWork)
         {
             _eventRepository = eventRepository;
         }

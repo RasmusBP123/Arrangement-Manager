@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Group15.EventManager.Data.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    [Migration("20191127131528_updatedDataModels")]
-    partial class updatedDataModels
+    [Migration("20191201102517_employee")]
+    partial class employee
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,6 +62,9 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
@@ -178,6 +181,9 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<Guid?>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("EndEventDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("EventDate")
                         .HasColumnType("datetime2");
 
@@ -251,6 +257,9 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<Guid>("EventId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("ApplicationUserId", "EventId");
 
                     b.HasIndex("EventId");
@@ -281,6 +290,9 @@ namespace Group15.EventManager.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("AddressId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("CityId")
                         .HasColumnType("uniqueidentifier");
 
@@ -293,60 +305,15 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<Guid?>("RegionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("SiteId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("CityId");
 
                     b.HasIndex("RegionId");
 
-                    b.HasIndex("SiteId");
-
                     b.ToTable("Stores");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IdentityRole");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "b17e0958-7c66-49e3-9897-e8c7dea569bb",
-                            ConcurrencyStamp = "31dcc43e-cb01-47be-88c9-fe2a330daca4",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "be355016-857c-4d09-aaae-f6564f12fe0b",
-                            ConcurrencyStamp = "e683817e-bf57-4610-9b42-bb4f4193a08d",
-                            Name = "Employee",
-                            NormalizedName = "EMPLOYEE"
-                        },
-                        new
-                        {
-                            Id = "2c6fa6f5-c9aa-4760-a15f-f95a70e667e7",
-                            ConcurrencyStamp = "31c0805c-d288-46ee-be98-514cee6f593b",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -358,6 +325,9 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(256)")
@@ -390,6 +360,9 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
@@ -413,6 +386,9 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -432,6 +408,9 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<string>("ProviderKey")
                         .HasColumnType("nvarchar(128)")
                         .HasMaxLength(128);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -454,6 +433,9 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
@@ -473,6 +455,9 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(128)")
                         .HasMaxLength(128);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -538,6 +523,10 @@ namespace Group15.EventManager.Data.Migrations
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Store", b =>
                 {
+                    b.HasOne("Group15.EventManager.Domain.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+
                     b.HasOne("Group15.EventManager.Domain.Models.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId");
@@ -545,10 +534,6 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasOne("Group15.EventManager.Domain.Models.Region", "Region")
                         .WithMany()
                         .HasForeignKey("RegionId");
-
-                    b.HasOne("Group15.EventManager.Domain.Models.Address", "Site")
-                        .WithMany()
-                        .HasForeignKey("SiteId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

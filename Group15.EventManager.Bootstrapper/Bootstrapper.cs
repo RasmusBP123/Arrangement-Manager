@@ -13,6 +13,7 @@ using Group15.EventManager.Data.Repositories;
 using Group15.EventManager.Data.UnitOfWork;
 using Group15.EventManager.Domain.CommandHandlers;
 using Group15.EventManager.Domain.Commands.Events;
+using Group15.EventManager.Domain.Commands.Store;
 using Group15.EventManager.Domain.Commands.Users;
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Models.Auth;
@@ -51,6 +52,7 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IEventApplicationService, EventApplicationService>();
             services.AddScoped<IRegionApplicationService, RegionApplicationService>();
             services.AddScoped<IUserApplicationService, UserApplicationService>();
+            services.AddScoped<IStoreApplicationService, StoreApplicationService>();
         }
 
         public static void RegisterCommands(this IServiceCollection services)
@@ -62,6 +64,8 @@ namespace Group15.EventManager.Bootstrapper
             //Users
             services.AddScoped<IRequestHandler<AddUserToEventCommand, bool>, UserCommandHandler>();
             services.AddScoped<IRequestHandler<CancelEventForUserCommand, bool>, UserCommandHandler>();
+            //Stores
+            services.AddScoped<IRequestHandler<CreateStoreCommand, bool>, StoreCommandHandler>();
         }
 
         public static void RegisterQueries(this IServiceCollection services)
@@ -89,6 +93,7 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<IStoreRepository, StoreRepository>();
         }
 
         public static void RegisterValidators(this IServiceCollection services)

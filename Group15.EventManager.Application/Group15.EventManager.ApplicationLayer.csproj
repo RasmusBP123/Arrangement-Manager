@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\Employees\" />
-    <Folder Include="ViewModels\Stores\" />
   </ItemGroup>
 
 </Project>

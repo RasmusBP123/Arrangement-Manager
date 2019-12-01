@@ -14,8 +14,7 @@ using System.Threading.Tasks;
 
 namespace Group15.EventManager.Domain.QueryHandlers
 {
-    public class EventQueryHandler : Handler,
-                                    IRequestHandler<AllActiveEventsQuery, IQueryable<Event>>,
+    public class EventQueryHandler :IRequestHandler<AllActiveEventsQuery, IQueryable<Event>>,
                                     IRequestHandler<AllEventsQuery, IQueryable<Event>>,
                                     IRequestHandler<AllEventsByRegionQuery, IQueryable<Event>>,
                                     IRequestHandler<AllEventsByRegionAndCityQuery, IQueryable<Event>>,
@@ -25,7 +24,7 @@ namespace Group15.EventManager.Domain.QueryHandlers
     {
         private readonly IEventRepository _eventRepository;
 
-        public EventQueryHandler(IMediator mediator, IUnitOfWork unitOfWork, IEventRepository eventRepository) : base(mediator, unitOfWork)
+        public EventQueryHandler(IEventRepository eventRepository)
         {
             _eventRepository = eventRepository;
         }

@@ -14,6 +14,12 @@ namespace Group15.EventManager.Data.Mappings
             builder.ToTable("Regions");
             builder.HasKey(region => region.Id);
             builder.HasMany(region => region.Cities).WithOne(city => city.Region);
+
+            builder.HasData(
+                new Region
+                {
+                    Id = Guid.NewGuid()
+                }); ;
         }
     }
 }
