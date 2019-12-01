@@ -12,6 +12,16 @@ namespace Group15.EventManager.Data.Mappings
         public void Configure(EntityTypeBuilder<Address> builder)
         {
             builder.ToTable("Address");
+
+            builder.HasData(new
+            {
+                Id = new Guid("19bcfcf0-4dd1-4f7e-8591-4697628fed9a"),
+                RoadName = "Bredgade",
+                RoadNumber = 1,
+                X = 12.02,
+                Y = 07.05,
+                CreatedDate = new DateTime(2019, 12, 01)
+            });
         }
     }
 }

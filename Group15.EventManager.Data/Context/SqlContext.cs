@@ -1,6 +1,4 @@
 ﻿using Group15.EventManager.Data.Mappings;
-using Group15.EventManager.Data.Mappings.Policies;
-using Group15.EventManager.Data.Seedings;
 using Group15.EventManager.Domain.Models.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -8,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
 
 namespace Group15.EventManager.Data.Context
 {

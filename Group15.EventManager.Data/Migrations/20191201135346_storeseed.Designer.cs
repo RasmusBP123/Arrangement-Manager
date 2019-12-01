@@ -4,14 +4,16 @@ using Group15.EventManager.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Group15.EventManager.Data.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    partial class SqlContextModelSnapshot : ModelSnapshot
+    [Migration("20191201135346_storeseed")]
+    partial class storeseed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,15 +211,6 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasIndex("StoreId");
 
                     b.ToTable("Employees");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("3216b7c9-4b42-44b4-a49c-2117496983d4"),
-                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Torsten Jakobsen",
-                            StoreId = new Guid("da868f6a-4f8c-4695-baae-4a0feea05207")
-                        });
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Event", b =>
@@ -287,28 +280,6 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasIndex("RegionId");
 
                     b.ToTable("Event");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("24ce1d49-dff7-4444-b931-fa573c6b83ce"),
-                            AddressId = new Guid("19bcfcf0-4dd1-4f7e-8591-4697628fed9a"),
-                            CityId = new Guid("264d9f3b-ee5a-4436-8f5e-9937a9ff4727"),
-                            CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Eventet kommer til at foregå i Odense kl. 16:00, hvor man vil få tilbudt forfriskninger og vin til maden",
-                            EmployeeId = new Guid("3216b7c9-4b42-44b4-a49c-2117496983d4"),
-                            EndEventDate = new DateTime(2019, 12, 24, 20, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventDate = new DateTime(2019, 12, 24, 14, 30, 0, 0, DateTimeKind.Unspecified),
-                            FoodId = new Guid("5384338e-ff12-4a9a-8789-b3d89ce5db26"),
-                            Image = new byte[] { 0 },
-                            LastBookingDate = new DateTime(2019, 12, 12, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            MaxCustomerLimit = 200,
-                            MinCustomerAmount = 50,
-                            Name = "Vinsmagning i hyggelige omgivelser",
-                            PayOnline = true,
-                            Price = 700.0,
-                            RegionId = new Guid("7e07ff02-61b5-47cf-80d2-95af4c291274")
-                        });
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Food", b =>
