@@ -19,6 +19,13 @@ namespace Group15.EventManager.Server.Controllers
             _storeApplicationService = storeApplicationService;
         }
 
+        [HttpGet()]
+        public async Task<IActionResult> GetAllStores()
+        {
+            var stores = await _storeApplicationService.GetAllStores();
+            return Ok(stores);
+        }
+
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> CreateStore(CreateStoreViewModel storeViewModel)

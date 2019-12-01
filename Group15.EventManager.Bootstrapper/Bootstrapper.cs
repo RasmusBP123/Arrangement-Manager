@@ -21,6 +21,7 @@ using Group15.EventManager.Domain.Queries.Cities;
 using Group15.EventManager.Domain.Queries.Events;
 using Group15.EventManager.Domain.Queries.Events.Filters;
 using Group15.EventManager.Domain.Queries.Regions;
+using Group15.EventManager.Domain.Queries.Stores;
 using Group15.EventManager.Domain.Queries.Users;
 using Group15.EventManager.Domain.QueryHandlers;
 using MediatR;
@@ -85,6 +86,8 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IRequestHandler<SingleCityQuery, City>, CityQueryHandler>();
             //Users
             services.AddScoped<IRequestHandler<AllUsersFromEventQuery, IQueryable<ApplicationUser>>, UserQueryHandler>();
+            //Stores
+            services.AddScoped<IRequestHandler<AllStroresQuery, IQueryable<Store>>, StoreQueryHandler>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)

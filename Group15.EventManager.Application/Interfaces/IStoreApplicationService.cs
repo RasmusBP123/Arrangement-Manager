@@ -8,6 +8,7 @@ namespace Group15.EventManager.ApplicationLayer.Interfaces
 {
     public interface IStoreApplicationService
     {
+        Task<IEnumerable<GetStoreListViewModel>> GetAllStores();
         Task CreateStore(CreateStoreViewModel storeViewModel);
     }
 }

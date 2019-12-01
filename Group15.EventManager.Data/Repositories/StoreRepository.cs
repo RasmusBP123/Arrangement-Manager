@@ -1,8 +1,10 @@
 ﻿using Group15.EventManager.Data.Context;
 using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Group15.EventManager.Data.Repositories
@@ -11,6 +13,14 @@ namespace Group15.EventManager.Data.Repositories
     {
         public StoreRepository(SqlContext context) : base(context)
         {
+        }
+
+        public override IQueryable<Store> GetAll()
+        {
+            var stores = Db.Set<Store>().Include(store => store.Address)
+                                        .Include(store => store.City)
+                                        .Include(store => store.Region);
+            return stores;
         }
 
         public override void Add(Store entity)

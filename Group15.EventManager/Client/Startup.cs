@@ -12,6 +12,7 @@ using Group15.EventManager.Client.Store.Employees;
 using Group15.EventManager.Client.Store.Events;
 using Group15.EventManager.Client.Store.Foods;
 using Group15.EventManager.Client.Store.Regions;
+using Group15.EventManager.Client.Store.Stores;
 using Group15.EventManager.Client.Store.Users;
 using Group15.EventManager.Shared.Auth.Policies;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -25,6 +26,7 @@ namespace Group15.EventManager.Client
         public void ConfigureServices(IServiceCollection services)
         {
             //State
+            services.AddScoped<AddressStore>();
             services.AddScoped<RegionStore>();
             services.AddScoped<EventStore>();
             services.AddScoped<AuthStore>();
@@ -32,7 +34,7 @@ namespace Group15.EventManager.Client
             services.AddScoped<FoodStore>();
             services.AddScoped<CityStore>();
             services.AddScoped<UserStore>();
-            services.AddScoped<AddressStore>();
+            services.AddScoped<StoreStore>();
             //Fluxor
             services.AddFluxor(options => options
                 .UseDependencyInjection(typeof(Startup).Assembly)
