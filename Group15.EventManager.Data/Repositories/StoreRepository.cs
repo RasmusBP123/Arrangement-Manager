@@ -23,6 +23,15 @@ namespace Group15.EventManager.Data.Repositories
             return stores;
         }
 
+        public override Store GetById(Guid id)
+        {
+            var store = Db.Set<Store>().Include(store => store.Address)
+                                        .Include(store => store.City)
+                                        .Include(store => store.Region)
+                                        .Include(store => store.Employees).FirstOrDefault(store => store.Id == id);
+            return store;
+        }
+
         public override void Add(Store entity)
         {
             Db.Attach(entity.City);

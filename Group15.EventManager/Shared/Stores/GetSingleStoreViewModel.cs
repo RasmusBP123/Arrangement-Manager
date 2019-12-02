@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Group15.EventManager.Shared.Stores
 {
-    public class GetStoreListViewModel
+    public class GetSingleStoreViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

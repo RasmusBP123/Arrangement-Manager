@@ -28,6 +28,7 @@ namespace Group15.EventManager.Application.AutoMapper
             CreateMap<Region, GetRegionWithoutCitiesViewModel>();
             CreateMap<Region, AddRegionForEventViewModel>();
             CreateMap<Store, GetStoreListViewModel>();
+            CreateMap<Store, GetSingleStoreViewModel>();
         }
     }
 }

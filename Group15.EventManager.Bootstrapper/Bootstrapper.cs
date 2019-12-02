@@ -88,6 +88,7 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IRequestHandler<AllUsersFromEventQuery, IQueryable<ApplicationUser>>, UserQueryHandler>();
             //Stores
             services.AddScoped<IRequestHandler<AllStroresQuery, IQueryable<Store>>, StoreQueryHandler>();
+            services.AddScoped<IRequestHandler<SingleStoreQuery, Store>, StoreQueryHandler>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)

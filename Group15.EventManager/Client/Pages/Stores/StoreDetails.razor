@@ -1,0 +1,19 @@
+﻿@page  "/store/{StoreId:guid}"
+@inject StoreStore Store
+@inject HttpClient HttpClient
+
+<h3>@Store.Store.Name</h3>
+
+<p>@Store.Store.City.Name</p>
+
+<p>@Store.Store.Region.Name</p>
+@code {
+
+    [Parameter]
+    public Guid StoreId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Store.Store = await HttpClient.GetJsonAsync<GetSingleStoreViewModel>($"api/store/{StoreId}");
+    }
+}

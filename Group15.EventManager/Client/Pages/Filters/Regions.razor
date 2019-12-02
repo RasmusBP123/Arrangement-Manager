@@ -29,7 +29,7 @@
 
 @code {
 
-    string regionId = "";
+        string regionId = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -38,10 +38,13 @@
 
     public async Task RegionClicked(ChangeEventArgs changeEvent)
     {
-        regionId = changeEvent.Value.ToString();
-        RegionStore.Region = await HttpClient.GetJsonAsync<GetRegionViewModel>($"api/regions/{regionId}");
-        EventStore.Events = await HttpClient.GetJsonAsync<List<GetEventListViewModel>>($"api/events/region/{regionId}");
-        EventStore.NotifyStateChanged();
+        if (Guid.TryParse(changeEvent.Value.ToString(), out var newGuid) == true)
+        {
+            regionId = changeEvent.Value.ToString();
+            RegionStore.Region = await HttpClient.GetJsonAsync<GetRegionViewModel>($"api/regions/{regionId}");
+            EventStore.Events = await HttpClient.GetJsonAsync<List<GetEventListViewModel>>($"api/events/region/{regionId}");
+            EventStore.NotifyStateChanged();
+        }
     }
 
     public async Task CityClicked(ChangeEventArgs changeEvent)

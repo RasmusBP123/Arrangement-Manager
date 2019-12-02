@@ -1,15 +1,18 @@
 ﻿@page  "/stores"
 @inject HttpClient HttpClient
 @inject StoreStore StoreStore
+@inject NavigationManager NavManager
 
 <h3>Stores</h3>
 
 @foreach (var store in StoreStore.Stores)
 {
+<div @onclick="@(() => NavigateToStore(store.Id))">
     <p>@store.Name</p>
     <p>@store.Address.RoadName , @store.Address.RoadNumber</p>
     <p>@store.Region.Name</p>
     <p>@store.City.Name</p>
+</div>
 }
 
 @code {
@@ -17,5 +20,10 @@
     protected override async Task OnInitializedAsync()
     {
         StoreStore.Stores = await HttpClient.GetJsonAsync<IEnumerable<GetStoreListViewModel>>("api/store");
+    }
+
+    private void NavigateToStore(Guid storeId)
+    {
+        NavManager.NavigateTo($"/store/{storeId}");
     }
 }

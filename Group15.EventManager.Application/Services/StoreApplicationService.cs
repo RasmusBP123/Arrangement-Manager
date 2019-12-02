@@ -31,5 +31,12 @@ namespace Group15.EventManager.ApplicationLayer.Services
             return storeViewModels;
 
         }
+
+        public async Task<GetSingleStoreViewModel> GetSingleStore(Guid storeId)
+        {
+            var store = await _mediator.Send(new SingleStoreQuery(storeId));
+            var storeViewModel = _mapper.Map<GetSingleStoreViewModel>(store);
+            return storeViewModel;
+        }
     }
 }

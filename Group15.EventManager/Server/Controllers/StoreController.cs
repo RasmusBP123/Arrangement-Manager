@@ -26,6 +26,14 @@ namespace Group15.EventManager.Server.Controllers
             return Ok(stores);
         }
 
+        [HttpGet]
+        [Route("{storeId}")]
+        public async Task<IActionResult> GetSingleStore([FromRoute] Guid storeId)
+        {
+            var store = await _storeApplicationService.GetSingleStore(storeId);
+            return Ok(store);
+        }
+
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> CreateStore(CreateStoreViewModel storeViewModel)

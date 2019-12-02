@@ -6,7 +6,7 @@
 <div class="side-flex">
     <div>
         <select class="form-control" @onchange="@RegionClicked">
-            <option value="">-- Vælg Region --</option>
+            <option>-- Vælg Region --</option>
             @foreach (var region in RegionStore.Regions)
             {
                 <option value="@region.Id">@region.Name</option>
@@ -15,7 +15,7 @@
     </div>
     <div>
         <select class="form-control" @onchange="CityClicked">
-            <option value="">-- Vælg by --</option>
+            <option>-- Vælg by --</option>
             @if (RegionStore.RegionToBeAdded != null && RegionStore.Region.Cities != null)
             {
                 @foreach (var city in RegionStore.Region.Cities)
@@ -38,9 +38,12 @@
 
     public async Task RegionClicked(ChangeEventArgs changeEvent)
     {
-        regionId = changeEvent.Value.ToString();
-        RegionStore.Region = await HttpClient.GetJsonAsync<GetRegionViewModel>($"api/regions/{regionId}");
-        EventStore.NotifyEventStateChanged();
+        if(Guid.TryParse(changeEvent.Value.ToString(), out var newGuid) == true)
+        {
+            regionId = changeEvent.Value.ToString();
+            RegionStore.Region = await HttpClient.GetJsonAsync<GetRegionViewModel>($"api/regions/{regionId}");
+            EventStore.NotifyEventStateChanged();
+        }
     }
 
     public async Task CityClicked(ChangeEventArgs changeEvent)
