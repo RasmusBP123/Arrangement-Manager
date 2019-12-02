@@ -5,7 +5,7 @@
 
 <h3>Event</h3>
 
-@if(EventStore.Event == null ||EventStore.Event.City == null)
+@if(EventStore.Event == null || EventStore.Event.City == null)
 {
     <text>Loading..</text>
 }
@@ -28,7 +28,7 @@ else
     {
         EventStore.Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{EventId}");
         IsPayableOnline();
-        AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
+        //AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
         EventStore.OnBookEvent += StateHasChanged;
     }
 

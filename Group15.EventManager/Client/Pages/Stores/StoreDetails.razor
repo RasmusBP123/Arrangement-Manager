@@ -1,19 +1,39 @@
-﻿@page  "/store/{StoreId:guid}"
+﻿@page  "/store/{storeId:guid}"
 @inject StoreStore Store
 @inject HttpClient HttpClient
 
-<h3>@Store.Store.Name</h3>
+@if (Store.Store != null && Store.Store.Address != null && Store.Store.City != null && Store.Store.Region !=  null)
+{
+        <h3>@Store.Store.Name</h3>
+        <p>@Store.Store.City.Name</p>
+    
+        <p>@Store.Store.Region.Name</p>
+        <p> @Store.Store.Address.RoadName</p>
+}
 
-<p>@Store.Store.City.Name</p>
+else if(failed == true)
+{
+    <p>Could not load data..</p>
+}
 
-<p>@Store.Store.Region.Name</p>
 @code {
 
     [Parameter]
     public Guid StoreId { get; set; }
 
+    protected bool failed;
+
     protected override async Task OnInitializedAsync()
     {
-        Store.Store = await HttpClient.GetJsonAsync<GetSingleStoreViewModel>($"api/store/{StoreId}");
+        try
+        {
+            failed = false;
+            Store.Store = await HttpClient.GetJsonAsync<GetSingleStoreViewModel>($"api/store/{StoreId}");
+        }
+        catch (Exception)
+        {
+            failed = true;
+            throw;
+        }
     }
 }

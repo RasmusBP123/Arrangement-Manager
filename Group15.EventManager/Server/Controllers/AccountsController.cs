@@ -41,6 +41,10 @@ namespace Group15.EventManager.Server.Controllers
         [Route("user")]
         public async Task<IActionResult> GetUser()
         {
+            if (!HttpContext.User.Identity.IsAuthenticated)
+            {
+                return NoContent();
+            }
             var claims = HttpContext.User;
             var user = await _accountApplicationService.GetLoggedInUser(claims);
             return Ok(user);
@@ -55,16 +59,13 @@ namespace Group15.EventManager.Server.Controllers
             return Ok(isAuthenticated);
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("delete")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAccount()
         {
             var user = HttpContext.User;
-            if (user == null) return BadRequest();
-
             await _accountApplicationService.DeleteAccount(user);
-            return NotFound();
+            return NoContent();
         }
     }
 }

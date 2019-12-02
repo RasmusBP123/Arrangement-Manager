@@ -24,7 +24,14 @@
 
     private async Task CancelEvent(Guid eventId)
     {
-        await HttpClient.DeleteAsync($"api/user/{userId}/delete/{eventId}/event");
-        EventStore.NotifyEventDeleted();
+        try
+        {
+            await HttpClient.DeleteAsync($"api/user/{userId}/delete/{eventId}/event");
+
+        }
+        catch (Exception)
+        {
+            EventStore.NotifyEventDeleted();
+        }
     }
 }

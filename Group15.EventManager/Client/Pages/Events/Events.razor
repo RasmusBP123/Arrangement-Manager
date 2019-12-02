@@ -6,10 +6,12 @@
 @inject EventStore EventStore
 @inject NavigationManager NavManager
 
-@if(EventStore.Events != null)
+<input type="search" @bind-Value="EventStore.SearchTerm" @bind-Value:event="oninput" />
+
+@if (EventStore.Events != null)
 {
     <ul>
-        @foreach (var _event in EventStore.Events)
+        @foreach (var _event in EventStore.EventSearch())
         {
             <li @onclick="@(() => NavigateToEventDetails(_event.Id))">
                 <p>@_event.Name</p>
@@ -18,11 +20,11 @@
                 <p>@_event.EventDate</p>
                 @if (_event.Address != null)
                 {
-                 <p>@_event.Address.RoadName -- @_event.Address.RoadNumber</p>
+                    <p>@_event.Address.RoadName -- @_event.Address.RoadNumber</p>
                 }
                 @if (_event.PayOnline == false)
-	            {
-		            <p>This event can only be bought in the specified store</p>
+                {
+                    <p>This event can only be bought in the specified store</p>
                 }
                 else
                 {

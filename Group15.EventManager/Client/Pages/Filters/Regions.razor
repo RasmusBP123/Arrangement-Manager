@@ -49,9 +49,12 @@
 
     public async Task CityClicked(ChangeEventArgs changeEvent)
     {
-        var cityId = changeEvent.Value.ToString();
-        EventStore.Events = await HttpClient.GetJsonAsync<List<GetEventListViewModel>>($"api/events/region/{regionId}/city/{cityId}");
-        CityStore.City = await HttpClient.GetJsonAsync<GetCityViewModel>($"api/city/{cityId}");
-        EventStore.NotifyStateChanged();
+        if (Guid.TryParse(changeEvent.Value.ToString(), out var newGuid) == true)
+        {
+            var cityId = changeEvent.Value.ToString();
+            EventStore.Events = await HttpClient.GetJsonAsync<List<GetEventListViewModel>>($"api/events/region/{regionId}/city/{cityId}");
+            CityStore.City = await HttpClient.GetJsonAsync<GetCityViewModel>($"api/city/{cityId}");
+            EventStore.NotifyStateChanged();
+        }
     }
 }

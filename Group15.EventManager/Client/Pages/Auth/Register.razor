@@ -82,6 +82,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        //Redirects user if already authenticated 
         var result = await HttpClient.GetJsonAsync<bool>("api/accounts/valid");
 
         if (result == true)
@@ -93,16 +94,22 @@
     private async Task HandleRegistration()
     {
         ShowErrors = false;
-
-        var result = await AuthService.Register(registerModel);
-        if (result.Successful)
+        try
         {
-            NavManager.NavigateTo("/login");
+            var result = await AuthService.Register(registerModel);
+            if (result.Successful)
+            {
+                NavManager.NavigateTo("/login");
+            }
+            else
+            {
+                Errors = result.Errors;
+                ShowErrors = true;
+            }
         }
-        else
+        catch
         {
-            Errors = result.Errors;
-            ShowErrors = true;
+            throw;
         }
     }
 }

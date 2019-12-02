@@ -46,6 +46,7 @@
 
     protected override async Task OnParametersSetAsync()
     {
+        //Redirects user if already authenticated
         var result = await HttpClient.GetJsonAsync<bool>("api/accounts/valid");
 
         if (result == true)
@@ -57,16 +58,23 @@
     private async Task HandleLogin()
     {
         ShowErrors = false;
-
-        var result = await AuthService.Login(loginModel);
-        if (result.Successful)
+        try
         {
-            NavManager.NavigateTo("/");
+            var result = await AuthService.Login(loginModel);
+            if (result.Successful)
+            {
+                NavManager.NavigateTo("/");
+            }
+            else
+            {
+                Error = result.Error;
+                ShowErrors = true;
+            }
         }
-        else
+        catch (Exception e)
         {
-            Error = result.Error;
-            ShowErrors = true;
+            Console.WriteLine(e.Message.ToString());
+            throw;
         }
     }
 }
