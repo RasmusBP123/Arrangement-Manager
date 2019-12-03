@@ -28,8 +28,6 @@ else
     {
         EventStore.Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{EventId}");
         IsPayableOnline();
-        //AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
-        EventStore.OnBookEvent += StateHasChanged;
     }
 
     private async Task BookEventForUser()

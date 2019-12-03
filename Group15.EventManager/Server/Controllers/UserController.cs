@@ -17,15 +17,6 @@ namespace Group15.EventManager.Server.Controllers
             _userApplicationService = userApplicationService;
         }
 
-        [HttpPost]
-        [Route("{eventId}/book/event")]
-        public async Task<IActionResult> AddUserToEvent([FromBody] AddUserToEventViewModel userEventViewModel)
-        {
-            if (!ModelState.IsValid) return BadRequest();
-            await _userApplicationService.AddUserToEvent(userEventViewModel);
-            return Ok();
-        }
-
         [HttpGet]
         [Route("{eventId}/users")]
         public async Task<IActionResult> GetAllUsersFromEvent(Guid eventId)
@@ -34,12 +25,21 @@ namespace Group15.EventManager.Server.Controllers
             return Ok(users);
         }
 
+        [HttpPost]
+        [Route("{eventId}/book/event")]
+        public async Task<IActionResult> AddUserToEvent([FromBody] AddUserToEventViewModel userEventViewModel)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+            await _userApplicationService.AddUserToEvent(userEventViewModel);
+            return Created("", userEventViewModel);
+        }
+
         [HttpDelete]
         [Route("{userId}/delete/{eventId}/event")]
         public async Task<IActionResult> CancelEventFromUser( Guid userId, Guid eventId)
         {
             await _userApplicationService.CancelEventFromUser(userId, eventId);
-            return Ok();
+            return NoContent();
         }
     }
 }

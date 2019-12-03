@@ -40,7 +40,7 @@ namespace Group15.EventManager.Server.Controllers
         {
             if (!ModelState.IsValid) return BadRequest();
             await _storeApplicationService.CreateStore(storeViewModel);
-            return Ok();
+            return Created("api/store/create", storeViewModel);
         }
     }
 }

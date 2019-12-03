@@ -75,11 +75,11 @@ namespace Group15.EventManager.Server.Controllers
         [Route("create")]
         public async Task<IActionResult> CreateEvent([FromBody]CreateEventViewModel eventViewModel)
         {
-            if (!ModelState.IsValid)
+            if(!ModelState.IsValid)
                 return StatusCode(422, eventViewModel);
 
             await _eventApplicationService.CreateEvent(eventViewModel);
-            return StatusCode(201, eventViewModel);
+            return Created("api/events/create", eventViewModel);
         }
 
         [HttpPost]
@@ -92,7 +92,7 @@ namespace Group15.EventManager.Server.Controllers
             }
 
             await _eventApplicationService.UpdateEvent(eventId, eventViewModel);
-            return Ok();
+            return NoContent();
         }
 
         [HttpDelete] 
@@ -101,7 +101,7 @@ namespace Group15.EventManager.Server.Controllers
         public async Task<IActionResult> DeleteEvent([FromRoute] Guid eventId)
         {
             await _eventApplicationService.DeleteEvent(eventId);
-            return NotFound();
+            return NoContent();
         }
     }
 }

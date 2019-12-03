@@ -6,8 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Group15.EventManager.Application.ViewModels.Auth;
 using Group15.EventManager.ApplicationLayer.Interfaces;
-using Group15.EventManager.Domain.Models.Auth;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -34,14 +32,16 @@ namespace Group15.EventManager.Server.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest(new LoginResult { Successful = false, Error = "Username or password are invalid" });
+                return Ok(new LoginResult { Successful = false, Error = "Username or password are invalid" });
             }
 
             var user = await _accountApplicationService.Login(loginModel.Email);
             var roles = await _accountApplicationService.GetRoles(user);
 
-            var claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Name, loginModel.Email));
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, loginModel.Email)
+            };
 
             foreach (var role in roles)
             {

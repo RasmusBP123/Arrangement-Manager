@@ -58,23 +58,26 @@
     private async Task HandleLogin()
     {
         ShowErrors = false;
+        LoginResult result = new LoginResult();
         try
         {
-            var result = await AuthService.Login(loginModel);
+            result = await AuthService.Login(loginModel);
             if (result.Successful)
             {
                 NavManager.NavigateTo("/");
             }
             else
             {
+                 ShowErrors = true;
                 Error = result.Error;
-                ShowErrors = true;
+                Console.WriteLine(Error);
             }
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.Message.ToString());
-            throw;
+            ShowErrors = true;
+            Error = result.Error;
+            Console.WriteLine(Error);
         }
     }
 }

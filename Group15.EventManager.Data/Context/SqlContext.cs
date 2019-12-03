@@ -70,7 +70,6 @@ namespace Group15.EventManager.Data.Context
                     entry.Property("CreatedDate").CurrentValue = DateTime.UtcNow;
                 }
             }
-
             return base.SaveChanges();
         }
     }

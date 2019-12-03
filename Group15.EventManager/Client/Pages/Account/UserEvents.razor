@@ -19,7 +19,6 @@
     {
         userId = AuthStore.User.Id;
         EventStore.BookedEvents = await HttpClient.GetJsonAsync<IEnumerable<GetEventListViewModel>>($"api/events/{userId}/events");
-        EventStore.OnDeletedEvent += StateHasChanged;
     }
 
     private async Task CancelEvent(Guid eventId)
@@ -27,11 +26,11 @@
         try
         {
             await HttpClient.DeleteAsync($"api/user/{userId}/delete/{eventId}/event");
-
+            EventStore.BookedEvents = await HttpClient.GetJsonAsync<IEnumerable<GetEventListViewModel>>($"api/events/{userId}/events");
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            EventStore.NotifyEventDeleted();
+            Console.WriteLine(e.Message);
         }
     }
 }

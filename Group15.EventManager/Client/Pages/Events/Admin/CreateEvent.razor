@@ -72,7 +72,7 @@
         <InputCheckbox Id="payable" class="form-control" @bind-Value="EventStore.CreateEvent.PayOnline" />
     </div>
         <h3>Food</h3> 
-    <button @onclick="@HideForm">Add</button>
+    <button type="button" @onclick="@HideForm">Add</button>
     <div class="@hideForm">
         <div class="form-group">
             <label for="food">Food Name</label>
@@ -90,11 +90,12 @@
 </EditForm>
 
 @code { 
+
     private CreateAddressForEventViewModel Address { get; set; } = new CreateAddressForEventViewModel();
     private CreateFoodViewModel CreateFood = new CreateFoodViewModel();
     public string hideForm = "hide-form";
     private bool hidden = false;
-
+ 
     private async Task SubmitEvent()
     {
         var events = await HttpClient.GetJsonAsync<IEnumerable<GetEventListViewModel>>("api/events/active");

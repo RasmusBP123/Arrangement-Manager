@@ -35,7 +35,6 @@ namespace Group15.EventManager.Client.Auth.Services
         public async Task<LoginResult> Login(LoginModel loginModel)
         {
             var result = await _httpClient.PostJsonAsync<LoginResult>("api/login", loginModel);
-
             if (!result.Successful)
             {
                 return result;

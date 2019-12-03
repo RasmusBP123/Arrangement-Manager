@@ -5,38 +5,52 @@
 
 @if (EventStore.ShowWarning == true)
 {
-    <p class="warning">@doubleBookingWarning</p>
+    <p class="warning">You are about to book an event on the same day in the same city. Is that correct?</p>
 }
 
 <p>@EventStore.CreateEvent.Name</p>
 <p>@EventStore.CreateEvent.Price</p>
 <p>@EventStore.CreateEvent.Description</p>
-
 <p>@EventStore.CreateEvent.City.Name</p>
 <p>@EventStore.CreateEvent.Region.Name</p>
+<p>@EventStore.CreateEvent.Address.RoadName @EventStore.CreateEvent.Address.RoadNumber</p>
+
+@if(EventStore.CreateEvent.Food.Name != "" && EventStore.CreateEvent.Food.Price != 0)
+{
+    <p>@EventStore.CreateEvent.Food.Name - @EventStore.CreateEvent.Food.Price  kr.</p>
+}
 <button class="btn btn-success" @onclick="@ConfirmEvent">Confirm</button>
 
-<button class="btn btn-danger" @onclick="@CancelEvent">Deny</button>
 <button class="btn btn-info" @onclick="@EditEvent">Go back</button>
 
 @code {     
-    
-    private string doubleBookingWarning = "You are about to book an event on the same day in the same city. Is that correct?";
 
     private async Task ConfirmEvent()
     {
-        await HttpClient.PostJsonAsync<CreateEventViewModel>("api/events/create", EventStore.CreateEvent);
-        EventStore.CreateEvent = new CreateEventViewModel();
-        Modal.Cancel();
-        NavManager.NavigateTo("/");
+        try
+        {
+            await HttpClient.PostJsonAsync<CreateEventViewModel>("api/events/create", EventStore.CreateEvent);
+            EventStore.CreateEvent = new CreateEventViewModel();
+            Modal.Cancel();
+            NavManager.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            NavManager.NavigateTo("/");
+        }
     }
 
-    private void CancelEvent()
-    {
-        EventStore.CreateEvent = new CreateEventViewModel();
-        EventStore.NotifyEventStateChanged();
-        Modal.Cancel();
-    }
+    //private void CancelEvent()
+    //{
+    //    EventStore.CreateEvent = new CreateEventViewModel();
+    //    EventStore.CreateEvent.Food = new CreateFoodViewModel();
+    //    EventStore.CreateEvent.Address = new CreateAddressForEventViewModel();
+    //    EventStore.CreateEvent.Region = new GetRegionViewModel();
+    //    EventStore.CreateEvent.City = new GetCityViewModel();
+    //    EventStore.NotifyEventStateChanged();
+    //    Modal.Cancel();
+    //}
 
     private void EditEvent()
     {

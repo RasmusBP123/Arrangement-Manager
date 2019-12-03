@@ -40,6 +40,14 @@
         Store.Address = Address;
         Store.Region = RegionStore.Region;
         Store.City = CityStore.City;
-        await HttpClient.PostJsonAsync<CreateStoreViewModel>("api/store/create", Store);
+
+        try
+        {
+            await HttpClient.PostJsonAsync<CreateStoreViewModel>("api/store/create", Store);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 }
