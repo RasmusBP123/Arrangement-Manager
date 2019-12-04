@@ -7,6 +7,7 @@ using Group15.EventManager.ApplicationLayer.ViewModels.Events;
 using Group15.EventManager.ApplicationLayer.ViewModels.Foods;
 using Group15.EventManager.ApplicationLayer.ViewModels.Regions;
 using Group15.EventManager.ApplicationLayer.ViewModels.Stores;
+using Group15.EventManager.ApplicationLayer.ViewModels.Tickets;
 using Group15.EventManager.ApplicationLayer.ViewModels.Users;
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Models.Auth;
@@ -29,6 +30,7 @@ namespace Group15.EventManager.Application.AutoMapper
             CreateMap<Region, AddRegionForEventViewModel>();
             CreateMap<Store, GetStoreListViewModel>();
             CreateMap<Store, GetSingleStoreViewModel>();
+            CreateMap<Ticket, GetTicketForCartViewModel>();
         }
     }
 }

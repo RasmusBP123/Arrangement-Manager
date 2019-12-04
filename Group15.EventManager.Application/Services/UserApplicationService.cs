@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
 using Group15.EventManager.ApplicationLayer.Interfaces;
-using Group15.EventManager.ApplicationLayer.ViewModels.Events;
 using Group15.EventManager.ApplicationLayer.ViewModels.Users;
 using Group15.EventManager.Domain.Commands.Users;
 using Group15.EventManager.Domain.Models;
-using Group15.EventManager.Domain.Models.Auth;
 using Group15.EventManager.Domain.Queries.Users;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Group15.EventManager.ApplicationLayer.Services
@@ -22,7 +19,7 @@ namespace Group15.EventManager.ApplicationLayer.Services
 
         public async Task AddUserToEvent(AddUserToEventViewModel userEvent)
         {
-            await _mediator.Send(new AddUserToEventCommand(userEvent.UserId, userEvent.EventId));
+            await _mediator.Send(new AddUserToEventCommand(userEvent.UserId, userEvent.EventId, userEvent.TicketAmount));
         }
 
         public async Task<IEnumerable<GetUserFromEventViewModel>> GetUsersFromEvent(Guid eventId)
@@ -36,6 +33,7 @@ namespace Group15.EventManager.ApplicationLayer.Services
         {
             await _mediator.Send(new CancelEventForUserCommand(userId, eventId));
         }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

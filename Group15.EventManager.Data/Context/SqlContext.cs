@@ -30,6 +30,7 @@ namespace Group15.EventManager.Data.Context
             modelBuilder.ApplyConfiguration(new RegionMap());
             modelBuilder.ApplyConfiguration(new StoreMap());
             modelBuilder.ApplyConfiguration(new RolesMap());
+            modelBuilder.ApplyConfiguration(new TicketMap());
 
             //Policies SKAL MÅSKE BRUGES
             //modelBuilder.ApplyConfiguration(new AdminPolicy());

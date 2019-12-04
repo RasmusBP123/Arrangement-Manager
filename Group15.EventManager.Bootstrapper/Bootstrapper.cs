@@ -14,6 +14,7 @@ using Group15.EventManager.Data.UnitOfWork;
 using Group15.EventManager.Domain.CommandHandlers;
 using Group15.EventManager.Domain.Commands.Events;
 using Group15.EventManager.Domain.Commands.Store;
+using Group15.EventManager.Domain.Commands.Tickets;
 using Group15.EventManager.Domain.Commands.Users;
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Models.Auth;
@@ -22,6 +23,7 @@ using Group15.EventManager.Domain.Queries.Events;
 using Group15.EventManager.Domain.Queries.Events.Filters;
 using Group15.EventManager.Domain.Queries.Regions;
 using Group15.EventManager.Domain.Queries.Stores;
+using Group15.EventManager.Domain.Queries.Tickets;
 using Group15.EventManager.Domain.Queries.Users;
 using Group15.EventManager.Domain.QueryHandlers;
 using MediatR;
@@ -55,6 +57,7 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IRegionApplicationService, RegionApplicationService>();
             services.AddScoped<IUserApplicationService, UserApplicationService>();
             services.AddScoped<IStoreApplicationService, StoreApplicationService>();
+            services.AddScoped<ITicketApplicationService, TicketApplicationService>();
         }
 
         public static void RegisterCommands(this IServiceCollection services)
@@ -68,6 +71,8 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IRequestHandler<CancelEventForUserCommand, bool>, UserCommandHandler>();
             //Stores
             services.AddScoped<IRequestHandler<CreateStoreCommand, bool>, StoreCommandHandler>();
+            //Tickets
+            services.AddScoped<IRequestHandler<DeleteTicketCommand, bool>, TicketCommandHandler>();
         }
 
         public static void RegisterQueries(this IServiceCollection services)
@@ -86,9 +91,12 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IRequestHandler<SingleCityQuery, City>, CityQueryHandler>();
             //Users
             services.AddScoped<IRequestHandler<AllUsersFromEventQuery, IQueryable<ApplicationUser>>, UserQueryHandler>();
+            services.AddScoped<IRequestHandler<SingleUserQuery, ApplicationUser>, UserQueryHandler>();
             //Stores
             services.AddScoped<IRequestHandler<AllStroresQuery, IQueryable<Store>>, StoreQueryHandler>();
             services.AddScoped<IRequestHandler<SingleStoreQuery, Store>, StoreQueryHandler>();
+            //Tickets
+            services.AddScoped<IRequestHandler<AllTicketsQuery, IQueryable<Ticket>>, TicketQueryHandler>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)
@@ -99,6 +107,7 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IStoreRepository, StoreRepository>();
+            services.AddScoped<ITicketRepository, TicketRepository>();
         }
 
         public static void RegisterValidators(this IServiceCollection services)

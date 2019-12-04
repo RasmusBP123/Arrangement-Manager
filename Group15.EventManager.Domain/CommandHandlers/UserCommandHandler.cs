@@ -24,7 +24,7 @@ namespace Group15.EventManager.Domain.CommandHandlers
 
         public Task<bool> Handle(AddUserToEventCommand request, CancellationToken cancellationToken)
         {
-            _userRepository.AddUserToEvent(request.UserId, request.EventId);
+            _userRepository.AddUserToEvent(request.UserId, request.EventId, request.TicketAmount);
             _unitOfWork.Commit();
 
             return Task.FromResult(true);

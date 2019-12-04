@@ -2,10 +2,10 @@
 @inject HttpClient HttpClient
 @inject EventStore EventStore
 @inject AuthStore AuthStore
-
+@inject UserStore UserStore
 <h3>Event</h3>
 
-@if(EventStore.Event == null || EventStore.Event.City == null)
+@if (EventStore.Event == null || EventStore.Event.City == null)
 {
     <text>Loading..</text>
 }
@@ -13,8 +13,15 @@ else
 {
     <p>@EventStore.Event.Name</p>
     <p>@EventStore.Event.City.Name</p>
+    <p>@EventStore.Event.CurrentAmountOfCustomers</p>
+    <p>@EventStore.Event.MaxCustomerLimit</p>
 
-    <button class="btn btn-success" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</button>
+    <p>How many tickets would you like to buy?</p>
+    <p class="@EventIsFull warning">You are about to overbook this event, which you cannot do</p>
+    <EditForm Model="ticketAmount">
+        <InputNumber @bind-Value="@ticketAmount" />
+        <button type="submit" class="btn btn-success" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</button>
+    </EditForm>
     <UsersFromEvent EventId="@EventId" />
 }
 
@@ -23,11 +30,17 @@ else
     [Parameter]
     public Guid EventId { get; set; }
     private bool disabled { get; set; }
+    private int ticketAmount = 0;
+    private string EventIsFull = "hide";
 
     protected override async Task OnInitializedAsync()
     {
+        EventIsFull = "hide";
         EventStore.Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{EventId}");
-        IsPayableOnline();
+        UserStore.UsersFromEvent = await HttpClient.GetJsonAsync<IEnumerable<GetUserFromEventViewModel>>($"api/user/{EventId}/users");
+        CanBookOnline();
+        UserAlreadyBookedEvent();
+        EventIsFullyBooked();
     }
 
     private async Task BookEventForUser()
@@ -35,14 +48,29 @@ else
         var userEvent = new AddUserToEventViewModel()
         {
             UserId = AuthStore.User.Id,
-            EventId = EventId
+            EventId = EventId,
+            TicketAmount = ticketAmount
         };
 
-        await HttpClient.PostJsonAsync<AddUserToEventViewModel>($"api/user/{EventId}/book/event", userEvent);
-        EventStore.NotifyBookedEvent();
+        if (EventStore.Event.CurrentAmountOfCustomers + ticketAmount > EventStore.Event.MaxCustomerLimit)
+        {
+            EventIsFull = "display";
+        }
+        else
+        {
+            await HttpClient.PostJsonAsync<AddUserToEventViewModel>($"api/user/{EventId}/book/event", userEvent);
+        }
     }
 
-    private void IsPayableOnline()
+    private void EventIsFullyBooked()
+    {
+        if (EventStore.Event.CurrentAmountOfCustomers >= EventStore.Event.MaxCustomerLimit)
+        {
+            disabled = true;
+        }
+    }
+
+    private void CanBookOnline()
     {
         if (EventStore.Event.PayOnline == false)
         {
@@ -51,6 +79,18 @@ else
         else
         {
             disabled = false;
+        }
+    }
+
+    private void UserAlreadyBookedEvent()
+    {
+        foreach (var user in UserStore.UsersFromEvent)
+        {
+            if (AuthStore.User.Id == user.Id)
+            {
+                disabled = true;
+                return;
+            }
         }
     }
 }

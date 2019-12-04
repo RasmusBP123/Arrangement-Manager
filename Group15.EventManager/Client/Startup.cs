@@ -13,11 +13,13 @@ using Group15.EventManager.Client.Store.Events;
 using Group15.EventManager.Client.Store.Foods;
 using Group15.EventManager.Client.Store.Regions;
 using Group15.EventManager.Client.Store.Stores;
+using Group15.EventManager.Client.Store.Tickets;
 using Group15.EventManager.Client.Store.Users;
 using Group15.EventManager.Shared.Auth.Policies;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net.Mail;
 
 namespace Group15.EventManager.Client
 {
@@ -35,6 +37,7 @@ namespace Group15.EventManager.Client
             services.AddScoped<CityStore>();
             services.AddScoped<UserStore>();
             services.AddScoped<StoreStore>();
+            services.AddScoped<TicketStore>();
             //Fluxor
             services.AddFluxor(options => options
                 .UseDependencyInjection(typeof(Startup).Assembly)

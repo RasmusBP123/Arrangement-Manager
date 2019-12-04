@@ -4,14 +4,16 @@ using Group15.EventManager.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Group15.EventManager.Data.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    partial class SqlContextModelSnapshot : ModelSnapshot
+    [Migration("20191204130602_Ticket")]
+    partial class Ticket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -479,7 +481,7 @@ namespace Group15.EventManager.Data.Migrations
                             Id = new Guid("6d60a26b-17de-4501-a1d1-4b21f564bc63"),
                             CreatedDate = new DateTime(2019, 12, 4, 11, 20, 0, 0, DateTimeKind.Unspecified),
                             EventId = new Guid("24ce1d49-dff7-4444-b931-fa573c6b83ce"),
-                            UserId = new Guid("363f53b7-6ee1-4a60-bee9-1af8712551a5")
+                            UserId = new Guid("20b193c3-9de6-42b1-aacf-56f6d860e418")
                         });
                 });
 

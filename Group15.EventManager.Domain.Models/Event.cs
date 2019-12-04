@@ -14,6 +14,7 @@ namespace Group15.EventManager.Domain.Models
         public bool PayOnline { get; set; }
         public int MinCustomerAmount { get; set; }
         public int MaxCustomerLimit { get; set; }
+        public int CurrentAmountOfCustomers { get { return Tickets.Count; } }
         public DateTime LastBookingDate { get; set; }
         public DateTime EventDate { get; set; }
         public DateTime EndEventDate { get; set; }
@@ -22,6 +23,7 @@ namespace Group15.EventManager.Domain.Models
         public virtual Region Region { get; set; }
         public virtual Food Food { get; set; }
         public ICollection<ApplicationUserEvent> UserEvents { get; set; }
+        public virtual ICollection<Ticket> Tickets { get; set; }
         public virtual Employee Employee { get; set; }
     }
 }

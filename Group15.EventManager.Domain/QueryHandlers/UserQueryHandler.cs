@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 namespace Group15.EventManager.Domain.QueryHandlers
 {
     public class UserQueryHandler : IRequestHandler<AllUsersFromEventQuery, IQueryable<ApplicationUser>>
+                                   ,IRequestHandler<SingleUserQuery, ApplicationUser>
     {
         private readonly IUserRepository _userRepository;
 
@@ -26,6 +27,12 @@ namespace Group15.EventManager.Domain.QueryHandlers
         {
             var users = _userRepository.GetAllUsersFromEvent(request.EventId);
             return Task.FromResult(users);
+        }
+
+        public Task<ApplicationUser> Handle(SingleUserQuery request, CancellationToken cancellationToken)
+        {
+            var user = _userRepository.GetSingleUser(request.UserId);
+            return Task.FromResult(user);
         }
     }
 }

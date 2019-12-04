@@ -1,7 +1,4 @@
-﻿using Group15.EventManager.ApplicationLayer.ViewModels.Events;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace Group15.EventManager.ApplicationLayer.ViewModels.Users
 {
@@ -9,5 +6,6 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Users
     {
         public Guid UserId { get; set; }
         public Guid EventId { get; set; }
+        public int TicketAmount { get; set; }
     }
 }

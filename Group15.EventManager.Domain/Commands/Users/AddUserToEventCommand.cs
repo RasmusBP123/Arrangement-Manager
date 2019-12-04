@@ -2,6 +2,7 @@
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Models.Auth;
 using System;
+using System.Collections.Generic;
 
 namespace Group15.EventManager.Domain.Commands.Users
 {
@@ -9,11 +10,12 @@ namespace Group15.EventManager.Domain.Commands.Users
     {
         public Guid UserId { get; }
         public Guid EventId { get; }
-
-        public AddUserToEventCommand(Guid userId, Guid eventId)
+        public int TicketAmount { get; set; }
+        public AddUserToEventCommand(Guid userId, Guid eventId, int ticketAmount)
         {
             UserId = userId;
             EventId = eventId;
+            TicketAmount = ticketAmount;
         }
     }
 }

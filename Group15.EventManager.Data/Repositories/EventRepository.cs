@@ -58,6 +58,7 @@ namespace Group15.EventManager.Data.Repositories
                                         .Include(e => e.City)
                                         .Include(e => e.Region)
                                         .Include(e => e.Address)
+                                        .Include(e => e.Tickets)
                                         .FirstOrDefault(e => e.Id == eventId);
             return _event;
         }

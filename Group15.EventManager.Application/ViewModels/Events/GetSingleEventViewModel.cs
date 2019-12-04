@@ -11,6 +11,9 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
         public string Name { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
+        public int MinCustomerAmount { get; set; }
+        public int MaxCustomerLimit { get; set; }
+        public int CurrentAmountOfCustomers { get; set; }
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
         public DateTime LastBookingDate { get; set; }

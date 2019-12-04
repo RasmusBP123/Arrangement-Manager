@@ -12,11 +12,14 @@
             <div>
                 <span>Hello, @context.User.Identity.Name</span>
                 <button class="sign-out" @onclick="@HandleLogout">Sign out</button>
+                <button @onclick="@NavigateToCart">Cart</button>
             </div>
         </Authorized>
         <NotAuthorized>
-            <button class="btn btn-success" @onclick="@(() => NavManager.NavigateTo("/register"))">Register</button> |
-            <button class="sign-in" @onclick="@(() => NavManager.NavigateTo("/login"))">Log in</button>
+            <div>
+                <button class="btn btn-success" @onclick="@(() => NavManager.NavigateTo("/register"))">Register</button> |
+                <button class="sign-in" @onclick="@(() => NavManager.NavigateTo("/login"))">Log in</button>
+            </div>
         </NotAuthorized>
     </AuthorizeView>
 </div>
@@ -36,5 +39,10 @@
     {
         await AuthService.Logout();
         NavManager.NavigateTo("/");
+    }
+
+    private void NavigateToCart()
+    {
+        NavManager.NavigateTo("/cart");
     }
 }

@@ -1,0 +1,38 @@
+﻿@page "/cart"
+@inject AuthStore AuthStore
+@inject TicketStore TicketStore
+@inject HttpClient HttpClient
+
+<h3>Cart</h3>
+<h5>@AuthStore.User.FirstName @AuthStore.User.LastName</h5>
+
+@foreach (var ticket in TicketStore.TicketsForCart)
+{
+    <div>
+        <p>Ticket for : @ticket.Event.Name</p>
+        <button class="btn btn-danger" @onclick="(() => DeleteTicket(ticket.Id))">X</button>
+    </div>
+
+    <button class="btn btn-info" @onclick="SendEmailConfirmation">Confirm</button>
+}  
+
+@code {    
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
+        TicketStore.TicketsForCart = await HttpClient.GetJsonAsync<IEnumerable<GetTicketForCartViewModel>>($"api/tickets/{AuthStore.User.Id}");
+        TicketStore.OnDeletedTicket += StateHasChanged;
+    }
+
+    private async Task DeleteTicket(Guid ticketId)
+    {
+        await HttpClient.DeleteAsync($"api/tickets/delete/{ticketId}");
+        TicketStore.NotifyTicketState();
+    }
+
+    private async Task SendEmailConfirmation()
+    {
+        await HttpClient.GetAsync("api/accounts/email");
+    }
+}

@@ -9,5 +9,6 @@ namespace Group15.EventManager.Shared.Users
     {
         public Guid UserId { get; set; }
         public Guid EventId { get; set; }
+        public int TicketAmount { get; set; }
     }
 }
