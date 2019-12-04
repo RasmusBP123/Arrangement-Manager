@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@inject AuthStore AuthStore
+@inject HttpClient HttpClient
 
 <BlazoredModal />
 
@@ -8,7 +10,7 @@
 
 <div class="main">
     <div class="top-row px-4">
-        <LoginDisplay/>
+        <LoginDisplay />
     </div>
     <div class="content px-4">
         @Body

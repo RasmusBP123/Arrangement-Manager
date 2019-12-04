@@ -19,7 +19,7 @@
         try
         {
             AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
-            if(AuthStore.User.Email != "")
+            if (AuthStore.User.Email != "")
             {
                 AuthStore.NotifyLogin();
             }

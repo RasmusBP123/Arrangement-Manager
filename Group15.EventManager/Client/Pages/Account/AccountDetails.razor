@@ -23,14 +23,8 @@
 
     private async Task DeleteAccount()
     {
-        try
-        {
-            await HttpClient.DeleteAsync("api/accounts/delete");
-            await AuthService.Logout();
-            NavManager.NavigateTo("/");
-        }
-        catch
-        {
-        }
+        await HttpClient.DeleteAsync("api/accounts/delete");
+        await AuthService.Logout();
+        NavManager.NavigateTo("/");
     }
 }

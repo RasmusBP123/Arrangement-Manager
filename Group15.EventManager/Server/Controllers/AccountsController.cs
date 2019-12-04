@@ -34,7 +34,7 @@ namespace Group15.EventManager.Server.Controllers
                 var errors = result.Errors.Select(e => e.Description);
                 return BadRequest(new RegisterResult() { Successful = false, Errors = errors });
             }
-            return Ok(new RegisterResult() { Successful = true });
+            return Created("api/accounts/create",new RegisterResult() { Successful = true });
         }
 
         [HttpGet]

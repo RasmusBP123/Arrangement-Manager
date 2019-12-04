@@ -1,5 +1,4 @@
-﻿@inject NavigationManager NavManager
-<CascadingAuthenticationState>
+﻿<CascadingAuthenticationState>
     <Router AppAssembly="@typeof(Program).Assembly" Context="routeData">
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"  /> 

@@ -107,9 +107,9 @@
                 ShowErrors = true;
             }
         }
-        catch
+        catch(Exception e)
         {
-            throw;
+            Console.WriteLine(e.Message);
         }
     }
 }
