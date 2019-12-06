@@ -53,6 +53,13 @@ namespace Group15.EventManager.Application.Services
             return eventViewModels;
         }
 
+        public async Task<IEnumerable<GetEventWithTicketsViewModel>> GetAllEventsWithTickets(Guid userId)
+        {
+            var events = await _mediator.Send(new AllEventsWithTicketsQuery(userId));
+            var eventViewModels = _mapper.Map<IEnumerable<GetEventWithTicketsViewModel>>(events);
+            return eventViewModels;
+        }
+
         public async Task<GetSingleEventViewModel> GetSingleEvent(Guid eventId)
         {
             var _event = await _mediator.Send(new SingleEventQuery(eventId));

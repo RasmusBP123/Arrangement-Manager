@@ -9,6 +9,7 @@ namespace Group15.EventManager.ApplicationLayer.Interfaces
     public interface ITicketApplicationService : IDisposable
     {
         Task<IEnumerable<GetTicketForCartViewModel>> GetTicketsForCart(Guid userId);
+        Task UpdateTickets(UpdateTicketsViewModel tickets);
         Task DeleteTicket(Guid ticketId);
     }
 }

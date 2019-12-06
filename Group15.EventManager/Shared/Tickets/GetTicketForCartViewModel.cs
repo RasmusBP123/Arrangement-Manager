@@ -1,7 +1,5 @@
 ﻿using Group15.EventManager.Shared.Events;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Group15.EventManager.Shared.Tickets
 {

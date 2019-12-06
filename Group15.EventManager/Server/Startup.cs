@@ -78,10 +78,11 @@ namespace Group15.EventManager.Server
                     new[] { "application/octet-stream" });
             });
 
-            services.AddSwaggerGen(setup =>
-            {
-                setup.SwaggerDoc("v1", new OpenApiInfo() { Title = "Event Manager", Version = "Version 1" });
-            });
+            //SWAGGER
+            //services.AddSwaggerGen(setup =>
+            //{
+            //    setup.SwaggerDoc("v1", new OpenApiInfo() { Title = "Event Manager", Version = "Version 1" });
+            //});
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -94,13 +95,13 @@ namespace Group15.EventManager.Server
             }
 
             //Swagger
-            app.UseSwagger();
-            app.UseSwaggerUI(config =>
-            {
-                config.SwaggerEndpoint("swagger/v1/swagger.json", "Event Manager v1");
-                config.RoutePrefix = string.Empty;
+            //app.UseSwagger();
+            //app.UseSwaggerUI(config =>
+            //{
+            //    config.SwaggerEndpoint("swagger/v1/swagger.json", "Event Manager v1");
+            //    config.RoutePrefix = string.Empty;
 
-            });
+            //});
 
             app.UseStaticFiles();
             app.UseClientSideBlazorFiles<Client.Startup>();

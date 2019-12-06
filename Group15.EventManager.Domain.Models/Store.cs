@@ -1,5 +1,4 @@
 ﻿using Group15.EventManager.Domain.Core.Models;
-using Group15.EventManager.Domain.Models.Auth;
 using System.Collections.Generic;
 
 namespace Group15.EventManager.Domain.Models

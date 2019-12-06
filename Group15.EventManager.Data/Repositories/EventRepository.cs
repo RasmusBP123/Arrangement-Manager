@@ -51,6 +51,17 @@ namespace Group15.EventManager.Data.Repositories
             var events = userEvents.Select(ue => ue.Event);
             return events;
         }
+        public IQueryable<Event> GetEventsWithTickets(Guid userId)
+        {
+            var userEvents = Db.Set<ApplicationUserEvent>().Include(ue => ue.Event)
+                                                           .ThenInclude(e => e.Tickets)
+                                                           .Include(ue => ue.Event)
+                                                           .ThenInclude(e => e.Address)
+                                                           .Where(ue => ue.ApplicationUserId == userId);
+
+            var events = userEvents.Select(ue => ue.Event);
+            return events;
+        }
 
         public Event GetSingleEvent(Guid eventId)
         {
@@ -58,7 +69,7 @@ namespace Group15.EventManager.Data.Repositories
                                         .Include(e => e.City)
                                         .Include(e => e.Region)
                                         .Include(e => e.Address)
-                                        .Include(e => e.Tickets)
+                                        .Include(e => e.Tickets) //For getting the current Count of tickets in the event model
                                         .FirstOrDefault(e => e.Id == eventId);
             return _event;
         }
@@ -77,5 +88,6 @@ namespace Group15.EventManager.Data.Repositories
             existingEvent = _event;
             Db.Attach(existingEvent).State = EntityState.Modified;
         }
+
     }
 }

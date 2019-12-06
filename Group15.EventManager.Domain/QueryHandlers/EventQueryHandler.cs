@@ -19,7 +19,8 @@ namespace Group15.EventManager.Domain.QueryHandlers
                                     IRequestHandler<AllEventsByRegionQuery, IQueryable<Event>>,
                                     IRequestHandler<AllEventsByRegionAndCityQuery, IQueryable<Event>>,
                                     IRequestHandler<AllEventsForUserQuery, IQueryable<Event>>,
-                                    IRequestHandler<SingleEventQuery, Event>
+                                    IRequestHandler<SingleEventQuery, Event>,
+                                    IRequestHandler<AllEventsWithTicketsQuery, IQueryable<Event>>
 
     {
         private readonly IEventRepository _eventRepository;
@@ -64,5 +65,10 @@ namespace Group15.EventManager.Domain.QueryHandlers
             return Task.FromResult(_event);
         }
 
+        public Task<IQueryable<Event>> Handle(AllEventsWithTicketsQuery request, CancellationToken cancellationToken)
+        {
+            var events = _eventRepository.GetEventsWithTickets(request.UserId);
+            return Task.FromResult(events);
+        }
     }
 }

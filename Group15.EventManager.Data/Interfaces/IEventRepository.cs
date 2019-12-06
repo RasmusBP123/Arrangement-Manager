@@ -11,6 +11,7 @@ namespace Group15.EventManager.Data.Interfaces
         IQueryable<Event> GetEventsByRegion(Guid regionId);
         IQueryable<Event> GetEventsByRegionAndCity(Guid regionId, Guid cityId);
         IQueryable<Event> GetEventsForUser(Guid userId);
+        IQueryable<Event> GetEventsWithTickets(Guid userId);
         Event GetSingleEvent(Guid eventId);
         void UpdateEvent(Event _event);
     }

@@ -23,6 +23,7 @@ namespace Group15.EventManager.Application.AutoMapper
             CreateMap<ApplicationUser, GetUserFromEventViewModel>();
             CreateMap<Event, GetEventListViewModel>();
             CreateMap<Event, GetSingleEventViewModel>();
+            CreateMap<Event, GetEventWithTicketsViewModel>();
             CreateMap<Food, GetFoodViewModel>();
             CreateMap<City, GetCityViewModel>();
             CreateMap<Region, GetRegionViewModel>();
@@ -31,6 +32,7 @@ namespace Group15.EventManager.Application.AutoMapper
             CreateMap<Store, GetStoreListViewModel>();
             CreateMap<Store, GetSingleStoreViewModel>();
             CreateMap<Ticket, GetTicketForCartViewModel>();
+            CreateMap<Ticket, GetTicketViewModel>();
         }
     }
 }

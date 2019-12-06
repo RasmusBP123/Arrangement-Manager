@@ -72,6 +72,7 @@ namespace Group15.EventManager.Bootstrapper
             //Stores
             services.AddScoped<IRequestHandler<CreateStoreCommand, bool>, StoreCommandHandler>();
             //Tickets
+            services.AddScoped<IRequestHandler<UpdateTicketsCommand, bool>, TicketCommandHandler>();
             services.AddScoped<IRequestHandler<DeleteTicketCommand, bool>, TicketCommandHandler>();
         }
 
@@ -84,6 +85,7 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IRequestHandler<AllEventsByRegionAndCityQuery, IQueryable<Event>>, EventQueryHandler>();
             services.AddScoped<IRequestHandler<AllEventsForUserQuery, IQueryable<Event>>, EventQueryHandler>();
             services.AddScoped<IRequestHandler<SingleEventQuery, Event>, EventQueryHandler>();
+            services.AddScoped<IRequestHandler<AllEventsWithTicketsQuery, IQueryable<Event>>, EventQueryHandler>();
             //Regions
             services.AddScoped<IRequestHandler<AllRegionsQuery, IQueryable<Region>>, RegionQueryHandler>();
             services.AddScoped<IRequestHandler<SingleRegionQuery, Region>,RegionQueryHandler>();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Group15.EventManager.ApplicationLayer.Interfaces;
+using Group15.EventManager.ApplicationLayer.ViewModels.Tickets;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Group15.EventManager.Server.Controllers
@@ -24,6 +25,14 @@ namespace Group15.EventManager.Server.Controllers
         {
             var tickets = await _ticketApplicationService.GetTicketsForCart(userId);
             return Ok(tickets);
+        }
+
+        [HttpPost]
+        [Route("update")]
+        public async Task<IActionResult> UpdateTickets([FromBody] UpdateTicketsViewModel tickets)
+        {
+            await _ticketApplicationService.UpdateTickets(tickets);
+            return Ok();
         }
 
         [HttpDelete]

@@ -2,11 +2,12 @@
 using Group15.EventManager.ApplicationLayer.Interfaces;
 using Group15.EventManager.ApplicationLayer.ViewModels.Tickets;
 using Group15.EventManager.Domain.Commands.Tickets;
+using Group15.EventManager.Domain.Models;
+using Group15.EventManager.Domain.Models.Auth;
 using Group15.EventManager.Domain.Queries.Tickets;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Group15.EventManager.ApplicationLayer.Services
@@ -28,9 +29,16 @@ namespace Group15.EventManager.ApplicationLayer.Services
            await _mediator.Send(new DeleteTicketCommand(ticketId));
         }
 
+        public async Task UpdateTickets(UpdateTicketsViewModel tickets)
+        {
+            var user = _mapper.Map<ApplicationUser>(tickets.User);
+            var events = _mapper.Map<IEnumerable<Event>>(tickets.Events);
+            await _mediator.Send(new UpdateTicketsCommand(user, events));
+        }
         public void Dispose()
         {
             GC.SuppressFinalize(this);
         }
+
     }
 }

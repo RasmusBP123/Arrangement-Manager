@@ -1,0 +1,27 @@
+﻿
+<button @onclick="(() => NewAmount.InvokeAsync(CurrentAmount))">-</button>
+    <input @bind-value="CurrentAmount" @bind-value:event="oninput" />
+<button @onclick="@(() => NewAmount.InvokeAsync(CurrentAmount))">+</button>
+
+@code {
+    [Parameter]
+    public int CurrentAmount { get; set; }
+
+    [Parameter]
+    public EventCallback<int> NewAmount { get; set; }
+
+    [CascadingParameter]
+    int MaxCustomerLimit { get; set; }
+
+    private void SubstractAmount()
+    {
+        if (CurrentAmount > 0)
+            CurrentAmount = CurrentAmount - 1;
+    }
+
+    private void AddAmount()
+    {
+        if(CurrentAmount < MaxCustomerLimit)
+            CurrentAmount = CurrentAmount + 1;
+    }
+}

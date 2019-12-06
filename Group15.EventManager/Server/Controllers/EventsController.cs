@@ -54,8 +54,16 @@ namespace Group15.EventManager.Server.Controllers
         }
 
         [HttpGet]
+        [Route("user/{userId}/tickets")]
+        public async Task<IActionResult> GetAllEventsWithTickets(Guid userId)
+        {
+            var events = await _eventApplicationService.GetAllEventsWithTickets(userId);
+            return Ok(events);
+        }
+
+        [HttpGet]
         [Route("{eventId}")]
-        public async Task<IActionResult> GetSingleEvent([FromRoute] Guid eventId)
+        public async Task<IActionResult> GetSingleEvent(Guid eventId)
         {
             var _event = await _eventApplicationService.GetSingleEvent(eventId);
             if (_event == null) return BadRequest();
