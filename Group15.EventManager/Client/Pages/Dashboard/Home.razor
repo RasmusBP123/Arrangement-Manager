@@ -1,8 +1,27 @@
 ﻿@page "/home"
+@inject UserStore UserStore
+@inject EventStore EventStore
+@inject HttpClient HttpClient
+@inject NavigationManager NavManager
 
-<h3>Home</h3>
+<h3>Dashboard</h3>
 
+@foreach (var e in EventStore.EventsWithBookedUsers)
+{
+   <div @onclick="(() => NavigateToEvent(e.Id))">
+       <p>@e.Name</p>
+   </div>
+}
 
 @code {
 
+    protected override async Task OnInitializedAsync()
+    {
+        EventStore.EventsWithBookedUsers = await HttpClient.GetJsonAsync<IEnumerable<GetEventListViewModel>>("api/events/all");
+    }
+
+    private void NavigateToEvent(Guid eventId)
+    {
+        NavManager.NavigateTo($"events/{eventId}/users");
+    }
 }

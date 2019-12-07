@@ -1,0 +1,28 @@
+﻿<div class="status-container">
+    <CascadingValue Value="this">
+        @ChildContent
+    </CascadingValue>
+</div>
+@code {
+
+    [Parameter]
+    public IEnumerable<GetUserFromEventViewModel> SignedUpUsers { get; set; } = new List<GetUserFromEventViewModel>();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<GetUserFromEventViewModel> OnMovedUser { get; set; }
+
+    public GetUserFromEventViewModel User { get; set; }
+
+    public void UpdateMovedUser(UserStatus status)
+    {
+        var movedUser = SignedUpUsers.FirstOrDefault(user => user.Id == User.Id);
+        if (movedUser != null)
+        {
+            movedUser.Status = status;
+            OnMovedUser.InvokeAsync(movedUser);
+        }
+    }
+}

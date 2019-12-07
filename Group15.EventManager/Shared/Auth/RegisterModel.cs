@@ -23,12 +23,6 @@ namespace Group15.EventManager.Shared.Auth
         [DataType(DataType.Text)]
         [MinLength(1, ErrorMessage = "Last name cannot be empty")]
         public string LastName { get; set; }
-        [DataType(DataType.Text)]
-        [MinLength(1, ErrorMessage = "City cannot be empty")]
-        public string City { get; set; }
-        [DataType(DataType.Text)]
-        [MinLength(1, ErrorMessage = "Address cannot be empty")]
-        public string Address { get; set; }
         [DataType(DataType.PhoneNumber)]
         [MinLength(8, ErrorMessage = "This is not a valid phone number")]
         public string PhoneNumber { get; set; }

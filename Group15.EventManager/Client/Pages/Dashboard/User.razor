@@ -1,0 +1,18 @@
+﻿
+<li class="draggable" draggable="true" @ondragstart="@(() => HandleDragStart(user))">
+    @user.FirstName @user.LastName
+</li>
+
+@code {
+
+    [CascadingParameter]
+    public UserContainer Container { get; set; }
+
+    [Parameter]
+    public GetUserFromEventViewModel user { get; set; }
+
+    private void HandleDragStart(GetUserFromEventViewModel user)
+    {
+        Container.User = user;
+    }
+}

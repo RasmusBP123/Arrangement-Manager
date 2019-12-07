@@ -22,7 +22,6 @@ else
         <InputNumber @bind-Value="@ticketAmount" />
         <button type="submit" class="btn btn-success" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</button>
     </EditForm>
-    <UsersFromEvent EventId="@EventId" />
 }
 
 @code {

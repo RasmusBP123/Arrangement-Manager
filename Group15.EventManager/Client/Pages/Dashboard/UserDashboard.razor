@@ -1,0 +1,43 @@
+﻿@page "/events/{eventId:guid}/users"
+@inject HttpClient HttpClient
+@inject UserStore UserStore
+
+<h3>@Event.Name</h3>
+<p>@Event.Price</p>
+
+<UserContainer OnMovedUser="RerenderUsers" SignedUpUsers="UserStore.UsersFromEvent">
+        <UserList UserStatus="@UserStatus.Invited" />
+        <UserList UserStatus="@UserStatus.Registered" />
+        <UserList UserStatus="@UserStatus.Cancelled" />
+</UserContainer>
+
+@code {
+    [Parameter]
+    public Guid EventId { get; set; }
+
+    private GetSingleEventViewModel Event { get; set; } = new GetSingleEventViewModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{EventId}");
+
+        if (UserStore.UsersFromEvent.Count() == 0) //This check garantuees that if user moves users, and leaves the page, it will not reset the page. You will need to reload the page to do that
+        {
+            UserStore.UsersFromEvent = await HttpClient.GetJsonAsync<IEnumerable<GetUserFromEventViewModel>>($"api/user/{EventId}/users");
+            foreach (var user in UserStore.UsersFromEvent)
+            {
+                user.Status = UserStatus.Invited;
+            }
+        }
+    }
+
+    private void RerenderUsers()
+    {
+        this.StateHasChanged();
+    }
+
+    private async Task SubmitUserShowOut()
+    {
+        //await HttpClient.PostJsonAsync<null>("", null);
+    }
+}

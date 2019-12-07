@@ -34,8 +34,6 @@ namespace Group15.EventManager.ApplicationLayer.Services
                 Email = registerModel.Email,
                 FirstName = registerModel.FirstName,
                 LastName = registerModel.LastName,
-                City = registerModel.City,
-                Address = registerModel.Address,
                 PhoneNumber = registerModel.PhoneNumber,
             };
 

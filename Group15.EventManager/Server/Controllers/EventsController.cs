@@ -62,21 +62,21 @@ namespace Group15.EventManager.Server.Controllers
         }
 
         [HttpGet]
-        [Route("{eventId}")]
-        public async Task<IActionResult> GetSingleEvent(Guid eventId)
-        {
-            var _event = await _eventApplicationService.GetSingleEvent(eventId);
-            if (_event == null) return BadRequest();
-            return Ok(_event);
-        }
-
-        [HttpGet]
         [Route("{userId}/events")]
         public async Task<IActionResult> GetEventsForUser([FromRoute] Guid userId)
         {
             var events = await _eventApplicationService.GetAllEventsForUser(userId);
             if (events == null) return BadRequest();
             return Ok(events);
+        }
+
+        [HttpGet]
+        [Route("{eventId}")]
+        public async Task<IActionResult> GetSingleEvent(Guid eventId)
+        {
+            var _event = await _eventApplicationService.GetSingleEvent(eventId);
+            if (_event == null) return BadRequest();
+            return Ok(_event);
         }
 
         [HttpPost]

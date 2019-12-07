@@ -9,6 +9,8 @@ namespace Group15.EventManager.Client.Store.Events
     public class EventStore
     {
         public IEnumerable<GetEventListViewModel> Events = new List<GetEventListViewModel>();
+        public IEnumerable<GetEventListViewModel> EventsWithBookedUsers = new List<GetEventListViewModel>();
+
         public IEnumerable<GetEventListViewModel> BookedEvents { get; set; } = new List<GetEventListViewModel>();
         public IEnumerable<GetEventWithTicketsViewModel> EventsWithTickets { get; set; } = new List<GetEventWithTicketsViewModel>();
         public GetSingleEventViewModel Event { get; set; } = new GetSingleEventViewModel();

@@ -1,0 +1,56 @@
+﻿
+.status-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 500px;
+    border: 1px solid black;
+}
+
+.userlist-container{
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start;
+    align-content: flex-start;
+    width: 100%;
+    padding: 2%;
+    margin: 2%;
+}
+
+.userlist-container ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+    flex: 1;
+}
+
+.user-container{
+    border: 1px solid black;
+    width: 100%;
+}
+
+.dropzone {
+    width: 100%;
+    height: 100vw;
+    border: 1px dashed #75868a;
+}
+
+.draggable {
+    white-space : nowrap;
+    margin-bottom: 10px;
+    border: 1px solid #424d5c;
+    cursor: grab;
+    background: #5c6b7f;
+    color: #ffffff;
+    border-radius: 5px;
+    width: 100%;
+    padding: 1%;
+}
+
+.draggable:active {
+    cursor: grabbing;
+}
+
+.dragging {
+    cursor: grabbing;
+}

@@ -15,8 +15,6 @@ namespace Group15.EventManager.ApplicationLayer.Validation.Accounts
             RuleFor(reg => reg.FirstName).NotEmpty().MaximumLength(50);
             RuleFor(reg => reg.LastName).NotEmpty().MaximumLength(50);
             RuleFor(reg => reg.PhoneNumber).NotEmpty().MinimumLength(8);
-            RuleFor(reg => reg.City).NotEmpty().NotNull();
-            RuleFor(reg => reg.Address).NotEmpty().MaximumLength(100).WithMessage("This cant possibly be your address");
         }
     }
 }

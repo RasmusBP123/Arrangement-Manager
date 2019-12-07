@@ -15,12 +15,13 @@ namespace Group15.EventManager.Domain.Models
         public byte[] Image { get; set; }
         public bool PayOnline { get; set; }
         public int MinCustomerAmount { get; set; }
-        public int CurrentAmountOfCustomers {get => Tickets.Count;}
+        public int CurrentAmountOfCustomers { get => Tickets.Count;  }
         public int MaxCustomerLimit { get; set; }
         public DateTime LastBookingDate { get; set; }
         public DateTime EventDate { get; set; }
         public DateTime EndEventDate { get; set; }
         public Address Address { get; set; }
+        public virtual Attendance Attendance { get; set; }
         public virtual City City { get; set; }
         public virtual Region Region { get; set; }
         public virtual Food Food { get; set; }
