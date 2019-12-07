@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Group15.EventManager.ApplicationLayer.Services
 {
-    public class CityApplicationService : Service, ICityApplicationService 
+    public class CityApplicationService : Service, ICityApplicationService
     {
         public CityApplicationService(IMapper mapper, IMediator mediator) : base(mapper, mediator)
         {
@@ -21,6 +21,10 @@ namespace Group15.EventManager.ApplicationLayer.Services
             var city = await _mediator.Send(new SingleCityQuery(cityId));
             var cityViewModel = _mapper.Map<GetCityViewModel>(city);
             return cityViewModel;
+        }
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
         }
     }
 }

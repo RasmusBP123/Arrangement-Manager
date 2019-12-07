@@ -6,6 +6,7 @@ using Blazored.Modal;
 using Group15.EventManager.Client.Auth;
 using Group15.EventManager.Client.Auth.Services;
 using Group15.EventManager.Client.Store.Address_;
+using Group15.EventManager.Client.Store.Attendances;
 using Group15.EventManager.Client.Store.Auth;
 using Group15.EventManager.Client.Store.Cities;
 using Group15.EventManager.Client.Store.Employees;
@@ -29,6 +30,7 @@ namespace Group15.EventManager.Client
         {
             //State
             services.AddScoped<AddressStore>();
+            services.AddScoped<AttendanceStore>();
             services.AddScoped<RegionStore>();
             services.AddScoped<EventStore>();
             services.AddScoped<AuthStore>();

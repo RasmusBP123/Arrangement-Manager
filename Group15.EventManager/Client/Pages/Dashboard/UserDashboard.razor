@@ -1,10 +1,12 @@
 ﻿@page "/events/{eventId:guid}/users"
 @inject HttpClient HttpClient
 @inject UserStore UserStore
+@inject AttendanceStore AttendanceStore
 
 <h3>@Event.Name</h3>
 <p>@Event.Price</p>
 
+<button class="btn btn-success" @onclick="SubmitUserShowOut">All has been accounted for</button>
 <UserContainer OnMovedUser="RerenderUsers" SignedUpUsers="UserStore.UsersFromEvent">
         <UserList UserStatus="@UserStatus.Invited" />
         <UserList UserStatus="@UserStatus.Registered" />
@@ -38,6 +40,30 @@
 
     private async Task SubmitUserShowOut()
     {
-        //await HttpClient.PostJsonAsync<null>("", null);
+        var _event = new SimpleEventViewModel() { Id = Event.Id };
+        int registred = 0;
+        int cancelled = 0;
+
+        foreach (var user in UserStore.UsersFromEvent)
+        {
+            if (user.Status == UserStatus.Registered)
+            {
+                registred++;
+            }
+            else
+            {
+                cancelled++;
+            }
+        }
+
+        var attendance = new CreateAttendanceViewModel
+        {
+            Invited = Event.CurrentAmountOfCustomers,
+            Registered = registred,
+            NotRegistred = cancelled,
+            Event = _event,
+        };
+
+        await HttpClient.PostJsonAsync<CreateAttendanceViewModel>($"api/attendance/{EventId}/create", attendance);
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Group15.EventManager.ApplicationLayer.Interfaces
 {
-    public interface ICityApplicationService
+    public interface ICityApplicationService : IDisposable
     {
         Task<GetCityViewModel> GetSingleCity(Guid cityId);
     }

@@ -12,6 +12,7 @@ using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Data.Repositories;
 using Group15.EventManager.Data.UnitOfWork;
 using Group15.EventManager.Domain.CommandHandlers;
+using Group15.EventManager.Domain.Commands.Attendances;
 using Group15.EventManager.Domain.Commands.Events;
 using Group15.EventManager.Domain.Commands.Store;
 using Group15.EventManager.Domain.Commands.Tickets;
@@ -52,6 +53,7 @@ namespace Group15.EventManager.Bootstrapper
         public static void RegisterApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IAccountApplicationService, AccountApplicationService>();
+            services.AddScoped<IAttendanceApplicationService, AttendanceApplicationService>();
             services.AddScoped<ICityApplicationService, CityApplicationService>();
             services.AddScoped<IEventApplicationService, EventApplicationService>();
             services.AddScoped<IRegionApplicationService, RegionApplicationService>();
@@ -62,6 +64,8 @@ namespace Group15.EventManager.Bootstrapper
 
         public static void RegisterCommands(this IServiceCollection services)
         {
+            //Attendance
+            services.AddScoped<IRequestHandler<AttendanceForEventCommand, bool>, AttendanceCommandHandler>();
             //Events
             services.AddScoped<IRequestHandler<CreateEventCommand, bool>, EventCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateEventCommand, bool>, EventCommandHandler>();
@@ -104,6 +108,7 @@ namespace Group15.EventManager.Bootstrapper
         public static void RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IAttendanceRepository, AttendanceRepository>();
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddScoped<IUserRepository, UserRepository>();

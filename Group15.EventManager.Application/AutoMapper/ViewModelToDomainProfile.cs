@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Group15.EventManager.Application.ViewModels.Auth;
 using Group15.EventManager.ApplicationLayer.ViewModels.Address_;
+using Group15.EventManager.ApplicationLayer.ViewModels.Attendances;
 using Group15.EventManager.ApplicationLayer.ViewModels.Cities;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
 using Group15.EventManager.ApplicationLayer.ViewModels.Foods;
@@ -17,6 +18,7 @@ namespace Group15.EventManager.Application.AutoMapper
     {
         public ViewModelToDomainProfile()
         {
+            CreateMap<CreateAttendanceViewModel, Attendance>();
             CreateMap<CreateAddressForEventViewModel, Address>();
             CreateMap<CreateEventViewModel, Event>();
             CreateMap<UpdateEventViewModel, Event>();
@@ -25,6 +27,7 @@ namespace Group15.EventManager.Application.AutoMapper
             CreateMap<AddUserToEventViewModel, ApplicationUser>();
             CreateMap<UserModel, ApplicationUser>();
             CreateMap<CreateStoreViewModel, Store>();
+            CreateMap<SimpleEventViewModel, Event>();
 
             //ViewModels which should be added to new entities
             CreateMap<GetSingleEventViewModel, Event>();

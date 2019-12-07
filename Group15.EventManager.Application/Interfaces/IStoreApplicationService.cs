@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Group15.EventManager.ApplicationLayer.Interfaces
 {
-    public interface IStoreApplicationService
+    public interface IStoreApplicationService : IDisposable
     {
         Task<IEnumerable<GetStoreListViewModel>> GetAllStores();
         Task<GetSingleStoreViewModel> GetSingleStore(Guid storeId);

@@ -38,5 +38,10 @@ namespace Group15.EventManager.ApplicationLayer.Services
             var storeViewModel = _mapper.Map<GetSingleStoreViewModel>(store);
             return storeViewModel;
         }
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
+
     }
 }

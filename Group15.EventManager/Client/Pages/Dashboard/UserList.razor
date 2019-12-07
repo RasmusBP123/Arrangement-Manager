@@ -1,24 +1,24 @@
 ﻿@inject UserStore UserStore
-
+@inject AttendanceStore AttendanceStore
 <div class="userlist-container">
-<h3>@UserStatus</h3>
+<h3>@UserStatus (@SignedUpUsers.Count())</h3>
 
     <ul class="dropzone" ondragover="event.preventDefault()"  @ondrop="HandleDrop">
         @foreach (var user in SignedUpUsers)
-        {
+         {
             <User user="user" />
-        }
+         }
     </ul>
 </div>
 
-
-
 @code {
+
     [CascadingParameter]
     public UserContainer UserContainer { get; set; }
 
     [Parameter]
     public UserStatus UserStatus { get; set; }
+
     public List<GetUserFromEventViewModel> SignedUpUsers { get; set; } = new List<GetUserFromEventViewModel>();
 
     protected override void OnParametersSet()
