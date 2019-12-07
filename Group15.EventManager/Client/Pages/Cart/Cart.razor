@@ -12,19 +12,21 @@
 @foreach (var _event in EventStore.EventsWithTickets)
 {
     <p>Ticket for : @_event.Name</p>
-    <div>
-        <CascadingValue Value="_event.MaxCustomerLimit">
-            <Amount CurrentAmount="@_event.CurrentAmountOfCustomers" />
-        </CascadingValue>
-    </div>
+        <div>
+            <CascadingValue Value="_event.MaxCustomerLimit">
+                <Amount CurrentAmount="@_event.CurrentAmountOfCustomers" />
+            </CascadingValue>
+        </div>
     <button @onclick="@(() => CancelEvent(_event.Id))">Remove</button>
 }  
-        <button @onclick="@(() => UpdateTicketAmount(EventStore.EventsWithTickets))">Update</button>
+    <button class="btn btn-success" @onclick="@(() => UpdateTicketAmount(EventStore.EventsWithTickets))">Update</button>
 
 @code {    
 
     [CascadingParameter]
     public int MaxCustomerLimit { get; set; }
+
+
 
     protected override async Task OnInitializedAsync()
     {

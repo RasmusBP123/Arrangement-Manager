@@ -1,9 +1,6 @@
 ﻿using Group15.EventManager.Domain.Models.Auth;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Group15.EventManager.Data.Mappings
 {

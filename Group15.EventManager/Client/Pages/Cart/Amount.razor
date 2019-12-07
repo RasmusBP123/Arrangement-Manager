@@ -1,6 +1,6 @@
 ﻿
 <button @onclick="(() => NewAmount.InvokeAsync(CurrentAmount))">-</button>
-    <input @bind-value="CurrentAmount" @bind-value:event="oninput" />
+    <input @bind-value="NewAmount" @bind-value:event="oninput" />
 <button @onclick="@(() => NewAmount.InvokeAsync(CurrentAmount))">+</button>
 
 @code {
