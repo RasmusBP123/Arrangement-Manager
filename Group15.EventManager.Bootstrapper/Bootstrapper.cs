@@ -38,7 +38,7 @@ namespace Group15.EventManager.Bootstrapper
         public static void RegisterServices(this IServiceCollection services)
         {
             //DB
-            services.AddScoped<SqlContext>();
+            //services.AddScoped<SqlContext>();
 
             services.RegisterApplicationServices();
             services.RegisterRepositories();

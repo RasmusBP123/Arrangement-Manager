@@ -18,10 +18,9 @@ else
 
     <p>How many tickets would you like to buy?</p>
     <p class="@EventIsFull warning">You are about to overbook this event, which you cannot do</p>
-    <EditForm Model="ticketAmount">
-        <InputNumber @bind-Value="@ticketAmount" />
-        <button type="submit" class="btn btn-success" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</button>
-    </EditForm>
+
+    <input @bind-value="@ticketAmount" />
+    <button type="submit" class="btn btn-success" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</button>
 }
 
 @code {

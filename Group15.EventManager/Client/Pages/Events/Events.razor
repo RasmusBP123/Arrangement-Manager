@@ -10,7 +10,7 @@
 <input type="search" @bind-Value="EventStore.SearchTerm" @bind-Value:event="oninput" />
 
 <ul>
-    @foreach (var _event in EventStore.EventSearch())
+    @foreach (var _event in EventStore.EventSearch(EventStore.Events))
     {
         <li @onclick="@(() => NavigateToEventDetails(_event.Id))">
             <p>@_event.Name</p>

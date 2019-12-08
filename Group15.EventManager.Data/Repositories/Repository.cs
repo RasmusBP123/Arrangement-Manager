@@ -1,7 +1,6 @@
 ﻿using Group15.EventManager.Data.Context;
 using Group15.EventManager.Domain.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Linq;
 

@@ -5,9 +5,8 @@
 @inject HttpClient HttpClient
 
 <h3>Cart</h3>
-<h5>@AuthStore.User.FirstName @AuthStore.User.LastName</h5>
 
-<p>Total price: <cite>@TicketStore.CalculateTotalPrice(TicketStore.TicketsForCart)</cite></p>
+<Process Step="Step.Basket"/>
 
 @foreach (var _event in EventsWithTickets)
 {
@@ -19,6 +18,7 @@
         </div>
     <button @onclick="@(() => CancelEvent(_event.Id))">Remove</button>
 }  
+    <p>Total price: <cite>@TicketStore.CalculateTotalPrice(TicketStore.TicketsForCart)</cite></p>
     <button class="btn btn-success" @onclick="@(() => UpdateTicketAmount(EventStore.EventsWithTickets))">Update</button>
 
 @code {    
@@ -26,6 +26,7 @@
     [CascadingParameter]
     public int MaxCustomerLimit { get; set; }
 
+    public Step Step { get; set; }
     private IEnumerable<GetEventWithTicketsViewModel> EventsWithTickets = new List<GetEventWithTicketsViewModel>();
 
     protected override async Task OnInitializedAsync()

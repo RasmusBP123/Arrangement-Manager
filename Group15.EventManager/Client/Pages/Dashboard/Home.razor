@@ -6,11 +6,13 @@
 
 <h3>Dashboard</h3>
 
-@foreach (var e in EventStore.EventsWithBookedUsers)
+<input type="search" @bind-Value="EventStore.SearchTerm" @bind-Value:event="oninput" />
+
+@foreach (var e in EventStore.EventSearch(EventStore.EventsWithBookedUsers))
 {
-   <div @onclick="(() => NavigateToEvent(e.Id))">
-       <p>@e.Name</p>
-   </div>
+    <div @onclick="(() => NavigateToEvent(e.Id))">
+        <p>@e.Name</p>
+    </div>
 }
 
 @code {

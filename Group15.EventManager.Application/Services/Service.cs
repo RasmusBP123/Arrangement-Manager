@@ -1,9 +1,5 @@
 ﻿using AutoMapper;
-using Group15.EventManager.Data.UnitOfWork;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Group15.EventManager.ApplicationLayer.Services
 {

@@ -1,0 +1,30 @@
+﻿
+.process-container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    border: 1px solid grey;
+}
+
+.process-container div{
+    flex: 1;
+}
+
+.process{
+    text-align: center;
+    font-size: 1.2em;
+    padding: 2%;
+}
+
+.process-container div::after {
+    content: "";
+    position: fixed;
+    margin: -14px 0 0 35px;
+    display: inline-block;
+    border: solid black;
+    border-width: 0 1px 1px 0;
+    padding: 28px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+  

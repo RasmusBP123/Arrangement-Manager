@@ -32,9 +32,9 @@ namespace Group15.EventManager.Client.Store.Events
         public  bool ShowWarning = false;
 
         public string SearchTerm = "";
-        public IEnumerable<GetEventListViewModel> EventSearch()
+        public IEnumerable<GetEventListViewModel> EventSearch(IEnumerable<GetEventListViewModel> events)
         {
-            return Events.Where(e => e.Name.ToLower().Contains(SearchTerm.ToLower()));
+            return events.Where(e => e.Name.ToLower().Contains(SearchTerm.ToLower()));
         }
     }
 }

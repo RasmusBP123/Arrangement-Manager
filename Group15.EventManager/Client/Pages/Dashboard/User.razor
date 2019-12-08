@@ -1,6 +1,7 @@
 ﻿
 <li class="draggable" draggable="true" @ondragstart="@(() => HandleDragStart(user))">
     @user.FirstName @user.LastName
+    <p>Tickets : @user.Tickets.Count()</p>
 </li>
 
 @code {

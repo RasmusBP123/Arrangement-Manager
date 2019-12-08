@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Group15.EventManager.Shared.Enums;
+using Group15.EventManager.Shared.Tickets;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,12 +13,6 @@ namespace Group15.EventManager.Shared.Users
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public UserStatus Status { get; set; }
-    }
-
-    public enum UserStatus
-    {
-        Invited,
-        Registered, 
-        Cancelled
+        public IEnumerable<GetTicketViewModel> Tickets { get; set; }
     }
 }

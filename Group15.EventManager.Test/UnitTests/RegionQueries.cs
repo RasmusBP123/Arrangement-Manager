@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Group15.EventManager.Test.UnitTests
 {
@@ -8,30 +9,7 @@ namespace Group15.EventManager.Test.UnitTests
     [TestClass]
     public class RegionQueries 
     {
-        public RegionQueries()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        private Mock mock = new Mock<SqlContext>();
 
         [TestMethod]
         public void TestMethod1()

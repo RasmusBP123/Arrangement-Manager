@@ -1,0 +1,64 @@
+﻿@inject HttpClient HttpClient
+@inject UserStore UserStore
+@inject IModalService ModalService
+
+<div>
+    <p>@Event.Name</p><cite>@Event.EventDate</cite>
+    <p>Invited : @Invited</p>
+    <p>Registred : @Registred</p>
+    <p>Cancelled : @Cancelled</p>
+
+    <p>Are these numbers correct?</p>
+</div>
+
+<div class="">
+    <button class="btn btn-success" @onclick="SubmitUserShowOut">All has been accounted for</button>
+    <button class="btn btn-danger" @onclick="@(() => ModalService.Cancel())">Close</button>
+</div>
+
+@code {
+
+    [CascadingParameter]
+    public ModalParameters Parameters { get; set; }
+    public int Invited { get; set; } = 0;
+    private int Registred { get; set; } = 0;
+    private int Cancelled { get; set; } = 0;
+
+
+    private GetSingleEventViewModel Event { get; set; } = new GetSingleEventViewModel();
+
+    protected override void OnInitialized()
+    {
+        Event = Parameters.Get<GetSingleEventViewModel>("Event");
+
+        foreach (var user in UserStore.UsersFromEvent)
+        {
+            Invited += user.Tickets.Count() + 1;
+
+            if (user.Status == UserStatus.Registered)
+            {
+                Registred = user.Tickets.Count() + 1;
+            }
+            if(user.Status == UserStatus.Cancelled)
+            {
+                Cancelled = user.Tickets.Count() + 1;
+            }
+        }
+    }
+
+    private async Task SubmitUserShowOut()
+    {
+        var _event = new SimpleEventViewModel() { Id = Event.Id };
+
+
+        var attendance = new CreateAttendanceViewModel
+        {
+            Invited = Invited,
+            Registered = Registred,
+            NotRegistred = Cancelled,
+            Event = _event,
+        };
+
+        await HttpClient.PostJsonAsync<CreateAttendanceViewModel>($"api/attendance/{Event.Id}/create", attendance);
+    }
+}

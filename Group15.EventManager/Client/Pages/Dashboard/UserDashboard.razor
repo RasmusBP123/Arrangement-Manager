@@ -2,11 +2,12 @@
 @inject HttpClient HttpClient
 @inject UserStore UserStore
 @inject AttendanceStore AttendanceStore
+@inject IModalService ModalService
 
 <h3>@Event.Name</h3>
 <p>@Event.Price</p>
 
-<button class="btn btn-success" @onclick="SubmitUserShowOut">All has been accounted for</button>
+<button class="btn btn-success" @onclick="ShowConfirmAttendance">Confirm</button>
 <UserContainer OnMovedUser="RerenderUsers" SignedUpUsers="UserStore.UsersFromEvent">
         <UserList UserStatus="@UserStatus.Invited" />
         <UserList UserStatus="@UserStatus.Registered" />
@@ -23,7 +24,7 @@
     {
         Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{EventId}");
 
-        if (UserStore.UsersFromEvent.Count() == 0) //This check garantuees that if user moves users, and leaves the page, it will not reset the page. You will need to reload the page to do that
+        if (UserStore.UsersFromEvent.Count() == 0) //This check guarantees that if user moves users, and leaves the page, it will not reset the page. You will need to reload the page to do that
         {
             UserStore.UsersFromEvent = await HttpClient.GetJsonAsync<IEnumerable<GetUserFromEventViewModel>>($"api/user/{EventId}/users");
             foreach (var user in UserStore.UsersFromEvent)
@@ -38,32 +39,10 @@
         this.StateHasChanged();
     }
 
-    private async Task SubmitUserShowOut()
+    private void ShowConfirmAttendance()
     {
-        var _event = new SimpleEventViewModel() { Id = Event.Id };
-        int registred = 0;
-        int cancelled = 0;
-
-        foreach (var user in UserStore.UsersFromEvent)
-        {
-            if (user.Status == UserStatus.Registered)
-            {
-                registred++;
-            }
-            else
-            {
-                cancelled++;
-            }
-        }
-
-        var attendance = new CreateAttendanceViewModel
-        {
-            Invited = Event.CurrentAmountOfCustomers,
-            Registered = registred,
-            NotRegistred = cancelled,
-            Event = _event,
-        };
-
-        await HttpClient.PostJsonAsync<CreateAttendanceViewModel>($"api/attendance/{EventId}/create", attendance);
+        var parameter = new ModalParameters();
+        parameter.Add("Event", Event);
+        ModalService.Show("Confirm attendance", typeof(ConfirmAttendance), parameter);
     }
 }
