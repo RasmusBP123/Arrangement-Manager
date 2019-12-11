@@ -1,16 +1,13 @@
-﻿using Group15.EventManager.ApplicationLayer.ViewModels.Events;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace Group15.EventManager.ApplicationLayer.ViewModels.Attendances
 {
-    public class CreateAttendanceViewModel
+    public class GetAttendanceViewModel
     {
+        public Guid Id { get; set; }
         public int Invited { get; set; }
         public int Registered { get; set; }
         public int NotRegistred { get; set; }
         public bool Finished { get; set; }
-        public SimpleEventViewModel Event { get; set; }
     }
 }

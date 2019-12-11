@@ -66,6 +66,7 @@ namespace Group15.EventManager.Data.Repositories
         public Event GetSingleEvent(Guid eventId)
         {
             var _event = Db.Set<Event>().Include(e => e.Food)
+                                        .Include(e => e.Attendance)
                                         .Include(e => e.City)
                                         .Include(e => e.Region)
                                         .Include(e => e.Address)

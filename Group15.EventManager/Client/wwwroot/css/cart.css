@@ -16,6 +16,11 @@
     padding: 2%;
 }
 
+.active{
+    border: 2px solid green;
+    background: red;
+}
+
 .process-container div::after {
     content: "";
     position: fixed;
@@ -23,7 +28,7 @@
     display: inline-block;
     border: solid black;
     border-width: 0 1px 1px 0;
-    padding: 28px;
+    padding: 1.8%;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
 }

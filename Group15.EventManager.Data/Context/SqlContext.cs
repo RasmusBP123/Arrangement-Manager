@@ -18,6 +18,7 @@ namespace Group15.EventManager.Data.Context
             _env = env;
         }
 
+        public SqlContext(DbContextOptions options) :base(options) {}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AddressMap());

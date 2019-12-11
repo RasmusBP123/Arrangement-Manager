@@ -1,4 +1,5 @@
 ﻿using Group15.EventManager.ApplicationLayer.ViewModels.Address_;
+using Group15.EventManager.ApplicationLayer.ViewModels.Attendances;
 using Group15.EventManager.ApplicationLayer.ViewModels.Cities;
 using Group15.EventManager.ApplicationLayer.ViewModels.Foods;
 using System;
@@ -19,6 +20,7 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
         public DateTime LastBookingDate { get; set; }
         public DateTime EndEventDate { get; set; }
         public bool PayOnline { get; set; }
+        public GetAttendanceViewModel Attendance { get; set; }
         public GetAddressForEventViewModel Address { get; set; }
         public GetFoodViewModel Food { get; set; }
         public GetCityViewModel City { get; set; }

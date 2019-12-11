@@ -8,7 +8,7 @@
 
 <Process Step="Step.Basket"/>
 
-@foreach (var _event in EventsWithTickets)
+@foreach (var _event in EventStore.EventsWithTickets)
 {
     <p>Ticket for : @_event.Name</p>
         <div>
@@ -26,15 +26,10 @@
     [CascadingParameter]
     public int MaxCustomerLimit { get; set; }
 
-    public Step Step { get; set; }
-    private IEnumerable<GetEventWithTicketsViewModel> EventsWithTickets = new List<GetEventWithTicketsViewModel>();
-
     protected override async Task OnInitializedAsync()
     {
         AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
-        TicketStore.TicketsForCart = await HttpClient.GetJsonAsync<IEnumerable<GetTicketForCartViewModel>>($"api/tickets/{AuthStore.User.Id}");
         EventStore.EventsWithTickets = await HttpClient.GetJsonAsync<IEnumerable<GetEventWithTicketsViewModel>>($"api/events/user/{AuthStore.User.Id}/tickets");
-        EventsWithTickets = EventStore.EventsWithTickets;
     }
 
     private async Task UpdateTicketAmount(IEnumerable<GetEventWithTicketsViewModel> tickets)

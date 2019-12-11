@@ -44,7 +44,7 @@
     private bool ShowErrors;
     private string Error;
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
         //Redirects user if already authenticated
         var result = await HttpClient.GetJsonAsync<bool>("api/accounts/valid");
@@ -68,7 +68,7 @@
             }
             else
             {
-                 ShowErrors = true;
+                ShowErrors = true;
                 Error = result.Error;
             }
         }
@@ -76,7 +76,6 @@
         {
             ShowErrors = true;
             Error = result.Error;
-            Console.WriteLine(Error);
         }
     }
 }

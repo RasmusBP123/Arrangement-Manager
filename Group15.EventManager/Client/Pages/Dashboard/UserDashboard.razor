@@ -7,22 +7,29 @@
 <h3>@Event.Name</h3>
 <p>@Event.Price</p>
 
-<button class="btn btn-success" @onclick="ShowConfirmAttendance">Confirm</button>
-<UserContainer OnMovedUser="RerenderUsers" SignedUpUsers="UserStore.UsersFromEvent">
+<div class="@disabled">
+    <button class="btn btn-success" @onclick="ShowConfirmAttendance">Confirm</button>
+    <UserContainer OnMovedUser="RerenderUsers" SignedUpUsers="UserStore.UsersFromEvent">
         <UserList UserStatus="@UserStatus.Invited" />
         <UserList UserStatus="@UserStatus.Registered" />
         <UserList UserStatus="@UserStatus.Cancelled" />
-</UserContainer>
+    </UserContainer>
+</div>
 
 @code {
     [Parameter]
     public Guid EventId { get; set; }
+    private string disabled = "";
 
     private GetSingleEventViewModel Event { get; set; } = new GetSingleEventViewModel();
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{EventId}");
+        if (Event.Attendance != null)
+        {
+            DisableDashboardContent(Event.Attendance.Finished);
+        }
 
         if (UserStore.UsersFromEvent.Count() == 0) //This check guarantees that if user moves users, and leaves the page, it will not reset the page. You will need to reload the page to do that
         {
@@ -44,5 +51,10 @@
         var parameter = new ModalParameters();
         parameter.Add("Event", Event);
         ModalService.Show("Confirm attendance", typeof(ConfirmAttendance), parameter);
+    }
+
+    private void DisableDashboardContent(bool finished = false)
+    {
+        if (finished == true) disabled = "disabled";
     }
 }

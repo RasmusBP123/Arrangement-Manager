@@ -1,11 +1,8 @@
-﻿<h3>Process</h3>
-
-
-<div class="process-container">
-    <div class="process triangle-right">@Step.Basket</div>
-    <div class="process">@Step.Delivery</div>
-    <div class="process">@Step.Payment</div>
-    <div class="process">@Step.Receipt</div>
+﻿<div class="process-container">
+    <div class="process @Active">1 @Step.Basket</div>
+    <div class="process @Active">2 @Step.Delivery</div>
+    <div class="process @Active">3 @Step.Payment</div>
+    <div class="process @Active">4 @Step.Receipt</div>
 
 </div>
 
@@ -14,4 +11,7 @@
 
     [Parameter]
     public Step Step { get; set; }
+
+    public Array Steps { get; set; }
+    public string Active { get; set; } = "";
 }
