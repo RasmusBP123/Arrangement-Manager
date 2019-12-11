@@ -57,6 +57,7 @@ else
         else
         {
             await HttpClient.PostJsonAsync<AddUserToEventViewModel>($"api/user/{EventId}/book/event", userEvent);
+            EventStore.NotifyBookedEvent();
         }
     }
 

@@ -19,6 +19,7 @@ using FluentValidation.AspNetCore;
 using Group15.EventManager.Data.Context;
 using System;
 using Group15.EventManager.Shared.Auth.Policies;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Group15.EventManager.Server
 {

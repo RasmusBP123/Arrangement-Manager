@@ -3,10 +3,6 @@
 @inject HttpClient HttpClient
 @inject NavigationManager NavManager
 
-<AuthorizeView Policy="@Policies.IsAdmin">
-    <button class="btn btn-dark" @onclick="@NavigateToCreateEvent">Create Event</button>
-</AuthorizeView>
-
 <div class="row">
 <Regions />
 <Price />

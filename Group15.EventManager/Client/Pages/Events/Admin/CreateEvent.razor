@@ -7,7 +7,6 @@
 @inject EmployeeStore EmployeeStore
 @inject HttpClient HttpClient
 @inject IModalService Modal
-@inject IJSRuntime JSRunTime
 @attribute [Authorize(Policy = Policies.IsAdmin)]
 
 <h3>Create a new event</h3>
@@ -126,11 +125,6 @@
         {
             EventStore.CreateEvent.Food = CreateFood;
         }
-    }
-
-    private void PreventInvalidInputs()
-    {
-        JSRunTime.InvokeVoidAsync("PreventInvalidInput");
     }
 
     private void HideForm()
