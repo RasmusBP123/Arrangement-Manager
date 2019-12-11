@@ -100,11 +100,17 @@ app {
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
+    margin: 1%;
 }
 
-.side-flex > div{
-    margin: 0 20px;
+.side-flex div{
+    margin: 0 5px 0 5px;
 }
+
+.pointer{
+    cursor: pointer;
+}
+
 
 @media (max-width: 767.98px) {
     .main .top-row {

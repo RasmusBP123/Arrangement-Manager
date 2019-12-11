@@ -11,14 +11,14 @@
         <Authorized>
             <div>
                 <span>Hello, @context.User.Identity.Name</span>
-                <button class="sign-out" @onclick="@HandleLogout">Sign out</button>
+                <button class="btn btn-outline-danger" @onclick="@HandleLogout">Sign out</button>
                 <button @onclick="@NavigateToCart">Cart</button>
             </div>
         </Authorized>
         <NotAuthorized>
             <div>
                 <button class="btn btn-success" @onclick="@(() => NavManager.NavigateTo("/register"))">Register</button> |
-                <button class="sign-in" @onclick="@(() => NavManager.NavigateTo("/login"))">Log in</button>
+                <button class="btn btn-primary" @onclick="@(() => NavManager.NavigateTo("/login"))">Log in</button>
             </div>
         </NotAuthorized>
     </AuthorizeView>

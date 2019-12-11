@@ -3,6 +3,7 @@
 @inject UserStore UserStore
 @inject AttendanceStore AttendanceStore
 @inject IModalService ModalService
+@implements IDisposable
 
 <h3>@Event.Name</h3>
 <p>@Event.Price</p>
@@ -23,12 +24,21 @@
 
     private GetSingleEventViewModel Event { get; set; } = new GetSingleEventViewModel();
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
         Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{EventId}");
         DisableDashboardContent(Event.Attendance);
+        await GetUsersDependingOnEarlierViset(UserStore.UsersFromEvent.Count());
+    }
 
-        if (UserStore.UsersFromEvent.Count() == 0) //This check guarantees that if user moves users, and leaves the page, it will not reset the page. You will need to reload the page to do that
+    private void RerenderUsers()
+    {
+        this.StateHasChanged();
+    }
+
+    private async Task GetUsersDependingOnEarlierViset(int numberOfUsers)
+    {
+        if (numberOfUsers == 0) //This check guarantees that if user moves users, and leaves the page, it will not reset the page. You will need to reload the page to do that
         {
             UserStore.UsersFromEvent = await HttpClient.GetJsonAsync<IEnumerable<GetUserFromEventViewModel>>($"api/user/{EventId}/users");
             foreach (var user in UserStore.UsersFromEvent)
@@ -36,11 +46,10 @@
                 user.Status = UserStatus.Invited;
             }
         }
-    }
-
-    private void RerenderUsers()
-    {
-        this.StateHasChanged();
+        else
+        {
+            UserStore.UsersFromEvent = await HttpClient.GetJsonAsync<IEnumerable<GetUserFromEventViewModel>>($"api/user/{EventId}/users");
+        }
     }
 
     private void ShowConfirmAttendance()
@@ -52,7 +61,12 @@
 
     private void DisableDashboardContent(GetAttendanceViewModel attendance)
     {
-        if (attendance == null) return;
+        if (attendance == null) return; //If attendance is null, we know the event cannot be finished
         if (attendance.Finished == true) disabled = "disabled";
+    }
+
+    public void Dispose()
+    {
+        UserStore.UsersFromEvent = new List<GetUserFromEventViewModel>();
     }
 }

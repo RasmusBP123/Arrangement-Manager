@@ -1,0 +1,32 @@
+﻿@inject NavigationManager NavManager
+
+<li @onclick="@(() => NavigateToEventDetails(Model.Id))">
+    <div class="event-container">
+        <div class="event-left">
+            <div class="event-left-top">
+                <h2>@Model.Name</h2>
+                <h2>@PayableOnline</h2>
+            </div>
+            <br/>
+            <p>@Model.Description</p>
+            <p>Start dato: @Model.EventDate.ToString("g")</p>
+            <p>Slutter omkring: @Model.EndEventDate.ToString("g")</p>
+            <p>Addresse @Model.Address.RoadName @Model.Address.RoadNumber, @Model.City.Name</p>
+        </div>
+        <div class="event-right">
+            <p>IMAGE GOES HERE</p>
+        </div>
+    </div>
+</li>
+
+
+@code {
+    [Parameter]
+    public GetEventListViewModel Model { get; set; }
+    public string PayableOnline => Model.PayOnline == false ? "Købes i butik" : $"{Model.Price} kr.";
+
+    private void NavigateToEventDetails(Guid eventId)
+    {
+        NavManager.NavigateTo($"/{eventId}/event/details");
+    }
+}

@@ -81,7 +81,6 @@ namespace Group15.EventManager.Server.Controllers
 
         [HttpPost]
         [Route("create")]
-        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> CreateEvent([FromBody]CreateEventViewModel eventViewModel)
         {
             if(!ModelState.IsValid)

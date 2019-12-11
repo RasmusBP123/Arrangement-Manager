@@ -18,7 +18,11 @@
 
     protected override async Task OnInitializedAsync()
     {
-        AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
+        try
+        {
+             AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
+        }
+        catch { }
     }
 
     private async Task DeleteAccount()

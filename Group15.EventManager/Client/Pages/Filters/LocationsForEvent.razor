@@ -5,16 +5,16 @@
 
 <div class="side-flex">
     <div>
-        <select class="form-control" @onchange="@RegionClicked">
+        <select class="form-control pointer" @onchange="@RegionClicked">
             <option>-- Vælg Region --</option>
             @foreach (var region in RegionStore.Regions)
             {
-                <option value="@region.Id">@region.Name</option>
+                <option class="pointer" value="@region.Id">@region.Name</option>
             }
         </select>
     </div>
     <div>
-        <select class="form-control" @onchange="CityClicked">
+        <select class="form-control pointer" @onchange="CityClicked">
             <option>-- Vælg by --</option>
             @if (RegionStore.RegionToBeAdded != null && RegionStore.Region.Cities != null)
             {

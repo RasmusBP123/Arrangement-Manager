@@ -1,13 +1,12 @@
 ﻿@page "/"
 @inject AuthStore AuthStore
 @inject HttpClient HttpClient
-@inject NavigationManager NavManager
+@inject EventStore  EventStore
 
-<div class="row">
-<Regions />
-<Price />
-</div>
-<Events />
+    <div class="index-container">
+        <Regions />
+        <Events />
+    </div>
 
 @code{
 
@@ -21,14 +20,6 @@
                 AuthStore.NotifyLogin();
             }
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.InnerException + e.Message);
-        }
-    }
-
-    private void NavigateToCreateEvent()
-    {
-        NavManager.NavigateTo("/create/event");
+        catch { }
     }
 }
