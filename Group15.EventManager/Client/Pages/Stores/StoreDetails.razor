@@ -2,18 +2,28 @@
 @inject StoreStore Store
 @inject HttpClient HttpClient
 
-@if (Store.Store != null && Store.Store.Address != null && Store.Store.City != null && Store.Store.Region !=  null)
+@if (Store.Store != null && Store.Store.Address != null && Store.Store.City != null && Store.Store.Region != null)
 {
-        <h3>@Store.Store.Name</h3>
-        <p>@Store.Store.City.Name</p>
-    
-        <p>@Store.Store.Region.Name</p>
-        <p> @Store.Store.Address.RoadName</p>
+    <h3>@Store.Store.Name</h3>
+    <p>@Store.Store.City.Name</p>
+
+    <p>@Store.Store.Region.Name</p>
+    <p> @Store.Store.Address.RoadName</p>
+    @if (Store.Store.Marker != null)
+    {
+        <div class="track-order-map">
+            <Map Zoom="15" Marker="@Store.Store.Marker" PopupText="@Store.Store.Name" />
+        </div>
+    }
+    else
+    {
+        <p>No map available..</p>
+    }
 }
 
-else if(failed == true)
+else if (failed == true)
 {
-    <p>Could not load data..</p>
+<p>Could not load data..</p>
 }
 
 @code {
@@ -30,10 +40,9 @@ else if(failed == true)
             failed = false;
             Store.Store = await HttpClient.GetJsonAsync<GetSingleStoreViewModel>($"api/store/{StoreId}");
         }
-        catch (Exception)
+        catch
         {
             failed = true;
-            throw;
         }
     }
-}
+ }

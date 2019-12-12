@@ -28,6 +28,7 @@ namespace Group15.EventManager.Data.Repositories
             var store = Db.Set<Store>().Include(store => store.Address)
                                         .Include(store => store.City)
                                         .Include(store => store.Region)
+                                        .Include(store => store.Marker)
                                         .Include(store => store.Employees).FirstOrDefault(store => store.Id == id);
             return store;
         }

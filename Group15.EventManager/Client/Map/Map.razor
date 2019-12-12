@@ -4,7 +4,6 @@
 <div id="@MarkerId" style="height: 100%; width: 100%;"></div>
 
 @code {
-    string elementId = $"map-{Guid.NewGuid().ToString("D")}";
 
     [Parameter] public double Zoom { get; set; }
     [Parameter] public GetMarkerViewModel Marker { get; set; }
@@ -14,6 +13,7 @@
     protected override void OnInitialized()
     {
         MarkerId = Marker.Id.ToString();
+        base.OnInitialized();
     }
 
     protected async override Task OnAfterRenderAsync(bool firstRender)

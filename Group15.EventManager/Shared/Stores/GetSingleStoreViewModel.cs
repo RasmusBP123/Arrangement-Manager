@@ -1,5 +1,6 @@
 ﻿using Group15.EventManager.Shared.Address_;
 using Group15.EventManager.Shared.Cities;
+using Group15.EventManager.Shared.Marker;
 using Group15.EventManager.Shared.Regions;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace Group15.EventManager.Shared.Stores
         public GetAddressForEventViewModel Address { get; set; }
         public GetRegionWithoutCitiesViewModel Region { get; set; }
         public GetCityViewModel City { get; set; }
+        public GetMarkerViewModel Marker { get; set; }
     }
 }
