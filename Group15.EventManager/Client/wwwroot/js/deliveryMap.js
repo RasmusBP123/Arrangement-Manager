@@ -18,21 +18,21 @@
             map = L.map(elem, {
                 layers: MQ.mapLayer(),
                 center: [marker.y, marker.x],
-                zoom: 10
+                zoom: zoom
             });
 
-            L.marker([marker.y, marker.x]).addTo(map);
+            //L.marker([marker.y, marker.x]).addTo(map);
 
-            navigator.geolocation.getCurrentPosition(function(position) {
+            navigator.geolocation.getCurrentPosition(function(position) { //Navigation for current location of browser
 
             latitude = position.coords.latitude;
             longtitude = position.coords.longitude;
 
-            L.marker([latitude, longtitude]).addTo(map);
+            //L.marker([latitude, longtitude]).addTo(map);
 
-            dir = MQ.routing.directions();
+            dir = MQ.routing.directions(); 
 
-            dir.route({
+            dir.route({ //Directions for event/store and the user
                 locations: [
                     { latLng: { lat: marker.y, lng: marker.x } },
                     { latLng: { lat: latitude, lng: longtitude } },
@@ -42,10 +42,9 @@
 
             map.addLayer(MQ.routing.routeLayer({
                 directions: dir,
-                fitBounds: true
+                fitBounds: true,
             }));
             })
         }
     }
-
 })();
