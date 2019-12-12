@@ -20,7 +20,7 @@
     {
         try
         {
-             AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
+            AuthStore.User = await HttpClient.GetJsonAsync<UserModel>("api/accounts/user");
         }
         catch { }
     }

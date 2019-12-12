@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Group15.EventManager.ApplicationLayer.ViewModels.Markers
+{
+    public class GetMarkerViewModel
+    {
+        public Guid Id { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
+
+    }
+}

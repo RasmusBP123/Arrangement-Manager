@@ -1,0 +1,35 @@
+﻿@inject IJSRuntime JSRuntime
+@implements IDisposable 
+
+<div id="@MarkerId" style="height: 100%; width: 100%;"></div>
+
+@code {
+    string elementId = $"map-{Guid.NewGuid().ToString("D")}";
+
+    [Parameter] public double Zoom { get; set; }
+    [Parameter] public GetMarkerViewModel Marker { get; set; }
+    [Parameter] public string PopupText { get; set; }
+    private string MarkerId { get; set; }
+
+    protected override void OnInitialized()
+    {
+        MarkerId = Marker.Id.ToString();
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync(
+            "deliveryMap.showOrUpdate",
+            MarkerId,
+            Marker,
+            Zoom,
+            PopupText);
+
+        firstRender = false;
+    }
+
+    public void Dispose()
+    {
+        GC.SuppressFinalize(this);
+    }
+}

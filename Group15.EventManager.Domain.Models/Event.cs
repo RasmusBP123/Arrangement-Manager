@@ -22,6 +22,7 @@ namespace Group15.EventManager.Domain.Models
         public DateTime EndEventDate { get; set; }
         public Address Address { get; set; }
         public virtual Attendance Attendance { get; set; }
+        public virtual Marker Marker { get; set; }
         public virtual City City { get; set; }
         public virtual Region Region { get; set; }
         public virtual Food Food { get; set; }

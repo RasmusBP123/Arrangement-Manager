@@ -29,6 +29,7 @@ namespace Group15.EventManager.Data.Context
             modelBuilder.ApplyConfiguration(new EmployeeMap());
             modelBuilder.ApplyConfiguration(new EventMap());
             modelBuilder.ApplyConfiguration(new FoodMap());
+            modelBuilder.ApplyConfiguration(new MarkerMap());
             modelBuilder.ApplyConfiguration(new RegionMap());
             modelBuilder.ApplyConfiguration(new StoreMap());
             modelBuilder.ApplyConfiguration(new RolesMap());

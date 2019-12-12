@@ -2,6 +2,7 @@
 using Group15.EventManager.ApplicationLayer.ViewModels.Attendances;
 using Group15.EventManager.ApplicationLayer.ViewModels.Cities;
 using Group15.EventManager.ApplicationLayer.ViewModels.Foods;
+using Group15.EventManager.ApplicationLayer.ViewModels.Markers;
 using System;
 
 namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
@@ -21,6 +22,7 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
         public DateTime EndEventDate { get; set; }
         public bool PayOnline { get; set; }
         public GetAttendanceViewModel Attendance { get; set; }
+        public GetMarkerViewModel Marker { get; set; }
         public GetAddressForEventViewModel Address { get; set; }
         public GetFoodViewModel Food { get; set; }
         public GetCityViewModel City { get; set; }

@@ -2,6 +2,7 @@
 using Group15.EventManager.Shared.Attendances;
 using Group15.EventManager.Shared.Cities;
 using Group15.EventManager.Shared.Food;
+using Group15.EventManager.Shared.Marker;
 using System;
 
 namespace Group15.EventManager.Shared.Events
@@ -20,9 +21,10 @@ namespace Group15.EventManager.Shared.Events
         public DateTime LastBookingDate { get; set; }
         public DateTime EndEventDate { get; set; }
         public bool PayOnline { get; set; }
-        public GetAttendanceViewModel Attendance { get; set; }
-        public GetCityViewModel City { get; set; }
         public GetAddressForEventViewModel Address { get; set; }
+        public GetAttendanceViewModel Attendance { get; set; }
+        public GetMarkerViewModel Marker { get; set; }
+        public GetCityViewModel City { get; set; }
         public GetFoodViewModel Food { get; set; }
     }
 }

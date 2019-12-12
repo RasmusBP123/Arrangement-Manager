@@ -26,6 +26,7 @@ namespace Group15.EventManager.Data.Mappings
                 MaxCustomerLimit = 200,
                 MinCustomerAmount = 50,
                 AddressId = new Guid("19bcfcf0-4dd1-4f7e-8591-4697628fed9a"),
+                MarkerId = new Guid("847fea10-80f0-49a0-8997-409eafdb5892"),
                 CityId = new Guid("264d9f3b-ee5a-4436-8f5e-9937a9ff4727"),
                 EmployeeId = new Guid("3216b7c9-4b42-44b4-a49c-2117496983d4"),
                 FoodId = new Guid("5384338e-ff12-4a9a-8789-b3d89ce5db26"),
