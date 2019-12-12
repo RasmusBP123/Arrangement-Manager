@@ -1,4 +1,5 @@
 ﻿using Group15.EventManager.Domain.Core.Models;
+using Group15.EventManager.Domain.Models.Auth;
 using Group15.EventManager.Domain.Models.Joint;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,6 @@ namespace Group15.EventManager.Domain.Models
 {
     public class Event : Entity
     {
-
         public string Name { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
@@ -27,6 +27,7 @@ namespace Group15.EventManager.Domain.Models
         public virtual Food Food { get; set; }
         public ICollection<ApplicationUserEvent> UserEvents { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
-        public virtual Employee Employee { get; set; }
+        //public virtual Employee Employee { get; set; }
+        public virtual ApplicationUser Employee { get; set; }
     }
 }

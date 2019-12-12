@@ -12,7 +12,7 @@
             <div>
                 <span>Hello, @context.User.Identity.Name</span>
                 <button class="btn btn-outline-danger" @onclick="@HandleLogout">Sign out</button>
-                <button @onclick="@NavigateToCart">Cart</button>
+                <button class="btn btn-primary" @onclick="@NavigateToCart">Cart</button>
             </div>
         </Authorized>
         <NotAuthorized>
