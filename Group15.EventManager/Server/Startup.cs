@@ -103,6 +103,7 @@ namespace Group15.EventManager.Server
             //    config.RoutePrefix = string.Empty;
 
             //});
+            app.UseHttpsRedirection();
 
             app.UseStaticFiles();
             app.UseClientSideBlazorFiles<Client.Startup>();
