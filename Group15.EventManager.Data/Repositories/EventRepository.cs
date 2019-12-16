@@ -20,7 +20,7 @@ namespace Group15.EventManager.Data.Repositories
             var events = Db.Set<Event>().Include(_event => _event.Region)
                                         .Include(_event => _event.City)
                                         .Include(_event => _event.Address)
-                                        .Where(_event => _event.EventDate >= DateTime.Today);
+                                        .Where(_event => _event.EventDate >= DateTime.Today).AsNoTracking();
             return events;
         }
 

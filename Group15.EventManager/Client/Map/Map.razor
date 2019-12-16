@@ -19,7 +19,7 @@
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
         await JSRuntime.InvokeVoidAsync(
-            "deliveryMap.showOrUpdate",
+            "map.showOrUpdate",
             MarkerId,
             Marker,
             Zoom,
