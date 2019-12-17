@@ -7,7 +7,6 @@ using Group15.EventManager.ApplicationLayer.Interfaces;
 using Group15.EventManager.ApplicationLayer.Services;
 using Group15.EventManager.ApplicationLayer.Validation.Accounts;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
-using Group15.EventManager.Data.Context;
 using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Data.Repositories;
 using Group15.EventManager.Data.UnitOfWork;
@@ -37,9 +36,6 @@ namespace Group15.EventManager.Bootstrapper
     {
         public static void RegisterServices(this IServiceCollection services)
         {
-            //DB
-            //services.AddScoped<SqlContext>();
-
             services.RegisterApplicationServices();
             services.RegisterRepositories();
             services.RegisterCommands();

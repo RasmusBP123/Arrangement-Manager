@@ -1,27 +1,27 @@
 ﻿@page "/cart"
 @inject AuthStore AuthStore
 @inject TicketStore TicketStore
-@inject EventStore EventStore 
+@inject EventStore EventStore
 @inject HttpClient HttpClient
 
 <h3>Cart</h3>
 
-<Process Step="Step.Basket"/>
+<Process Step="Step.Basket" />
 
 @foreach (var _event in EventStore.EventsWithTickets)
 {
     <p>Ticket for : @_event.Name</p>
-        <div>
-            <CascadingValue Value="_event.MaxCustomerLimit">
-                <Amount CurrentAmount="@_event.CurrentAmountOfCustomers" />
-            </CascadingValue>
-        </div>
+    <div>
+        <CascadingValue Value="_event.MaxCustomerLimit">
+            <Amount CurrentAmount="@_event.CurrentAmountOfCustomers" />
+        </CascadingValue>
+    </div>
     <button @onclick="@(() => CancelEvent(_event.Id))">Remove</button>
-}  
-    <p>Total price: <cite>@TicketStore.CalculateTotalPrice(TicketStore.TicketsForCart)</cite></p>
-    <button class="btn btn-success" @onclick="@(() => UpdateTicketAmount(EventStore.EventsWithTickets))">Update</button>
+}
+<p>Total price: <cite>@TicketStore.CalculateTotalPrice(TicketStore.TicketsForCart)</cite></p>
+<button class="btn btn-success" @onclick="@(() => UpdateTicketAmount(EventStore.EventsWithTickets))">Update</button>
 
-@code {    
+@code {
 
     [CascadingParameter]
     public int MaxCustomerLimit { get; set; }

@@ -101,8 +101,8 @@ namespace Group15.EventManager.Server
             //{
             //    config.SwaggerEndpoint("swagger/v1/swagger.json", "Event Manager v1");
             //    config.RoutePrefix = string.Empty;
-
             //});
+
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();

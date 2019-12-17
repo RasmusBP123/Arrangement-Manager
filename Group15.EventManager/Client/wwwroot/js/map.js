@@ -1,7 +1,7 @@
 ﻿(function () {
     var dir, map = null;
 
-    var latitude, longtitude;
+    var userLatitude, userLongtitude;
     // Global export
     window.map = {
         showOrUpdate: function (markerId, marker, zoom, popupText) {
@@ -20,15 +20,15 @@
 
             navigator.geolocation.getCurrentPosition(function (position) { //Navigation for current location of browser
 
-                latitude = position.coords.latitude;
-                longtitude = position.coords.longitude;
+                userLatitude = position.coords.latitude;
+                userLongtitude = position.coords.longitude;
 
                 dir = MQ.routing.directions();
 
                 dir.route({ //Directions for event/store and the user
                     locations: [
+                        { latLng: { lat: userLatitude, lng: userLongtitude } },
                         { latLng: { lat: marker.y, lng: marker.x } },
-                        { latLng: { lat: latitude, lng: longtitude } },
                     ]
                 });
 

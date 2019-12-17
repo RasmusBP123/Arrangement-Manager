@@ -43,7 +43,6 @@ namespace Group15.EventManager.Client.Auth.Services
             await _localStorageService.SetItemAsync("authToken", result.Token);
             ((ServerAuthenticationStateProvider)_authStateProvider).MarkUserAsAuthenticated(result.Token);
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
-
             return result;
         }
 

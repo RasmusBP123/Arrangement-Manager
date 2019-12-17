@@ -1,9 +1,11 @@
 ﻿@page "/events/{eventId:guid}/users"
 @inject HttpClient HttpClient
+@inject NavigationManager NavManager
 @inject UserStore UserStore
 @inject AttendanceStore AttendanceStore
 @inject IModalService ModalService
 @implements IDisposable
+@attribute [Authorize(Roles = "Employee, Admin")]
 
 <h3>@Event.Name</h3>
 <p>@Event.Price</p>
