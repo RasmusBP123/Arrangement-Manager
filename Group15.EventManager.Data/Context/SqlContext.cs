@@ -13,12 +13,15 @@ namespace Group15.EventManager.Data.Context
     {
         private readonly IHostEnvironment _env;
 
+        public SqlContext()
+        {
+
+        }
         public SqlContext(DbContextOptions options, IHostEnvironment env) : base(options)
         {
             _env = env;
         }
 
-        public SqlContext(DbContextOptions options) :base(options) {}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AddressMap());

@@ -5,6 +5,7 @@ using Group15.EventManager.ApplicationLayer.ViewModels.Attendances;
 using Group15.EventManager.ApplicationLayer.ViewModels.Cities;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
 using Group15.EventManager.ApplicationLayer.ViewModels.Foods;
+using Group15.EventManager.ApplicationLayer.ViewModels.Markers;
 using Group15.EventManager.ApplicationLayer.ViewModels.Regions;
 using Group15.EventManager.ApplicationLayer.ViewModels.Stores;
 using Group15.EventManager.ApplicationLayer.ViewModels.Tickets;
@@ -28,6 +29,7 @@ namespace Group15.EventManager.Application.AutoMapper
             CreateMap<UserModel, ApplicationUser>();
             CreateMap<CreateStoreViewModel, Store>();
             CreateMap<SimpleEventViewModel, Event>();
+            CreateMap<CreateMarkerViewModel, Marker>();
 
             //ViewModels which should be added to new entities
             CreateMap<GetSingleEventViewModel, Event>();

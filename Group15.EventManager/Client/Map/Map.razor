@@ -7,23 +7,26 @@
 
     [Parameter] public double Zoom { get; set; }
     [Parameter] public GetMarkerViewModel Marker { get; set; }
-    [Parameter] public string PopupText { get; set; }
+    [Parameter] public GetAddressForEventViewModel AddressModel { get; set; }
+    [Parameter] public GetCityViewModel City { get; set; }
     private string MarkerId { get; set; }
+    private string Address { get; set; }
 
     protected override void OnInitialized()
     {
-        MarkerId = Marker.Id.ToString();
-        base.OnInitialized();
+        MarkerId = Guid.NewGuid().ToString();
     }
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
+        Address = $"{AddressModel.RoadName} {AddressModel.RoadNumber}, {City.Name}, Denmark";
+        Console.WriteLine(Address);
         await JSRuntime.InvokeVoidAsync(
             "map.showOrUpdate",
             MarkerId,
             Marker,
-            Zoom,
-            PopupText);
+            Address,
+            Zoom);
 
         firstRender = false;
     }

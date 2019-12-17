@@ -20,6 +20,7 @@ namespace Group15.EventManager.Domain.Commands.Events
         public Food Food { get; set; }
         public Region Region { get; set; }
         public City City { get; set; }
+        public Marker Marker { get; set; }
 
         public CreateEventCommand()
         {

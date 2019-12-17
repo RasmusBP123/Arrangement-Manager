@@ -36,7 +36,7 @@ namespace Group15.EventManager.Data.Mappings
                     new
                     {
                         Id = new Guid("264d9f3b-ee5a-4436-8f5e-9937a9ff4727"),
-                        Name = "Fyn",
+                        Name = "Odense",
                         RegionId = new Guid("7e07ff02-61b5-47cf-80d2-95af4c291274"),
                         Zipcode = 5000,
                         CreatedDate = new DateTime(2019, 12, 01)

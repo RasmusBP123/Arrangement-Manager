@@ -1,6 +1,7 @@
 ﻿using Group15.EventManager.ApplicationLayer.ViewModels.Address_;
 using Group15.EventManager.ApplicationLayer.ViewModels.Cities;
 using Group15.EventManager.ApplicationLayer.ViewModels.Foods;
+using Group15.EventManager.ApplicationLayer.ViewModels.Markers;
 using Group15.EventManager.ApplicationLayer.ViewModels.Regions;
 using System;
 
@@ -24,5 +25,6 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
         public CreateFoodViewModel Food { get; set; }
         public GetRegionViewModel Region { get; set; }
         public GetCityViewModel City { get; set; }
+        public CreateMarkerViewModel Marker { get; set; }
     }
 }

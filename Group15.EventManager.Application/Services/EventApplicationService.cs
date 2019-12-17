@@ -88,6 +88,7 @@ namespace Group15.EventManager.Application.Services
                 Food = _event.Food,
                 Region = _event.Region,
                 City = _event.City,
+                Marker = _event.Marker
             });
         }
 

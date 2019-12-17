@@ -1,4 +1,8 @@
+using System;
+using System.Text;
+using System.Linq;
 using AutoMapper;
+using MediatR;
 using Group15.EventManager.Application.AutoMapper;
 using Group15.EventManager.Bootstrapper;
 using Microsoft.AspNetCore.Builder;
@@ -6,20 +10,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Linq;
-using Microsoft.OpenApi.Models;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Group15.EventManager.Domain.Models.Auth;
 using Microsoft.AspNetCore.Identity;
 using FluentValidation.AspNetCore;
 using Group15.EventManager.Data.Context;
-using System;
 using Group15.EventManager.Shared.Auth.Policies;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Group15.EventManager.Server
 {

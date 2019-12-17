@@ -23,18 +23,9 @@ else
     <input @bind-value="@ticketAmount" />
     <button type="submit" class="btn btn-success" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</button>
 
-    @if(EventStore.Event.Marker != null)
-    {
-        <div class="track-order-map">
-            <Map Zoom="15" Marker="@EventStore.Event.Marker" PopupText="@EventStore.Event.Name"/>
-        </div>
-    }
-    else
-    {
-        <div>
-            <p>No map available..</p>
-        </div>
-    }
+    <div class="track-order-map">
+        <Map Zoom="15" Marker="@EventStore.Event.Marker" AddressModel="@EventStore.Event.Address" City="@EventStore.Event.City"/>
+    </div>
 }
 
 @code {

@@ -2,6 +2,7 @@
 using Group15.EventManager.Shared.Cities;
 using Group15.EventManager.Shared.Employees;
 using Group15.EventManager.Shared.Food;
+using Group15.EventManager.Shared.Marker;
 using Group15.EventManager.Shared.Regions;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -29,5 +30,6 @@ namespace Group15.EventManager.Shared.Events
         public GetRegionViewModel Region { get; set; }
         public GetCityViewModel City { get; set; }
         public EmployeeCreateEventViewModel Employee { get; set; }
+        public CreateMarkerViewModel Marker { get; set; }
     }
 }
