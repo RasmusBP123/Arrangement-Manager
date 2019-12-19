@@ -7,13 +7,14 @@
 
 <input class="search-bar pointer" type="search" @bind-Value="EventStore.SearchTerm" @bind-Value:event="oninput" placeholder=" ..." />
 
+<MatBlazor.MatButton>Halløjsa</MatBlazor.MatButton>
+
 <ul class="eventlist-container">
     @foreach (var _event in EventStore.EventSearch(EventStore.Events))
     {
         <Event Model="@_event" />
     }
 </ul>
-
 
 @code {
 
