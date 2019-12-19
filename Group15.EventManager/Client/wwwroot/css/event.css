@@ -52,12 +52,18 @@
     border: 1px solid silver;
 }
 
-.search-bar{
+.search-bar {
     border: 1px solid black;
     border-radius: 5px;
     width: 30%;
     height: 30px;
-    margin-left: 1%;
+}
+
+/*Event-card*/
+
+.card-container{
+    width: 100%;
+    height: 200px;
 }
 
 

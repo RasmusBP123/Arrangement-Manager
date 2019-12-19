@@ -1,4 +1,7 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@inject ThemeStore Theme
+@inject NavigationManager NavManager
+
+<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">EVENT MANAGER</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
@@ -42,6 +45,13 @@
                 <NavLink class="nav-link" href="create/event">
                     <span class="oi oi-elevator" aria-hidden="true"></span> Create event
                 </NavLink>
+            </li>
+            <li class="nav-item px-3">
+                <MatThemeProvider Theme="Theme.Main">
+                    <div class="nav-link cart">
+                        <MatButton @onclick="@(() => NavManager.NavigateTo("/cart"))" Unelevated="true" TrailingIcon="shopping_cart">Indkøbsvogn  </MatButton>
+                    </div>
+                </MatThemeProvider>
             </li>
         </AuthorizeView>
     </ul>

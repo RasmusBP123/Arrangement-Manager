@@ -1,4 +1,6 @@
-﻿<CascadingAuthenticationState>
+﻿@inject ThemeStore Theme
+<CascadingAuthenticationState>
+    <MatThemeProvider Theme="@Theme.Main">
     <Router AppAssembly="@typeof(Program).Assembly" Context="routeData">
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"  /> 
@@ -9,4 +11,5 @@
             </LayoutView>
         </NotFound>
     </Router>
+    </MatThemeProvider>
 </CascadingAuthenticationState>

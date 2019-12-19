@@ -96,6 +96,10 @@ app {
     color: red;
 }
 
+.cart{
+    margin-top: 100%;
+}
+
 .side-flex{
     display: flex;
     justify-content: flex-start;

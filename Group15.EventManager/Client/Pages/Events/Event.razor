@@ -1,5 +1,10 @@
 ﻿@inject NavigationManager NavManager
 
+<MatCard Class="card-container">
+    <MatCardContent>
+        <MatCardMedia />
+    </MatCardContent>
+</MatCard>
 <li @onclick="@(() => NavigateToEventDetails(Model.Id))">
     <div class="event-container">
         <div class="event-left">
