@@ -1,11 +1,21 @@
 ﻿@inject NavigationManager NavManager
 
-<MatCard Class="card-container">
-    <MatCardContent>
-        <MatCardMedia />
-    </MatCardContent>
-</MatCard>
-<li @onclick="@(() => NavigateToEventDetails(Model.Id))">
+    <li @onclick="@(() => NavigateToEventDetails(Model.Id))">
+        <MatCard Class="card-container">
+            <MatCardContent>
+                <div class="flex-row">
+                    <MatCardMedia Wide="true" Class="image-container" ImageUrl="https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg" />
+                    <div class="card-content">
+                        <MatHeadline6>@Model.Name</MatHeadline6>
+                        <MatSubtitle2>@PayableOnline</MatSubtitle2>
+                    </div>
+                    <MatBody2>@Model.Description</MatBody2>
+                </div>
+            </MatCardContent>
+        </MatCard>
+    </li>
+
+@*<li @onclick="@(() => NavigateToEventDetails(Model.Id))">
     <div class="event-container">
         <div class="event-left">
             <div class="event-left-top">
@@ -22,7 +32,7 @@
             <p>IMAGE GOES HERE</p>
         </div>
     </div>
-</li>
+</li>*@
 
 
 @code {
