@@ -2,7 +2,14 @@
 @inject RegionStore RegionStore
 @inject EventStore  EventStore
 @inject CityStore CityStore
+@inject ThemeStore Theme
 
+    <MatSelect Label="Vælg Region" @bind-Value="@region">
+        @foreach (var region in RegionStore.Regions)
+        {
+            <MatOptionString Value="@region.Id.ToString()">@region.Name</MatOptionString>
+        }
+    </MatSelect>
 <div class="side-flex">
     <div>
         <select class="form-control pointer" @onchange="@RegionClicked">
@@ -30,7 +37,7 @@
 @code {
 
     string regionId = "";
-
+    private GetRegionViewModel region = new GetRegionViewModel();
     protected override async Task OnInitializedAsync()
     {
         RegionStore.Regions = await HttpClient.GetJsonAsync<IEnumerable<GetRegionViewModel>>("api/regions");
