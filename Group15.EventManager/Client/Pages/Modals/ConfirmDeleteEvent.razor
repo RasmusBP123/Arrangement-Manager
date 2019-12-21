@@ -1,0 +1,31 @@
+﻿@inject IModalService ModalService
+@inject HttpClient HttpClient
+@inject NavigationManager NavManager
+
+<div class="row">
+    <div class="col-10">
+    Are you sure you want to delete @Event.Name?
+    <MatButton Raised="true" OnClick="@(() => DeleteEvent())">Delete</MatButton>
+
+    </div>
+</div>
+
+@code {
+
+    [CascadingParameter]
+    public ModalParameters Parameters { get; set; }
+
+    public GetSingleEventViewModel Event { get; set; } = new GetSingleEventViewModel();
+
+    protected override void OnInitialized()
+    {
+        Event = Parameters.Get<GetSingleEventViewModel>("Event");
+    }
+
+    private async Task DeleteEvent()
+    {
+        await HttpClient.DeleteAsync($"api/events/{Event.Id}/delete");
+        ModalService.Cancel();
+        NavManager.NavigateTo("/");
+    }
+}

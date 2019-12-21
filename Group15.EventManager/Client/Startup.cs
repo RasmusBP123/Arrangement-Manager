@@ -21,7 +21,6 @@ using Group15.EventManager.Shared.Auth.Policies;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using System.Net.Mail;
 
 namespace Group15.EventManager.Client
 {
@@ -44,6 +43,7 @@ namespace Group15.EventManager.Client
 
             //Themes
             services.AddSingleton<ThemeStore>();
+
             //Fluxor
             services.AddFluxor(options => options
                 .UseDependencyInjection(typeof(Startup).Assembly)

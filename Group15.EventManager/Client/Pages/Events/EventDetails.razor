@@ -3,29 +3,42 @@
 @inject EventStore EventStore
 @inject AuthStore AuthStore
 @inject UserStore UserStore
-
-<h3>Event</h3>
+@inject IModalService ModalService
+@inject ThemeStore Theme
 
 @if (EventStore.Event == null || EventStore.Event.City == null)
 {
+<h3>Event</h3>
     <text>Loading..</text>
 }
 else
 {
-    <p>@EventStore.Event.Name</p>
-    <p>@EventStore.Event.City.Name</p>
-    <p>@EventStore.Event.CurrentAmountOfCustomers</p>
-    <p>@EventStore.Event.MaxCustomerLimit</p>
+<AuthorizeView Policy="@Policies.IsAdmin">
+    <MatButton Raised="true" OnClick="@(() => OpenConfirmDeleteEvent())">Delete</MatButton>
+</AuthorizeView>
 
-    <p>How many tickets would you like to buy?</p>
-    <p class="@EventIsFull warning">You are about to overbook this event, which you cannot do</p>
+<div class="event-details-container">
+    <MatCard Class="eventdetails-card">
+        <MatCardContent Class="eventdetails-card">
+            <MatThemeProvider Theme="Theme.Main">
+                <MatHeadline1>@EventStore.Event.Name</MatHeadline1>
+                <MatH4>@EventStore.Event.Price</MatH4>
 
-    <input @bind-value="@ticketAmount" />
-    <button type="submit" class="btn btn-success" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</button>
-
+                <MatBody2>
+                    <p>@EventStore.Event.Description</p>
+                </MatBody2>
+                <MatSubtitle2>How many tickets would you like to buy?</MatSubtitle2>
+                <MatInputTextComponent @bind-Value="@ticketAmount" />
+                <MatButton type="submit" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</MatButton>
+            </MatThemeProvider>
+        </MatCardContent>
+    </MatCard>
+    @*<input @bind-value="@ticketAmount" />
+        <p class="@EventIsFull warning">You are about to overbook this event, which you cannot do</p>*@
     <div class="track-order-map">
-        <Map Zoom="15" Marker="@EventStore.Event.Marker" AddressModel="@EventStore.Event.Address" City="@EventStore.Event.City"/>
+        <Map Zoom="15" Marker="@EventStore.Event.Marker" AddressModel="@EventStore.Event.Address" City="@EventStore.Event.City" />
     </div>
+</div>
 }
 
 @code {
@@ -64,6 +77,13 @@ else
             await HttpClient.PostJsonAsync<AddUserToEventViewModel>($"api/user/{EventId}/book/event", userEvent);
             EventStore.NotifyBookedEvent();
         }
+    }
+
+    private void OpenConfirmDeleteEvent()
+    {
+        var options = new ModalParameters();
+        options.Add("Event", EventStore.Event);
+        ModalService.Show<ConfirmDeleteEvent>("Are you sure?", options);
     }
 
     private void EventIsFullyBooked()

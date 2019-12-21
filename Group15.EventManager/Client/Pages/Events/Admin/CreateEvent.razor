@@ -116,7 +116,7 @@
                 EventStore.ShowWarning = true;
             }
         }
-        Modal.Show("Confirm Event?", typeof(ConfirmEventCreation));
+        Modal.Show<ConfirmEventCreation>("Confirm Event?");
     }
 
     private void PackageEvent()

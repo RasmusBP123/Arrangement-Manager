@@ -4,42 +4,38 @@
 @inject CityStore CityStore
 @inject ThemeStore Theme
 
-    <MatSelect Label="Vælg Region" @bind-Value="@region">
-        @foreach (var region in RegionStore.Regions)
-        {
-            <MatOptionString Value="@region.Id.ToString()">@region.Name</MatOptionString>
-        }
-    </MatSelect>
 <div class="side-flex">
-    <div>
-        <select class="form-control pointer" @onchange="@RegionClicked">
-            <option value="">-- Vælg Region --</option>
-            @foreach (var region in RegionStore.Regions)
-            {
-                <option value="@region.Id">@region.Name</option>
-            }
-        </select>
-    </div>
-    <div>
-        <select class="form-control pointer" @onchange="CityClicked">
-            <option value="">-- Vælg by --</option>
-            @if (RegionStore.Region != null && RegionStore.Region.Cities != null)
-            {
-                @foreach (var city in RegionStore.Region.Cities)
+        <div>
+            <select class="form-control pointer" @onchange="@RegionClicked">
+                <option value="">-- Vælg Region --</option>
+                @foreach (var region in RegionStore.Regions)
+                 {
+                    <option value="@region.Id">@region.Name</option>
+                 }
+            </select>
+        </div>
+        <div>
+            <select class="form-control pointer" @onchange="CityClicked">
+                <option value="">-- Vælg by --</option>
+                @if (RegionStore.Region != null && RegionStore.Region.Cities != null)
                 {
-                    <option value="@city.Id">@city.Name</option>
+                    @foreach (var city in RegionStore.Region.Cities)
+                    {
+                        <option value="@city.Id">@city.Name</option>
+                    }
                 }
-            }
-        </select>
+            </select>
+        </div>
     </div>
-</div>
 
 @code {
-
+    
+    string value1;
     string regionId = "";
-    private GetRegionViewModel region = new GetRegionViewModel();
+    private GetRegionViewModel region;
     protected override async Task OnInitializedAsync()
     {
+        region = new GetRegionViewModel();
         RegionStore.Regions = await HttpClient.GetJsonAsync<IEnumerable<GetRegionViewModel>>("api/regions");
     }
 

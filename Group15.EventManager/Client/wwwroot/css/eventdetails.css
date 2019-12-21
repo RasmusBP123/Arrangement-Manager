@@ -1,0 +1,11 @@
+﻿.event-details-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+
+.eventdetails-card{
+    width: 30px;
+    height: 300px;
+}

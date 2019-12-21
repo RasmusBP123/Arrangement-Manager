@@ -58,7 +58,7 @@
     {
         var parameter = new ModalParameters();
         parameter.Add("Event", Event);
-        ModalService.Show("Confirm attendance", typeof(ConfirmAttendance), parameter);
+        ModalService.Show<ConfirmAttendance>("Confirm attendance", parameter);
     }
 
     private void DisableDashboardContent(GetAttendanceViewModel attendance)

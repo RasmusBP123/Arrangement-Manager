@@ -4,6 +4,12 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.my-row {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
 app {
     position: relative;
     display: flex;

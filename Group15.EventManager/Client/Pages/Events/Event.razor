@@ -1,15 +1,30 @@
 ﻿@inject NavigationManager NavManager
 
-    <li @onclick="@(() => NavigateToEventDetails(Model.Id))">
+    <li class="e-container" @onclick="@(() => NavigateToEventDetails(Model.Id))">
         <MatCard Class="card-container">
             <MatCardContent>
-                <div class="flex-row">
-                    <MatCardMedia Wide="true" Class="image-container" ImageUrl="https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg" />
-                    <div class="card-content">
-                        <MatHeadline6>@Model.Name</MatHeadline6>
-                        <MatSubtitle2>@PayableOnline</MatSubtitle2>
-                    </div>
-                    <MatBody2>@Model.Description</MatBody2>
+                <h1>@Model.Name</h1>
+                <div class="my-row">
+                   <MatCardMedia Wide="false" Class="image-container" ImageUrl="https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg" />
+                   <div class="card-content">
+                       <div class="event-section-1">
+                           <h6>BESKRIVELSE</h6>
+                           <p>@Model.Description</p>
+                       </div>
+                       <div class="v-line">
+                           <div class="vertical-line"></div>
+                       </div>
+                       <div class="event-section-2">
+                           <h6>PRIS PR. BILLET</h6>
+                           <h1>@PayableOnline</h1>
+                       </div>
+                       <div class="v-line">
+                           <div class="vertical-line"></div>
+                       </div>        
+                       <div class="event-section-3">
+                           <h4>Læg i tilbudskurven</h4>
+                       </div>
+                   </div>
                 </div>
             </MatCardContent>
         </MatCard>

@@ -18,6 +18,15 @@ namespace Group15.EventManager.Server.Controllers
             _eventApplicationService = eventApplicationService;
         }
 
+        [HttpGet]
+        [Route("active")]
+        public async Task<IActionResult> GetActiveEvents()
+        {
+            var events = await _eventApplicationService.GetActiveEvents();
+            if (events == null) return BadRequest();
+            return Ok(events);
+        }
+
         [HttpGet("all")]
         public async Task<IActionResult> GetAllEvents()
         {
@@ -69,6 +78,7 @@ namespace Group15.EventManager.Server.Controllers
             if (_event == null) return BadRequest();
             return Ok(_event);
         }
+
         [HttpPost]
         [Route("{eventId}/update")]
         public async Task<IActionResult> UpdateEvent(Guid eventId, [FromBody] UpdateEventViewModel eventViewModel)
@@ -82,18 +92,8 @@ namespace Group15.EventManager.Server.Controllers
             return NoContent();
         }
 
-        [HttpGet]
-        [Route("active")]
-        public async Task<IActionResult> GetActiveEvents()
-        {
-            var events = await _eventApplicationService.GetActiveEvents();
-            if (events == null) return BadRequest();
-            return Ok(events);
-        }
-
         [HttpPost]
         [Route("create")]
-        [Authorize(Roles = "Employee, Admin")]
         public async Task<IActionResult> CreateEvent([FromBody]CreateEventViewModel eventViewModel)
         {
             if(!ModelState.IsValid)
@@ -105,7 +105,6 @@ namespace Group15.EventManager.Server.Controllers
 
         [HttpDelete] 
         [Route("{eventId}/delete")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteEvent([FromRoute] Guid eventId)
         {
             await _eventApplicationService.DeleteEvent(eventId);
