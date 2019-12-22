@@ -2,11 +2,8 @@
 using Group15.EventManager.Shared.Auth;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Group15.EventManager.Client.Auth.Services
@@ -17,7 +14,7 @@ namespace Group15.EventManager.Client.Auth.Services
         private readonly AuthenticationStateProvider _authStateProvider;
         private readonly ILocalStorageService _localStorageService;
 
-        public AuthService(HttpClient httpClient, 
+        public AuthService(HttpClient httpClient,
                                       AuthenticationStateProvider authStateProvider,
                                       ILocalStorageService localStorageService)
         {

@@ -11,7 +11,7 @@ namespace Group15.EventManager.Domain.Commands.Events
         public string Description { get; set; }
         public byte[] Image { get; set; }
         public DateTime EventDate { get; set; }
-        public DateTime LastBookingDate { get; set;}
+        public DateTime LastBookingDate { get; set; }
         public DateTime EndEventDate { get; set; }
         public bool PayOnline { get; set; }
         public int MinCustomerAmount { get; set; }
@@ -24,7 +24,7 @@ namespace Group15.EventManager.Domain.Commands.Events
 
         public CreateEventCommand()
         {
-                
+
         }
     }
 }

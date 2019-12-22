@@ -1,9 +1,6 @@
 ﻿using Group15.EventManager.Shared.Cities;
 using Group15.EventManager.Shared.Regions;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Group15.EventManager.Client.Store.Regions
 {

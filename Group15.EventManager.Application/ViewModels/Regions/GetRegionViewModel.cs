@@ -1,8 +1,6 @@
-﻿using Group15.EventManager.Application.ViewModels.Events;
-using Group15.EventManager.ApplicationLayer.ViewModels.Cities;
+﻿using Group15.EventManager.ApplicationLayer.ViewModels.Cities;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Group15.EventManager.ApplicationLayer.ViewModels.Regions
 {

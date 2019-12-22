@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Group15.EventManager.Shared.Address_
+﻿namespace Group15.EventManager.Shared.Address_
 {
     public class CreateAddressForEventViewModel
     {

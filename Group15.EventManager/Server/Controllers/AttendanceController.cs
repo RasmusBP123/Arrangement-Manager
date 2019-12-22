@@ -1,6 +1,5 @@
 ﻿using Group15.EventManager.ApplicationLayer.Interfaces;
 using Group15.EventManager.ApplicationLayer.ViewModels.Attendances;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

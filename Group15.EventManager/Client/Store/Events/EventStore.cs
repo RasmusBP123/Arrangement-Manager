@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Group15.EventManager.Client.Store.Events
 {
@@ -20,13 +19,13 @@ namespace Group15.EventManager.Client.Store.Events
         public event Action OnSubmittedEvent;
 
         public event Action OnBookedEvent;
-        public void NotifyBookedEvent() => OnBookedEvent?.Invoke(); 
-        
+        public void NotifyBookedEvent() => OnBookedEvent?.Invoke();
+
         public void NotifyEventStateChanged() => OnSubmittedEvent?.Invoke();
         public void NotifyStateChanged() => OnClickedRegion?.Invoke();
         public void NotifyEventDeleted() => OnDeletedEvent?.Invoke();
 
-        public  bool ShowWarning = false;
+        public bool ShowWarning = false;
 
         public string SearchTerm = "";
         public IEnumerable<GetEventListViewModel> EventSearch(IEnumerable<GetEventListViewModel> events)

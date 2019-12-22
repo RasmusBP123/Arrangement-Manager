@@ -1,8 +1,6 @@
 ﻿using Group15.EventManager.Application.ViewModels.Auth;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Group15.EventManager.ApplicationLayer.ViewModels.Tickets
 {

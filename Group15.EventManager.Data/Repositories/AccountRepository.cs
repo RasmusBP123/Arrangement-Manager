@@ -34,7 +34,7 @@ namespace Group15.EventManager.Data.Repositories
         public async Task<ApplicationUser> GetLoggedInUser(ClaimsPrincipal claimsPrincipal)
         {
             string userName = claimsPrincipal.Identity.Name;
-            var user = await _userManager.FindByNameAsync(userName); 
+            var user = await _userManager.FindByNameAsync(userName);
             return user;
         }
 

@@ -3,8 +3,6 @@ using Group15.EventManager.Shared.Cities;
 using Group15.EventManager.Shared.Marker;
 using Group15.EventManager.Shared.Regions;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Group15.EventManager.Shared.Stores
 {

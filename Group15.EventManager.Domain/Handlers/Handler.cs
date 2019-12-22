@@ -1,5 +1,4 @@
 ﻿using Group15.EventManager.Data.UnitOfWork;
-using MediatR;
 
 namespace Group15.EventManager.Domain.Handlers
 {

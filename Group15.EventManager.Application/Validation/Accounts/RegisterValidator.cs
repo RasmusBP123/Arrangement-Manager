@@ -1,8 +1,5 @@
 ﻿using FluentValidation;
 using Group15.EventManager.Application.ViewModels.Auth;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Group15.EventManager.ApplicationLayer.Validation.Accounts
 {

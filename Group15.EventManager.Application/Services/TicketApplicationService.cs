@@ -26,7 +26,7 @@ namespace Group15.EventManager.ApplicationLayer.Services
         }
         public async Task DeleteTicket(Guid ticketId)
         {
-           await _mediator.Send(new DeleteTicketCommand(ticketId));
+            await _mediator.Send(new DeleteTicketCommand(ticketId));
         }
 
         public async Task UpdateTickets(UpdateTicketsViewModel tickets)

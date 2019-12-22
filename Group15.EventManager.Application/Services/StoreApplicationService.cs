@@ -7,7 +7,6 @@ using Group15.EventManager.Domain.Queries.Stores;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Group15.EventManager.ApplicationLayer.Services

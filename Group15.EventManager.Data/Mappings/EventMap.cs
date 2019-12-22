@@ -21,7 +21,7 @@ namespace Group15.EventManager.Data.Mappings
                 EventDate = new DateTime(2019, 12, 24, 14, 30, 00),
                 LastBookingDate = new DateTime(2019, 12, 12, 12, 00, 00),
                 EndEventDate = new DateTime(2019, 12, 24, 20, 00, 00),
-                Image = new byte[] {0x00},
+                Image = new byte[] { 0x00 },
                 PayOnline = true,
                 MaxCustomerLimit = 200,
                 MinCustomerAmount = 50,

@@ -1,6 +1,4 @@
-﻿using Group15.EventManager.Domain.Core.Models;
-using Group15.EventManager.Domain.Models.Auth;
-using Microsoft.AspNetCore.Identity;
+﻿using Group15.EventManager.Domain.Models.Auth;
 using System;
 
 namespace Group15.EventManager.Domain.Models.Joint

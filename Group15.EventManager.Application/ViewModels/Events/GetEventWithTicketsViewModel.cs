@@ -2,7 +2,6 @@
 using Group15.EventManager.ApplicationLayer.ViewModels.Tickets;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
 {

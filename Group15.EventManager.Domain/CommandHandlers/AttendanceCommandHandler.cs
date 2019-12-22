@@ -3,9 +3,6 @@ using Group15.EventManager.Data.UnitOfWork;
 using Group15.EventManager.Domain.Commands.Attendances;
 using Group15.EventManager.Domain.Handlers;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

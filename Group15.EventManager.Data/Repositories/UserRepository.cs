@@ -24,7 +24,7 @@ namespace Group15.EventManager.Data.Repositories
 
             for (int i = 0; i < ticketAmount; i++)
             {
-                ticketList.Add(new Ticket {Event = _event, User = user });
+                ticketList.Add(new Ticket { Event = _event, User = user });
             }
 
             Db.Set<Ticket>().AddRange(ticketList);

@@ -10,7 +10,7 @@ namespace Group15.EventManager.Data.Repositories
     public class RegionRepository : Repository<Region>, IRegionRepository
     {
         public RegionRepository(SqlContext context) : base(context)
-        {}
+        { }
 
         public override IQueryable<Region> GetAll()
         {

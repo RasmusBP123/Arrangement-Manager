@@ -26,12 +26,14 @@ namespace Group15.EventManager.Data.Context
         {
             modelBuilder.ApplyConfiguration(new AddressMap());
             modelBuilder.ApplyConfiguration(new ApplicationUserEventMap());
+            modelBuilder.ApplyConfiguration(new ApplicationUserGroupMap());
             modelBuilder.ApplyConfiguration(new ApplicationUserMap());
             modelBuilder.ApplyConfiguration(new AttendanceMap());
             modelBuilder.ApplyConfiguration(new CityMap());
             modelBuilder.ApplyConfiguration(new EmployeeMap());
             modelBuilder.ApplyConfiguration(new EventMap());
             modelBuilder.ApplyConfiguration(new FoodMap());
+            modelBuilder.ApplyConfiguration(new GroupMap());
             modelBuilder.ApplyConfiguration(new MarkerMap());
             modelBuilder.ApplyConfiguration(new RegionMap());
             modelBuilder.ApplyConfiguration(new StoreMap());

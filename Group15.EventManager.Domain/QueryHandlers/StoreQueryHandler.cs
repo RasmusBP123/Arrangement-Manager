@@ -2,17 +2,14 @@
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Queries.Stores;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Group15.EventManager.Domain.QueryHandlers
 {
     public class StoreQueryHandler : IRequestHandler<AllStroresQuery, IQueryable<Store>>
-                                    ,IRequestHandler<SingleStoreQuery, Store>
+                                    , IRequestHandler<SingleStoreQuery, Store>
     {
         private readonly IStoreRepository _storeRepository;
 

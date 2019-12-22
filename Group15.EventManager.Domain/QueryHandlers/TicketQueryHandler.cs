@@ -2,10 +2,7 @@
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Queries.Tickets;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

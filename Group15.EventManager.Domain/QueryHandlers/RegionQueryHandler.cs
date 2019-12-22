@@ -1,10 +1,7 @@
 ﻿using Group15.EventManager.Data.Interfaces;
-using Group15.EventManager.Data.UnitOfWork;
-using Group15.EventManager.Domain.Handlers;
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Queries.Regions;
 using MediatR;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

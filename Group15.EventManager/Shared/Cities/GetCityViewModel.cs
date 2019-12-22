@@ -1,6 +1,4 @@
-﻿using Group15.EventManager.Shared.Events;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace Group15.EventManager.Shared.Cities
 {

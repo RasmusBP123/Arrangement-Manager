@@ -1,6 +1,5 @@
 ﻿using Group15.EventManager.Domain.Core.Commands;
 using Group15.EventManager.Domain.Models;
-using System;
 
 namespace Group15.EventManager.Domain.Commands.Store
 {

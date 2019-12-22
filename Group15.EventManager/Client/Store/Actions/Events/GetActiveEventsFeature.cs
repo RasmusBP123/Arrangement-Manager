@@ -11,9 +11,9 @@ namespace Group15.EventManager.Client.Store.Events
 
         protected override GetActiveEventsState GetInitialState()
         {
-            return new GetActiveEventsState(isLoading : false,
-                                            errorMessage : null, 
-                                            events : null);
+            return new GetActiveEventsState(isLoading: false,
+                                            errorMessage: null,
+                                            events: null);
         }
     }
 }

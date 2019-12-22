@@ -88,7 +88,7 @@ namespace Group15.EventManager.Bootstrapper
             services.AddScoped<IRequestHandler<AllEventsWithTicketsQuery, IQueryable<Event>>, EventQueryHandler>();
             //Regions
             services.AddScoped<IRequestHandler<AllRegionsQuery, IQueryable<Region>>, RegionQueryHandler>();
-            services.AddScoped<IRequestHandler<SingleRegionQuery, Region>,RegionQueryHandler>();
+            services.AddScoped<IRequestHandler<SingleRegionQuery, Region>, RegionQueryHandler>();
             //Cities
             services.AddScoped<IRequestHandler<SingleCityQuery, City>, CityQueryHandler>();
             //Users

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Group15.EventManager.Application.Interfaces;
+﻿using Group15.EventManager.Application.Interfaces;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Group15.EventManager.Server.Controllers
 {
@@ -96,14 +95,14 @@ namespace Group15.EventManager.Server.Controllers
         [Route("create")]
         public async Task<IActionResult> CreateEvent([FromBody]CreateEventViewModel eventViewModel)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return StatusCode(422, eventViewModel);
 
             await _eventApplicationService.CreateEvent(eventViewModel);
             return Created("api/events/create", eventViewModel);
         }
 
-        [HttpDelete] 
+        [HttpDelete]
         [Route("{eventId}/delete")]
         public async Task<IActionResult> DeleteEvent([FromRoute] Guid eventId)
         {

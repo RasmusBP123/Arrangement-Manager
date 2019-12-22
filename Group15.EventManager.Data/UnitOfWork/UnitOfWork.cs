@@ -1,5 +1,4 @@
 ﻿using Group15.EventManager.Data.Context;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Group15.EventManager.Data.UnitOfWork
 {

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Group15.EventManager.ApplicationLayer.Interfaces;
+﻿using Group15.EventManager.ApplicationLayer.Interfaces;
 using Group15.EventManager.ApplicationLayer.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Group15.EventManager.Server.Controllers
 {
@@ -36,7 +36,7 @@ namespace Group15.EventManager.Server.Controllers
 
         [HttpDelete]
         [Route("{userId}/delete/{eventId}/event")]
-        public async Task<IActionResult> CancelEventFromUser( Guid userId, Guid eventId)
+        public async Task<IActionResult> CancelEventFromUser(Guid userId, Guid eventId)
         {
             await _userApplicationService.CancelEventFromUser(userId, eventId);
             return NoContent();

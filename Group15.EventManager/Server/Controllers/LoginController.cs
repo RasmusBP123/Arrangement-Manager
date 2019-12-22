@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Group15.EventManager.Application.ViewModels.Auth;
+using Group15.EventManager.ApplicationLayer.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Group15.EventManager.Application.ViewModels.Auth;
-using Group15.EventManager.ApplicationLayer.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Group15.EventManager.Server.Controllers
 {
@@ -60,7 +60,7 @@ namespace Group15.EventManager.Server.Controllers
                 signingCredentials: credentials
             );
 
-            return Ok(new LoginResult {Successful = true, Name = loginModel.Email, Token = new JwtSecurityTokenHandler().WriteToken(token) });
+            return Ok(new LoginResult { Successful = true, Name = loginModel.Email, Token = new JwtSecurityTokenHandler().WriteToken(token) });
         }
     }
 }

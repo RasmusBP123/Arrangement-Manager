@@ -1,7 +1,5 @@
 ﻿using Group15.EventManager.Domain.Models.Auth;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;

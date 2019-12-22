@@ -2,14 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Group15.EventManager.Client.Store.Events
 {
     public class GetActiveEventsState
     {
         public bool IsLoading { get; set; }
-        public string ErrorMessage { get; set;  }
+        public string ErrorMessage { get; set; }
         public IEnumerable<GetEventListViewModel> Events { get; set; }
         public GetActiveEventsState(bool isLoading, string errorMessage, IEnumerable<GetEventListViewModel> events)
         {

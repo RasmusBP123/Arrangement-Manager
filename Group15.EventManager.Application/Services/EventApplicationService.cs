@@ -3,7 +3,6 @@ using Group15.EventManager.Application.Interfaces;
 using Group15.EventManager.Application.ViewModels.Events;
 using Group15.EventManager.ApplicationLayer.Services;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
-using Group15.EventManager.Data.UnitOfWork;
 using Group15.EventManager.Domain.Commands.Events;
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Queries.Events;
@@ -72,14 +71,14 @@ namespace Group15.EventManager.Application.Services
         {
             var _event = _mapper.Map<Event>(eventViewModel);
 
-            await _mediator.Send(new CreateEventCommand() 
-            {   
+            await _mediator.Send(new CreateEventCommand()
+            {
                 Name = _event.Name,
-                Description = _event.Description, 
+                Description = _event.Description,
                 EventDate = _event.EventDate,
                 LastBookingDate = _event.LastBookingDate,
                 EndEventDate = _event.EndEventDate,
-                Image = _event.Image, 
+                Image = _event.Image,
                 Address = _event.Address,
                 Price = _event.Price,
                 PayOnline = _event.PayOnline,
@@ -95,7 +94,7 @@ namespace Group15.EventManager.Application.Services
         public async Task UpdateEvent(Guid eventId, UpdateEventViewModel eventViewModel)
         {
             var _event = _mapper.Map<Event>(eventViewModel);
-            await _mediator.Send(new UpdateEventCommand(eventViewModel.Id) 
+            await _mediator.Send(new UpdateEventCommand(eventViewModel.Id)
             {
                 Name = _event.Name,
                 Description = _event.Description,

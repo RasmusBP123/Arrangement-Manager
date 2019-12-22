@@ -1,9 +1,6 @@
 ﻿using Group15.EventManager.Domain.Core.Repositories;
-using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Models.Auth;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Group15.EventManager.Data.Interfaces

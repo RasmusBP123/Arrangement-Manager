@@ -1,6 +1,5 @@
 ﻿using Group15.EventManager.Domain.Core.Models;
 using Group15.EventManager.Domain.Models.Auth;
-using System;
 
 namespace Group15.EventManager.Domain.Models
 {

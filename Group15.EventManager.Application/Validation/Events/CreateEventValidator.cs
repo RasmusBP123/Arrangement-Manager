@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
-using System;
 
 namespace Group15.EventManager.Application.Validation.Events
 {

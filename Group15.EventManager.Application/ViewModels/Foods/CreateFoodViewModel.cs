@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Group15.EventManager.ApplicationLayer.ViewModels.Foods
+﻿namespace Group15.EventManager.ApplicationLayer.ViewModels.Foods
 {
     public class CreateFoodViewModel
     {

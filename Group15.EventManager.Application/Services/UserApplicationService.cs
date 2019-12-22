@@ -2,7 +2,6 @@
 using Group15.EventManager.ApplicationLayer.Interfaces;
 using Group15.EventManager.ApplicationLayer.ViewModels.Users;
 using Group15.EventManager.Domain.Commands.Users;
-using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Queries.Users;
 using MediatR;
 using System;

@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Group15.EventManager.Data.Mappings
 {
@@ -15,7 +13,7 @@ namespace Group15.EventManager.Data.Mappings
             builder.HasKey(mark => mark.Id);
 
 
-            builder.HasData( new //Event marker
+            builder.HasData(new //Event marker
             {
                 Id = new Guid("847fea10-80f0-49a0-8997-409eafdb5892"),
                 X = 10.369267,

@@ -1,14 +1,10 @@
 ﻿using AutoMapper;
 using Group15.EventManager.ApplicationLayer.Interfaces;
-using Group15.EventManager.ApplicationLayer.ViewModels.Cities;
 using Group15.EventManager.ApplicationLayer.ViewModels.Regions;
-using Group15.EventManager.Data.UnitOfWork;
-using Group15.EventManager.Domain.Queries.Cities;
 using Group15.EventManager.Domain.Queries.Regions;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Group15.EventManager.ApplicationLayer.Services

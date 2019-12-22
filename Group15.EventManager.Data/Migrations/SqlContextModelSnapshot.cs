@@ -153,7 +153,7 @@ namespace Group15.EventManager.Data.Migrations
                             LastName = "Petersen",
                             NormalizedEmail = "ADMINDEV@HOTMAIL.COM",
                             NormalizedUserName = "ADMINDEV@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPD56O6pJTXk4DSOSQ4WxuyZxQkJ3uSSfAzkLy2pW1yIKwx6Uybxa+n+RzPhdmRxVg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIe2xCqtGsu/ByT2WLR+DX7TNS45db0vjLjRpXShe2wBOiQomVDALzGNrJ+YcU0ENQ==",
                             PhoneNumber = "28929173",
                             SecurityStamp = "f4572cb1-6f71-46fd-8260-0baea7287367",
                             UserName = "adminDev@hotmail.com"
@@ -205,7 +205,7 @@ namespace Group15.EventManager.Data.Migrations
                         {
                             Id = new Guid("264d9f3b-ee5a-4436-8f5e-9937a9ff4727"),
                             CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Fyn",
+                            Name = "Odense",
                             RegionId = new Guid("7e07ff02-61b5-47cf-80d2-95af4c291274"),
                             Zipcode = 5000
                         },
@@ -384,6 +384,56 @@ namespace Group15.EventManager.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Group15.EventManager.Domain.Models.Group", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Discount")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Groups");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4bca98a6-3cd0-49da-a947-02ad2ef8cdf5"),
+                            CreatedDate = new DateTime(2019, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Discount = 30.0,
+                            Name = "Basic"
+                        },
+                        new
+                        {
+                            Id = new Guid("cf113457-a62f-4ed5-ae65-d5d4ebc09537"),
+                            CreatedDate = new DateTime(2019, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Discount = 40.0,
+                            Name = "Member"
+                        },
+                        new
+                        {
+                            Id = new Guid("0daeaea2-2e4e-49f7-be7b-d61724c60971"),
+                            CreatedDate = new DateTime(2019, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Discount = 45.0,
+                            Name = "Business"
+                        },
+                        new
+                        {
+                            Id = new Guid("dba67215-9771-457d-9698-d7dc708a00e7"),
+                            CreatedDate = new DateTime(2019, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Discount = 55.0,
+                            Name = "Premium"
+                        });
+                });
+
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Joint.ApplicationUserEvent", b =>
                 {
                     b.Property<Guid>("ApplicationUserId")
@@ -400,6 +450,24 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasIndex("EventId");
 
                     b.ToTable("UserEvents");
+                });
+
+            modelBuilder.Entity("Group15.EventManager.Domain.Models.Joint.ApplicationUserGroup", b =>
+                {
+                    b.Property<Guid>("ApplicationUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GroupId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ApplicationUserId", "GroupId");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("UserGroups");
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Marker", b =>
@@ -792,6 +860,21 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasOne("Group15.EventManager.Domain.Models.Event", "Event")
                         .WithMany("UserEvents")
                         .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Group15.EventManager.Domain.Models.Joint.ApplicationUserGroup", b =>
+                {
+                    b.HasOne("Group15.EventManager.Domain.Models.Auth.ApplicationUser", "User")
+                        .WithMany("Groups")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Group15.EventManager.Domain.Models.Group", "Group")
+                        .WithMany("Users")
+                        .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

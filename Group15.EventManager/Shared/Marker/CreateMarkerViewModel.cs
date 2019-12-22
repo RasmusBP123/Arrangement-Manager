@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Group15.EventManager.Shared.Marker
+﻿namespace Group15.EventManager.Shared.Marker
 {
     public class CreateMarkerViewModel
     {

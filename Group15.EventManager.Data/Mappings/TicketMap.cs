@@ -1,7 +1,6 @@
 ﻿using Group15.EventManager.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
 namespace Group15.EventManager.Data.Mappings
 {

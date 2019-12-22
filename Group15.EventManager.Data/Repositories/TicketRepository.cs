@@ -37,7 +37,7 @@ namespace Group15.EventManager.Data.Repositories
                         Db.Set<Ticket>().Add(new Ticket() { Id = Guid.NewGuid(), Event = _event, User = user });
                     }
                 }
-                if(e.CurrentAmountOfCustomers < _event.CurrentAmountOfCustomers)
+                if (e.CurrentAmountOfCustomers < _event.CurrentAmountOfCustomers)
                 {
                     var numberOfTicketsToBeRemoved = _event.CurrentAmountOfCustomers - e.CurrentAmountOfCustomers;
                     var ticketsToBeRemoved = Db.Set<Ticket>().Take(numberOfTicketsToBeRemoved);

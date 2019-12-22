@@ -1,8 +1,6 @@
 ﻿using FluentValidation;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Group15.EventManager.ApplicationLayer.Validation.Events
 {

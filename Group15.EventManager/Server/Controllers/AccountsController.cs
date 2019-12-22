@@ -1,11 +1,8 @@
-﻿using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using Group15.EventManager.Application.ViewModels.Auth;
+﻿using Group15.EventManager.Application.ViewModels.Auth;
 using Group15.EventManager.ApplicationLayer.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Group15.EventManager.Server.Controllers
 {
@@ -36,7 +33,7 @@ namespace Group15.EventManager.Server.Controllers
                 var errors = result.Errors.Select(e => e.Description);
                 return BadRequest(new RegisterResult() { Successful = false, Errors = errors });
             }
-            return Created("api/accounts/create",new RegisterResult() { Successful = true });
+            return Created("api/accounts/create", new RegisterResult() { Successful = true });
         }
 
         [HttpGet]

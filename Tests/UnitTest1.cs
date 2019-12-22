@@ -1,6 +1,5 @@
 using Group15.EventManager.Data.Context;
 using Group15.EventManager.Domain.Models;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System.Linq;
 

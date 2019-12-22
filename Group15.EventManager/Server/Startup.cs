@@ -1,23 +1,23 @@
-using System;
-using System.Text;
-using System.Linq;
 using AutoMapper;
-using MediatR;
+using FluentValidation.AspNetCore;
 using Group15.EventManager.Application.AutoMapper;
 using Group15.EventManager.Bootstrapper;
+using Group15.EventManager.Data.Context;
+using Group15.EventManager.Domain.Models.Auth;
+using Group15.EventManager.Shared.Auth.Policies;
+using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Group15.EventManager.Domain.Models.Auth;
-using Microsoft.AspNetCore.Identity;
-using FluentValidation.AspNetCore;
-using Group15.EventManager.Data.Context;
-using Group15.EventManager.Shared.Auth.Policies;
+using System;
+using System.Linq;
+using System.Text;
 
 namespace Group15.EventManager.Server
 {
@@ -39,7 +39,7 @@ namespace Group15.EventManager.Server
                     .AddRoles<IdentityRole<Guid>>()
                     .AddEntityFrameworkStores<SqlContext>()
                     .AddDefaultTokenProviders();
-            
+
             services.RegisterServices();
 
             //JWT
@@ -55,7 +55,7 @@ namespace Group15.EventManager.Server
                         ValidIssuer = Configuration["JwtIssuer"],
                         ValidAudience = Configuration["JwtAudience"],
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSecurityKey"]))
-                    };  
+                    };
                 });
 
             services.AddAuthorization(config =>

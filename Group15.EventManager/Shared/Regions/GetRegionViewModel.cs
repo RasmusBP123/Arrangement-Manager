@@ -1,5 +1,4 @@
 ﻿using Group15.EventManager.Shared.Cities;
-using Group15.EventManager.Shared.Events;
 using System;
 using System.Collections.Generic;
 

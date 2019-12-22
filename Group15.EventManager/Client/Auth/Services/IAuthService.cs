@@ -1,5 +1,4 @@
 ﻿using Group15.EventManager.Shared.Auth;
-using System;
 using System.Threading.Tasks;
 
 namespace Group15.EventManager.Client.Auth.Services

@@ -10,13 +10,13 @@ namespace Group15.EventManager.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-             builder.ToTable("Users");
-             builder.Ignore(user => user.TwoFactorEnabled)
-                    .Ignore(user => user.LockoutEnabled)
-                    .Ignore(user => user.LockoutEnd)
-                    .Ignore(user => user.PhoneNumberConfirmed)
-                    .Ignore(user => user.EmailConfirmed)
-                    .Ignore(user => user.AccessFailedCount);
+            builder.ToTable("Users");
+            builder.Ignore(user => user.TwoFactorEnabled)
+                   .Ignore(user => user.LockoutEnabled)
+                   .Ignore(user => user.LockoutEnd)
+                   .Ignore(user => user.PhoneNumberConfirmed)
+                   .Ignore(user => user.EmailConfirmed)
+                   .Ignore(user => user.AccessFailedCount);
 
             var hasher = new PasswordHasher<ApplicationUser>();
 
@@ -28,7 +28,7 @@ namespace Group15.EventManager.Data.Mappings
                 Email = "adminDev@hotmail.coM",
                 NormalizedEmail = "ADMINDEV@HOTMAIL.COM",
                 PasswordHash = hasher.HashPassword(null, "Horse123!"),
-                SecurityStamp ="f4572cb1-6f71-46fd-8260-0baea7287367",
+                SecurityStamp = "f4572cb1-6f71-46fd-8260-0baea7287367",
                 ConcurrencyStamp = "bd5b9857-9d78-4f9d-81e3-28569973e0a2",
                 PhoneNumber = "28929173",
                 FirstName = "Rasmus",

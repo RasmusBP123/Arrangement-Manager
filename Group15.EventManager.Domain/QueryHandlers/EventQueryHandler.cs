@@ -1,20 +1,15 @@
 ﻿using Group15.EventManager.Data.Interfaces;
-using Group15.EventManager.Data.UnitOfWork;
-using Group15.EventManager.Domain.Handlers;
 using Group15.EventManager.Domain.Models;
 using Group15.EventManager.Domain.Queries.Events;
 using Group15.EventManager.Domain.Queries.Events.Filters;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Group15.EventManager.Domain.QueryHandlers
 {
-    public class EventQueryHandler :IRequestHandler<AllActiveEventsQuery, IQueryable<Event>>,
+    public class EventQueryHandler : IRequestHandler<AllActiveEventsQuery, IQueryable<Event>>,
                                     IRequestHandler<AllEventsQuery, IQueryable<Event>>,
                                     IRequestHandler<AllEventsByRegionQuery, IQueryable<Event>>,
                                     IRequestHandler<AllEventsByRegionAndCityQuery, IQueryable<Event>>,

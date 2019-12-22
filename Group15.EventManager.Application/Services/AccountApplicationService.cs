@@ -4,7 +4,6 @@ using Group15.EventManager.ApplicationLayer.Interfaces;
 using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Data.UnitOfWork;
 using Group15.EventManager.Domain.Models.Auth;
-using MediatR;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -19,7 +18,7 @@ namespace Group15.EventManager.ApplicationLayer.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAccountRepository _accountRepository;
 
-        public AccountApplicationService(IMapper mapper, IUnitOfWork unitOfWork ,IAccountRepository accountRepository)
+        public AccountApplicationService(IMapper mapper, IUnitOfWork unitOfWork, IAccountRepository accountRepository)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
