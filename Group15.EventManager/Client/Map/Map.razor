@@ -1,7 +1,8 @@
 ﻿@inject IJSRuntime JSRuntime
 @implements IDisposable 
 
-<div id="@MarkerId" style="height: 100%; width: 100%;"></div>
+<div id="@MarkerId" class="map-container">Hello
+</div>
 
 @code {
 
@@ -20,7 +21,6 @@
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
         Address = $"{AddressModel.RoadName} {AddressModel.RoadNumber}, {City.Name}, Denmark";
-        Console.WriteLine(Address);
         await JSRuntime.InvokeVoidAsync(
             "map.showOrUpdate",
             MarkerId,

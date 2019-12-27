@@ -121,12 +121,6 @@ app {
     cursor: pointer;
 }
 
-.track-order-map{
-    width: 550px;
-    height: 500px;
-}
-
-
 @media (max-width: 767.98px) {
     .main .top-row {
         display: none;

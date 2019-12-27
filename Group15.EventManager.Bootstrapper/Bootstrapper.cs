@@ -3,6 +3,7 @@ using Group15.EventManager.Application.Interfaces;
 using Group15.EventManager.Application.Services;
 using Group15.EventManager.Application.Validation.Events;
 using Group15.EventManager.Application.ViewModels.Auth;
+using Group15.EventManager.ApplicationLayer.Email;
 using Group15.EventManager.ApplicationLayer.Interfaces;
 using Group15.EventManager.ApplicationLayer.Services;
 using Group15.EventManager.ApplicationLayer.Validation.Accounts;
@@ -41,6 +42,8 @@ namespace Group15.EventManager.Bootstrapper
             services.RegisterCommands();
             services.RegisterQueries();
             services.RegisterValidators();
+
+            services.AddScoped<IMailBuilder, MailBuilder>();
 
             //Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();

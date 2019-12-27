@@ -1,11 +1,10 @@
 ﻿@inject NavigationManager NavManager
 
-    <li class="e-container" @onclick="@(() => NavigateToEventDetails(Model.Id))">
-        <MatCard Class="card-container">
-            <MatCardContent>
+    <li class="event-container" @onclick="@(() => NavigateToEventDetails(Model.Id))">
+        <div class="card-container">
                 <h1>@Model.Name</h1>
                 <div class="my-row">
-                   <MatCardMedia Wide="false" Class="image-container" ImageUrl="https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg" />
+                   <img Class="image-container" src="https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg" />
                    <div class="card-content">
                        <div class="event-section-1">
                            <h6>BESKRIVELSE</h6>
@@ -22,33 +21,15 @@
                            <div class="vertical-line"></div>
                        </div>        
                        <div class="event-section-3">
+                           <div>
+                           <Amount />
+                           </div>
                            <h4>Læg i tilbudskurven</h4>
                        </div>
                    </div>
                 </div>
-            </MatCardContent>
-        </MatCard>
+        </div>
     </li>
-
-@*<li @onclick="@(() => NavigateToEventDetails(Model.Id))">
-    <div class="event-container">
-        <div class="event-left">
-            <div class="event-left-top">
-                <h2>@Model.Name</h2>
-                <h2>@PayableOnline</h2>
-            </div>
-            <br/>
-            <p>@Model.Description</p>
-            <p>Start dato: @Model.EventDate</p>
-            <p>Slutter omkring: @Model.EndEventDate</p>
-            <p class="font-weight-bold">Addresse @Model.Address.RoadName @Model.Address.RoadNumber, @Model.City.Name</p>
-        </div>
-        <div class="event-right">
-            <p>IMAGE GOES HERE</p>
-        </div>
-    </div>
-</li>*@
-
 
 @code {
     [Parameter]

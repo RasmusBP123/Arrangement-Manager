@@ -4,6 +4,7 @@
 @inject EventStore  EventStore
 
     <div class="index-container">
+        <MatButton Raised="true" @onclick="@(() => SendMail())">Send email</MatButton>
         <Regions />
         <Events />
     </div>
@@ -20,5 +21,11 @@
             }
         }
         catch { }
+    }
+
+    private void SendMail()
+    {
+        var email = AuthStore.User.Email;
+        HttpClient.PostAsync($"api/mail/send/{email}", null);
     }
 }

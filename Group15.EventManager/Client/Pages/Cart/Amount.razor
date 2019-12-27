@@ -1,7 +1,10 @@
-﻿
-<button @onclick="(() => SubstractAmount())">-</button>
-    <input @bind-value="CurrentAmount" @bind-value:event="oninput" />
-<button @onclick="@(() => AddAmount())">+</button>
+﻿@inject ThemeStore Theme
+
+<MatThemeProvider Theme="Theme.Main">
+    <MatButton Raised="true" @onclick="(() => SubstractAmount())">-</MatButton>
+        <input @bind-value="CurrentAmount" @bind-value:event="oninput" style="width: 50px;" />
+    <MatButton Raised="true" @onclick="@(() => AddAmount())">+</MatButton>
+</MatThemeProvider>
 
 @code {
     [Parameter]

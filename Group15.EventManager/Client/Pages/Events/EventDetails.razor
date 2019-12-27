@@ -16,23 +16,25 @@ else
 <AuthorizeView Policy="@Policies.IsAdmin">
     <MatButton Raised="true" OnClick="@(() => OpenConfirmDeleteEvent())">Delete</MatButton>
 </AuthorizeView>
-
 <div class="event-details-container">
-    <MatCard Class="eventdetails-card">
-        <MatCardContent Class="eventdetails-card">
-            <MatThemeProvider Theme="Theme.Main">
-                <MatHeadline1>@EventStore.Event.Name</MatHeadline1>
-                <MatH4>@EventStore.Event.Price</MatH4>
-
-                <MatBody2>
-                    <p>@EventStore.Event.Description</p>
-                </MatBody2>
-                <MatSubtitle2>How many tickets would you like to buy?</MatSubtitle2>
-                <MatInputTextComponent @bind-Value="@ticketAmount" />
-                <MatButton type="submit" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</MatButton>
-            </MatThemeProvider>
-        </MatCardContent>
-    </MatCard>
+    <div>
+        <MatCard Class="details-container">
+            <MatCardContent>
+                <MatThemeProvider Theme="Theme.Main">
+                    <div class="eventdetails-card">
+                        <MatHeadline1>@EventStore.Event.Name</MatHeadline1>
+                        <MatH4>@EventStore.Event.Price</MatH4>
+                        <MatBody2>
+                            <p>@EventStore.Event.Description</p>
+                        </MatBody2>
+                        <MatSubtitle2>How many tickets would you like to buy?</MatSubtitle2>
+                        <MatInputTextComponent @bind-Value="@ticketAmount" />
+                        <MatButton type="submit" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</MatButton>
+                    </div>
+                </MatThemeProvider>
+            </MatCardContent>
+        </MatCard>
+    </div>
     @*<input @bind-value="@ticketAmount" />
         <p class="@EventIsFull warning">You are about to overbook this event, which you cannot do</p>*@
     <div class="track-order-map">

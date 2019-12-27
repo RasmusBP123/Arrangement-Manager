@@ -3,7 +3,7 @@
 @inject TicketStore TicketStore
 @inject EventStore EventStore
 @inject HttpClient HttpClient
-@using Group15.EventManager.Shared.Tickets
+
 
 <h3>Cart</h3>
 
@@ -19,6 +19,7 @@
     </div>
     <button @onclick="@(() => CancelEvent(_event.Id))">Remove</button>
 }
+
 <p>Total price: <cite>@TicketStore.CalculateTotalPrice(TicketStore.TicketsForCart)</cite></p>
 <button class="btn btn-success" @onclick="@(() => UpdateTicketAmount(EventStore.EventsWithTickets))">Update</button>
 
