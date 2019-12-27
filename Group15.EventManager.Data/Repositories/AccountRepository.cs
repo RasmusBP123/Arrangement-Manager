@@ -1,18 +1,22 @@
-﻿using Group15.EventManager.Data.Interfaces;
+﻿using Group15.EventManager.Data.Context;
+using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Domain.Models.Auth;
+using Group15.EventManager.Domain.Models.Joint;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Group15.EventManager.Data.Repositories
 {
-    public class AccountRepository : IAccountRepository
+    public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountRepository(SqlContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) : base(context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -35,6 +39,8 @@ namespace Group15.EventManager.Data.Repositories
         {
             string userName = claimsPrincipal.Identity.Name;
             var user = await _userManager.FindByNameAsync(userName);
+            var userGroups = Db.Set<ApplicationUserGroup>().Include(ug => ug.Group).Where(u => u.ApplicationUserId == user.Id);
+            user.Groups = userGroups.ToList();
             return user;
         }
 
