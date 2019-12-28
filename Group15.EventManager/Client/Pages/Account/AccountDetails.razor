@@ -3,18 +3,29 @@
 @inject IAuthService AuthService
 @inject NavigationManager NavManager
 @inject AuthStore AuthStore
+@inject IModalService ModalService
 @attribute [Authorize(Policy = Policies.IsUser)]
 
-<h3>Account</h3>
+<h3>Din konto</h3>
 
-<!--More properties to be added-->
-<p>@AuthStore.User.Email</p>
-<p>@AuthStore.User.FirstName</p>
-<p>@AuthStore.User.LastName</p>
+<div class="account-info">
+    <p>Email </p><p> @AuthStore.User.Email</p>
+</div>
+<div class="account-info">
+    <p>Navn </p><p> @AuthStore.User.FirstName @AuthStore.User.LastName</p>
+</div>
+<div class="account-info">
+    <p>By </p><p> @AuthStore.User.City</p>
+</div>
 
-<button class="btn btn-outline-danger" @onclick="@(() => DeleteAccount())">delete</button>
+<div class="flex-row">
+    <MatButton Raised="true" @onclick="@ShowChangePasswordModal">Skift kodeord</MatButton>
+    <MatButton Raised="true" class="btn btn-danger" @onclick="@(() => DeleteAccount())">delete</MatButton>
+</div>
 
 @code {
+
+    public bool PasswordChanged { get; set; } = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -30,5 +41,10 @@
         await HttpClient.DeleteAsync("api/accounts/delete");
         await AuthService.Logout();
         NavManager.NavigateTo("/");
+    }
+
+    private void ShowChangePasswordModal()
+    {
+        ModalService.Show<ChangePassword>("Indtast venligst informationen nedenunder");
     }
 }

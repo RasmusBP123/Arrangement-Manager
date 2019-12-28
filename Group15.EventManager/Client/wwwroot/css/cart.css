@@ -33,3 +33,42 @@
     -webkit-transform: rotate(-45deg);
 }
   
+/*Delivery*/
+
+.delivery-container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+}
+
+.form-container{
+    width: 50%;
+}
+
+side-container{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.aside-box{
+    width: 300px;
+    margin-top: 5%;
+    border: 1px solid #eee;
+}
+
+.grey{
+    background-color: #eee;
+    width: 100%;
+}
+
+.yellow-sticker {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    padding: 2%;
+    background-color: #f3efb4;
+}

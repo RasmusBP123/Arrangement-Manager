@@ -1,0 +1,21 @@
+﻿@inject EventStore EventStore
+@inject TicketStore TicketStore
+@inject HttpClient HttpClient
+@inject AuthStore AuthStore
+
+<div class="yellow-sticker">
+    <MatH5>Total price: @Sum</MatH5>
+    <MatH6>Heraf er moms: @Moms</MatH6>
+</div>
+
+@code{
+    private double Sum { get; set; }
+    private double Moms { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        EventStore.EventsWithTickets = await HttpClient.GetJsonAsync<IEnumerable<GetEventWithTicketsViewModel>>($"api/events/user/{AuthStore.User.Id}/tickets");
+        Sum = TicketStore.CalculateTotalPrice(EventStore.EventsWithTickets);
+        Moms = @TicketStore.CalculateTax(Sum);
+    }
+}

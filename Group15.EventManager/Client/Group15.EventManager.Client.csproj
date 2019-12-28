@@ -19,8 +19,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Shared\Group15.EventManager.Shared.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
 
 </Project>

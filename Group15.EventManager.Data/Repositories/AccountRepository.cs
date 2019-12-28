@@ -4,6 +4,7 @@ using Group15.EventManager.Domain.Models.Auth;
 using Group15.EventManager.Domain.Models.Joint;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -59,6 +60,13 @@ namespace Group15.EventManager.Data.Repositories
         public async Task<SignInResult> PasswordSignIn(string email, string password)
         {
             var result = await _signInManager.PasswordSignInAsync(email, password, false, false);
+            return result;
+        }
+
+        public async Task<IdentityResult> UpdatePassword(Guid userId, string currentPassword, string newPassword)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
             return result;
         }
 

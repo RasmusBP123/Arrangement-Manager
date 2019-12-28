@@ -9,6 +9,7 @@ namespace Group15.EventManager.Shared.Events
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public double Price { get; set; }
         public int CurrentAmountOfCustomers { get; set; }
         public int MaxCustomerLimit { get; set; }
         public IEnumerable<GetTicketForCartViewModel> Tickets { get; set; }

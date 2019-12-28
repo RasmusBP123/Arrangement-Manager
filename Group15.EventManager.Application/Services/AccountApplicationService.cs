@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Group15.EventManager.Application.ViewModels.Auth;
 using Group15.EventManager.ApplicationLayer.Interfaces;
+using Group15.EventManager.ApplicationLayer.ViewModels.Auth;
 using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Data.UnitOfWork;
 using Group15.EventManager.Domain.Models.Auth;
@@ -62,6 +63,12 @@ namespace Group15.EventManager.ApplicationLayer.Services
             return result;
         }
 
+        public async Task<IdentityResult> UpdatePassword(UpdateAccountPasswordModel user)
+        {
+            var result = await _accountRepository.UpdatePassword(user.Id, user.CurrentPassword, user.NewPassword);
+            return result;
+        }
+
         public Task<IEnumerable<string>> GetRoles(UserModel user)
         {
             var applicationUser = _mapper.Map<ApplicationUser>(user);
@@ -73,9 +80,11 @@ namespace Group15.EventManager.ApplicationLayer.Services
         {
             await _accountRepository.DeleteAccount(userClaim);
         }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);
         }
+
     }
 }

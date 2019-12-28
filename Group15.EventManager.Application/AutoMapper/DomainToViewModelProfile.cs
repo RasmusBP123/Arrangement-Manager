@@ -3,6 +3,7 @@ using Group15.EventManager.Application.ViewModels.Auth;
 using Group15.EventManager.Application.ViewModels.Events;
 using Group15.EventManager.ApplicationLayer.ViewModels.Address_;
 using Group15.EventManager.ApplicationLayer.ViewModels.Attendances;
+using Group15.EventManager.ApplicationLayer.ViewModels.Auth;
 using Group15.EventManager.ApplicationLayer.ViewModels.Cities;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
 using Group15.EventManager.ApplicationLayer.ViewModels.Foods;

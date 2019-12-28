@@ -3,11 +3,16 @@
 @inject TicketStore TicketStore
 @inject EventStore EventStore
 @inject HttpClient HttpClient
-
+@inject NavigationManager NavManager
+@inject ThemeStore ThemeStore
 
 <h3>Cart</h3>
 
 <Process Step="Step.Basket" />
+
+<MatThemeProvider Theme="ThemeStore.Main">
+<MatButton Raised="true" OnClick="@(() => NavManager.NavigateTo("delivery"))">Næste</MatButton>
+</MatThemeProvider>
 
 @foreach (var _event in EventStore.EventsWithTickets)
 {
@@ -19,9 +24,10 @@
     </div>
     <button @onclick="@(() => CancelEvent(_event.Id))">Remove</button>
 }
-
-<p>Total price: <cite>@TicketStore.CalculateTotalPrice(TicketStore.TicketsForCart)</cite></p>
-<button class="btn btn-success" @onclick="@(() => UpdateTicketAmount(EventStore.EventsWithTickets))">Update</button>
+<div>
+    <CalculatedTotalAmount />
+    <button class="btn btn-success" @onclick="@(() => UpdateTicketAmount(EventStore.EventsWithTickets))">Update</button>
+</div>
 
 @code {
 

@@ -1,4 +1,5 @@
 ﻿using Group15.EventManager.Application.ViewModels.Auth;
+using Group15.EventManager.ApplicationLayer.ViewModels.Auth;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Group15.EventManager.ApplicationLayer.Interfaces
         Task<SignInResult> PasswordSignIn(LoginModel loginModel);
         Task<UserModel> GetLoggedInUser(ClaimsPrincipal claimsPrincipal);
         Task<UserModel> Login(string email);
+        Task<IdentityResult> UpdatePassword(UpdateAccountPasswordModel user);
         Task<IEnumerable<string>> GetRoles(UserModel user);
         Task DeleteAccount(ClaimsPrincipal userClaim);
     }

@@ -1,5 +1,6 @@
 ﻿using Group15.EventManager.Application.ViewModels.Auth;
 using Group15.EventManager.ApplicationLayer.Interfaces;
+using Group15.EventManager.ApplicationLayer.ViewModels.Auth;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,6 +37,19 @@ namespace Group15.EventManager.Server.Controllers
             return Created("api/accounts/create", new RegisterResult() { Successful = true });
         }
 
+        [HttpPost]
+        [Route("update/password")]
+        public async Task<IActionResult> UpdatePassword([FromBody] UpdateAccountPasswordModel user)
+        {
+            var result = await _accountApplicationService.UpdatePassword(user);
+            if (result.Succeeded)
+            {
+                return Ok(true);
+            }
+
+            return BadRequest(result.Errors);
+        }
+ 
         [HttpGet]
         [Route("user")]
         public async Task<IActionResult> GetUser()

@@ -1,0 +1,45 @@
+﻿@page "/delivery"
+@inject HttpClient HttpClient
+@inject AuthStore AuthStore
+
+<h3>Levering</h3>
+
+<Process Step="Step.Delivery"/>
+
+<div class="delivery-container">
+    <div class="form-container">
+    <EditForm Model="User" OnValidSubmit="DeliverySubmit">
+        <div class="form-group">
+            <label>Navn</label>
+            <InputText class="form-control" @bind-Value="@User.FirstName"/>
+        </div>
+    </EditForm>
+    </div>
+    <div class="side-container">
+            <div class="aside-box">
+                <label class="grey">Ordre resume</label>
+                    <UserEvents />
+            </div>
+            <div class="aside-box">
+                <label class="grey">Beløb</label>
+                <CalculatedTotalAmount />
+            </div>
+    </div>
+</div>
+
+@code {
+
+    private UserModel User { get; set; } = new UserModel();
+    public bool IsLoggedInUser { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        IsLoggedInUser = await HttpClient.GetJsonAsync<bool>("api/accounts/valid");
+    }
+
+    private async Task DeliverySubmit()
+    {
+
+    }
+
+}

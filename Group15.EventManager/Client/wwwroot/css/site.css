@@ -16,6 +16,12 @@ app {
     flex-direction: column;
 }
 
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 .top-row {
     height: 3.5rem;
     display: flex;

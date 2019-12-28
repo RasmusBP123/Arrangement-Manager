@@ -10,6 +10,7 @@ namespace Group15.EventManager.Application.ViewModels.Auth
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string City { get; set; }
         public IEnumerable<IdentityRole> Roles { get; set; }
     }
 }
