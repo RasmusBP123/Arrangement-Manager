@@ -1,11 +1,12 @@
 ﻿@page "/delivery"
 @inject HttpClient HttpClient
 @inject AuthStore AuthStore
+@inject NavigationManager NavManager
 
 <h3>Levering</h3>
 
 <Process Step="Step.Delivery"/>
-
+<MatButton Raised="true" @onclick="@(() => NavManager.NavigateTo("cart"))">Tilbage</MatButton>
 <div class="delivery-container">
     <div class="form-container">
     <EditForm Model="User" OnValidSubmit="DeliverySubmit">

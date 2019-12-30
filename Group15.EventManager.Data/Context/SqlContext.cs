@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Reflection;
 
 namespace Group15.EventManager.Data.Context
 {
@@ -13,7 +14,7 @@ namespace Group15.EventManager.Data.Context
     {
         private readonly IHostEnvironment _env;
 
-        public SqlContext()
+        public SqlContext(DbContextOptions options) : base(options)
         {
 
         }
@@ -62,7 +63,6 @@ namespace Group15.EventManager.Data.Context
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            // define the database to use
             optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
         }
 

@@ -4,6 +4,7 @@
 @inject IState<GetActiveEventsState> EventState
 @inject EventStore EventStore
 @inject HttpClient HttpClient
+@implements IDisposable
 
 <input class="search-bar pointer" type="search" @bind-Value="EventStore.SearchTerm" @bind-Value:event="oninput" placeholder=" ..." />
 
@@ -22,5 +23,10 @@
         EventStore.OnClickedRegion += StateHasChanged;
         //EventStore.OnBookedEvent += StateHasChanged;
         //Dispatcher.Dispatch(new GetActiveEventsAction());
+    }
+
+    void IDisposable.Dispose()
+    {
+        EventStore.OnClickedRegion -= StateHasChanged;
     }
 }

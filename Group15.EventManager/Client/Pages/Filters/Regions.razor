@@ -29,9 +29,9 @@
     </div>
 
 @code {
-    
-    string value1;
+
     string regionId = "";
+    string cityId = "";
     private GetRegionViewModel region;
     protected override async Task OnInitializedAsync()
     {
@@ -41,6 +41,12 @@
 
     public async Task RegionClicked(ChangeEventArgs changeEvent)
     {
+        //Ensures if a city has already been selected, and a new region is selected, a city wont be chosen
+        if (!string.IsNullOrEmpty(cityId))
+        {
+            RegionStore.Region.Cities = new List<GetCityViewModel>();
+        }
+
         if (Guid.TryParse(changeEvent.Value.ToString(), out var newGuid) == true)
         {
             regionId = changeEvent.Value.ToString();
@@ -60,9 +66,8 @@
     {
         if (Guid.TryParse(changeEvent.Value.ToString(), out var newGuid) == true)
         {
-            var cityId = changeEvent.Value.ToString();
+            cityId = changeEvent.Value.ToString();
             EventStore.Events = await HttpClient.GetJsonAsync<List<GetEventListViewModel>>($"api/events/region/{regionId}/city/{cityId}");
-            CityStore.City = await HttpClient.GetJsonAsync<GetCityViewModel>($"api/city/{cityId}");
             EventStore.NotifyStateChanged();
         }
     }

@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Group15.EventManager.Domain.CommandHandlers
-{
+{ 
     public class StoreCommandHandler : Handler, IRequestHandler<CreateStoreCommand, bool>
     {
         private readonly IStoreRepository _storeRepository;

@@ -17,5 +17,9 @@ namespace Group15.EventManager.Domain.Commands.Store
             Region = region;
             City = city;
         }
+        public CreateStoreCommand(string name)
+        {
+            Name = name;
+        }
     }
 }
