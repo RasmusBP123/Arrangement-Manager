@@ -77,6 +77,7 @@ namespace Group15.EventManager.Server
                     new[] { "application/octet-stream" });
             });
 
+
             //SWAGGER
             //services.AddSwaggerGen(setup =>
             //{
@@ -107,6 +108,7 @@ namespace Group15.EventManager.Server
             app.UseClientSideBlazorFiles<Client.Startup>();
 
             app.UseRouting();
+
 
             //DO NOT TOUCH IMPORTANT --> UseAuthorization must be between UseRouting() and UseEndPoints()
             app.UseAuthentication();
