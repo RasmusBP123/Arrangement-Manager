@@ -8,7 +8,6 @@ using Group15.EventManager.ApplicationLayer.Interfaces;
 using Group15.EventManager.ApplicationLayer.Services;
 using Group15.EventManager.ApplicationLayer.Validation.Accounts;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
-using Group15.EventManager.Data.Context;
 using Group15.EventManager.Data.Interfaces;
 using Group15.EventManager.Data.Repositories;
 using Group15.EventManager.Data.UnitOfWork;
@@ -29,8 +28,6 @@ using Group15.EventManager.Domain.Queries.Tickets;
 using Group15.EventManager.Domain.Queries.Users;
 using Group15.EventManager.Domain.QueryHandlers;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 
@@ -47,8 +44,6 @@ namespace Group15.EventManager.Bootstrapper
             services.RegisterValidators();
 
             services.AddScoped<IMailBuilder, MailBuilder>();
-
-            //Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 

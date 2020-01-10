@@ -1,4 +1,5 @@
-﻿using Group15.EventManager.ApplicationLayer.Interfaces;
+﻿using Group15.EventManager.ApplicationLayer;
+using Group15.EventManager.ApplicationLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;

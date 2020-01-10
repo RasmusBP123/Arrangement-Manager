@@ -10,7 +10,7 @@ namespace Group15.EventManager.Domain.Models.Auth
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public ICollection<ApplicationUserEvent> UserEvents { get; set; }
-        public virtual ICollection<Ticket> Tickets { get; set; }
-        public virtual ICollection<ApplicationUserGroup> Groups { get; set; }
+        public ICollection<Ticket> Tickets { get; set; }
+        //public virtual ICollection<ApplicationUserGroup> Groups { get; set; }
     }
 }

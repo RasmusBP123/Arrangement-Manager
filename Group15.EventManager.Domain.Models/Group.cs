@@ -8,6 +8,6 @@ namespace Group15.EventManager.Domain.Models
     {
         public string Name { get; set; }
         public double Discount { get; set; }
-        public virtual ICollection<ApplicationUserGroup> Users { get; set; }
+        //public virtual ICollection<ApplicationUserGroup> Users { get; set; }
     }
 }

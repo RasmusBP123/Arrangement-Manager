@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Group15.EventManager.Data.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    [Migration("20191222121043_groups")]
-    partial class groups
+    [Migration("20200109220326_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -155,7 +155,7 @@ namespace Group15.EventManager.Data.Migrations
                             LastName = "Petersen",
                             NormalizedEmail = "ADMINDEV@HOTMAIL.COM",
                             NormalizedUserName = "ADMINDEV@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIe2xCqtGsu/ByT2WLR+DX7TNS45db0vjLjRpXShe2wBOiQomVDALzGNrJ+YcU0ENQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI+uaUXQ2gOwvegvJOBwLZUeQwE2Tb/A/+BlUHv1AgdcsInYKsrRPkgs9dIZUpra4g==",
                             PhoneNumber = "28929173",
                             SecurityStamp = "f4572cb1-6f71-46fd-8260-0baea7287367",
                             UserName = "adminDev@hotmail.com"
@@ -342,11 +342,11 @@ namespace Group15.EventManager.Data.Migrations
                             CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Eventet kommer til at foregå i Odense kl. 16:00, hvor man vil få tilbudt forfriskninger og vin til maden",
                             EmployeeId = new Guid("3216b7c9-4b42-44b4-a49c-2117496983d4"),
-                            EndEventDate = new DateTime(2019, 12, 24, 20, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventDate = new DateTime(2019, 12, 24, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            EndEventDate = new DateTime(2022, 12, 24, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventDate = new DateTime(2022, 12, 24, 14, 30, 0, 0, DateTimeKind.Unspecified),
                             FoodId = new Guid("5384338e-ff12-4a9a-8789-b3d89ce5db26"),
                             Image = new byte[] { 0 },
-                            LastBookingDate = new DateTime(2019, 12, 12, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastBookingDate = new DateTime(2022, 12, 12, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             MarkerId = new Guid("847fea10-80f0-49a0-8997-409eafdb5892"),
                             MaxCustomerLimit = 200,
                             MinCustomerAmount = 50,
@@ -452,24 +452,6 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasIndex("EventId");
 
                     b.ToTable("UserEvents");
-                });
-
-            modelBuilder.Entity("Group15.EventManager.Domain.Models.Joint.ApplicationUserGroup", b =>
-                {
-                    b.Property<Guid>("ApplicationUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("GroupId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ApplicationUserId", "GroupId");
-
-                    b.HasIndex("GroupId");
-
-                    b.ToTable("UserGroups");
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Marker", b =>
@@ -628,6 +610,14 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Tickets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a1f30749-d72d-422f-860c-534d49297bd8"),
+                            CreatedDate = new DateTime(2020, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = new Guid("a14280f8-d2b9-4598-8c89-c699cd1ab278")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -862,21 +852,6 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasOne("Group15.EventManager.Domain.Models.Event", "Event")
                         .WithMany("UserEvents")
                         .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Group15.EventManager.Domain.Models.Joint.ApplicationUserGroup", b =>
-                {
-                    b.HasOne("Group15.EventManager.Domain.Models.Auth.ApplicationUser", "User")
-                        .WithMany("Groups")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Group15.EventManager.Domain.Models.Group", "Group")
-                        .WithMany("Users")
-                        .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

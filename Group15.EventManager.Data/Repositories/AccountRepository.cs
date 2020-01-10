@@ -40,8 +40,8 @@ namespace Group15.EventManager.Data.Repositories
         {
             string userName = claimsPrincipal.Identity.Name;
             var user = await _userManager.FindByNameAsync(userName);
-            var userGroups = Db.Set<ApplicationUserGroup>().Include(ug => ug.Group).Where(u => u.ApplicationUserId == user.Id);
-            user.Groups = userGroups.ToList();
+            //var userGroups = Db.Set<ApplicationUserGroup>().Include(ug => ug.Group).Where(u => u.ApplicationUserId == user.Id);
+            //user.Groups = userGroups.ToList();
             return user;
         }
 

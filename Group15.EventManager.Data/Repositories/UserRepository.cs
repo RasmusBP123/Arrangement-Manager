@@ -36,7 +36,7 @@ namespace Group15.EventManager.Data.Repositories
         public IQueryable<ApplicationUser> GetAllUsersFromEvent(Guid eventId)
         {
             var userEvents = Db.Set<ApplicationUserEvent>().Include(ue => ue.User)
-                                                           .ThenInclude(user => user.Tickets)
+                                                           //.ThenInclude(user => user.Tickets)
                                                            .Where(ue => ue.EventId == eventId);
 
             var users = userEvents.Select(ue => ue.User).AsQueryable();
@@ -45,7 +45,7 @@ namespace Group15.EventManager.Data.Repositories
 
         public ApplicationUser GetSingleUser(Guid userId)
         {
-            var user = Db.Set<ApplicationUser>().Include(u => u.Tickets)
+            var user = Db.Set<ApplicationUser>()/*.Include(u => u.Tickets)*/
                                                 .FirstOrDefault(u => u.Id == userId);
             return user;
         }

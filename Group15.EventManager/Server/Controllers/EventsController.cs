@@ -1,4 +1,4 @@
-﻿using Group15.EventManager.Application.Interfaces;
+﻿    using Group15.EventManager.Application.Interfaces;
 using Group15.EventManager.ApplicationLayer.ViewModels.Events;
 using Microsoft.AspNetCore.Mvc;
 using System;
