@@ -12,6 +12,7 @@
 
 <div class="@disabled">
     <button class="btn btn-success" @onclick="ShowConfirmAttendance">Confirm</button>
+
     <UserContainer OnMovedUser="RerenderUsers" SignedUpUsers="UserStore.UsersFromEvent">
         <UserList UserStatus="@UserStatus.Invited" />
         <UserList UserStatus="@UserStatus.Registered" />
@@ -29,8 +30,8 @@
     protected override async Task OnInitializedAsync()
     {
         Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{EventId}");
-        DisableDashboardContent(Event.Attendance);
         await GetUsersDependingOnEarlierViset(UserStore.UsersFromEvent.Count());
+        //DisableDashboardContent(Event.Attendance);
     }
 
     private void RerenderUsers()
@@ -45,7 +46,7 @@
             UserStore.UsersFromEvent = await HttpClient.GetJsonAsync<IEnumerable<GetUserFromEventViewModel>>($"api/user/{EventId}/users");
             foreach (var user in UserStore.UsersFromEvent)
             {
-                user.Status = UserStatus.Invited;
+                //user.Status = UserStatus.Invited;
             }
         }
         else
@@ -63,7 +64,7 @@
 
     private void DisableDashboardContent(GetAttendanceViewModel attendance)
     {
-        if (attendance == null) return; //If attendance is null, we know the event cannot be finished
+        if (attendance == null) return; //If attendance is null, we know the event has not ended.
         if (attendance.Finished == true) disabled = "disabled";
     }
 

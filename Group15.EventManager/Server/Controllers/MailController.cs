@@ -1,4 +1,5 @@
-﻿using Group15.EventManager.ApplicationLayer.Email;
+﻿using Group15.EventManager.Application.ViewModels.Auth;
+using Group15.EventManager.ApplicationLayer.Email;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
@@ -21,12 +22,12 @@ namespace Group15.EventManager.Server.Controllers
 
         [HttpPost]
         [Route("send/{to}")]
-        public IActionResult SendEmail([FromRoute] string to)
+        public IActionResult SendEmail([FromRoute] string to, [FromBody] UserModel model)
         {
             MailboxAddress sender = new MailboxAddress("rasmusvm6@hotmail.com");
             MailboxAddress receiver = new MailboxAddress(to);
 
-            var header = _mailBuilder.CreateMailContent(sender, receiver);
+            var header = _mailBuilder.CreateMailContent(sender, receiver, model);
             var client = _mailBuilder.OpenSmtpServer();
 
             client.Send(header);

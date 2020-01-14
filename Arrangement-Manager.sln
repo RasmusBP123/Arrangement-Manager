@@ -12,9 +12,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. UnitTest", "6. UnitTest", "{22FA41CA-34C4-4C46-A288-E7631AC8139E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Presentation", "1. Presentation", "{BE20422D-D4C6-4A12-A7D9-24E7606D39C0}"
-	ProjectSection(SolutionItems) = preProject
-		nginx.conf = nginx.conf
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Group15.EventManager.ApplicationLayer", "Group15.EventManager.Application\Group15.EventManager.ApplicationLayer.csproj", "{D1B7B6EB-F15F-4037-8A54-581B73739586}"
 EndProject

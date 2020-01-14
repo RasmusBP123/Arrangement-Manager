@@ -13,9 +13,11 @@
 }
 else
 {
+
 <AuthorizeView Policy="@Policies.IsAdmin">
     <MatButton Raised="true" OnClick="@(() => OpenConfirmDeleteEvent())">Delete</MatButton>
 </AuthorizeView>
+
 <div class="event-details-container">
     <div>
 
@@ -30,14 +32,17 @@ else
                         </MatBody2>
                         <MatSubtitle2>How many tickets would you like to buy?</MatSubtitle2>
                         <MatInputTextComponent @bind-Value="@ticketAmount" />
-                        <MatButton type="submit" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</MatButton>
+                        @if (EventStore.Event.Food != null)
+                        {
+                            <MatSubtitle2>How many are eating?</MatSubtitle2>
+                            <MatInputTextComponent @bind-Value="@foodAmount" />
+                        }
                     </div>
+                        <MatButton Raised="true" type="submit" disabled="@disabled"  @onclick="@(() => BookEventForUser())">Book event</MatButton>
                 </MatThemeProvider>
             </MatCardContent>
         </MatCard>
     </div>
-    @*<input @bind-value="@ticketAmount" />
-        <p class="@EventIsFull warning">You are about to overbook this event, which you cannot do</p>*@
     <div class="track-order-map">
         <Map Zoom="15" Marker="@EventStore.Event.Marker" AddressModel="@EventStore.Event.Address" City="@EventStore.Event.City" />
     </div>
@@ -50,6 +55,7 @@ else
     public Guid EventId { get; set; }
     private bool disabled { get; set; }
     private int ticketAmount = 0;
+    private int foodAmount = 0;
     private string EventIsFull = "hide";
 
     protected override async Task OnInitializedAsync()

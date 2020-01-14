@@ -30,6 +30,7 @@ namespace Group15.EventManager.Data.Repositories
                 var _event = Db.Set<Event>().Include(e => e.Tickets).FirstOrDefault(ev => ev.Id == e.Id);
 
                 if (e.CurrentAmountOfCustomers == _event.CurrentAmountOfCustomers) return;
+
                 if (e.CurrentAmountOfCustomers > _event.CurrentAmountOfCustomers)
                 {
                     for (int i = 0; i < e.CurrentAmountOfCustomers; i++)
@@ -37,6 +38,7 @@ namespace Group15.EventManager.Data.Repositories
                         Db.Set<Ticket>().Add(new Ticket() { Id = Guid.NewGuid(), Event = _event, User = user });
                     }
                 }
+
                 if (e.CurrentAmountOfCustomers < _event.CurrentAmountOfCustomers)
                 {
                     var numberOfTicketsToBeRemoved = _event.CurrentAmountOfCustomers - e.CurrentAmountOfCustomers;

@@ -3,30 +3,36 @@
 @inject AuthStore AuthStore
 @inject NavigationManager NavManager
 
-<h3>Levering</h3>
+<h3>Fakturering</h3>
 
-<Process Step="Step.Delivery"/>
+<Process Step="Step.Delivery" />
 <MatButton Raised="true" @onclick="@(() => NavManager.NavigateTo("cart"))">Tilbage</MatButton>
 <div class="delivery-container">
     <div class="form-container">
-    <EditForm Model="User" OnValidSubmit="DeliverySubmit">
-        <div class="form-group">
-            <label>Navn</label>
-            <InputText class="form-control" @bind-Value="@User.FirstName"/>
-        </div>
-    </EditForm>
+        <EditForm Model="User">
+            <div class="form-group">
+                <label>Navn</label>
+                <InputText class="form-control" @bind-Value="@User.FirstName" />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <InputText class="form-control" @bind-Value="@User.Email" />
+            </div>
+            <MatButton Raised="true" Type="submit" OnClick="@(() => SendEMailWithTickets(User.Email))">Send email</MatButton>
+        </EditForm>
     </div>
     <div class="side-container">
-            <div class="aside-box">
-                <label class="grey">Ordre resume</label>
-                    <UserEvents />
-            </div>
-            <div class="aside-box">
-                <label class="grey">Beløb</label>
-                <CalculatedTotalAmount />
-            </div>
+        <div class="aside-box">
+            <label class="grey">Ordre resume</label>
+            <UserEvents />
+        </div>
+        <div class="aside-box">
+            <label class="grey">Beløb</label>
+            <CalculatedTotalAmount />
+        </div>
     </div>
 </div>
+
 
 @code {
 
@@ -38,9 +44,8 @@
         IsLoggedInUser = await HttpClient.GetJsonAsync<bool>("api/accounts/valid");
     }
 
-    private async Task DeliverySubmit()
+    private void SendEMailWithTickets(string email)
     {
-
+        HttpClient.PostJsonAsync<UserModel>($"api/mail/send/{email}", User);
     }
-
 }

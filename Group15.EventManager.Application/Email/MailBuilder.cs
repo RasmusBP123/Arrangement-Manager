@@ -1,4 +1,5 @@
-﻿using MailKit.Net.Smtp;
+﻿using Group15.EventManager.Application.ViewModels.Auth;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using MimeKit;
@@ -14,7 +15,7 @@ namespace Group15.EventManager.ApplicationLayer.Email
         {
             _env = env;
         }
-        public MimeMessage CreateMailContent(MailboxAddress sender, MailboxAddress receiver)
+        public MimeMessage CreateMailContent(MailboxAddress sender, MailboxAddress receiver, UserModel model)
         {
             MimeMessage message = new MimeMessage();
 
@@ -22,7 +23,7 @@ namespace Group15.EventManager.ApplicationLayer.Email
             message.To.Add(receiver);
             message.Subject = "Køb af H.J. Hansen Vin";
 
-            message.Body = CreateBody();
+            message.Body = CreateBody(model);
 
             return message;
         }
@@ -36,11 +37,12 @@ namespace Group15.EventManager.ApplicationLayer.Email
             return client;
         }
 
-        public MimeEntity CreateBody()
+        public MimeEntity CreateBody(UserModel model)
         {
             BodyBuilder body = new BodyBuilder
             {
                 HtmlBody = "<h1>Du har købt billet hos os</h1>" +
+                $"Kære {model.FirstName}" +
                 "<p>Du kan se dine billetter i ovenstående fil, vi glæder os til at se dig/Jer!</p>",
             };
 
