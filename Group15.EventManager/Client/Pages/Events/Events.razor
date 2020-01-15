@@ -6,7 +6,7 @@
 @inject HttpClient HttpClient
 @implements IDisposable
 
-<input class="search-bar pointer" type="search" @bind-Value="EventStore.SearchTerm" @bind-Value:event="oninput" placeholder=" ..." />
+<input class="search-bar pointer" type="search" @bind-Value="EventStore.SearchTerm" @bind-Value:event="oninput" placeholder=" Søg..." />
 
 <ul class="eventlist-container">
     @foreach (var _event in EventStore.EventSearch(EventStore.Events))

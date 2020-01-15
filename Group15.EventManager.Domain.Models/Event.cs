@@ -27,5 +27,6 @@ namespace Group15.EventManager.Domain.Models
         public ICollection<ApplicationUserEvent> UserEvents { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
         public virtual Employee Employee { get; set; }
+        public virtual Store? Store { get; set; }
     }
 }

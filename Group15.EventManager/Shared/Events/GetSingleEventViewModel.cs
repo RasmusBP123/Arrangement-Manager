@@ -3,6 +3,7 @@ using Group15.EventManager.Shared.Attendances;
 using Group15.EventManager.Shared.Cities;
 using Group15.EventManager.Shared.Food;
 using Group15.EventManager.Shared.Marker;
+using Group15.EventManager.Shared.Stores;
 using System;
 
 namespace Group15.EventManager.Shared.Events
@@ -26,5 +27,6 @@ namespace Group15.EventManager.Shared.Events
         public GetMarkerViewModel Marker { get; set; }
         public GetCityViewModel City { get; set; }
         public GetFoodViewModel Food { get; set; }
+        public GetSingleStoreViewModel Store { get; set; }
     }
 }

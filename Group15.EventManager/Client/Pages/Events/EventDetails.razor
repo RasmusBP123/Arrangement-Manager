@@ -20,7 +20,6 @@ else
 
 <div class="event-details-container">
     <div>
-
         <MatCard Class="details-container">
             <MatCardContent>
                 <MatThemeProvider Theme="Theme.Main">
@@ -30,22 +29,44 @@ else
                         <MatBody2>
                             <p>@EventStore.Event.Description</p>
                         </MatBody2>
-                        <MatSubtitle2>How many tickets would you like to buy?</MatSubtitle2>
-                        <MatInputTextComponent @bind-Value="@ticketAmount" />
-                        @if (EventStore.Event.Food != null)
+                        @if (EventStore.Event.PayOnline)
                         {
-                            <MatSubtitle2>How many are eating?</MatSubtitle2>
-                            <MatInputTextComponent @bind-Value="@foodAmount" />
+                            <MatSubtitle2>How many tickets would you like to buy?</MatSubtitle2>
+                            <MatInputTextComponent @bind-Value="@ticketAmount" />
+                            @if (EventStore.Event.Food != null)
+                            {
+                                <MatSubtitle2>How many are eating?</MatSubtitle2>
+                                <MatInputTextComponent @bind-Value="@foodAmount" />
+                            }
+                            <MatButton Raised="true" type="submit" disabled="@disabled" @onclick="@(() => BookEventForUser())">Book event</MatButton>
+                        }
+                        else
+                        {
+                            <MatSubtitle2>Dette arrangement kan kun købes i butikken.</MatSubtitle2>
                         }
                     </div>
-                        <MatButton Raised="true" type="submit" disabled="@disabled"  @onclick="@(() => BookEventForUser())">Book event</MatButton>
                 </MatThemeProvider>
             </MatCardContent>
         </MatCard>
     </div>
-    <div class="track-order-map">
-        <Map Zoom="15" Marker="@EventStore.Event.Marker" AddressModel="@EventStore.Event.Address" City="@EventStore.Event.City" />
-    </div>
+    @if (EventStore.Event.PayOnline == true)
+    {
+        <div>
+            <h3>Vejen til Arrangementet</h3>
+            <div class="track-order-map">
+                <Map Zoom="15" Marker="@EventStore.Event.Marker" AddressModel="@EventStore.Event.Address" City="@EventStore.Event.City" PayOnline="true" />
+            </div>
+        </div>
+    }
+    else
+    {
+        <div>
+            <h3>Vejen til @EventStore.Event.Store.Name</h3>
+            <div class="track-order-map">
+                <Map Zoom="15" Marker="@EventStore.Event.Store.Marker" AddressModel="@EventStore.Event.Store.Address" City="@EventStore.Event.Store.City" PayOnline="false" />
+            </div>
+        </div>
+    }
 </div>
 }
 

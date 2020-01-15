@@ -71,6 +71,10 @@ namespace Group15.EventManager.Data.Repositories
                                         .Include(e => e.Region)
                                         .Include(e => e.Address)
                                         .Include(e => e.Marker)
+                                        .Include(e => e.Store).ThenInclude(store => store.Address)
+                                        .Include(e => e.Store).ThenInclude(store => store.Marker)
+                                        .Include(e => e.Store).ThenInclude(store => store.City)
+                                        .Include(e => e.Store).ThenInclude(store => store.Region)
                                         .Include(e => e.Tickets) //For getting the current Count of tickets in the event model
                                         .FirstOrDefault(e => e.Id == eventId);
             return _event;

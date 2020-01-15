@@ -21,10 +21,17 @@
                            <div class="vertical-line"></div>
                        </div>        
                        <div class="event-section-3">
-                           <div>
-                           <Amount />
-                           </div>
-                           <h4>Læg i tilbudskurven</h4>
+                            @if (Model.PayOnline)
+                            {
+                                <div>
+                                        <Amount />
+                                </div>
+                                <h4>Læg i tilbudskurven</h4>
+                            }
+                            else
+                            {
+                                <h1>Arrangementet købes i butik.</h1>
+                            }
                        </div>
                    </div>
                 </div>
@@ -34,7 +41,7 @@
 @code {
     [Parameter]
     public GetEventListViewModel Model { get; set; }
-    public string PayableOnline => Model.PayOnline == false ? "Købes i butik" : $"{Model.Price} kr.";
+    public string PayableOnline => Model.PayOnline == false ? $"Arrangementet købes i butik. {Model.Price} kr." : $"{Model.Price} kr.";
 
     private void NavigateToEventDetails(Guid eventId)
     {

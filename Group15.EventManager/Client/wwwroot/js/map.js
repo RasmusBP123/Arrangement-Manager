@@ -4,7 +4,7 @@
     var userLongtitude, userLatitude;
 
 window.map = {
-    showOrUpdate: function (markerId, marker, address, zoom) {
+    showOrUpdate: function (markerId, marker, address, zoom, payOnline) {
 
             //If map exists it will be removed from context and a new one will be created
             if (map != null) {
@@ -25,8 +25,8 @@ window.map = {
 
                 dir = MQ.routing.directions();
 
-                if (marker != null) {
-                    dir.route({ //Directions for event and the user if markers exists
+                if (payOnline == true) {
+                    dir.route({ //Directions for event and if the user and markers exists
                         locations: [
                             { latLng: { lat: userLatitude, lng: userLongtitude } },
                             { latLng: { lat: marker.y, lng: marker.x } },
@@ -34,7 +34,6 @@ window.map = {
                     });
                 }
                 else {
-                    console.log(address);
                     dir.route({ //Directions for event and the user if address exists
                         locations: [
                             { latLng: { lat: userLatitude, lng: userLongtitude } },
