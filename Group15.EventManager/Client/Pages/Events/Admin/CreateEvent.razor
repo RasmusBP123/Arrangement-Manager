@@ -9,21 +9,21 @@
 @inject IModalService Modal
 @attribute [Authorize(Policy = Policies.IsAdmin)]
 
-<h3>Create a new event</h3>
+<h3>Opret Arrangement</h3>
 
 <EditForm Model="@EventStore.CreateEvent" OnValidSubmit="SubmitEvent">
     <DataAnnotationsValidator />
     <div class="form-group">
-        <label>Choose location</label>
+        <label>Vælg Region, by og butik</label>
         <LocationsForEvent />
     </div>
     <div class="form-group">
-        <label for="name">Name</label>
+        <label for="name">Navn</label>
         <InputText Id="name" class="form-control" @bind-Value="EventStore.CreateEvent.Name" />
         <ValidationMessage For="@(() => EventStore.CreateEvent.Name)" />
     </div>
     <div class="form-group">
-        <label for="description">Description</label>
+        <label for="description">Beskrivelse</label>
         <InputText Id="description" class="form-control" @bind-Value="EventStore.CreateEvent.Description" />
         <ValidationMessage For="@(() => EventStore.CreateEvent.Description)" />
     </div>
@@ -33,37 +33,37 @@
         <ValidationMessage For="@(() => EventStore.CreateEvent.Price)" />
     </div>
     <div class="form-group">
-        <label for="date">Date</label>
+        <label for="date">Dato for arrangement</label>
         <InputDate Id="date" class="form-control" @bind-Value="EventStore.CreateEvent.EventDate" />
         <ValidationMessage For="@(() => EventStore.CreateEvent.EventDate)" />
     </div>
     <div class="form-group">
-        <label>Last Booking Date</label>
+        <label>Sidste booking dato</label>
         <InputDate class="form-control" @bind-Value="EventStore.CreateEvent.LastBookingDate" />
         <ValidationMessage For="@(() => EventStore.CreateEvent.LastBookingDate)" />
     </div>
     <div class="form-group">
-        <label for="enddate">End of event</label>
+        <label for="enddate">Sluttidspunkt</label>
         <InputDate Id="enddate" class="form-control" @bind-Value="EventStore.CreateEvent.EndEventDate" />
         <ValidationMessage For="@(() => EventStore.CreateEvent.EndEventDate)" />
     </div>
     <div class="form-group">
-        <label for="mincustomer">Minimum customers</label>
+        <label for="mincustomer">Minimum kunder</label>
         <InputNumber Id="mincustomer" class="form-control" @bind-Value="EventStore.CreateEvent.MinCustomerAmount" />
         <ValidationMessage For="@(() => EventStore.CreateEvent.MinCustomerAmount)" />
     </div>
     <div class="form-group">
-        <label for="MaxCustomers">Maximum customers</label>
+        <label for="MaxCustomers">Maximum kunder</label>
         <InputNumber Id="inputnumber" class="form-control" @bind-Value="EventStore.CreateEvent.MaxCustomerLimit" />
         <ValidationMessage For="@(() => EventStore.CreateEvent.MaxCustomerLimit)" />
     </div>
     <div class="form-group">
-        <label>StreetName</label>
+        <label>Gadenavn</label>
         <InputText class="form-control" @bind-Value="Address.RoadName" />
         <ValidationMessage For="@(() => Address.RoadName)" />
     </div>
     <div class="form-group">
-        <label>Number</label>
+        <label>Gadenummer</label>
         <InputNumber Id="inputnumber" class="form-control" @bind-Value="Address.RoadNumber" />
         <ValidationMessage For="@(() => Address.RoadNumber)" />
     </div>
@@ -79,16 +79,16 @@
         <label for="payable">Payable</label>
         <InputCheckbox Id="payable" class="form-control" @bind-Value="EventStore.CreateEvent.PayOnline" />
     </div>
-    <h3>Food</h3>
+    <h3>Mad</h3>
     <button type="button" @onclick="@HideForm">Add</button>
     <div class="@hideForm">
         <div class="form-group">
-            <label for="food">Food Name</label>
+            <label for="food">Navn på maden</label>
             <InputText Id="food" class="form-control" @bind-Value="CreateFood.Name" />
             <ValidationMessage For="@(() =>CreateFood.Name)" />
         </div>
         <div class="form-group">
-            <label for="inputnumber">Food Price</label>
+            <label for="inputnumber">Mad pris</label>
             <InputNumber Id="inputnumber" class="form-control" @bind-Value="CreateFood.Price" />
             <ValidationMessage For="@(() =>CreateFood.Price)" />
         </div>

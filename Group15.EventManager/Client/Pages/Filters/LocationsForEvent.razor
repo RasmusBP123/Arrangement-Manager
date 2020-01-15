@@ -3,29 +3,32 @@
 @inject EventStore  EventStore
 @inject CityStore CityStore
 
-<div class="side-flex">
-    <div>
-        <select class="form-control pointer" @onchange="@RegionClicked">
-            <option>-- Vælg Region --</option>
-            @foreach (var region in RegionStore.Regions)
-            {
-                <option class="pointer" value="@region.Id">@region.Name</option>
-            }
-        </select>
-    </div>
-    <div>
-        <select class="form-control pointer" @onchange="CityClicked">
-            <option>-- Vælg by --</option>
-            @if (RegionStore.RegionToBeAdded != null && RegionStore.Region.Cities != null)
-            {
-                @foreach (var city in RegionStore.Region.Cities)
+    <div class="side-flex">
+        <div>
+            <select class="form-control pointer" @onchange="@RegionClicked">
+                <option>-- Vælg Region --</option>
+                @foreach (var region in RegionStore.Regions)
                 {
-                    <option value="@city.Id">@city.Name</option>
+                    <option class="pointer" value="@region.Id">@region.Name</option>
                 }
-            }
-        </select>
+            </select>
+        </div>
+        <div>
+            <select class="form-control pointer" @onchange="CityClicked">
+                <option>-- Vælg by --</option>
+                @if (RegionStore.RegionToBeAdded != null && RegionStore.Region.Cities != null)
+                {
+                    @foreach (var city in RegionStore.Region.Cities)
+                    {
+                        <option value="@city.Id">@city.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div>
+            <StoreDropdown />
+        </div>
     </div>
-</div>
 
 @code {
 

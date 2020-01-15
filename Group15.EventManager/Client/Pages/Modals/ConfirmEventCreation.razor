@@ -1,4 +1,5 @@
 ﻿@inject EventStore EventStore
+@inject StoreStore Store
 @inject HttpClient  HttpClient
 @inject NavigationManager NavManager
 @inject IModalService Modal
@@ -15,20 +16,21 @@
 <p>@EventStore.CreateEvent.Region.Name</p>
 <p>@EventStore.CreateEvent.Address.RoadName @EventStore.CreateEvent.Address.RoadNumber</p>
 
-@if(EventStore.CreateEvent.Food.Name != "" && EventStore.CreateEvent.Food.Price != 0)
-{
-    <p>@EventStore.CreateEvent.Food.Name - @EventStore.CreateEvent.Food.Price  kr.</p>
-}
-<button class="btn btn-success" @onclick="@ConfirmEvent">Confirm</button>
+    @if (EventStore.CreateEvent.Food.Name != "" && EventStore.CreateEvent.Food.Price != 0)
+    {
+        <p>@EventStore.CreateEvent.Food.Name - @EventStore.CreateEvent.Food.Price  kr.</p>
+    }
 
+<button class="btn btn-success" @onclick="@ConfirmEvent">Confirm</button>
 <button class="btn btn-info" @onclick="@EditEvent">Go back</button>
 
-@code {     
+@code {
 
     private async Task ConfirmEvent()
     {
         try
         {
+            EventStore.CreateEvent.StoreId = Store.Id;
             await HttpClient.PostJsonAsync<CreateEventViewModel>("api/events/create", EventStore.CreateEvent);
             EventStore.CreateEvent = new CreateEventViewModel();
             Modal.Cancel();
@@ -36,7 +38,6 @@
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
             NavManager.NavigateTo("/");
         }
     }

@@ -26,5 +26,6 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Events
         public GetRegionViewModel Region { get; set; }
         public GetCityViewModel City { get; set; }
         public CreateMarkerViewModel Marker { get; set; }
+        public Guid StoreId { get; set; }
     }
 }

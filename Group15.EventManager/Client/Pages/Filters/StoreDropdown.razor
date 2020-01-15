@@ -1,0 +1,28 @@
+﻿@inject StoreStore Store
+@inject HttpClient HttpClient
+
+<select class="form-control pointer" @onchange="@OnSelectedStore">
+    <option>Vælg butik..</option>
+    @foreach (var store in Stores)
+    {
+        <option value="@store.Id">@store.Name</option>
+    }
+</select>
+
+@code {
+
+    private IEnumerable<GetStoreListViewModel> Stores = new List<GetStoreListViewModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Stores = await HttpClient.GetJsonAsync<IEnumerable<GetStoreListViewModel>>("api/store");
+    }
+
+    private void OnSelectedStore(ChangeEventArgs args)
+    {
+        if (Guid.TryParse(args.Value.ToString(), out var newGuid) == true)
+        {
+            Store.Id = new Guid(args.Value.ToString());
+        }
+    }
+}

@@ -38,7 +38,8 @@ namespace Group15.EventManager.Domain.CommandHandlers
                 Food = request.Food,
                 Region = request.Region,
                 City = request.City,
-                Marker = request.Marker
+                Marker = request.Marker,
+                Store = request.Store
             };
 
             _eventRepository.Add(_event);

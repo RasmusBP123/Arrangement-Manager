@@ -69,6 +69,7 @@ namespace Group15.EventManager.Application.Services
 
         public async Task CreateEvent(CreateEventViewModel eventViewModel)
         {
+            var storeId = eventViewModel.StoreId;
             var _event = _mapper.Map<Event>(eventViewModel);
 
             await _mediator.Send(new CreateEventCommand()
@@ -87,7 +88,8 @@ namespace Group15.EventManager.Application.Services
                 Food = _event.Food,
                 Region = _event.Region,
                 City = _event.City,
-                Marker = _event.Marker
+                Marker = _event.Marker,
+                Store = new Store { Id = storeId }
             });
         }
 

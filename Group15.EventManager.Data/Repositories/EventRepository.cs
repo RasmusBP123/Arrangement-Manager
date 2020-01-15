@@ -84,6 +84,7 @@ namespace Group15.EventManager.Data.Repositories
         {
             Db.Attach(entity.City);
             Db.Attach(entity.Region);
+            Db.Attach(entity.Store);
             Db.Set<Address>().Add(entity.Address);
             Db.Set<Marker>().Add(entity.Marker);
             base.Add(entity);

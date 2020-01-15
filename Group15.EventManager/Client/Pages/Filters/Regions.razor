@@ -32,10 +32,9 @@
 
     string regionId = "";
     string cityId = "";
-    private GetRegionViewModel region;
+
     protected override async Task OnInitializedAsync()
     {
-        region = new GetRegionViewModel();
         RegionStore.Regions = await HttpClient.GetJsonAsync<IEnumerable<GetRegionViewModel>>("api/regions");
     }
 

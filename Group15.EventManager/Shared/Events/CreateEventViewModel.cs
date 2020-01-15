@@ -31,5 +31,6 @@ namespace Group15.EventManager.Shared.Events
         public GetCityViewModel City { get; set; }
         public EmployeeCreateEventViewModel Employee { get; set; }
         public CreateMarkerViewModel Marker { get; set; }
+        public Guid StoreId { get; set; }
     }
 }
