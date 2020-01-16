@@ -4,11 +4,10 @@
 @inject UserStore UserStore
 @inject AttendanceStore AttendanceStore
 @inject IModalService ModalService
-@implements IDisposable
 @attribute [Authorize(Roles = "Employee, Admin")]
 
 <h3>@Event.Name</h3>
-<p>@Event.Price</p>
+<p>@Event.Price kr.</p>
 
 <div class="@disabled">
     <button class="btn btn-success" @onclick="ShowConfirmAttendance">Confirm</button>
@@ -41,18 +40,32 @@
 
     private async Task GetUsersDependingOnEarlierViset(int numberOfUsers)
     {
-        if (numberOfUsers == 0) //This check guarantees that if user moves users, and leaves the page, it will not reset the page. You will need to reload the page to do that
-        {
-            UserStore.UsersFromEvent = await HttpClient.GetJsonAsync<IEnumerable<GetUserFromEventViewModel>>($"api/user/{EventId}/users");
+        if (numberOfUsers != 0) //This check guarantees that if user moves users, and leaves the page, it will not reset the page. You will need to reload the page to do that
+        { 
             foreach (var user in UserStore.UsersFromEvent)
             {
-                //user.Status = UserStatus.Invited;
+                Console.WriteLine(user.Status.ToString());
+                UserStatus status = user.Status;
+                switch (status)
+                {
+                    case UserStatus.Invited:
+                        user.Status = UserStatus.Invited;
+                        break;
+                    case UserStatus.Registered:
+                        user.Status = UserStatus.Registered;
+                        break;
+                    case UserStatus.Cancelled:
+                        user.Status = UserStatus.Cancelled;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         else
         {
             UserStore.UsersFromEvent = await HttpClient.GetJsonAsync<IEnumerable<GetUserFromEventViewModel>>($"api/user/{EventId}/users");
-        }
+}
     }
 
     private void ShowConfirmAttendance()
@@ -66,10 +79,5 @@
     {
         if (attendance == null) return; //If attendance is null, we know the event has not ended.
         if (attendance.Finished == true) disabled = "disabled";
-    }
-
-    public void Dispose()
-    {
-        UserStore.UsersFromEvent = new List<GetUserFromEventViewModel>();
     }
 }

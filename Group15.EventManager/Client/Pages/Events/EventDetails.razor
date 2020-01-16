@@ -85,7 +85,7 @@ else
         EventStore.Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{EventId}");
         UserStore.UsersFromEvent = await HttpClient.GetJsonAsync<IEnumerable<GetUserFromEventViewModel>>($"api/user/{EventId}/users");
         CanBookOnline();
-        UserAlreadyBookedEvent();
+        //UserAlreadyBookedEvent();
         EventIsFullyBooked();
     }
 

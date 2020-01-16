@@ -1,7 +1,7 @@
 ﻿
 <li class="draggable" draggable="true" @ondragstart="@(() => HandleDragStart(user))">
     @user.FirstName @user.LastName
-    <p>Tickets : @user.Tickets.Count()</p>
+    <p>Tickets : @NumberOfCustomers</p>
 </li>
 
 @code {
@@ -11,6 +11,8 @@
 
     [Parameter]
     public GetUserFromEventViewModel user { get; set; }
+
+    private int NumberOfCustomers => user.Tickets.Count() + 1;
 
     private void HandleDragStart(GetUserFromEventViewModel user)
     {

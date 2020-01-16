@@ -15,7 +15,7 @@
                        </div>
                        <div class="event-section-2">
                            <h6>PRIS PR. BILLET</h6>
-                           <h1>@PayableOnline</h1>
+                           <h1>@Model.Price kr.</h1>
                        </div>
                        <div class="v-line">
                            <div class="vertical-line"></div>
@@ -41,7 +41,7 @@
 @code {
     [Parameter]
     public GetEventListViewModel Model { get; set; }
-    public string PayableOnline => Model.PayOnline == false ? $"Arrangementet købes i butik. {Model.Price} kr." : $"{Model.Price} kr.";
+    public string PayableOnline => Model.PayOnline == false ? $"Arrangementet købes i butik." : $"{Model.Price} kr.";
 
     private void NavigateToEventDetails(Guid eventId)
     {
