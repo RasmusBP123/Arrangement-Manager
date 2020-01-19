@@ -1,5 +1,28 @@
-﻿<h3>EventInfo</h3>
+﻿<h3>@Event.Name</h3>
+<h4>@Event.Price kr.</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Inviteret</th>
+            <th scope="col">Mødt op</th>
+            <th scope="col">Udeblev</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>@Event.Attendance.Invited</td>
+            <td>@Event.Attendance.Registered</td>
+            <td>@Event.Attendance.NotRegistred</td>
+        </tr>
+    </tbody>
+</table>
+
 
 @code {
 
+    [Parameter]
+    public GetSingleEventViewModel Event { get; set; } = new GetSingleEventViewModel();
 }

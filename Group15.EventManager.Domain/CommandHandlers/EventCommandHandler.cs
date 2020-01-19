@@ -36,6 +36,7 @@ namespace Group15.EventManager.Domain.CommandHandlers
                 Address = request.Address,
                 Image = request.Image,
                 Food = request.Food,
+                Attendance = new Attendance(),
                 Region = request.Region,
                 City = request.City,
                 Marker = request.Marker,

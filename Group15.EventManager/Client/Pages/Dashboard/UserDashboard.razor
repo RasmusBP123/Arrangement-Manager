@@ -6,31 +6,37 @@
 @inject IModalService ModalService
 @attribute [Authorize(Roles = "Employee, Admin")]
 
-<h3>@Event.Name</h3>
-<p>@Event.Price kr.</p>
 
-<div class="@disabled">
-    <button class="btn btn-success" @onclick="ShowConfirmAttendance">Confirm</button>
+@if(Event.Attendance.Finished == true)
+{
+    <EventInfo Event="@Event"/>
+}
+else
+{
+    <h3>@Event.Name</h3>
+    <p>@Event.Price kr.</p>
 
-    <UserContainer OnMovedUser="RerenderUsers" SignedUpUsers="UserStore.UsersFromEvent">
-        <UserList UserStatus="@UserStatus.Invited" />
-        <UserList UserStatus="@UserStatus.Registered" />
-        <UserList UserStatus="@UserStatus.Cancelled" />
-    </UserContainer>
-</div>
+        <button class="btn btn-success" @onclick="ShowConfirmAttendance">Confirm</button>
+
+        <UserContainer OnMovedUser="RerenderUsers" SignedUpUsers="UserStore.UsersFromEvent" EventContainer="Event">
+            <UserList UserStatus="@UserStatus.Invited" />
+            <UserList UserStatus="@UserStatus.Registered" />
+            <UserList UserStatus="@UserStatus.Cancelled" />
+        </UserContainer>
+}
 
 @code {
     [Parameter]
     public Guid EventId { get; set; }
-    private string disabled = "";
 
     private GetSingleEventViewModel Event { get; set; } = new GetSingleEventViewModel();
 
     protected override async Task OnInitializedAsync()
     {
+        UserStore.UsersFromEvent = new List<GetUserFromEventViewModel>();
+        Event.Attendance = new GetAttendanceViewModel();
         Event = await HttpClient.GetJsonAsync<GetSingleEventViewModel>($"api/events/{EventId}");
         await GetUsersDependingOnEarlierViset(UserStore.UsersFromEvent.Count());
-        //DisableDashboardContent(Event.Attendance);
     }
 
     private void RerenderUsers()
@@ -41,10 +47,9 @@
     private async Task GetUsersDependingOnEarlierViset(int numberOfUsers)
     {
         if (numberOfUsers != 0) //This check guarantees that if user moves users, and leaves the page, it will not reset the page. You will need to reload the page to do that
-        { 
+        {
             foreach (var user in UserStore.UsersFromEvent)
             {
-                Console.WriteLine(user.Status.ToString());
                 UserStatus status = user.Status;
                 switch (status)
                 {
@@ -65,7 +70,7 @@
         else
         {
             UserStore.UsersFromEvent = await HttpClient.GetJsonAsync<IEnumerable<GetUserFromEventViewModel>>($"api/user/{EventId}/users");
-}
+        }
     }
 
     private void ShowConfirmAttendance()
@@ -73,11 +78,5 @@
         var parameter = new ModalParameters();
         parameter.Add("Event", Event);
         ModalService.Show<ConfirmAttendance>("Confirm attendance", parameter);
-    }
-
-    private void DisableDashboardContent(GetAttendanceViewModel attendance)
-    {
-        if (attendance == null) return; //If attendance is null, we know the event has not ended.
-        if (attendance.Finished == true) disabled = "disabled";
     }
 }

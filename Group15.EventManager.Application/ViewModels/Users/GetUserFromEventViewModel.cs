@@ -10,6 +10,6 @@ namespace Group15.EventManager.ApplicationLayer.ViewModels.Users
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
-        public IEnumerable<GetTicketViewModel> Tickets { get; set; }
+        public IEnumerable<GetTicketForCartViewModel> Tickets { get; set; }
     }
 }

@@ -59,6 +59,24 @@ namespace Group15.EventManager.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Attendance",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Invited = table.Column<int>(nullable: false),
+                    Registered = table.Column<int>(nullable: false),
+                    NotRegistred = table.Column<int>(nullable: false),
+                    MinCustomerAmount = table.Column<int>(nullable: false),
+                    MaxCustomerLimit = table.Column<int>(nullable: false),
+                    Finished = table.Column<bool>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attendance", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Foods",
                 columns: table => new
                 {
@@ -323,10 +341,12 @@ namespace Group15.EventManager.Data.Migrations
                     EndEventDate = table.Column<DateTime>(nullable: false),
                     AddressId = table.Column<Guid>(nullable: true),
                     MarkerId = table.Column<Guid>(nullable: true),
+                    AttendanceId = table.Column<Guid>(nullable: true),
                     CityId = table.Column<Guid>(nullable: true),
                     RegionId = table.Column<Guid>(nullable: true),
                     FoodId = table.Column<Guid>(nullable: true),
                     EmployeeId = table.Column<Guid>(nullable: true),
+                    StoreId = table.Column<Guid>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -336,6 +356,12 @@ namespace Group15.EventManager.Data.Migrations
                         name: "FK_Event_Address_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Address",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Event_Attendance_AttendanceId",
+                        column: x => x.AttendanceId,
+                        principalTable: "Attendance",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -368,31 +394,12 @@ namespace Group15.EventManager.Data.Migrations
                         principalTable: "Regions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Attendance",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Invited = table.Column<int>(nullable: false),
-                    Registered = table.Column<int>(nullable: false),
-                    NotRegistred = table.Column<int>(nullable: false),
-                    MinCustomerAmount = table.Column<int>(nullable: false),
-                    MaxCustomerLimit = table.Column<int>(nullable: false),
-                    Finished = table.Column<bool>(nullable: false),
-                    EventId = table.Column<Guid>(nullable: false),
-                    CreatedDate = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Attendance", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Attendance_Event_EventId",
-                        column: x => x.EventId,
-                        principalTable: "Event",
+                        name: "FK_Event_Stores_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Stores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -463,7 +470,12 @@ namespace Group15.EventManager.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Email", "FirstName", "LastName", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "SecurityStamp", "UserName" },
-                values: new object[] { new Guid("a14280f8-d2b9-4598-8c89-c699cd1ab278"), "bd5b9857-9d78-4f9d-81e3-28569973e0a2", new DateTime(2019, 8, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "adminDev@hotmail.coM", "Rasmus", "Petersen", "ADMINDEV@HOTMAIL.COM", "ADMINDEV@HOTMAIL.COM", "AQAAAAEAACcQAAAAEI+uaUXQ2gOwvegvJOBwLZUeQwE2Tb/A/+BlUHv1AgdcsInYKsrRPkgs9dIZUpra4g==", "28929173", "f4572cb1-6f71-46fd-8260-0baea7287367", "adminDev@hotmail.com" });
+                values: new object[] { new Guid("a14280f8-d2b9-4598-8c89-c699cd1ab278"), "bd5b9857-9d78-4f9d-81e3-28569973e0a2", new DateTime(2019, 8, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "adminDev@hotmail.coM", "Rasmus", "Petersen", "ADMINDEV@HOTMAIL.COM", "ADMINDEV@HOTMAIL.COM", "AQAAAAEAACcQAAAAENFsvzdYfVG/7FmytXy0aNnHvsuBUYWbCUTyIZKSBIfWK7C1niccqvrwUmbRM04PPQ==", "28929173", "f4572cb1-6f71-46fd-8260-0baea7287367", "adminDev@hotmail.com" });
+
+            migrationBuilder.InsertData(
+                table: "Attendance",
+                columns: new[] { "Id", "CreatedDate", "Finished", "Invited", "MaxCustomerLimit", "MinCustomerAmount", "NotRegistred", "Registered" },
+                values: new object[] { new Guid("2300cd37-5bf0-436a-1136-08d798f22ccd"), new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 0, 100, 10, 0, 0 });
 
             migrationBuilder.InsertData(
                 table: "Foods",
@@ -486,8 +498,8 @@ namespace Group15.EventManager.Data.Migrations
                 columns: new[] { "Id", "CreatedDate", "X", "Y" },
                 values: new object[,]
                 {
-                    { new Guid("847fea10-80f0-49a0-8997-409eafdb5892"), new DateTime(2019, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 10.369267000000001, 55.427731000000001 },
-                    { new Guid("82751c12-b1f9-4d4e-a806-0ea07dd291d7"), new DateTime(2019, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 10.379875, 55.394002999999998 }
+                    { new Guid("82751c12-b1f9-4d4e-a806-0ea07dd291d7"), new DateTime(2019, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 10.379875, 55.394002999999998 },
+                    { new Guid("847fea10-80f0-49a0-8997-409eafdb5892"), new DateTime(2019, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 10.369267000000001, 55.427731000000001 }
                 });
 
             migrationBuilder.InsertData(
@@ -531,8 +543,8 @@ namespace Group15.EventManager.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Event",
-                columns: new[] { "Id", "AddressId", "CityId", "CreatedDate", "Description", "EmployeeId", "EndEventDate", "EventDate", "FoodId", "Image", "LastBookingDate", "MarkerId", "MaxCustomerLimit", "MinCustomerAmount", "Name", "PayOnline", "Price", "RegionId" },
-                values: new object[] { new Guid("24ce1d49-dff7-4444-b931-fa573c6b83ce"), new Guid("19bcfcf0-4dd1-4f7e-8591-4697628fed9a"), new Guid("264d9f3b-ee5a-4436-8f5e-9937a9ff4727"), new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Eventet kommer til at foregå i Odense kl. 16:00, hvor man vil få tilbudt forfriskninger og vin til maden", new Guid("3216b7c9-4b42-44b4-a49c-2117496983d4"), new DateTime(2022, 12, 24, 20, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 12, 24, 14, 30, 0, 0, DateTimeKind.Unspecified), new Guid("5384338e-ff12-4a9a-8789-b3d89ce5db26"), new byte[] { 0 }, new DateTime(2022, 12, 12, 12, 0, 0, 0, DateTimeKind.Unspecified), new Guid("847fea10-80f0-49a0-8997-409eafdb5892"), 200, 50, "Vinsmagning i hyggelige omgivelser", true, 700.0, new Guid("7e07ff02-61b5-47cf-80d2-95af4c291274") });
+                columns: new[] { "Id", "AddressId", "AttendanceId", "CityId", "CreatedDate", "Description", "EmployeeId", "EndEventDate", "EventDate", "FoodId", "Image", "LastBookingDate", "MarkerId", "MaxCustomerLimit", "MinCustomerAmount", "Name", "PayOnline", "Price", "RegionId", "StoreId" },
+                values: new object[] { new Guid("24ce1d49-dff7-4444-b931-fa573c6b83ce"), new Guid("19bcfcf0-4dd1-4f7e-8591-4697628fed9a"), new Guid("2300cd37-5bf0-436a-1136-08d798f22ccd"), new Guid("264d9f3b-ee5a-4436-8f5e-9937a9ff4727"), new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Eventet kommer til at foregå i Odense kl. 16:00, hvor man vil få tilbudt forfriskninger og vin til maden", new Guid("3216b7c9-4b42-44b4-a49c-2117496983d4"), new DateTime(2022, 12, 24, 20, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 12, 24, 14, 30, 0, 0, DateTimeKind.Unspecified), new Guid("5384338e-ff12-4a9a-8789-b3d89ce5db26"), new byte[] { 0 }, new DateTime(2022, 12, 12, 12, 0, 0, 0, DateTimeKind.Unspecified), new Guid("847fea10-80f0-49a0-8997-409eafdb5892"), 200, 50, "Vinsmagning i hyggelige omgivelser", true, 700.0, new Guid("7e07ff02-61b5-47cf-80d2-95af4c291274"), null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -574,12 +586,6 @@ namespace Group15.EventManager.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attendance_EventId",
-                table: "Attendance",
-                column: "EventId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Cities_RegionId",
                 table: "Cities",
                 column: "RegionId");
@@ -593,6 +599,11 @@ namespace Group15.EventManager.Data.Migrations
                 name: "IX_Event_AddressId",
                 table: "Event",
                 column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Event_AttendanceId",
+                table: "Event",
+                column: "AttendanceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Event_CityId",
@@ -618,6 +629,11 @@ namespace Group15.EventManager.Data.Migrations
                 name: "IX_Event_RegionId",
                 table: "Event",
                 column: "RegionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Event_StoreId",
+                table: "Event",
+                column: "StoreId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stores_AddressId",
@@ -673,9 +689,6 @@ namespace Group15.EventManager.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Attendance");
-
-            migrationBuilder.DropTable(
                 name: "Groups");
 
             migrationBuilder.DropTable(
@@ -692,6 +705,9 @@ namespace Group15.EventManager.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Event");
+
+            migrationBuilder.DropTable(
+                name: "Attendance");
 
             migrationBuilder.DropTable(
                 name: "Employees");

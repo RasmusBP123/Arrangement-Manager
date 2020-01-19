@@ -4,14 +4,16 @@ using Group15.EventManager.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Group15.EventManager.Data.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    partial class SqlContextModelSnapshot : ModelSnapshot
+    [Migration("20200119085115_retry")]
+    partial class retry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,7 +162,7 @@ namespace Group15.EventManager.Data.Migrations
                             LastName = "Petersen",
                             NormalizedEmail = "ADMINDEV@HOTMAIL.COM",
                             NormalizedUserName = "ADMINDEV@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKFD5G4BF9gaZ7MShGkxwTlFaAYjEerlpF/QsTWhrHvIhF3n+ry+9mGIA+abQWtAAQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECsMS7T6ThnWMx1a2DgFvV7IQn2hRPuLGzKNSSFssHwDfm2ffNgDRtmWa2+4S/at6w==",
                             PhoneNumber = "28929173",
                             SecurityStamp = "f4572cb1-6f71-46fd-8260-0baea7287367",
                             UserName = "adminDev@hotmail.com"
@@ -274,9 +276,6 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<Guid?>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AttendanceId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("CityId")
                         .HasColumnType("uniqueidentifier");
 
@@ -332,8 +331,6 @@ namespace Group15.EventManager.Data.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.HasIndex("AttendanceId");
-
                     b.HasIndex("CityId");
 
                     b.HasIndex("EmployeeId");
@@ -353,7 +350,6 @@ namespace Group15.EventManager.Data.Migrations
                         {
                             Id = new Guid("24ce1d49-dff7-4444-b931-fa573c6b83ce"),
                             AddressId = new Guid("19bcfcf0-4dd1-4f7e-8591-4697628fed9a"),
-                            AttendanceId = new Guid("2300cd37-5bf0-436a-1136-08d798f22ccd"),
                             CityId = new Guid("264d9f3b-ee5a-4436-8f5e-9937a9ff4727"),
                             CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Eventet kommer til at foregå i Odense kl. 16:00, hvor man vil få tilbudt forfriskninger og vin til maden",
@@ -826,10 +822,6 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasOne("Group15.EventManager.Domain.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
-
-                    b.HasOne("Group15.EventManager.Domain.Models.Attendance", "Attendance")
-                        .WithMany()
-                        .HasForeignKey("AttendanceId");
 
                     b.HasOne("Group15.EventManager.Domain.Models.City", "City")
                         .WithMany("Events")

@@ -36,10 +36,10 @@ namespace Group15.EventManager.Data.Repositories
         public IQueryable<ApplicationUser> GetAllUsersFromEvent(Guid eventId)
         {
             var userEvents = Db.Set<ApplicationUserEvent>().Include(ue => ue.User)
-                                                           .ThenInclude(user => user.Tickets)
+                                                           .ThenInclude(user => user.Tickets).ThenInclude(t => t.Event)
                                                            .Where(ue => ue.EventId == eventId);
 
-            var users = userEvents.Select(ue => ue.User).AsQueryable();
+            var users = userEvents.Select(ue => ue.User);
             return users;
         }
 

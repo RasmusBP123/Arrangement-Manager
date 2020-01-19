@@ -1,19 +1,20 @@
 ﻿@inject HttpClient HttpClient
 @inject UserStore UserStore
+@inject NavigationManager NavManager
 @inject IModalService ModalService
 
 <div>
     <p>@Event.Name</p><cite>@Event.EventDate</cite>
-    <p>Invited : @Invited</p>
-    <p>Registred : @Registred</p>
-    <p>Cancelled : @Cancelled</p>
+    <p>Inviteret : @Invited</p>
+    <p>Registreret : @Registred</p>
+    <p>Udeblev : @Cancelled</p>
 
-    <p>Are these numbers correct?</p>
+    <p>Er disse oplysninger korrekte?</p>
 </div>
 
 <div class="">
-    <button class="btn btn-success" @onclick="SubmitUserShowOut">All has been accounted for</button>
-    <button class="btn btn-danger" @onclick="@(() => ModalService.Cancel())">Close</button>
+    <button class="btn btn-success" @onclick="SubmitUserShowOut">Indsend</button>
+    <button class="btn btn-danger" @onclick="@(() => ModalService.Cancel())">Luk</button>
 </div>
 
 @code {
@@ -33,15 +34,15 @@
 
         foreach (var user in UserStore.UsersFromEvent)
         {
-            Invited += user.Tickets.Count() + 1;
+            Invited += user.Tickets.Where(ticket => ticket.Event.Id == Event.Id).Count();
 
             if (user.Status == UserStatus.Registered)
             {
-                Registred = user.Tickets.Count() + 1;
+                Registred = user.Tickets.Where(ticket => ticket.Event.Id == Event.Id).Count();
             }
             if(user.Status == UserStatus.Cancelled)
             {
-                Cancelled = user.Tickets.Count() + 1;
+                Cancelled = user.Tickets.Where(ticket => ticket.Event.Id == Event.Id).Count();
             }
         }
     }
@@ -53,13 +54,22 @@
 
         var attendance = new CreateAttendanceViewModel
         {
+            Id = Event.Attendance.Id,
             Invited = Invited,
             Registered = Registred,
             NotRegistred = Cancelled,
             Finished = true,
             Event = _event,
         };
-
-        await HttpClient.PostJsonAsync<CreateAttendanceViewModel>($"api/attendance/{Event.Id}/create", attendance);
+        try
+        {
+            await HttpClient.PostJsonAsync<CreateAttendanceViewModel>($"api/attendance/{Event.Id}/create", attendance);
+            ModalService.Cancel();
+            NavManager.NavigateTo($"events/{Event.Id}/users");
+        }
+        catch (Exception)
+        {
+            ModalService.Cancel();
+        }
     }
 }

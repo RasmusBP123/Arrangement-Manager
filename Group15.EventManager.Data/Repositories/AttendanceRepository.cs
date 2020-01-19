@@ -12,8 +12,7 @@ namespace Group15.EventManager.Data.Repositories
 
         public void SubmitAttendanceAfterEvent(Event _event, Attendance attendance)
         {
-            Db.Set<Event>().Attach(_event);
-            _event.Attendance = attendance;
+            Db.Set<Attendance>().Update(attendance);
         }
     }
 }

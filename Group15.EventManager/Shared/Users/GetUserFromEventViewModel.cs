@@ -12,6 +12,6 @@ namespace Group15.EventManager.Shared.Users
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public UserStatus Status { get; set; }
-        public IEnumerable<GetTicketViewModel> Tickets { get; set; }
+        public IEnumerable<GetTicketForCartViewModel> Tickets { get; set; }
     }
 }

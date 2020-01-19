@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Group15.EventManager.Data.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    [Migration("20200109220326_init")]
+    [Migration("20200118155123_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,9 +59,6 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("EventId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("Finished")
                         .HasColumnType("bit");
 
@@ -82,10 +79,20 @@ namespace Group15.EventManager.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventId")
-                        .IsUnique();
-
                     b.ToTable("Attendance");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("2300cd37-5bf0-436a-1136-08d798f22ccd"),
+                            CreatedDate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Finished = false,
+                            Invited = 0,
+                            MaxCustomerLimit = 100,
+                            MinCustomerAmount = 10,
+                            NotRegistred = 0,
+                            Registered = 0
+                        });
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Auth.ApplicationUser", b =>
@@ -155,7 +162,7 @@ namespace Group15.EventManager.Data.Migrations
                             LastName = "Petersen",
                             NormalizedEmail = "ADMINDEV@HOTMAIL.COM",
                             NormalizedUserName = "ADMINDEV@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI+uaUXQ2gOwvegvJOBwLZUeQwE2Tb/A/+BlUHv1AgdcsInYKsrRPkgs9dIZUpra4g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENFsvzdYfVG/7FmytXy0aNnHvsuBUYWbCUTyIZKSBIfWK7C1niccqvrwUmbRM04PPQ==",
                             PhoneNumber = "28929173",
                             SecurityStamp = "f4572cb1-6f71-46fd-8260-0baea7287367",
                             UserName = "adminDev@hotmail.com"
@@ -269,6 +276,9 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<Guid?>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("AttendanceId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("CityId")
                         .HasColumnType("uniqueidentifier");
 
@@ -317,9 +327,14 @@ namespace Group15.EventManager.Data.Migrations
                     b.Property<Guid?>("RegionId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("StoreId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("AttendanceId");
 
                     b.HasIndex("CityId");
 
@@ -331,6 +346,8 @@ namespace Group15.EventManager.Data.Migrations
 
                     b.HasIndex("RegionId");
 
+                    b.HasIndex("StoreId");
+
                     b.ToTable("Event");
 
                     b.HasData(
@@ -338,6 +355,7 @@ namespace Group15.EventManager.Data.Migrations
                         {
                             Id = new Guid("24ce1d49-dff7-4444-b931-fa573c6b83ce"),
                             AddressId = new Guid("19bcfcf0-4dd1-4f7e-8591-4697628fed9a"),
+                            AttendanceId = new Guid("2300cd37-5bf0-436a-1136-08d798f22ccd"),
                             CityId = new Guid("264d9f3b-ee5a-4436-8f5e-9937a9ff4727"),
                             CreatedDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Eventet kommer til at foregå i Odense kl. 16:00, hvor man vil få tilbudt forfriskninger og vin til maden",
@@ -789,15 +807,6 @@ namespace Group15.EventManager.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Group15.EventManager.Domain.Models.Attendance", b =>
-                {
-                    b.HasOne("Group15.EventManager.Domain.Models.Event", "Event")
-                        .WithOne("Attendance")
-                        .HasForeignKey("Group15.EventManager.Domain.Models.Attendance", "EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Group15.EventManager.Domain.Models.City", b =>
                 {
                     b.HasOne("Group15.EventManager.Domain.Models.Region", "Region")
@@ -820,6 +829,10 @@ namespace Group15.EventManager.Data.Migrations
                         .WithMany()
                         .HasForeignKey("AddressId");
 
+                    b.HasOne("Group15.EventManager.Domain.Models.Attendance", "Attendance")
+                        .WithMany()
+                        .HasForeignKey("AttendanceId");
+
                     b.HasOne("Group15.EventManager.Domain.Models.City", "City")
                         .WithMany("Events")
                         .HasForeignKey("CityId");
@@ -839,6 +852,10 @@ namespace Group15.EventManager.Data.Migrations
                     b.HasOne("Group15.EventManager.Domain.Models.Region", "Region")
                         .WithMany("Events")
                         .HasForeignKey("RegionId");
+
+                    b.HasOne("Group15.EventManager.Domain.Models.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("StoreId");
                 });
 
             modelBuilder.Entity("Group15.EventManager.Domain.Models.Joint.ApplicationUserEvent", b =>

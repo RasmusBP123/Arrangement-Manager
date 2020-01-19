@@ -14,6 +14,9 @@
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
+    public GetSingleEventViewModel EventContainer { get; set; } = new GetSingleEventViewModel();
+
+    [Parameter]
     public EventCallback<GetUserFromEventViewModel> OnMovedUser { get; set; }
 
     public GetUserFromEventViewModel User { get; set; }

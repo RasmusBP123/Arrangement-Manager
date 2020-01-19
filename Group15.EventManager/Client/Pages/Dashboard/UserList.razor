@@ -1,12 +1,13 @@
 ﻿@inject UserStore UserStore
 @inject AttendanceStore AttendanceStore
+
 <div class="userlist-container">
-<h3>@UserStatus (@UserAmount)</h3>
+<h3>@UserStatus </h3>
 
     <ul class="dropzone" ondragover="event.preventDefault()"  @ondrop="HandleDrop">
         @foreach (var user in SignedUpUsers)
          {
-            <User user="user" />
+            <User user="user"/>
          }
     </ul>
 </div>
@@ -16,7 +17,10 @@
     [CascadingParameter]
     public UserContainer UserContainer { get; set; }
 
-    public int UserAmount { get; set; } 
+    [Parameter]
+    public GetSingleEventViewModel Event { get; set; }
+
+    public int UserAmount { get; set; }
 
     [Parameter]
     public UserStatus UserStatus { get; set; }
@@ -27,7 +31,7 @@
     {
         SignedUpUsers.Clear();
         SignedUpUsers.AddRange(UserContainer.SignedUpUsers.Where(user => user.Status == UserStatus));
-        GatheredUsers();
+        //GatheredUsers();
     }
 
     private void HandleDrop()
@@ -40,7 +44,7 @@
         var ticketAmount = 0;
         foreach (var user in SignedUpUsers)
         {
-            ticketAmount += user.Tickets.Count();
+            ticketAmount += user.Tickets.Where(t => t.Event.Id == Event.Id).Count();
         }
 
         UserAmount = SignedUpUsers.Count() + ticketAmount;

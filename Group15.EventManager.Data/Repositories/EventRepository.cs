@@ -75,7 +75,7 @@ namespace Group15.EventManager.Data.Repositories
                                         .Include(e => e.Store).ThenInclude(store => store.Marker)
                                         .Include(e => e.Store).ThenInclude(store => store.City)
                                         .Include(e => e.Store).ThenInclude(store => store.Region)
-                                        .Include(e => e.Tickets) //For getting the current Count of tickets in the event model
+                                        .Include(e => e.Tickets).ThenInclude(t => t.Event)
                                         .FirstOrDefault(e => e.Id == eventId);
             return _event;
         }
@@ -87,6 +87,7 @@ namespace Group15.EventManager.Data.Repositories
             Db.Attach(entity.Store);
             Db.Set<Address>().Add(entity.Address);
             Db.Set<Marker>().Add(entity.Marker);
+            Db.Set<Attendance>().Add(entity.Attendance);
             base.Add(entity);
         }
 

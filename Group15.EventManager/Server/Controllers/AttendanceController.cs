@@ -20,8 +20,15 @@ namespace Group15.EventManager.Server.Controllers
         [Route("{eventId}/create")]
         public async Task<IActionResult> SubmitAttendanceAfterEvent([FromBody] CreateAttendanceViewModel attendanceViewModel)
         {
-            await _attendanceApplicationService.SubmitAttendanceAfterEvent(attendanceViewModel);
-            return Created("", attendanceViewModel);
+            try
+            {
+                await _attendanceApplicationService.SubmitAttendanceAfterEvent(attendanceViewModel);
+                return Created("", attendanceViewModel);
+            }
+            catch (System.Exception)
+            {
+                return Ok();
+            }
         }
     }
 }

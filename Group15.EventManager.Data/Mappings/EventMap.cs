@@ -25,6 +25,7 @@ namespace Group15.EventManager.Data.Mappings
                 PayOnline = true,
                 MaxCustomerLimit = 200,
                 MinCustomerAmount = 50,
+                AttendanceId = new Guid("2300cd37-5bf0-436a-1136-08d798f22ccd"),
                 AddressId = new Guid("19bcfcf0-4dd1-4f7e-8591-4697628fed9a"),
                 MarkerId = new Guid("847fea10-80f0-49a0-8997-409eafdb5892"),
                 CityId = new Guid("264d9f3b-ee5a-4436-8f5e-9937a9ff4727"),
