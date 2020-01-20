@@ -14,12 +14,12 @@
 else
 {
 
-<AuthorizeView Policy="@Policies.IsAdmin">
-    <MatButton Raised="true" OnClick="@(() => OpenConfirmDeleteEvent())">Delete</MatButton>
-</AuthorizeView>
 
 <div class="event-details-container">
     <div>
+<AuthorizeView Policy="@Policies.IsAdmin">
+    <MatButton Class="padding" Raised="true" OnClick="@(() => OpenConfirmDeleteEvent())">Delete</MatButton>
+</AuthorizeView>
         <MatCard Class="details-container">
             <MatCardContent>
                 <MatThemeProvider Theme="Theme.Main">
@@ -51,7 +51,7 @@ else
     </div>
     @if (EventStore.Event.PayOnline == true)
     {
-        <div>
+        <div class="flex-column">
             <h3>Vejen til Arrangementet</h3>
             <div class="track-order-map">
                 <Map Zoom="15" Marker="@EventStore.Event.Marker" AddressModel="@EventStore.Event.Address" City="@EventStore.Event.City" PayOnline="true" />

@@ -10,6 +10,24 @@
     flex: 1;
 }
 
+.background-grey {
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    margin: 0 1% 0 1%;  
+    background: #f7f7f7;
+    padding: 1% 0 1% 0;
+    margin: 1% 0;
+}
+
+.amount-container{
+    margin: 0 2%;
+}
+
+.reverse-padding{
+    margin: 0 1% 0 1%;
+}
+
 .process{
     text-align: center;
     font-size: 1.2em;
@@ -58,6 +76,12 @@ side-container{
     border: 1px solid #eee;
 }
 
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .grey{
     background-color: #eee;
     width: 100%;
@@ -68,7 +92,7 @@ side-container{
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    width: 100%;
+    width: 300px;
     padding: 2%;
     background-color: #f3efb4;
 }

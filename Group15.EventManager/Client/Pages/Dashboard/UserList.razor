@@ -2,8 +2,7 @@
 @inject AttendanceStore AttendanceStore
 
 <div class="userlist-container">
-<h3>@UserStatus </h3>
-
+<h3>@UserStatus</h3>
     <ul class="dropzone" ondragover="event.preventDefault()"  @ondrop="HandleDrop">
         @foreach (var user in SignedUpUsers)
          {
@@ -31,7 +30,6 @@
     {
         SignedUpUsers.Clear();
         SignedUpUsers.AddRange(UserContainer.SignedUpUsers.Where(user => user.Status == UserStatus));
-        //GatheredUsers();
     }
 
     private void HandleDrop()

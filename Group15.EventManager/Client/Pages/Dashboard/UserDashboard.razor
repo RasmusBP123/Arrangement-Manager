@@ -7,22 +7,24 @@
 @attribute [Authorize(Roles = "Employee, Admin")]
 
 
-@if(Event.Attendance.Finished == true)
+@if (Event.Attendance.Finished == true)
 {
-    <EventInfo Event="@Event"/>
+    <EventInfo Event="@Event" />
 }
 else
 {
-    <h3>@Event.Name</h3>
-    <p>@Event.Price kr.</p>
-
-        <button class="btn btn-success" @onclick="ShowConfirmAttendance">Confirm</button>
+    <div>
+        <div class="flex-row justify-content-between">
+            <h3>@Event.Name</h3>
+            <button class="btn btn-success padding" @onclick="ShowConfirmAttendance">Confirm</button>
+        </div>
 
         <UserContainer OnMovedUser="RerenderUsers" SignedUpUsers="UserStore.UsersFromEvent" EventContainer="Event">
             <UserList UserStatus="@UserStatus.Invited" />
             <UserList UserStatus="@UserStatus.Registered" />
             <UserList UserStatus="@UserStatus.Cancelled" />
         </UserContainer>
+    </div>
 }
 
 @code {

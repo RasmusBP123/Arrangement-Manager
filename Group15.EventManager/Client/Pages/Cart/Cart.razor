@@ -8,25 +8,40 @@
 
 <h3>Cart</h3>
 
+
 <Process Step="Step.Basket" />
-
-<MatThemeProvider Theme="ThemeStore.Main">
-<MatButton Raised="true" OnClick="@(() => NavManager.NavigateTo("delivery"))">Næste</MatButton>
-</MatThemeProvider>
-
-@foreach (var _event in EventStore.EventsWithTickets)
-{
-    <p>Ticket for : @_event.Name</p>
+<div class="wrapper">
     <div>
-        <CascadingValue Value="_event.MaxCustomerLimit">
-            <Amount CurrentAmount="@_event.CurrentAmountOfCustomers" />
-        </CascadingValue>
+        <div class="padding">
+            <MatThemeProvider Theme="ThemeStore.Main">
+                <MatButton Raised="true" OnClick="@(() => NavManager.NavigateTo("delivery"))">Næste</MatButton>
+            </MatThemeProvider>
+        </div>
+
+        @foreach (var _event in EventStore.EventsWithTickets)
+        {
+            <h5>Billet: @_event.Name</h5>
+            <div class="background-grey">
+                <div class="amount-container">
+                    <CascadingValue Value="_event.MaxCustomerLimit">
+                        <Amount CurrentAmount="@_event.CurrentAmountOfCustomers" />
+                    </CascadingValue>
+                </div>
+                <button class="btn btn-danger reverse-padding" @onclick="@(() => CancelEvent(_event.Id))">x</button>
+            </div>
+        }
     </div>
-    <button @onclick="@(() => CancelEvent(_event.Id))">Remove</button>
-}
-<div>
-    <CalculatedTotalAmount />
-    <button class="btn btn-success" @onclick="@(() => UpdateTicketAmount(EventStore.EventsWithTickets))">Update</button>
+
+    <div class="side-container">
+        <div class="aside-box">
+            <label class="grey">Ordre resume</label>
+            <UserEvents />
+        </div>
+        <div class="aside-box">
+            <label class="grey">Beløb</label>
+            <CalculatedTotalAmount />
+        </div>
+    </div>
 </div>
 
 @code {

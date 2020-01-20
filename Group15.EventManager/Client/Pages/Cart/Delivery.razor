@@ -2,13 +2,18 @@
 @inject HttpClient HttpClient
 @inject AuthStore AuthStore
 @inject NavigationManager NavManager
+@inject ThemeStore ThemeStore
 
 <h3>Fakturering</h3>
 
 <Process Step="Step.Delivery" />
-<MatButton Raised="true" @onclick="@(() => NavManager.NavigateTo("cart"))">Tilbage</MatButton>
+
+
 <div class="delivery-container">
     <div class="form-container">
+    <MatThemeProvider Theme="ThemeStore.Main">
+        <MatButton Class="padding" Raised="true" @onclick="@(() => NavManager.NavigateTo("cart"))">Tilbage</MatButton>
+    </MatThemeProvider>
         <EditForm Model="User">
             <div class="form-group">
                 <label>Navn</label>

@@ -4,6 +4,14 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.black-border{
+    border: 1px solid black;
+}
+
+.padding{
+    margin: 1% 0 1% 0;
+}
+
 .my-row {
     display: flex;
     flex-direction: row;

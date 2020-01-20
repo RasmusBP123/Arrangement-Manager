@@ -5,25 +5,14 @@
 @if (Store.Store != null && Store.Store.Address != null && Store.Store.City != null && Store.Store.Region != null)
 {
     <h3>@Store.Store.Name</h3>
-    <p>@Store.Store.City.Name</p>
+    <p>By: @Store.Store.City.Name</p>
 
-    <p>@Store.Store.Region.Name</p>
-    <p> @Store.Store.Address.RoadName</p>
-    @if (Store.Store.Marker != null)
-    {
-        <div class="track-order-map">
-            <Map Zoom="15" Marker="@Store.Store.Marker" AddressModel="@Store.Store.Address" City="@Store.Store.City" />
-        </div>
-    }
-    else
-    {
-        <p>No map available..</p>
-    }
+    <p>Region: @Store.Store.Region.Name</p>
+    <p>Vej: @Store.Store.Address.RoadName</p>
 }
-
 else if (failed == true)
 {
-<p>Could not load data..</p>
+    <p>Could not load data..</p>
 }
 
 @code {

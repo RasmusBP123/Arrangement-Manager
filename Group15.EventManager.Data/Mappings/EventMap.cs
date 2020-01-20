@@ -32,6 +32,7 @@ namespace Group15.EventManager.Data.Mappings
                 EmployeeId = new Guid("3216b7c9-4b42-44b4-a49c-2117496983d4"),
                 FoodId = new Guid("5384338e-ff12-4a9a-8789-b3d89ce5db26"),
                 RegionId = new Guid("7e07ff02-61b5-47cf-80d2-95af4c291274"),
+                StoreId = new Guid("da868f6a-4f8c-4695-baae-4a0feea05207"),
                 CreatedDate = new DateTime(2019, 12, 01)
             });
         }

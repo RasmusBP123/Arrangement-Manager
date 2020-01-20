@@ -6,14 +6,34 @@
 
 <h3>Dashboard</h3>
 
-<input type="search" @bind-Value="EventStore.SearchTerm" @bind-Value:event="oninput" />
+<div class="attendance">
+
+<input class="search-bar pointer padding" type="search" @bind-Value="EventStore.SearchTerm" @bind-Value:event="oninput" />
 
 @foreach (var e in EventStore.EventSearch(EventStore.EventsWithBookedUsers))
 {
-    <div @onclick="(() => NavigateToEvent(e.Id))">
-        <p>@e.Name</p>
+    <div class="event-">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Navn</th>
+                    <th scope="col">Pris</th>
+                    <th scope="col">Dato</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="pointer" @onclick="(() => NavigateToEvent(e.Id))">
+                    <th scope="row">1</th>
+                    <td>@e.Name</td>
+                    <td>@e.Price</td>
+                    <td>@e.EventDate</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 }
+    </div>
 
 @code {
 
