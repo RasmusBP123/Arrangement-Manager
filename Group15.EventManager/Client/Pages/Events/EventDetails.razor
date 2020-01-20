@@ -24,14 +24,14 @@ else
             <MatCardContent>
                 <MatThemeProvider Theme="Theme.Main">
                     <div class="eventdetails-card">
-                        <MatHeadline1>@EventStore.Event.Name</MatHeadline1>
-                        <MatH4>@EventStore.Event.Price</MatH4>
+                        <MatHeadline1 Class="no-wrap">@EventStore.Event.Name</MatHeadline1>
+                        <MatH4>@EventStore.Event.Price kr.</MatH4>
                         <MatBody2>
                             <p>@EventStore.Event.Description</p>
                         </MatBody2>
                         @if (EventStore.Event.PayOnline)
                         {
-                            <MatSubtitle2>How many tickets would you like to buy?</MatSubtitle2>
+                            <MatSubtitle2>Antal billeter</MatSubtitle2>
                             <MatInputTextComponent @bind-Value="@ticketAmount" />
                             @*@if (EventStore.Event.Food != null)
                             {

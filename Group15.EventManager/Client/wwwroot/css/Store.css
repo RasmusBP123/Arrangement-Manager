@@ -1,0 +1,11 @@
+﻿
+
+.store-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background: #f7f7f7;
+    border: 1px solid #f7f7f7;
+    border-radius: 1px;
+    width: 300px;
+}

@@ -6,6 +6,7 @@
 @inject AuthStore AuthStore
 @inject EmployeeStore EmployeeStore
 @inject HttpClient HttpClient
+@inject ThemeStore Theme
 @inject IModalService Modal
 @attribute [Authorize(Policy = Policies.IsAdmin)]
 
@@ -76,25 +77,29 @@
         <InputNumber Id="Y" class="form-control" @bind-Value="@Marker.Y" />
     </div>
     <div class="form-group">
-        <label for="payable">Payable</label>
-        <InputCheckbox Id="payable" class="form-control" @bind-Value="EventStore.CreateEvent.PayOnline" />
+        <label>Payable</label>
+        <InputCheckbox @bind-Value="EventStore.CreateEvent.PayOnline" />
     </div>
-    <h3>Mad</h3>
-    <button type="button" @onclick="@HideForm">Add</button>
-    <div class="@hideForm">
-        <div class="form-group">
-            <label for="food">Navn på maden</label>
-            <InputText Id="food" class="form-control" @bind-Value="CreateFood.Name" />
-            <ValidationMessage For="@(() =>CreateFood.Name)" />
-        </div>
-        <div class="form-group">
-            <label for="inputnumber">Mad pris</label>
-            <InputNumber Id="inputnumber" class="form-control" @bind-Value="CreateFood.Price" />
-            <ValidationMessage For="@(() =>CreateFood.Price)" />
+    <div class="food-container">
+        <h3>Mad</h3>
+        <button class="btn btn-info" type="button" @onclick="@HideForm">@foodButton</button>
+        <div class="@hideForm">
+            <div class="form-group">
+                <label for="food">Navn på maden</label>
+                <InputText Id="food" class="form-control" @bind-Value="CreateFood.Name" />
+                <ValidationMessage For="@(() =>CreateFood.Name)" />
+            </div>
+            <div class="form-group">
+                <label for="inputnumber">Mad pris</label>
+                <InputNumber Id="inputnumber" class="form-control" @bind-Value="CreateFood.Price" />
+                <ValidationMessage For="@(() =>CreateFood.Price)" />
+            </div>
         </div>
     </div>
     <br />
-    <button class="btn btn-outline-success">Submit</button>
+    <MatThemeProvider Theme="Theme.Main">
+        <MatButton Raised="true">Opret</MatButton>
+    </MatThemeProvider>
 </EditForm>
 
 @code { 
@@ -103,6 +108,7 @@
     private CreateFoodViewModel CreateFood = new CreateFoodViewModel();
     private CreateMarkerViewModel Marker = new CreateMarkerViewModel();
     public string hideForm = "hide-form";
+    private string foodButton => hidden == true ? "Luk" : "Tilføj";
     private bool hidden = false;
 
     private async Task SubmitEvent()

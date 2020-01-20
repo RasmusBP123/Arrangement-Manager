@@ -71,6 +71,14 @@
     background: #f7f7f7;
 }
 
+.no-wrap{
+    word-wrap: break-word;
+}
+
+.food-container{
+    margin: 1% 0 1% 0;
+}
+
 h1 {
     color: #144164;
 }
