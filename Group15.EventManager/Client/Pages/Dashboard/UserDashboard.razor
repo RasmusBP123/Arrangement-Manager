@@ -16,13 +16,13 @@ else
     <div>
         <div class="flex-row justify-content-between">
             <h3>@Event.Name</h3>
-            <button class="btn btn-success padding" @onclick="ShowConfirmAttendance">Confirm</button>
+            <button class="btn btn-success padding" @onclick="ShowConfirmAttendance">Bekræft</button>
         </div>
 
         <UserContainer OnMovedUser="RerenderUsers" SignedUpUsers="UserStore.UsersFromEvent" EventContainer="Event">
-            <UserList UserStatus="@UserStatus.Invited" />
-            <UserList UserStatus="@UserStatus.Registered" />
-            <UserList UserStatus="@UserStatus.Cancelled" />
+            <UserList UserStatus="@UserStatus.Inviteret" />
+            <UserList UserStatus="@UserStatus.Registeret" />
+            <UserList UserStatus="@UserStatus.Udeblevet" />
         </UserContainer>
     </div>
 }
@@ -55,14 +55,14 @@ else
                 UserStatus status = user.Status;
                 switch (status)
                 {
-                    case UserStatus.Invited:
-                        user.Status = UserStatus.Invited;
+                    case UserStatus.Inviteret:
+                        user.Status = UserStatus.Inviteret;
                         break;
-                    case UserStatus.Registered:
-                        user.Status = UserStatus.Registered;
+                    case UserStatus.Registeret:
+                        user.Status = UserStatus.Registeret;
                         break;
-                    case UserStatus.Cancelled:
-                        user.Status = UserStatus.Cancelled;
+                    case UserStatus.Udeblevet:
+                        user.Status = UserStatus.Udeblevet;
                         break;
                     default:
                         break;

@@ -13,7 +13,7 @@ namespace Group15.EventManager.Data.Repositories
 
         public City GetSingleCity(Guid cityId)
         {
-            throw new NotImplementedException();
+            return new City();
         }
     }
 }

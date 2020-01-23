@@ -2,16 +2,16 @@
 {
     public enum Step
     {
-        Basket,
-        Delivery,
-        Payment,
-        Receipt
+        Kurv,
+        Levering,
+        Betaling,
+        Kvittering
     }
 
     public enum UserStatus
     {
-        Invited,
-        Registered,
-        Cancelled
+        Inviteret,
+        Registeret,
+        Udeblevet
     }
 }

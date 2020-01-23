@@ -36,11 +36,11 @@
         {
             Invited += user.Tickets.Where(ticket => ticket.Event.Id == Event.Id).Count();
 
-            if (user.Status == UserStatus.Registered)
+            if (user.Status == UserStatus.Registeret)
             {
                 Registred = user.Tickets.Where(ticket => ticket.Event.Id == Event.Id).Count();
             }
-            if(user.Status == UserStatus.Cancelled)
+            if(user.Status == UserStatus.Udeblevet)
             {
                 Cancelled = user.Tickets.Where(ticket => ticket.Event.Id == Event.Id).Count();
             }
